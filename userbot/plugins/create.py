@@ -5,7 +5,7 @@ from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 from ..utils.tools import create_supergroup
 
-plugin_category = "tools"
+plugin_category = "اوامر الحساب"
 
 
 @catub.cat_cmd(
