@@ -9,35 +9,34 @@ plugin_category = "اوامر الحساب"
 
 
 @catub.cat_cmd(
-    pattern="create (b|g|c) ([\s\S]*)",
-    command=("create", plugin_category),
+    pattern="صنع (مجموعه خارقه|مجموعه عاديه|قناه) ([\s\S]*)",
+    command=("صنع", plugin_category),
     info={
         "header": "To create a private group/channel with userbot.",
         "description": "Use this cmd to create super group , normal group or channel.",
         "flags": {
-            "b": "to create a private super group",
-            "g": "To create a private basic group.",
-            "c": "to create a private channel",
+            "مجموعه خارقه": "⌔︙لإنشاء مجموعة خارقة خاصة",
+            "مجموعه عاديه": "⌔︙لإنشاء مجموعة أساسية خاصة.",
+            "قناه": "⌔︙لإنشاء قناة خاصة ",
         },
-        "usage": "{tr}create (b|g|c) <name of group/channel>",
-        "examples": "{tr}create b catuserbot",
+        "usage": "{tr}صنع (مجموعه خارقه|مجموعه عاديه|قناه) <اسم المجموعه او القناه>",
+        "examples": "{tr}صنع مجموعه خارقه + اسم الكروب",
     },
 )
 async def _(event):
-    "To create a private group/channel with userbot"
+    "⌔︙لإنشاء مجموعة خاصة/قناة مع مستخدم البوت  ☸️"
     type_of_group = event.pattern_match.group(1)
     group_name = event.pattern_match.group(2)
-    if type_of_group == "c":
-        descript = "This is a Test Channel created using catuserbot"
+    if type_of_group == "قناه":
+        descript = "⌔︙ هذه قناة إختبار أُنشئت بإستعمال تليثون العرب"
     else:
-        descript = "This is a Test Group created using catuserbot"
-    if type_of_group == "g":
+        descript = "⌔︙ هذه المجموعه إختبار أُنشئت بإستعمال تليثون العرب"
+    if type_of_group == "مجموعه خارقه":
         try:
             result = await event.client(
                 functions.messages.CreateChatRequest(
                     users=[Config.TG_BOT_USERNAME],
-                    # Not enough users (to create a chat, for example)
-                    # Telegram, no longer allows creating a chat with ourselves
+                   
                     title=group_name,
                 )
             )
@@ -48,11 +47,11 @@ async def _(event):
                 )
             )
             await edit_or_reply(
-                event, f"Group `{group_name}` created successfully. Join {result.link}"
+                event, f"⌔︙ اسم المجموعه `{group_name}` ** تم الإنشاء بنجاح  ✅  دخول ** {result.link}"
             )
         except Exception as e:
-            await edit_delete(event, f"**Error:**\n{str(e)}")
-    elif type_of_group == "c":
+            await edit_delete(event, f"**⌔︙ حدث خطأ ما  🆘:**\n{str(e)}")
+    elif type_of_group == "قناه":
         try:
             r = await event.client(
                 functions.channels.CreateChannelRequest(
@@ -69,20 +68,20 @@ async def _(event):
             )
             await edit_or_reply(
                 event,
-                f"Channel `{group_name}` created successfully. Join {result.link}",
+                f"⌔︙ اسم القناه `{group_name}` ** تم الإنشاء بنجاح  ✅  دخول ** {result.link}",
             )
         except Exception as e:
-            await edit_delete(event, f"**Error:**\n{str(e)}")
-    elif type_of_group == "b":
+            await edit_delete(event, f"**⌔︙ حدث خطأ ما  🆘 :**\n{str(e)}")
+    elif type_of_group == "مجموعه خارقه":
         answer = await create_supergroup(
             group_name, event.client, Config.TG_BOT_USERNAME, descript
         )
         if answer[0] != "error":
             await edit_or_reply(
                 event,
-                f"Mega group `{group_name}` created successfully. Join {answer[0].link}",
+                f"⌔︙ ميجا جروب `{group_name}` ** تم الإنشاء بنجاح  ✅  دخول ** {answer[0].link}",
             )
         else:
-            await edit_delete(event, f"**Error:**\n{str(answer[1])}")
+            await edit_delete(event, f"**⌔︙ حدث خطأ ما  🆘 :**\n{str(answer[1])}")
     else:
-        await edit_delete(event, "Read `.help create` to know how to use me")
+        await edit_delete(event, "**⌔︙الاوامر` **صنع مجموعه لمعرفة كيفية استخدامي.`")
