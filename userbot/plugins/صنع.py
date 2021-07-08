@@ -12,8 +12,8 @@ plugin_category = "اوامر الحساب"
     pattern="صنع (مجموعه خارقه|مجموعه عاديه|قناه) ([\s\S]*)",
     command=("صنع", plugin_category),
     info={
-        "header": "To create a private group/channel with userbot.",
-        "description": "Use this cmd to create super group , normal group or channel.",
+        "header": "⌔︙لإنشاء مجموعة خاصة/قناة مع تليثون العرب  ☸️",
+        "description": "⌔︙إستخدام سمد لإنشاء مجموعة خارقة، مجموعة عادية أو قناة  ⚜️",
         "flags": {
             "مجموعه خارقه": "⌔︙لإنشاء مجموعة خارقة خاصة",
             "مجموعه عاديه": "⌔︙لإنشاء مجموعة أساسية خاصة.",
