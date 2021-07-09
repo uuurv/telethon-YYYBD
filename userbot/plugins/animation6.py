@@ -1,11 +1,11 @@
 import asyncio
 
-from . import catub, edit_or_reply
+from . import iqthon, edit_or_reply
 
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="unoob$",
     command=("unoob", plugin_category),
     info={
@@ -34,7 +34,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="menoob$",
     command=("menoob", plugin_category),
     info={
@@ -63,7 +63,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="upro$",
     command=("upro", plugin_category),
     info={
@@ -91,7 +91,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="mepro$",
     command=("mepro", plugin_category),
     info={
@@ -119,7 +119,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="quickheal$",
     command=("quickheal", plugin_category),
     info={
@@ -150,7 +150,7 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="sqh$",
     command=("sqh", plugin_category),
     info={
@@ -181,7 +181,7 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="vquickheal$",
     command=("vquickheal", plugin_category),
     info={
@@ -212,7 +212,7 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="macoc$",
     command=("macoc", plugin_category),
     info={
@@ -243,7 +243,7 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="windows$",
     command=("windows", plugin_category),
     info={
@@ -274,7 +274,7 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="linux$",
     command=("linux", plugin_category),
     info={
@@ -305,7 +305,7 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="stock$",
     command=("stock", plugin_category),
     info={
@@ -336,7 +336,7 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="os$",
     command=("os", plugin_category),
     info={
