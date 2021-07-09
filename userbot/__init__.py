@@ -4,7 +4,7 @@ import heroku3
 
 from .Config import Config
 from .core.logger import logging
-from .core.session import catub
+from .core.session import iqthon
 from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
 __version__ = "1.0.0"
@@ -12,10 +12,10 @@ __license__ = "GNU Affero General Public License v3.0"
 __author__ = "telethon <https://github.com/telethontesthelp/Telethon-arabb>"
 __copyright__ = "telethon AR (C) 2020 - 2021  " + __author__
 
-catub.version = __version__
-catub.tgbot.version = __version__
+iqthon.version = __version__
+iqthon.tgbot.version = __version__
 LOGS = logging.getLogger("CatUserbot")
-bot = catub
+bot = iqthon
 
 StartTime = time.time()
 catversion = "3.0.3"
