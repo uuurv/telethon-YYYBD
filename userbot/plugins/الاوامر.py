@@ -1,6 +1,6 @@
 from telethon import functions
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core import CMD_INFO, GRP_INFO, PLG_INFO
@@ -125,7 +125,7 @@ async def cmdlist():
     return outstr
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="الاوامر ?(-c|-p|-t)? ?([\s\S]*)?",
     command=("الاوامر", plugin_category),
     info={
@@ -168,7 +168,7 @@ async def _(event):
     await edit_or_reply(event, outstr)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="جميع الاوامر(?:\s|$)([\s\S]*)",
     command=("جميع الاوامر", plugin_category),
     info={
@@ -201,7 +201,7 @@ async def _(event):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ssssssssssssssssss ([\s\S]*)",
     command=("ssssssssssssssssss", plugin_category),
     info={
@@ -222,7 +222,7 @@ async def _(event):
     await edit_or_reply(event, out)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="dcccccccccccc$",
     command=("dcccccccccccc", plugin_category),
     info={
