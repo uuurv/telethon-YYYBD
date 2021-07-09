@@ -1,6 +1,6 @@
 from telethon.tl import functions
 
-from .. import catub
+from .. import iqthon
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 from ..utils.tools import create_supergroup
@@ -8,7 +8,7 @@ from ..utils.tools import create_supergroup
 plugin_category = "اوامر الحساب"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="صنع (مجموعه خارقه|مجموعه عاديه|قناه) ([\s\S]*)",
     command=("صنع", plugin_category),
     info={
