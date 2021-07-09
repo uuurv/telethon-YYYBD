@@ -20,7 +20,7 @@ bot = catub
 StartTime = time.time()
 catversion = "3.0.3"
 
-if Config.UPSTREAM_REPO == "Telethon-Ar":
+if Config.UPSTREAM_REPO == "Telethon-Araab":
     UPSTREAM_REPO_URL = "https://github.com/telethontesthelp/Telethon-arabb"
 elif Config.UPSTREAM_REPO == "goodcat":
     UPSTREAM_REPO_URL = "https://github.com/sandy1709/catuserbot"
