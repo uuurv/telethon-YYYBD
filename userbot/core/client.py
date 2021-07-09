@@ -269,12 +269,12 @@ class CatUserBotClient(TelegramClient):
                             Config.PRIVATE_GROUP_BOT_API_ID, text, link_preview=False
                         )
 
-            from .session import catub
+            from .session import iqthon
 
             if edited is True:
-                catub.tgbot.add_event_handler(func, events.MessageEdited(**kwargs))
+                iqthon.tgbot.add_event_handler(func, events.MessageEdited(**kwargs))
             else:
-                catub.tgbot.add_event_handler(func, events.NewMessage(**kwargs))
+                iqthon.tgbot.add_event_handler(func, events.NewMessage(**kwargs))
 
             return wrapper
 
