@@ -1,12 +1,12 @@
 import asyncio
 from collections import deque
 
-from . import ALIVE_NAME, catub, edit_or_reply
+from . import ALIVE_NAME, iqthon, edit_or_reply
 
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="stupid$",
     command=("stupid", plugin_category),
     info={
@@ -40,7 +40,7 @@ async def _(event):
         await event.edit(animation_chars[i % 14])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="bombs$",
     command=("bombs", plugin_category),
     info={
@@ -73,7 +73,7 @@ async def _(event):
     await asyncio.sleep(2)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="call$",
     command=("call", plugin_category),
     info={
@@ -111,7 +111,7 @@ async def _(event):
         await event.edit(animation_chars[i % 18])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="kill$",
     command=("kill", plugin_category),
     info={
@@ -143,7 +143,7 @@ async def _(event):
         await event.edit(animation_chars[i % 12])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="wtf$",
     command=("wtf", plugin_category),
     info={
@@ -168,7 +168,7 @@ async def _(event):
         await event.edit(animation_chars[i % 5], link_preview=True)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ding$",
     command=("ding", plugin_category),
     info={
@@ -198,7 +198,7 @@ async def _(event):
         await event.edit(animation_chars[i % 10])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="hypno$",
     command=("hypno", plugin_category),
     info={
@@ -233,7 +233,7 @@ async def _(event):
         await event.edit(animation_chars[i % 15])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="candy$",
     command=("candy", plugin_category),
     info={
@@ -251,7 +251,7 @@ async def _(event):
         deq.rotate(1)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gangasta$",
     command=("gangasta", plugin_category),
     info={
@@ -279,7 +279,7 @@ async def _(event):
     await event.edit("EVERyBOdy iZ GangSTur UNtIL I ArRivE 🔥🔥🔥")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="charging$",
     command=("charging", plugin_category),
     info={
