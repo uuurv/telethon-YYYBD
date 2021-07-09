@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 from requests import get
 from telethon.utils import get_display_name
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
@@ -76,7 +76,7 @@ async def get_imposter_img(text: str) -> str:
     return webp_file
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="amongus(?:\s|$)([\s\S]*)",
     command=("amongus", plugin_category),
     info={
@@ -134,7 +134,7 @@ async def sayliecmd(event):
     await event.client.send_file(event.chat_id, imposter_file, reply_to=reply_to)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="imposter(?:\s|$)([\s\S]*)",
     command=("imposter", plugin_category),
     info={
@@ -169,7 +169,7 @@ async def procces_img(event):
     await event.client.send_file(event.chat_id, imposter_file, reply_to=reply_to)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="imp(|n) ([\s\S]*)",
     command=("imp", plugin_category),
     info={
@@ -262,7 +262,7 @@ async def _(event):
         await event.client.send_file(event.chat_id, "CAADAQADQAADnjOcH-WOkB8DEctJAg")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="timp(|n) ([\s\S]*)",
     command=("timp", plugin_category),
     info={
