@@ -5,7 +5,7 @@ from userbot import BOTLOG_CHATID, HEROKU_APP, PM_LOGGER_GROUP_ID
 
 from .Config import Config
 from .core.logger import logging
-from .core.session import catub
+from .core.session import iqthon
 from .utils import (
     add_bot_to_logger_group,
     ipchange,
@@ -24,7 +24,7 @@ cmdhr = Config.COMMAND_HAND_LER
 
 try:
     LOGS.info("Starting Userbot")
-    catub.loop.run_until_complete(setup_bot())
+    iqthon.loop.run_until_complete(setup_bot())
     LOGS.info("TG Bot Startup Completed")
 except Exception as e:
     LOGS.error(f"{str(e)}")
@@ -63,15 +63,15 @@ async def startup_process():
     return
 
 
-catub.loop.run_until_complete(startup_process())
+iqthon.loop.run_until_complete(startup_process())
 
 if len(sys.argv) not in (1, 3, 4):
-    catub.disconnect()
+    iqthon.disconnect()
 elif not Catcheck.sucess:
     if HEROKU_APP is not None:
         HEROKU_APP.restart()
 else:
     try:
-        catub.run_until_disconnected()
+        iqthon.run_until_disconnected()
     except ConnectionError:
         pass
