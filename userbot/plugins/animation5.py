@@ -1,11 +1,11 @@
 import asyncio
 
-from . import catub, edit_or_reply
+from . import iqthon, edit_or_reply
 
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="loading$",
     command=("loading", plugin_category),
     info={
@@ -24,7 +24,7 @@ async def _(event):
         await event.edit(animation_chars[i % 4])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="asquare$",
     command=("asquare", plugin_category),
     info={
@@ -43,7 +43,7 @@ async def _(event):
         await event.edit(animation_chars[i % 4])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="up$",
     command=("up", plugin_category),
     info={
@@ -62,7 +62,7 @@ async def _(event):
         await event.edit(animation_chars[i % 4])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="round$",
     command=("round", plugin_category),
     info={
@@ -81,7 +81,7 @@ async def _(event):
         await event.edit(animation_chars[i % 4])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="hart$",
     command=("hart", plugin_category),
     info={
@@ -100,7 +100,7 @@ async def _(event):
         await event.edit(animation_chars[i % 4])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="anim$",
     command=("anim", plugin_category),
     info={
@@ -130,7 +130,7 @@ async def _(event):
         await event.edit(animation_chars[i % 10])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="fnl$",
     command=("fnl", plugin_category),
     info={
@@ -149,7 +149,7 @@ async def _(event):
         await event.edit(animation_chars[i % 6])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="monkey$",
     command=("monkey", plugin_category),
     info={
@@ -168,7 +168,7 @@ async def _(event):
         await event.edit(animation_chars[i % 6])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="herber$",
     command=("herber", plugin_category),
     info={
@@ -198,7 +198,7 @@ async def _(event):
         await event.edit(animation_chars[i % 10])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="hand$",
     command=("hand", plugin_category),
     info={
@@ -231,7 +231,7 @@ async def _(event):
         await event.edit(animation_chars[i % 13])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gsg$",
     command=("gsg", plugin_category),
     info={
@@ -263,7 +263,7 @@ async def _(event):
         await event.edit(animation_chars[i % 12])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="theart$",
     command=("theart", plugin_category),
     info={
