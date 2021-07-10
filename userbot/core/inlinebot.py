@@ -64,37 +64,37 @@ def main_menu():
         ),
         (
             Button.inline(
-                f"👮‍♂️ اوامر الادمن ({len(GRP_INFO['اوامر الادمن'])})",
+                f"👮‍♂️ اوامر الادمن ({len(GRP_INFO['admin'])})",
                 data=f"admin_menu",
             ),
             Button.inline(
-                f"🤖 استخدامات البوت ({len(GRP_INFO['استخدامات البوت'])})",
+                f"🤖 استخدامات البوت ({len(GRP_INFO['bot'])})",
                 data=f"bot_menu",
             ),
         ),
         (
             Button.inline(
-                f"🎨 اوامر الترفيهيه ({len(GRP_INFO['اوامر الترفيهيه'])})",
+                f"🎨 اوامر الترفيهيه ({len(GRP_INFO['fun'])})",
                 data=f"fun_menu",
             ),
             Button.inline(
-                f"🧩 اوامر عشوائيه ({len(GRP_INFO['اوامر عشوائيه'])})",
+                f"🧩 اوامر عشوائيه ({len(GRP_INFO['misc'])})",
                 data=f"misc_menu",
             ),
         ),
         (
             Button.inline(
-                f"🧰 اوامر الحساب ({len(GRP_INFO['اوامر الحساب'])})",
+                f"🧰 اوامر الحساب ({len(GRP_INFO['tools'])})",
                 data=f"tools_menu",
             ),
             Button.inline(
-                f"🗂 اوامر الادارة ({len(GRP_INFO['اوامر الادارة'])})",
+                f"🗂 اوامر الادارة ({len(GRP_INFO['utils'])})",
                 data=f"utils_menu",
             ),
         ),
         (
             Button.inline(
-                f"➕ اوامر الحفض ({len(GRP_INFO['اوامر الحفض'])})",
+                f"➕ اوامر الحفض ({len(GRP_INFO['extra'])})",
                 data=f"extra_menu",
             ),
             Button.inline(
