@@ -6,7 +6,7 @@ from userbot import iqthon
 from ..core.managers import edit_or_reply
 from . import catmemes
 
-plugin_category = "اوامر الحفض"
+plugin_category = "extra"
 
 
 @iqthon.iq_cmd(
