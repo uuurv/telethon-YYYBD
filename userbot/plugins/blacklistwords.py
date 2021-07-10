@@ -2,7 +2,7 @@ import re
 
 from telethon.utils import get_display_name
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 from ..sql_helper import blacklist_sql as sql
@@ -11,7 +11,7 @@ from ..utils import is_admin
 plugin_category = "admin"
 
 
-@catub.cat_cmd(incoming=True, groups_only=True)
+@iqthon.iq_cmd(incoming=True, groups_only=True)
 async def on_new_message(event):
     name = event.raw_text
     snips = sql.get_chat_blacklist(event.chat_id)
@@ -34,7 +34,7 @@ async def on_new_message(event):
             break
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="addblacklist(?:\s|$)([\s\S]*)",
     command=("addblacklist", plugin_category),
     info={
@@ -65,7 +65,7 @@ async def _(event):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="rmblacklist(?:\s|$)([\s\S]*)",
     command=("rmblacklist", plugin_category),
     info={
@@ -94,7 +94,7 @@ async def _(event):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="listblacklist$",
     command=("listblacklist", plugin_category),
     info={
