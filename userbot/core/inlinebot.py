@@ -33,8 +33,6 @@ BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>
 CATLOGO = "https://telegra.ph/file/1bf9c1b0a084c258b1f97.jpg"
 tr = Config.COMMAND_HAND_LER
 
-print(GRP_INFO)
-
 def getkey(val):
     for key, value in GRP_INFO.items():
         for plugin in value:
@@ -54,6 +52,7 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
+    print(GRP_INFO)
     text = f"تليثون العرب\
         \nللأوامر {mention}"
     buttons = [
