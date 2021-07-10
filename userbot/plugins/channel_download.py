@@ -10,12 +10,12 @@ import os
 import subprocess
 
 from ..Config import Config
-from . import catub, edit_or_reply
+from . import iqthon, edit_or_reply
 
 plugin_category = "tools"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="getc(?:\s|$)([\s\S]*)",
     command=("getc", plugin_category),
     info={
@@ -57,7 +57,7 @@ async def get_media(event):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="geta(?:\s|$)([\s\S]*)",
     command=("geta", plugin_category),
     info={
