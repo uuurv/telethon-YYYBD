@@ -4,7 +4,7 @@ modified by  @mrconfused
 Userbot plugin for CatUserbot
 """
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 from ..helpers import fonts as emojify
@@ -12,7 +12,7 @@ from ..helpers import fonts as emojify
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="emoji(?:\s|$)([\s\S]*)",
     command=("emoji", plugin_category),
     info={
@@ -43,7 +43,7 @@ async def itachi(event):
     await edit_or_reply(event, result)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="cmoji(?:\s|$)([\s\S]*)",
     command=("cmoji", plugin_category),
     info={
