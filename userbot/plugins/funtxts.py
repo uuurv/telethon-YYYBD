@@ -1,13 +1,13 @@
 import nekos
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="tcat$",
     command=("tcat", plugin_category),
     info={
@@ -21,7 +21,7 @@ async def hmm(cat):
     await edit_or_reply(cat, reactcat)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="why$",
     command=("why", plugin_category),
     info={
@@ -35,7 +35,7 @@ async def hmm(cat):
     await edit_or_reply(cat, whycat)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="fact$",
     command=("fact", plugin_category),
     info={
