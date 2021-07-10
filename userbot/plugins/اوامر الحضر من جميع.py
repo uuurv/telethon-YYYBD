@@ -7,7 +7,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import ChatBannedRights
 from telethon.utils import get_display_name
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import _format
@@ -15,7 +15,7 @@ from ..sql_helper import gban_sql_helper as gban_sql
 from ..sql_helper.mute_sql import is_muted, mute, unmute
 from . import BOTLOG, BOTLOG_CHATID, admin_groups, get_user_from_event
 
-plugin_category = "admin"
+plugin_category = "اوامر الادمن"
 
 BANNED_RIGHTS = ChatBannedRights(
     until_date=None,
@@ -41,7 +41,7 @@ UNBAN_RIGHTS = ChatBannedRights(
 )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gban(?:\s|$)([\s\S]*)",
     command=("gban", plugin_category),
     info={
@@ -125,7 +125,7 @@ async def catgban(event):  # sourcery no-metrics
             pass
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ungban(?:\s|$)([\s\S]*)",
     command=("ungban", plugin_category),
     info={
@@ -201,7 +201,7 @@ async def catgban(event):
             )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="listgban$",
     command=("listgban", plugin_category),
     info={
@@ -226,7 +226,7 @@ async def gablist(event):
     await edit_or_reply(event, GBANNED_LIST)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gmute(?:\s|$)([\s\S]*)",
     command=("gmute", plugin_category),
     info={
@@ -292,7 +292,7 @@ async def startgmute(event):
             await reply.forward_to(BOTLOG_CHATID)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ungmute(?:\s|$)([\s\S]*)",
     command=("ungmute", plugin_category),
     info={
@@ -354,13 +354,13 @@ async def endgmute(event):
             )
 
 
-@catub.cat_cmd(incoming=True)
+@iqthon.iq_cmd(incoming=True)
 async def watcher(event):
     if is_muted(event.sender_id, "gmute"):
         await event.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gkick(?:\s|$)([\s\S]*)",
     command=("gkick", plugin_category),
     info={
