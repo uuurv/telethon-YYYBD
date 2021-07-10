@@ -5,7 +5,7 @@ from telethon.errors import BadRequestError
 from telethon.tl.functions.channels import EditAdminRequest
 from telethon.tl.types import ChatAdminRights
 
-from userbot import iqthon
+from userbot import iqthonub
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import get_user_from_event
