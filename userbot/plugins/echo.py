@@ -3,7 +3,7 @@ created by @sandy1709
 Idea by @BlazingRobonix
 """
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..sql_helper.echo_sql import (
@@ -20,7 +20,7 @@ from . import get_user_from_event
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="addecho$",
     command=("addecho", plugin_category),
     info={
@@ -60,7 +60,7 @@ async def echo(event):
         await edit_or_reply(catevent, "Hi")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="rmecho$",
     command=("rmecho", plugin_category),
     info={
@@ -89,7 +89,7 @@ async def echo(event):
         await edit_or_reply(event, "The user is not activated with echo")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="delecho( -a)?",
     command=("delecho", plugin_category),
     info={
@@ -135,7 +135,7 @@ async def echo(event):
             )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="listecho( -a)?$",
     command=("listecho", plugin_category),
     info={
@@ -199,7 +199,7 @@ async def echo(event):  # sourcery no-metrics
     await edit_or_reply(event, output_str)
 
 
-@catub.cat_cmd(incoming=True, edited=False)
+@iqthon.iq_cmd(incoming=True, edited=False)
 async def samereply(event):
     if is_echo(event.chat_id, event.sender_id) and (
         event.message.text or event.message.sticker
