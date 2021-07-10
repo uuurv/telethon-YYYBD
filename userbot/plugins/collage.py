@@ -7,7 +7,7 @@
 
 import os
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import _catutils, reply_id
@@ -16,7 +16,7 @@ from . import make_gif
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="collage(?:\s|$)([\s\S]*)",
     command=("collage", plugin_category),
     info={
