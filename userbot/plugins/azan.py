@@ -5,12 +5,12 @@ import json
 import requests
 
 from ..sql_helper.globals import gvarstatus
-from . import catub, edit_delete, edit_or_reply
+from . import iqthon, edit_delete, edit_or_reply
 
 plugin_category = "extra"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="azan(?:\s|$)([\s\S]*)",
     command=("azan", plugin_category),
     info={
