@@ -10,13 +10,13 @@ from telethon.tl.types import ChannelParticipantsAdmins
 from ..Config import Config
 from ..sql_helper.gban_sql_helper import get_gbanuser, is_gbanned
 from ..utils import is_admin
-from . import BOTLOG, BOTLOG_CHATID, catub, edit_or_reply, logging, spamwatch
+from . import BOTLOG, BOTLOG_CHATID, iqthon, edit_or_reply, logging, spamwatch
 
 LOGS = logging.getLogger(__name__)
 plugin_category = "admin"
 if Config.ANTISPAMBOT_BAN:
 
-    @catub.on(ChatAction())
+    @iqthon.on(ChatAction())
     async def anti_spambot(event):  # sourcery no-metrics
         if not event.user_joined and not event.user_added:
             return
@@ -101,7 +101,7 @@ if Config.ANTISPAMBOT_BAN:
             )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="cascheck$",
     command=("cascheck", plugin_category),
     info={
@@ -149,7 +149,7 @@ async def caschecker(event):
     await catevent.edit(text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="spamcheck$",
     command=("spamcheck", plugin_category),
     info={
