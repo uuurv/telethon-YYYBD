@@ -53,52 +53,54 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    text = f"تليثون العرب\
-        \nللأوامر {mention}"
+    text = f"𝙲𝚘𝚖𝚖𝚊𝚗𝚍 𝙷𝚎𝚕𝚙𝚎𝚛\
+\n𝚏𝚘𝚛 {mention}"
     buttons = [
         (
             Button.inline(
-                f"ℹ️ Info",
+                f"𝙸𝙽𝙵𝙾",
                 data="check",
             ),
         ),
         (
             Button.inline(
-                f"👮‍♂️ اوامر الادمن ({len(GRP_INFO['اوامر الادمن'])})",
+                f"𝙰𝚍𝚖𝚒𝚗 » ‹{len(GRP_INFO['admin'])}› ",
                 data=f"admin_menu",
             ),
             Button.inline(
-                f"🤖 استخدامات البوت ({len(GRP_INFO['استخدامات البوت'])})",
+                f"𝙱𝚘𝚝 » ‹{len(GRP_INFO['bot'])}› ",
                 data=f"bot_menu",
             ),
         ),
         (
             Button.inline(
-                f"🎨 اوامر الترفيهيه ({len(GRP_INFO['اوامر الترفيهيه'])})",
+                f"𝙵𝚞𝚗 » ‹{len(GRP_INFO['fun'])}› ",
                 data=f"fun_menu",
             ),
             Button.inline(
-                f"🧩 اوامر عشوائيه ({len(GRP_INFO['اوامر عشوائيه'])})",
+                f"𝙼𝚒𝚜𝚌 » ‹{len(GRP_INFO['misc'])}› ",
                 data=f"misc_menu",
             ),
         ),
         (
             Button.inline(
-                f"🧰 اوامر الحساب ({len(GRP_INFO['اوامر الحساب'])})",
+                f"𝚃𝚘𝚘𝚕𝚜 » ‹{len(GRP_INFO['tools'])}› ",
                 data=f"tools_menu",
             ),
             Button.inline(
-                f"🗂 اوامر الادارة ({len(GRP_INFO['اوامر الادارة'])})",
+                f"𝚄𝚝𝚒𝚕𝚜 » ‹{len(GRP_INFO['utils'])}› ",
                 data=f"utils_menu",
             ),
         ),
         (
             Button.inline(
-                f"➕ اوامر الحفض ({len(GRP_INFO['اوامر الحفض'])})",
+                f"𝙴𝚡𝚝𝚛𝚊 » ‹{len(GRP_INFO['extra'])}›",
                 data=f"extra_menu",
             ),
+        ),
+        (
             Button.inline(
-                f"🔒 اغلاق الاعدادات",
+                f"✕ » 𝙲𝚕𝚘𝚜𝚎",
                 data=f"close",
             ),
         ),
