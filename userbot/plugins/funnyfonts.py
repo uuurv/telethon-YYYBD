@@ -1,7 +1,7 @@
 import random
 import re
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 from . import fonts
@@ -9,7 +9,7 @@ from . import fonts
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="str(?:\s|$)([\s\S]*)",
     command=("str", plugin_category),
     info={
@@ -36,7 +36,7 @@ async def stretch(stret):
     await edit_or_reply(stret, reply_text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="zal(?:\s|$)([\s\S]*)",
     command=("zal", plugin_category),
     info={
@@ -80,7 +80,7 @@ async def zal(zgfy):
     await edit_or_reply(zgfy, "".join(reply_text))
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="cp(?:\s|$)([\s\S]*)",
     command=("cp", plugin_category),
     info={
@@ -119,7 +119,7 @@ async def copypasta(cp_e):
     await edit_or_reply(cp_e, reply_text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="weeb(?:\s|$)([\s\S]*)",
     command=("weeb", plugin_category),
     info={
@@ -145,7 +145,7 @@ async def weebify(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="downside(?:\s|$)([\s\S]*)",
     command=("downside", plugin_category),
     info={
@@ -176,7 +176,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="subscript(?:\s|$)([\s\S]*)",
     command=("subscript", plugin_category),
     info={
@@ -207,7 +207,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="superscript(?:\s|$)([\s\S]*)",
     command=("superscript", plugin_category),
     info={
