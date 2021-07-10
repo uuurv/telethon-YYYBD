@@ -1,7 +1,7 @@
 from urlextract import URLExtract
 from validators.url import url
 
-from userbot import catub
+from userbot import iqthon
 from userbot.core.logger import logging
 
 from ..Config import Config
@@ -38,7 +38,7 @@ oldvars = {
 }
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="(set|get|del)dv(?: |$)([\s\S]*)",
     command=("dv", plugin_category),
     info={
@@ -112,7 +112,7 @@ async def bad(event):  # sourcery no-metrics
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="custom (pmpermit|pmpic|pmblock|startmsg)$",
     command=("custom", plugin_category),
     info={
@@ -168,7 +168,7 @@ async def custom_catuserbot(event):
     await edit_or_reply(event, f"__Your custom {input_str} has been updated__")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="delcustom (pmpermit|pmpic|pmblock|startmsg)$",
     command=("delcustom", plugin_category),
     info={
