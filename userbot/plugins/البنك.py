@@ -1,14 +1,14 @@
 import asyncio
 from datetime import datetime
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 
-plugin_category = "tools"
+plugin_category = "اوامر الحساب"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ping( -a|$)",
     command=("ping", plugin_category),
     info={
@@ -38,7 +38,7 @@ async def _(event):
         await catevent.edit(f"Pong!\n`{ms} ms`")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="fping$",
     command=("fping", plugin_category),
     info={"header": "Shows the server ping with extra animation", "usage": "{tr}fping"},
