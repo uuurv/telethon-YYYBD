@@ -1,4 +1,3 @@
-# ported from uniborg by @spechide
 import asyncio
 import io
 import os
@@ -11,14 +10,14 @@ from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import _cattools, media_type, progress, reply_id
 
-plugin_category = "utils"
+plugin_category = "اوامر الادارة"
 
 
 FF_MPEG_DOWN_LOAD_MEDIA_PATH = os.path.join(
     Config.TMP_DOWNLOAD_DIRECTORY, "catuserbot.media.ffmpeg"
 )
 
-# https://github.com/Nekmo/telegram-upload/blob/master/telegram_upload/video.py#L26
+
 
 
 async def cult_small_video(
