@@ -11,7 +11,7 @@ from . import (
     BOTLOG,
     BOTLOG_CHATID,
     DEFAULT_BIO,
-    catub,
+    iqthon,
     edit_delete,
     get_user_from_event,
 )
@@ -25,7 +25,7 @@ DEFAULTUSERBIO = (
 )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="clone(?:\s|$)([\s\S]*)",
     command=("clone", plugin_category),
     info={
@@ -66,7 +66,7 @@ async def _(event):
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="revert$",
     command=("revert", plugin_category),
     info={
