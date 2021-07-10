@@ -5,7 +5,7 @@ from telethon.tl.types import ChatBannedRights
 
 from ..sql_helper import antiflood_sql as sql
 from ..utils import is_admin
-from . import catub, edit_or_reply
+from . import iqthon, edit_or_reply
 
 plugin_category = "admin"
 CHAT_FLOOD = sql.__load_flood_settings()
@@ -15,7 +15,7 @@ ANTI_FLOOD_WARN_MODE = ChatBannedRights(
 )
 
 
-@catub.cat_cmd(incoming=True, groups_only=True)
+@iqthon.iq_cmd(incoming=True, groups_only=True)
 async def _(event):
     if not CHAT_FLOOD:
         return
@@ -55,7 +55,7 @@ because he reached the defined flood limit.""",
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="setflood(?:\s|$)([\s\S]*)",
     command=("setflood", plugin_category),
     info={
