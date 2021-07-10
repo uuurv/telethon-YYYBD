@@ -11,7 +11,7 @@ from telethon.errors import QueryIdInvalidError
 from telethon.events import CallbackQuery, InlineQuery
 from youtubesearchpython import VideosSearch
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..helpers.functions import rand_key
@@ -53,54 +53,52 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    text = f"𝙲𝚘𝚖𝚖𝚊𝚗𝚍 𝙷𝚎𝚕𝚙𝚎𝚛\
-\n𝚏𝚘𝚛 {mention}"
+    text = f"تليثون العرب\
+        \nللأوامر {mention}"
     buttons = [
         (
             Button.inline(
-                f"𝙸𝙽𝙵𝙾",
+                f"ℹ️ Info",
                 data="check",
             ),
         ),
         (
             Button.inline(
-                f"𝙰𝚍𝚖𝚒𝚗 » ‹{len(GRP_INFO['admin'])}› ",
+                f"👮‍♂️ اوامر الادمن ({len(GRP_INFO['اوامر الادمن'])})",
                 data=f"admin_menu",
             ),
             Button.inline(
-                f"𝙱𝚘𝚝 » ‹{len(GRP_INFO['bot'])}› ",
+                f"🤖 استخدامات البوت ({len(GRP_INFO['استخدامات البوت'])})",
                 data=f"bot_menu",
             ),
         ),
         (
             Button.inline(
-                f"𝙵𝚞𝚗 » ‹{len(GRP_INFO['fun'])}› ",
+                f"🎨 اوامر الترفيهيه ({len(GRP_INFO['اوامر الترفيهيه'])})",
                 data=f"fun_menu",
             ),
             Button.inline(
-                f"𝙼𝚒𝚜𝚌 » ‹{len(GRP_INFO['misc'])}› ",
+                f"🧩 اوامر عشوائيه ({len(GRP_INFO['اوامر عشوائيه'])})",
                 data=f"misc_menu",
             ),
         ),
         (
             Button.inline(
-                f"𝚃𝚘𝚘𝚕𝚜 » ‹{len(GRP_INFO['tools'])}› ",
+                f"🧰 اوامر الحساب ({len(GRP_INFO['اوامر الحساب'])})",
                 data=f"tools_menu",
             ),
             Button.inline(
-                f"𝚄𝚝𝚒𝚕𝚜 » ‹{len(GRP_INFO['utils'])}› ",
+                f"🗂 اوامر الادارة ({len(GRP_INFO['اوامر الادارة'])})",
                 data=f"utils_menu",
             ),
         ),
         (
             Button.inline(
-                f"𝙴𝚡𝚝𝚛𝚊 » ‹{len(GRP_INFO['extra'])}›",
+                f"➕ اوامر الحفض ({len(GRP_INFO['اوامر الحفض'])})",
                 data=f"extra_menu",
             ),
-        ),
-        (
             Button.inline(
-                f"✕ » 𝙲𝚕𝚘𝚜𝚎",
+                f"🔒 اغلاق الاعدادات",
                 data=f"close",
             ),
         ),
@@ -234,7 +232,7 @@ def paginate_help(
     return pairs
 
 
-@catub.tgbot.on(InlineQuery)
+@iqthon.tgbot.on(InlineQuery)
 async def inline_handler(event):  # sourcery no-metrics
     builder = event.builder
     result = None
@@ -537,7 +535,7 @@ async def inline_handler(event):  # sourcery no-metrics
         await event.answer([result] if result else None)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(b"close")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(b"close")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     buttons = [
@@ -546,7 +544,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit("Menu Closed", buttons=buttons)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
     text = f"𝙿𝚕𝚞𝚐𝚒𝚗𝚜: {len(PLG_INFO)}\
         \n𝙲𝚘𝚖𝚖𝚊𝚗𝚍𝚜: {len(CMD_INFO)}\
@@ -557,7 +555,7 @@ async def on_plugin_callback_query_handler(event):
     await event.answer(text, cache_time=0, alert=True)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(b"(.*)_menu")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(b"(.*)_menu")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     category = str(event.pattern_match.group(1).decode("UTF-8"))
@@ -568,7 +566,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text, buttons=buttons)
 
 
-@catub.tgbot.on(
+@iqthon.tgbot.on(
     CallbackQuery(
         data=re.compile(b"back_([a-z]+)_([a-z]+)_([0-9]+)_?([a-z]+)?_?([0-9]+)?")
     )
@@ -600,14 +598,14 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text, buttons=buttons)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"mainmenu")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"mainmenu")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     _result = main_menu()
     await event.edit(_result[0], buttons=_result[1])
 
 
-@catub.tgbot.on(
+@iqthon.tgbot.on(
     CallbackQuery(data=re.compile(rb"(.*)_prev\((.+?)\)_([a-z]+)_?([a-z]+)?_?(.*)?"))
 )
 @check_owner
@@ -638,7 +636,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(buttons=buttons)
 
 
-@catub.tgbot.on(
+@iqthon.tgbot.on(
     CallbackQuery(data=re.compile(rb"(.*)_next\((.+?)\)_([a-z]+)_?([a-z]+)?_?(.*)?"))
 )
 @check_owner
@@ -666,7 +664,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(buttons=buttons)
 
 
-@catub.tgbot.on(
+@iqthon.tgbot.on(
     CallbackQuery(data=re.compile(b"(.*)_cmdhelp_([a-z]+)_([0-9]+)_([a-z]+)_([0-9]+)"))
 )
 @check_owner
