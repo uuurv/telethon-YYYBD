@@ -5,7 +5,7 @@ from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 
-plugin_category = "اوامر الحساب"
+plugin_category = "tools"
 
 
 @iqthon.iq_cmd(
