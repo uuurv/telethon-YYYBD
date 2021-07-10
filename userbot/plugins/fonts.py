@@ -1,6 +1,6 @@
 import random
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 from . import fonts
@@ -8,7 +8,7 @@ from . import fonts
 plugin_category = "extra"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="fmusical(?:\s|$)([\s\S]*)",
     command=("fmusical", plugin_category),
     info={
@@ -39,7 +39,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ancient(?:\s|$)([\s\S]*)",
     command=("ancient", plugin_category),
     info={
@@ -70,7 +70,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="vapor(?:\s|$)([\s\S]*)",
     command=("vapor", plugin_category),
     info={
@@ -103,7 +103,7 @@ async def vapor(event):
     await edit_or_reply(event, "".join(reply_text))
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="smallcaps(?:\s|$)([\s\S]*)",
     command=("smallcaps", plugin_category),
     info={
@@ -134,7 +134,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="blackbf(?:\s|$)([\s\S]*)",
     command=("blackbf", plugin_category),
     info={
@@ -165,7 +165,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="bubbles(?:\s|$)([\s\S]*)",
     command=("bubbles", plugin_category),
     info={
@@ -196,7 +196,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="tanf(?:\s|$)([\s\S]*)",
     command=("tanf", plugin_category),
     info={
@@ -224,7 +224,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="boxf(?:\s|$)([\s\S]*)",
     command=("boxf", plugin_category),
     info={
@@ -252,7 +252,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="smothtext(?:\s|$)([\s\S]*)",
     command=("smothtext", plugin_category),
     info={
@@ -283,7 +283,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="egyptf(?:\s|$)([\s\S]*)",
     command=("egyptf", plugin_category),
     info={
@@ -311,7 +311,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="maref(?:\s|$)([\s\S]*)",
     command=("maref", plugin_category),
     info={
@@ -339,7 +339,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="handcf(?:\s|$)([\s\S]*)",
     command=("handcf", plugin_category),
     info={
@@ -367,7 +367,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="doublef(?:\s|$)([\s\S]*)",
     command=("doublef", plugin_category),
     info={
@@ -398,7 +398,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="mock(?:\s|$)([\s\S]*)",
     command=("mock", plugin_category),
     info={
@@ -430,7 +430,7 @@ async def spongemocktext(mock):
     await edit_or_reply(mock, "".join(reply_text))
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ghostf(?:\s|$)([\s\S]*)",
     command=("ghostf", plugin_category),
     info={
@@ -458,7 +458,7 @@ async def stylish_generator(event):
     await edit_or_reply(event, string)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="handsf(?:\s|$)([\s\S]*)",
     command=("handsf", plugin_category),
     info={
