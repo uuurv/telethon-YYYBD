@@ -1,15 +1,15 @@
 import asyncio
 import random
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 from . import catmemes
 
-plugin_category = "extra"
+plugin_category = "اوامر الحفض"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="abuse$",
     command=("abuse", plugin_category),
     info={
@@ -23,7 +23,7 @@ async def abusing(abused):
     await edit_or_reply(abused, reply_text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="abusehard$",
     command=("abusehard", plugin_category),
     info={
@@ -37,7 +37,7 @@ async def fuckedd(abusehard):
     await edit_or_reply(abusehard, reply_text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="rendi$",
     command=("rendi", plugin_category),
     info={
@@ -51,7 +51,7 @@ async def metoo(e):
     await edit_or_reply(e, txt)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="rape$",
     command=("rape", plugin_category),
     info={
@@ -65,7 +65,7 @@ async def raping(raped):
     await edit_or_reply(raped, reply_text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="fuck$",
     command=("fuck", plugin_category),
     info={
@@ -79,7 +79,7 @@ async def chutiya(fuks):
     await edit_or_reply(fuks, reply_text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="thanos$",
     command=("thanos", plugin_category),
     info={
@@ -93,7 +93,7 @@ async def thanos(thanos):
     await edit_or_reply(thanos, reply_text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="kiss$",
     command=("kiss", plugin_category),
     info={
@@ -112,7 +112,7 @@ async def _(event):
         await catevent.edit(animation_chars[i % 4])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="fuk$",
     command=("fuk", plugin_category),
     info={
@@ -131,7 +131,7 @@ async def _(event):
         await catevent.edit(animation_chars[i % 4])
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="sex$",
     command=("sex", plugin_category),
     info={
