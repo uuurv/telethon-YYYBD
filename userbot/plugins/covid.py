@@ -1,12 +1,12 @@
 # corona virus stats for catuserbot
 from covid import Covid
 
-from . import catub, covidindia, edit_delete, edit_or_reply
+from . import iqthon, covidindia, edit_delete, edit_or_reply
 
 plugin_category = "extra"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="covid(?:\s|$)([\s\S]*)",
     command=("covid", plugin_category),
     info={
