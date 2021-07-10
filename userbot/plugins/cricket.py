@@ -5,12 +5,12 @@ plugin for Cat_Userbot
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from . import catub, edit_or_reply, reply_id
+from . import iqthon, edit_or_reply, reply_id
 
 plugin_category = "extra"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="score$",
     command=("score", plugin_category),
     info={
@@ -45,7 +45,7 @@ async def _(event):
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="cric ([\s\S]*)",
     command=("cric", plugin_category),
     info={
