@@ -5,7 +5,7 @@ import os
 import time
 from datetime import datetime
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
@@ -55,7 +55,7 @@ async def cult_small_video(
     return None
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ffmpegsave$",
     command=("ffmpegsave", plugin_category),
     info={
@@ -102,7 +102,7 @@ async def ff_mpeg_trim_cmd(event):
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="vtrim(?:\s|$)([\s\S]*)",
     command=("vtrim", plugin_category),
     info={
@@ -188,7 +188,7 @@ async def ff_mpeg_trim_cmd(event):
     await edit_delete(catevent, f"`Completed Process in {ms} seconds`", 3)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="atrim(?:\s|$)([\s\S]*)",
     command=("atrim", plugin_category),
     info={
@@ -252,7 +252,7 @@ async def ff_mpeg_trim_cmd(event):
     await edit_delete(catevent, f"`Completed Process in {ms} seconds`", 3)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ffmpegclear$",
     command=("ffmpegclear", plugin_category),
     info={
