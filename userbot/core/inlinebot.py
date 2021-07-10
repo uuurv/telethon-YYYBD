@@ -366,7 +366,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(jsondata, open(secret, "w"))
             else:
                 json.dump(newsecret, open(secret, "w"))
-        elif string == "help":
+        elif string == "الاوامر":
             _result = main_menu()
             result = builder.article(
                 title="© CatUserbot Help",
