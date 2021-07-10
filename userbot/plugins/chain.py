@@ -1,11 +1,11 @@
 from telethon.tl.functions.messages import SaveDraftRequest
 
-from . import catub
+from . import iqthon
 
 plugin_category = "tools"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="chain$",
     command=("chain", plugin_category),
     info={
