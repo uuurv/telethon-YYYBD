@@ -3,7 +3,7 @@ from pathlib import Path
 
 from ..Config import Config
 from ..utils import load_module, remove_plugin
-from . import CMD_HELP, CMD_LIST, SUDO_LIST, catub, edit_delete, edit_or_reply, reply_id
+from . import CMD_HELP, CMD_LIST, SUDO_LIST, iqthon, edit_delete, edit_or_reply, reply_id
 
 plugin_category = "tools"
 
@@ -11,7 +11,7 @@ DELETE_TIMEOUT = 5
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="install$",
     command=("install", plugin_category),
     info={
@@ -47,7 +47,7 @@ async def install(event):
             os.remove(downloaded_file_name)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="load ([\s\S]*)",
     command=("load", plugin_category),
     info={
@@ -74,7 +74,7 @@ async def load(event):
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="send ([\s\S]*)",
     command=("send", plugin_category),
     info={
@@ -106,7 +106,7 @@ async def send(event):
         await edit_or_reply(event, "404: File Not Found")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="unload ([\s\S]*)",
     command=("unload", plugin_category),
     info={
@@ -126,7 +126,7 @@ async def unload(event):
         await edit_or_reply(event, f"Successfully unload {shortname}\n{str(e)}")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="uninstall ([\s\S]*)",
     command=("uninstall", plugin_category),
     info={
