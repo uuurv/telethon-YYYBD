@@ -87,7 +87,7 @@ async def amireallyalive(event):
     else:
         await event.client.send_message(
             entity=event.chat_id,
-            message=CUSTOM_ALIVE_TEXT
+            message=CUSTOM_ALIVE_TEXT,
             buttons=alive_buttons,
             reply_to=reply_to_id
         )
