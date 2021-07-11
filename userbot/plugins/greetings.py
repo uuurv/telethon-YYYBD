@@ -1,6 +1,6 @@
 import random
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 from . import catmemes
@@ -8,7 +8,7 @@ from . import catmemes
 plugin_category = "extra"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gm$",
     command=("gm", plugin_category),
     info={
@@ -22,7 +22,7 @@ async def morning(morning):
     await edit_or_reply(morning, txt)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gnoon$",
     command=("gnoon", plugin_category),
     info={
@@ -36,7 +36,7 @@ async def noon(noon):
     await edit_or_reply(noon, txt)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gn$",
     command=("gn", plugin_category),
     info={
@@ -50,7 +50,7 @@ async def night(night):
     await edit_or_reply(night, txt)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gmg$",
     command=("gmg", plugin_category),
     info={
@@ -66,7 +66,7 @@ async def gm(event):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gnt$",
     command=("gnt", plugin_category),
     info={
@@ -85,7 +85,7 @@ async def gn(event):
 # @PhycoNinja13b 's Part begin from here
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="hi(?:\s|$)([\s\S]*)",
     command=("hi", plugin_category),
     info={
@@ -108,7 +108,7 @@ async def hi(event):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="cheer$",
     command=("cheer", plugin_category),
     info={
@@ -124,7 +124,7 @@ async def cheer(event):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="getwell$",
     command=("getwell", plugin_category),
     info={
@@ -139,7 +139,7 @@ async def getwell(event):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="luck$",
     command=("luck", plugin_category),
     info={
@@ -154,7 +154,7 @@ async def luck(event):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="sprinkle$",
     command=("sprinkle", plugin_category),
     info={
