@@ -76,7 +76,7 @@ async def amireallyalive(event):
         PIC = random.choice(A_IMG)
         try:
             await event.client.send_file(
-                event.chat_id, PIC, caption=cat_caption, reply_to=reply_to_id, buttons=alive_buttons
+                event.chat_id, PIC, caption=CUSTOM_ALIVE_TEXT, reply_to=reply_to_id, buttons=alive_buttons
             )
             await event.delete()
         except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
@@ -87,6 +87,7 @@ async def amireallyalive(event):
     else:
         await event.client.send_message(
             entity=event.chat_id,
+            message=CUSTOM_ALIVE_TEXT
             buttons=alive_buttons,
             reply_to=reply_to_id
         )
