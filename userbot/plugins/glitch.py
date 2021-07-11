@@ -8,7 +8,7 @@ import os
 from glitch_this import ImageGlitcher
 from PIL import Image
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete
 from ..helpers.utils import _cattools, _catutils, reply_id
@@ -16,7 +16,7 @@ from ..helpers.utils import _cattools, _catutils, reply_id
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="glitch(s)?(?: |$)([1-8])?",
     command=("glitch", plugin_category),
     info={
