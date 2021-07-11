@@ -1,13 +1,13 @@
 import asyncio
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="^\:/$",
     command=("\:", plugin_category),
     info={
@@ -25,7 +25,7 @@ async def kek(keks):
         await keks.edit(txt)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="^\-_-$",
     command=("-_-", plugin_category),
     info={
@@ -43,7 +43,7 @@ async def lol(lel):
         await lel.edit(okay)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="^\;_;$",
     command=(";_;", plugin_category),
     info={
@@ -61,7 +61,7 @@ async def fun(e):
         await e.edit(t)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="oof$",
     command=("oof", plugin_category),
     info={
@@ -79,7 +79,7 @@ async def Oof(e):
         await catevent.edit(t)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="type ([\s\S]*)",
     command=("type", plugin_category),
     info={
@@ -104,7 +104,7 @@ async def typewriter(typew):
         await asyncio.sleep(sleep_time)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="repeat (\d*) ([\s\S]*)",
     command=("repeat", plugin_category),
     info={
@@ -122,7 +122,7 @@ async def _(event):
     await edit_or_reply(event, repsmessage)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="meme",
     command=("meme", plugin_category),
     info={
@@ -199,7 +199,7 @@ async def meme(event):
     await event.edit(memeVar)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="give",
     command=("give", plugin_category),
     info={
@@ -254,7 +254,7 @@ async def give(event):
     await event.edit(lp + lp + lp + lp + lp + lp + lp + lp + lp)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="sadmin$",
     command=("sadmin", plugin_category),
     info={
