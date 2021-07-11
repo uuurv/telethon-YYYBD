@@ -3,7 +3,7 @@ import re
 import time
 from platform import python_version
 
-from telethon import version
+from telethon import version, Button
 from telethon.errors.rpcerrorlist import (
     MediaEmptyError,
     WebpageCurlFailedError,
@@ -42,21 +42,41 @@ async def amireallyalive(event):
     EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
     CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "✮ تليثون العرب ✮"
     CAT_IMG = gvarstatus("ALIVE_PIC")
+    alive_buttons = [
+        [
+            Button.inline(
+                text=f"{EMOJI} قاعدة البيانات : {check_sgnirts}"
+            ),
+            Button.inline(
+                text=f"{EMOJI} نسخه تليثون : {version.__version__}"
+            ),
+            
+        ],
+        [
+            Button.inline(
+                text=f"**{EMOJI} نسخه العرب :** `{catversion}`\n"
+            ),
+            Button.inline(
+                text=f"**{EMOJI} نسخه البايثون :** `{python_version()}\n`"
+            ),
+        ],
+        [
+            Button.inline(
+                text=f"**{EMOJI} الوقت :** `{uptime}\n`"
+            ),
+            Button.inline(
+                text=f"**{EMOJI} المنصب :** {mention}\n"
+            ),
+            
+        ],
+    ]
     if CAT_IMG:
         CAT = [x for x in CAT_IMG.split()]
         A_IMG = list(CAT)
         PIC = random.choice(A_IMG)
-        cat_caption = f"**{CUSTOM_ALIVE_TEXT}**\n\n"
-        cat_caption += f"**{EMOJI} قاعدة البيانات :** `{check_sgnirts}`\n"
-        cat_caption += f"**{EMOJI} نسخه تليثون :** `{version.__version__}\n`"
-        cat_caption += f"**{EMOJI} نسخه العرب :** `{catversion}`\n"
-        cat_caption += f"**{EMOJI} نسخه البايثون :** `{python_version()}\n`"
-        cat_caption += f"**{EMOJI} الوقت :** `{uptime}\n`"
-        cat_caption += f"**قناه السورس : @iqthon\n"
-        cat_caption += f"**{EMOJI} المنصب :** {mention}\n"
         try:
             await event.client.send_file(
-                event.chat_id, PIC, caption=cat_caption, reply_to=reply_to_id
+                event.chat_id, PIC, caption=cat_caption, reply_to=reply_to_id, buttons=alive_buttons
             )
             await event.delete()
         except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
@@ -65,15 +85,9 @@ async def amireallyalive(event):
                 f"**Media Value Error!!**\n__Change the link by __`.setdv`\n\n**__Can't get media from this link :-**__ `{PIC}`",
             )
     else:
-        await edit_or_reply(
-            event,
-            f"**{CUSTOM_ALIVE_TEXT}**\n\n"
-            f"**{EMOJI} Database :** `{check_sgnirts}`\n"
-            f"**{EMOJI} Telethon Version :** `{version.__version__}\n`"
-            f"**{EMOJI} Catuserbot Version :** `{catversion}`\n"
-            f"**{EMOJI} Python Version :** `{python_version()}\n`"
-            f"**{EMOJI} Uptime :** `{uptime}\n`"
-            f"**{EMOJI} Master:** {mention}\n",
+        await event.client.send_message(
+            entity=event,
+            buttons=alive_buttons
         )
 
 
