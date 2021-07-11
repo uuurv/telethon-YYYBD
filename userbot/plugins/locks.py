@@ -6,7 +6,7 @@ from telethon.tl.functions.messages import EditChatDefaultBannedRightsRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from telethon.tl.types import ChatBannedRights
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import _format
@@ -17,7 +17,7 @@ from . import BOTLOG, get_user_from_event
 plugin_category = "admin"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="lock ([\s\S]*)",
     command=("lock", plugin_category),
     info={
@@ -205,7 +205,7 @@ async def _(event):  # sourcery no-metrics
             )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="unlock ([\s\S]*)",
     command=("unlock", plugin_category),
     info={
@@ -393,7 +393,7 @@ async def _(event):  # sourcery no-metrics
             )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="locks$",
     command=("locks", plugin_category),
     info={
@@ -452,7 +452,7 @@ async def _(event):  # sourcery no-metrics
     await edit_or_reply(event, res)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="plock ([\s\S]*)",
     command=("plock", plugin_category),
     info={
@@ -699,7 +699,7 @@ async def _(event):  # sourcery no-metrics
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="punlock ([\s\S]*)",
     command=("punlock", plugin_category),
     info={
@@ -950,7 +950,7 @@ async def _(event):  # sourcery no-metrics
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="uperm(?:\s|$)([\s\S]*)",
     command=("uperm", plugin_category),
     info={
@@ -1027,7 +1027,7 @@ async def _(event):  # sourcery no-metrics
     await edit_or_reply(event, output)
 
 
-@catub.cat_cmd(incoming=True, forword=None)
+@iqthon.iq_cmd(incoming=True, forword=None)
 async def check_incoming_messages(event):  # sourcery no-metrics
     if not event.is_private:
         chat = await event.get_chat()
