@@ -12,7 +12,7 @@ import requests
 from selenium import webdriver
 from validators.url import url
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
@@ -21,7 +21,7 @@ from . import reply_id
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ss ([\s\S]*)",
     command=("ss", plugin_category),
     info={
@@ -92,7 +92,7 @@ async def _(event):
         await catevent.edit(f"`{traceback.format_exc()}`")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="scapture ([\s\S]*)",
     command=("scapture", plugin_category),
     info={
