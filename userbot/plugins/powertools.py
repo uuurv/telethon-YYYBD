@@ -2,7 +2,7 @@ import sys
 from asyncio.exceptions import CancelledError
 from time import sleep
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.logger import logging
 from ..core.managers import edit_or_reply
@@ -18,7 +18,7 @@ LOGS = logging.getLogger(__name__)
 plugin_category = "tools"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="restart$",
     command=("restart", plugin_category),
     info={
@@ -55,7 +55,7 @@ async def _(event):
         LOGS.error(e)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="shutdown$",
     command=("shutdown", plugin_category),
     info={
@@ -75,7 +75,7 @@ async def _(event):
         sys.exit(0)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="sleep( [0-9]+)?$",
     command=("sleep", plugin_category),
     info={
@@ -99,7 +99,7 @@ async def _(event):
     await event.edit("`OK, I'm awake now.`")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="notify (on|off)$",
     command=("notify", plugin_category),
     info={
