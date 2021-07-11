@@ -407,7 +407,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     thumb=InputWebDocument(url=CAT_IMG, size=42, mime_type="image/jpeg", attributes=[]) if CAT_IMG else None, 
                     buttons=alive_buttons
                 ),
-            ] if iresult else None)
+            ])
         elif string == "help":
             _result = main_menu()
             result = builder.article(
