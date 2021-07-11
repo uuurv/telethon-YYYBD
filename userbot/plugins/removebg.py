@@ -3,7 +3,7 @@ import os
 
 import requests
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
@@ -45,7 +45,7 @@ def ReTrieveURL(input_url):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="(rmbg|srmbg)(?:\s|$)([\s\S]*)",
     command=("rmbg", plugin_category),
     info={
