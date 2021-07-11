@@ -4,7 +4,7 @@ import asyncio
 import os
 import re
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import reply_id
@@ -22,7 +22,7 @@ from . import (
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="fakegs(?:\s|$)([\s\S]*)",
     command=("fakegs", plugin_category),
     info={
@@ -59,7 +59,7 @@ async def nekobot(cat):
         os.remove(catfile)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="trump(?:\s|$)([\s\S]*)",
     command=("trump", plugin_category),
     info={
@@ -90,7 +90,7 @@ async def nekobot(cat):
         os.remove(catfile)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="modi(?:\s|$)([\s\S]*)",
     command=("modi", plugin_category),
     info={
@@ -121,7 +121,7 @@ async def nekobot(cat):
         os.remove(catfile)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="cmm(?:\s|$)([\s\S]*)",
     command=("cmm", plugin_category),
     info={
@@ -151,7 +151,7 @@ async def nekobot(cat):
         os.remove(catfile)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="kanna(?:\s|$)([\s\S]*)",
     command=("kanna", plugin_category),
     info={
@@ -182,7 +182,7 @@ async def nekobot(cat):
         os.remove(catfile)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="tweet(?:\s|$)([\s\S]*)",
     command=("tweet", plugin_category),
     info={
