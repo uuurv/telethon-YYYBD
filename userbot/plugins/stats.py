@@ -5,7 +5,7 @@ from telethon.tl.custom import Dialog
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from telethon.tl.types import Channel, Chat, User
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 
@@ -37,7 +37,7 @@ def user_full_name(user):
     return " ".join(names)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="stat$",
     command=("stat", plugin_category),
     info={
@@ -118,7 +118,7 @@ async def stats(event):  # sourcery no-metrics
     await cat.edit(response)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="stat (c|ca|co)$",
 )
 async def stats(event):  # sourcery no-metrics
@@ -169,7 +169,7 @@ async def stats(event):  # sourcery no-metrics
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="stat (g|ga|go)$",
 )
 async def stats(event):  # sourcery no-metrics
@@ -228,7 +228,7 @@ async def stats(event):  # sourcery no-metrics
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ustat(?:\s|$)([\s\S]*)",
     command=("ustat", plugin_category),
     info={
