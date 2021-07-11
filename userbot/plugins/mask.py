@@ -6,7 +6,7 @@ from telegraph import exceptions, upload_file
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
@@ -15,7 +15,7 @@ from . import awooify, baguette, convert_toimage, iphonex, lolice
 plugin_category = "extra"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="mask$",
     command=("mask", plugin_category),
     info={
@@ -52,7 +52,7 @@ async def _(catbot):
             await event.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="awooify$",
     command=("awooify", plugin_category),
     info={
@@ -99,7 +99,7 @@ async def catbot(catmemes):
     await catmemes.client.send_file(catmemes.chat_id, cat, reply_to=replied)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="lolice$",
     command=("lolice", plugin_category),
     info={
@@ -146,7 +146,7 @@ async def catbot(catmemes):
     await catmemes.client.send_file(catmemes.chat_id, cat, reply_to=replied)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="bun$",
     command=("bun", plugin_category),
     info={
@@ -193,7 +193,7 @@ async def catbot(catmemes):
     await catmemes.client.send_file(catmemes.chat_id, cat, reply_to=replied)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="iphx$",
     command=("iphx", plugin_category),
     info={
