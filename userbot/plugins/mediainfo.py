@@ -2,7 +2,7 @@
 # ported to telethon by @mrconfused (@sandy1709)
 import os
 
-from userbot import catub
+from userbot import iqthon
 from userbot.core.logger import logging
 
 from ..Config import Config
@@ -52,7 +52,7 @@ async def file_data(reply):
     return hmm
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="minfo$",
     command=("minfo", plugin_category),
     info={
