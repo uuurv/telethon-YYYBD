@@ -2,14 +2,14 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="recognize ?([\s\S]*)",
     command=("recognize", plugin_category),
     info={
