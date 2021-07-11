@@ -395,7 +395,7 @@ async def inline_handler(event):  # sourcery no-metrics
                         text=f"{EMOJI} الوقت : {uptime}"
                     ),
                     Button.inline(
-                        text=f"{EMOJI} المنصب : {mention}"
+                        text=f"{EMOJI} المنصب : {Config.ALIVE_NAME}"
                     ),
                 ],
             ]
