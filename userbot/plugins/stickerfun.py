@@ -13,7 +13,7 @@ import textwrap
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import InputMessagesFilterDocument
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 from ..helpers.functions import deEmojify, hide_inlinebot, waifutxt
@@ -39,7 +39,7 @@ async def get_font_file(client, channel_id, search_kw=""):
     return await client.download_media(font_file_message)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="sttxt(?:\s|$)([\s\S]*)",
     command=("sttxt", plugin_category),
     info={
@@ -65,7 +65,7 @@ async def waifu(animu):
 
 
 # 12 21 28 30
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="stcr ?(?:(.*?) ?; )?([\s\S]*)",
     command=("stcr", plugin_category),
     info={
@@ -133,7 +133,7 @@ async def sticklet(event):
         pass
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="honk(?:\s|$)([\s\S]*)",
     command=("honk", plugin_category),
     info={
@@ -159,7 +159,7 @@ async def honk(event):
     await hide_inlinebot(event.client, bot_name, text, event.chat_id, reply_to_id)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="twt(?:\s|$)([\s\S]*)",
     command=("twt", plugin_category),
     info={
@@ -185,7 +185,7 @@ async def twt(event):
     await hide_inlinebot(event.client, bot_name, text, event.chat_id, reply_to_id)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="doge(?:\s|$)([\s\S]*)",
     command=("doge", plugin_category),
     info={
@@ -211,7 +211,7 @@ async def doge(event):
     await hide_inlinebot(event.client, bot_name, text, event.chat_id, reply_to_id)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="glax(|r)(?:\s|$)([\s\S]*)",
     command=("glax", plugin_category),
     info={
