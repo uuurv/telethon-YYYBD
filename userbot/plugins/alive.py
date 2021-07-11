@@ -54,18 +54,18 @@ async def amireallyalive(event):
         ],
         [
             Button.inline(
-                text=f"**{EMOJI} نسخه العرب :** `{catversion}`\n"
+                text=f"{EMOJI} نسخه العرب : {catversion}"
             ),
             Button.inline(
-                text=f"**{EMOJI} نسخه البايثون :** `{python_version()}\n`"
+                text=f"{EMOJI} نسخه البايثون : {python_version()}"
             ),
         ],
         [
             Button.inline(
-                text=f"**{EMOJI} الوقت :** `{uptime}\n`"
+                text=f"{EMOJI} الوقت : {uptime}"
             ),
             Button.inline(
-                text=f"**{EMOJI} المنصب :** {mention}\n"
+                text=f"{EMOJI} المنصب : {mention}"
             ),
             
         ],
