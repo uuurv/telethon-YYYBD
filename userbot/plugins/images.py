@@ -2,7 +2,7 @@
 import os
 import shutil
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 from ..helpers.google_image_download import googleimagesdownload
@@ -11,7 +11,7 @@ from ..helpers.utils import reply_id
 plugin_category = "misc"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="img(?: |$)(\d*)? ?([\s\S]*)",
     command=("img", plugin_category),
     info={
