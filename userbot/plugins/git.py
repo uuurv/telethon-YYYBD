@@ -6,7 +6,7 @@ import requests
 from github import Github
 from pySmartDL import SmartDL
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core.logger import logging
@@ -21,7 +21,7 @@ plugin_category = "misc"
 GIT_TEMP_DIR = "./temp/"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="repo$",
     command=("repo", plugin_category),
     info={
@@ -40,7 +40,7 @@ async def source(e):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="github( -l(\d+))? ([\s\S]*)",
     command=("github", plugin_category),
     info={
@@ -106,7 +106,7 @@ async def _(event):
             await catevent.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="commit$",
     command=("commit", plugin_category),
     info={
