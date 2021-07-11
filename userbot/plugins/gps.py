@@ -2,7 +2,7 @@
 from geopy.geocoders import Nominatim
 from telethon.tl import types
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 from ..helpers import reply_id
@@ -10,7 +10,7 @@ from ..helpers import reply_id
 plugin_category = "extra"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gps ([\s\S]*)",
     command=("gps", plugin_category),
     info={
