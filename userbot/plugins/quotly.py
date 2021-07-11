@@ -16,7 +16,7 @@ from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.utils import get_display_name
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import convert_tosticker, media_type, process
@@ -31,7 +31,7 @@ def get_warp_length(width):
     return int((20.0 / 1024.0) * (width + 0.0))
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="qpic(?:\s|$)([\s\S]*)",
     command=("qpic", plugin_category),
     info={
@@ -139,7 +139,7 @@ async def q_pic(event):  # sourcery no-metrics
             os.remove(i)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="q(?:\s|$)([\s\S]*)",
     command=("q", plugin_category),
     info={
@@ -175,7 +175,7 @@ async def stickerchat(catquotes):
     os.remove(endfi)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="rq(?:\s|$)([\s\S]*)",
     command=("rq", plugin_category),
     info={
@@ -211,7 +211,7 @@ async def stickerchat(catquotes):
     os.remove(endfi)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="qbot(?:\s|$)([\s\S]*)",
     command=("qbot", plugin_category),
     info={
