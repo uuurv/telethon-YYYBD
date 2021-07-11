@@ -405,7 +405,8 @@ async def inline_handler(event):  # sourcery no-metrics
                     description="Alive MSG", 
                     text=CUSTOM_ALIVE_TEXT, 
                     thumb=InputWebDocument(url=CAT_IMG, size=42, mime_type="image/jpeg", attributes=[]) if CAT_IMG else None, 
-                    buttons=alive_buttons
+                    buttons=alive_buttons, 
+                    parse_mode="md"
                 ),
             ])
         elif string == "help":
