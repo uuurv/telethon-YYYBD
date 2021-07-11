@@ -21,7 +21,7 @@ from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
 from telethon import events
 
-from userbot import catub
+from userbot import iqthon
 from userbot.core.logger import logging
 
 from ..Config import Config
@@ -915,7 +915,7 @@ async def lists(gdrive, folderlink=None):  # sourcery no-metrics
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gauth$",
     command=("gauth", plugin_category),
     info={
@@ -996,7 +996,7 @@ async def generate_credentials(gdrive):
     return
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="greset",
     command=("greset", plugin_category),
     info={
@@ -1016,7 +1016,7 @@ async def reset_credentials(gdrive):
     return
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="glist(?: |$)(-l \d+)?(?: |$)?([\s\S]*)?(?: |$)",
     command=("glist", plugin_category),
     info={
@@ -1041,7 +1041,7 @@ async def catlists(gdrive):
     await lists(gdrive)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gdf (mkdir|rm|info) ([\s\S]*)",
     command=("gdf", plugin_category),
     info={
@@ -1213,7 +1213,7 @@ async def google_drive_managers(gdrive):  # sourcery no-metrics
     await gdrive.edit(reply)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gabort$",
     command=("gabort", plugin_category),
     info={
@@ -1238,7 +1238,7 @@ async def cancel_process(gdrive):
     await gdrive.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ugd(?:\s|$)([\s\S]*)",
     command=("ugd", plugin_category),
     info={
@@ -1422,7 +1422,7 @@ async def google_drive(gdrive):  # sourcery no-metrics
     return
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gclear$",
     command=("gclear", plugin_category),
     info={
@@ -1457,7 +1457,7 @@ async def set_upload_folder(gdrive):
             return None
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gset(?:\s|$)([\s\S]*)",
     command=("gset", plugin_category),
     info={
@@ -1500,7 +1500,7 @@ async def set_upload_folder(gdrive):
     return
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gdown ?(-u)? ([\s\S]*)",
     command=("gdown", plugin_category),
     info={
@@ -1554,7 +1554,7 @@ async def g_download(event):
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gshare ([\s\S]*)",
     command=("gshare", plugin_category),
     info={
