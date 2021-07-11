@@ -20,7 +20,7 @@ from telethon.tl.types import (
     UserStatusRecently,
 )
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -45,13 +45,13 @@ BANNED_RIGHTS = ChatBannedRights(
 
 async def ban_user(chat_id, i, rights):
     try:
-        await catub(functions.channels.EditBannedRequest(chat_id, i, rights))
+        await iqthon(functions.channels.EditBannedRequest(chat_id, i, rights))
         return True, None
     except Exception as exc:
         return False, str(exc)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="kickme$",
     command=("kickme", plugin_category),
     info={
@@ -68,7 +68,7 @@ async def kickme(leave):
     await leave.client.kick_participant(leave.chat_id, "me")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="kickall$",
     command=("kickall", plugin_category),
     info={
@@ -112,7 +112,7 @@ async def _(event):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="banall$",
     command=("banall", plugin_category),
     info={
@@ -149,16 +149,15 @@ async def _(event):
                     EditBannedRequest(event.chat_id, user.id, BANNED_RIGHTS)
                 )
                 success += 1
-                await sleep(0.5)
+                await sleep(0.5) # for avoid any flood waits !!-> do not remove it 
         except Exception as e:
             LOGS.info(str(e))
-            await sleep(0.5)
     await catevent.edit(
         f"`Sucessfully i have completed banall process with {success} members banned out of {total} members`"
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="unbanall$",
     command=("unbanall", plugin_category),
     info={
@@ -213,7 +212,7 @@ async def _(event):
 
 
 # Ported by ©[NIKITA](t.me/kirito6969) and ©[EYEPATCH](t.me/NeoMatrix90)
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="zombies ?([\s\S]*)",
     command=("zombies", plugin_category),
     info={
@@ -278,7 +277,7 @@ async def rm_deletedacc(show):
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ikuck ?([\s\S]*)",
     command=("ikuck", plugin_category),
     info={
