@@ -2,7 +2,7 @@
 All Thenks goes to Emily ( The creater of This Plugin) from ftg userbot
 """
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 
@@ -11,7 +11,7 @@ plugin_category = "extra"
 name = "Profile Photos"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="poto(?:\s|$)([\s\S]*)",
     command=("poto", plugin_category),
     info={
