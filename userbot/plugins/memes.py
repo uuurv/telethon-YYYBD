@@ -11,7 +11,7 @@ from cowpy import cow
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import ChannelParticipantsAdmins, MessageEntityMentionName
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import catmemes
@@ -54,7 +54,7 @@ async def get_user(event):
     return replied_user
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="(\w+)say ([\s\S]*)",
     command=("cowsay", plugin_category),
     info={
@@ -130,7 +130,7 @@ async def univsaye(cowmsg):
     await edit_or_reply(cowmsg, f"`{cheese.milk(text).replace('`', '´')}`")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="coin ?([\s\S]*)",
     command=("coin", plugin_category),
     info={
@@ -175,7 +175,7 @@ async def _(event):
         await edit_or_reply(event, r"¯\_(ツ)_/¯")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="slap(?:\s|$)([\s\S]*)",
     command=("slap", plugin_category),
     info={
@@ -197,7 +197,7 @@ async def who(event):
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="(yes|no|maybe|decide)$",
     command=("decide", plugin_category),
     info={
@@ -225,7 +225,7 @@ async def decide(event):
     await _catutils.unsavegif(event, sandy)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="shout",
     command=("shout", plugin_category),
     info={
@@ -251,7 +251,7 @@ async def shout(args):
     await edit_or_reply(args, "`" + msg + "`")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="owo ?([\s\S]*)",
     command=("owo", plugin_category),
     info={
@@ -281,7 +281,7 @@ async def faces(owo):
     await edit_or_reply(owo, reply_text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="clap(?:\s|$)([\s\S]*)",
     command=("clap", plugin_category),
     info={
@@ -306,7 +306,7 @@ async def claptext(event):
     await edit_or_reply(event, reply_text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="smk(?:\s|$)([\s\S]*)",
     command=("smk", plugin_category),
     info={
@@ -334,7 +334,7 @@ async def smrk(smk):
         await edit_or_reply(smk, reply_text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="f ([\s\S]*)",
     command=("f", plugin_category),
     info={
@@ -364,7 +364,7 @@ async def payf(event):
     await edit_or_reply(event, pay)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="wish(?:\s|$)([\s\S]*)",
     command=("wish", plugin_category),
     info={
@@ -391,7 +391,7 @@ async def wish_check(event):
     await edit_or_reply(event, reslt)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="lfy(?:\s|$)([\s\S]*)",
     command=("lfy", plugin_category),
     info={
@@ -428,7 +428,7 @@ async def _(event):
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gbun(?:\s|$)([\s\S]*)",
     command=("gbun", plugin_category),
     info={
