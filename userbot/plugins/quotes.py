@@ -1,7 +1,7 @@
 # inspired from uniborg Quotes plugin
 import random
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -13,7 +13,7 @@ LOGS = logging.getLogger(__name__)
 plugin_category = "extra"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="quote(?:\s|$)([\s\S]*)",
     command=("quote", plugin_category),
     info={
@@ -33,7 +33,7 @@ async def quote_search(event):
     await edit_or_reply(event, response, parse_mode=parse_pre)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="pquote$",
     command=("pquote", plugin_category),
     info={
