@@ -399,14 +399,15 @@ async def inline_handler(event):  # sourcery no-metrics
                     ),
                 ],
             ]
-            iresult = builder.article(
-                title="Ialive", 
-                description="Alive MSG", 
-                text=CUSTOM_ALIVE_TEXT, 
-                thumb=InputWebDocument(url=CAT_IMG, size=42, mime_type="image/jpeg", attributes=[]) if CAT_IMG else None, 
-                buttons=alive_buttons
-            )
-            await event.answer([iresult] if result else None)
+            await event.answer([
+                builder.article(
+                    title="Ialive", 
+                    description="Alive MSG", 
+                    text=CUSTOM_ALIVE_TEXT, 
+                    thumb=InputWebDocument(url=CAT_IMG, size=42, mime_type="image/jpeg", attributes=[]) if CAT_IMG else None, 
+                    buttons=alive_buttons
+                ),
+            ] if iresult else None)
         elif string == "help":
             _result = main_menu()
             result = builder.article(
