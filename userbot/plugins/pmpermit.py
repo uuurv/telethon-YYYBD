@@ -6,7 +6,7 @@ from telethon import Button, functions
 from telethon.events import CallbackQuery
 from telethon.utils import get_display_name
 
-from userbot import catub
+from userbot import iqthon
 from userbot.core.logger import logging
 
 from ..Config import Config
@@ -401,7 +401,7 @@ Now you can't do anything unless my master comes online and unblocks you.**"
         return
 
 
-@catub.cat_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
+@iqthon.iq_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
 async def on_new_private_message(event):
     if gvarstatus("pmpermit") is None:
         return
@@ -423,7 +423,7 @@ async def on_new_private_message(event):
     await do_pm_permit_action(event, chat)
 
 
-@catub.cat_cmd(outgoing=True, func=lambda e: e.is_private, edited=False, forword=None)
+@iqthon.iq_cmd(outgoing=True, func=lambda e: e.is_private, edited=False, forword=None)
 async def you_dm_other(event):
     if gvarstatus("pmpermit") is None:
         return
@@ -475,7 +475,7 @@ async def you_dm_other(event):
         sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"show_pmpermit_options")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"show_pmpermit_options")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit these options are for users who messages you, not for you"
@@ -507,7 +507,7 @@ __Let's make this smooth and let me know why you are here.__
     await event.edit(text, buttons=buttons)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"to_enquire_something")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"to_enquire_something")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit this options for user who messages you. not for you"
@@ -528,7 +528,7 @@ Then we can extend this conversation more but not right now.__"""
     await event.edit(text)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"to_request_something")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"to_request_something")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit this options for user who messages you. not for you"
@@ -550,7 +550,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"to_chat_with_my_master")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"to_chat_with_my_master")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit these options are for users who message you. not for you"
@@ -570,7 +570,7 @@ some other time. Right now I am a little busy. when I come online and if I am fr
     await event.edit(text)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"to_spam_my_master_inbox")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"to_spam_my_master_inbox")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit these options are for users who message you. not for you"
@@ -603,7 +603,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="pmguard (on|off)$",
     command=("pmguard", plugin_category),
     info={
@@ -631,7 +631,7 @@ async def pmpermit_on(event):
         await edit_delete(event, "__Pmpermit is already disabled for your account__")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="pmmenu (on|off)$",
     command=("pmmenu", plugin_category),
     info={
@@ -664,7 +664,7 @@ async def pmpermit_on(event):
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="(a|approve)(?:\s|$)([\s\S]*)",
     command=("approve", plugin_category),
     info={
@@ -740,7 +740,7 @@ async def approve_p_m(event):  # sourcery no-metrics
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="(da|disapprove)(?:\s|$)([\s\S]*)",
     command=("disapprove", plugin_category),
     info={
@@ -791,7 +791,7 @@ async def disapprove_p_m(event):
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="block(?:\s|$)([\s\S]*)",
     command=("block", plugin_category),
     info={
@@ -847,7 +847,7 @@ async def block_p_m(event):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="unblock(?:\s|$)([\s\S]*)",
     command=("unblock", plugin_category),
     info={
@@ -880,7 +880,7 @@ async def unblock_pm(event):
     )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="listapproved$",
     command=("listapproved", plugin_category),
     info={
