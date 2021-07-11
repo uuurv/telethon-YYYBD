@@ -1,11 +1,11 @@
 from asyncio import sleep
 
-from userbot import catub
+from userbot import iqthon
 
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="schd (\d*) ([\s\S]*)",
     command=("schd", plugin_category),
     info={
