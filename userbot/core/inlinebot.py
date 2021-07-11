@@ -5,16 +5,17 @@ import random
 import re
 import time
 from uuid import uuid4
+from platform import python_version
 
-from telethon import Button, types
+from telethon import Button, types, version
 from telethon.errors import QueryIdInvalidError
 from telethon.events import CallbackQuery, InlineQuery
 from youtubesearchpython import VideosSearch
 
-from userbot import iqthon
+from userbot import iqthon, catversion, StartTime
 
 from ..Config import Config
-from ..helpers.functions import rand_key
+from ..helpers.functions import rand_key, catalive, check_data_base_heal_th, get_readable_time
 from ..helpers.functions.utube import (
     download_button,
     get_yt_video_id,
@@ -368,7 +369,9 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(newsecret, open(secret, "w"))
         elif string == "ialive":
             EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
+            _, check_sgnirts = check_data_base_heal_th()
             CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "✮ تليثون العرب ✮"
+            uptime = await get_readable_time((time.time() - StartTime))
             CAT_IMG = gvarstatus("ALIVE_PIC")
             alive_buttons = [
                 [
