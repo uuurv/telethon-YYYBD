@@ -37,61 +37,9 @@ plugin_category = "utils"
 async def amireallyalive(event):
     "A kind of showing bot details"
     reply_to_id = await reply_id(event)
-    uptime = await get_readable_time((time.time() - StartTime))
-    _, check_sgnirts = check_data_base_heal_th()
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
-    CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "✮ تليثون العرب ✮"
-    CAT_IMG = gvarstatus("ALIVE_PIC")
-    alive_buttons = [
-        [
-            Button.inline(
-                text=f"{EMOJI} قاعدة البيانات : {check_sgnirts}"
-            ),
-            Button.inline(
-                text=f"{EMOJI} نسخه تليثون : {version.__version__}"
-            ),
-            
-        ],
-        [
-            Button.inline(
-                text=f"{EMOJI} نسخه العرب : {catversion}"
-            ),
-            Button.inline(
-                text=f"{EMOJI} نسخه البايثون : {python_version()}"
-            ),
-        ],
-        [
-            Button.inline(
-                text=f"{EMOJI} الوقت : {uptime}"
-            ),
-            Button.inline(
-                text=f"{EMOJI} المنصب : {mention}"
-            ),
-            
-        ],
-    ]
-    if CAT_IMG:
-        CAT = [x for x in CAT_IMG.split()]
-        A_IMG = list(CAT)
-        PIC = random.choice(A_IMG)
-        try:
-            await event.client.send_file(
-                event.chat_id, PIC, caption=CUSTOM_ALIVE_TEXT, reply_to=reply_to_id, buttons=alive_buttons
-            )
-            await event.delete()
-        except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
-            return await edit_or_reply(
-                event,
-                f"**Media Value Error!!**\n__Change the link by __`.setdv`\n\n**__Can't get media from this link :-**__ `{PIC}`",
-            )
-    else:
-        await event.client.send_message(
-            entity=event.chat_id,
-            message=CUSTOM_ALIVE_TEXT,
-            buttons=alive_buttons,
-            reply_to=reply_to_id
-        )
-        await event.delete()
+    results = await event.client.inline_query(Config.TG_BOT_USERNAME, 'ialive')
+    await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
+    await event.delete()
 
 
 @iqthon.iq_cmd(
