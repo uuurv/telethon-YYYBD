@@ -1,6 +1,6 @@
 import asyncio
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import reply_id
@@ -22,7 +22,7 @@ game_name = [
 game_list = "1.`ttt` :- Tic-Tac-Toe\n2.`ttf` :- Tic-Tac-Four\n3.`cf` :- Connect Four\n4.`rps` :- Rock-Paper-Scissors\n5.`rpsls` :- Rock-Paper-Scissors-Lizard-Spock\n6.`rr` :- Russian Roulette\n7.`c` :- Checkers\n8.`pc` :- Pool Checkers"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="game(?:\s|$)([\s\S]*)",
     command=("game", plugin_category),
     info={
