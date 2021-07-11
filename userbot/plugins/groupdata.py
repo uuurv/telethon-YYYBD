@@ -18,7 +18,7 @@ from telethon.tl.types import (
 )
 from telethon.utils import get_input_location
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -29,7 +29,7 @@ LOGS = logging.getLogger(__name__)
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="admins(?:\s|$)([\s\S]*)",
     command=("admins", plugin_category),
     info={
@@ -84,7 +84,7 @@ async def _(event):
     await event.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="bots(?:\s|$)([\s\S]*)",
     command=("bots", plugin_category),
     info={
@@ -126,7 +126,7 @@ async def _(event):
     await edit_or_reply(event, mentions)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="users(?:\s|$)([\s\S]*)",
     command=("users", plugin_category),
     info={
@@ -176,7 +176,7 @@ async def get_users(show):
     await edit_or_reply(catevent, mentions)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="chatinfo(?:\s|$)([\s\S]*)",
     command=("chatinfo", plugin_category),
     info={
