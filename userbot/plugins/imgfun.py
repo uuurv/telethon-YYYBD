@@ -5,7 +5,7 @@ from io import BytesIO
 
 from PIL import Image, ImageFilter, ImageOps
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers import media_type
@@ -15,7 +15,7 @@ from ..helpers.utils import _cattools
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="imirror(s)? ?(-)?(l|r|u|b)?$",
     command=("imirror", plugin_category),
     info={
@@ -106,7 +106,7 @@ async def imirror(event):  # sourcery no-metrics
     await catevent.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="irotate(?: |$)(\d+)$",
     command=("irotate", plugin_category),
     info={
@@ -150,7 +150,7 @@ async def irotate(event):
     await catevent.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="iresize(?:\s|$)([\s\S]*)$",
     command=("iresize", plugin_category),
     info={
@@ -210,7 +210,7 @@ async def iresize(event):
     await catevent.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="square$",
     command=("square", plugin_category),
     info={
@@ -252,7 +252,7 @@ async def square_cmd(event):
     await catevent.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="dotify(?: |$)(\d+)?$",
     command=("dotify", plugin_category),
     info={
