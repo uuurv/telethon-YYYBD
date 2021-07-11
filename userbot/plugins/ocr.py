@@ -2,7 +2,7 @@ import os
 
 import requests
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
@@ -40,7 +40,7 @@ async def ocr_space_file(
     return r.json()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ocr(?:\s|$)([\s\S]*)",
     command=("ocr", plugin_category),
     info={
