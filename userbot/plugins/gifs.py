@@ -6,12 +6,12 @@ import requests
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import _catutils, reply_id
-from . import catub
+from . import iqthon
 
 plugin_category = "Extra"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gifs(?:\s|$)([\s\S]*)",
     command=("gifs", plugin_category),
     info={
