@@ -4,7 +4,7 @@ import os
 import lyricsgenius
 from tswift import Song
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 
@@ -13,7 +13,7 @@ plugin_category = "extra"
 GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="lyrics ?([\s\S]*)",
     command=("lyrics", plugin_category),
     info={
@@ -50,7 +50,7 @@ async def _(event):
     await edit_or_reply(catevent, reply)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="glyrics ?([\s\S]*)",
     command=("glyrics", plugin_category),
     info={
