@@ -366,6 +366,44 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(jsondata, open(secret, "w"))
             else:
                 json.dump(newsecret, open(secret, "w"))
+        elif string == "ialive":
+            EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
+            CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "✮ تليثون العرب ✮"
+            CAT_IMG = gvarstatus("ALIVE_PIC")
+            alive_buttons = [
+                [
+                    Button.inline(
+                        text=f"{EMOJI} قاعدة البيانات : {check_sgnirts}"
+                    ),
+                    Button.inline(
+                        text=f"{EMOJI} نسخه تليثون : {version.__version__}"
+                    ),
+                ],
+                [
+                    Button.inline(
+                        text=f"{EMOJI} نسخه العرب : {catversion}"
+                    ),
+                    Button.inline(
+                        text=f"{EMOJI} نسخه البايثون : {python_version()}"
+                    ),
+                ],
+                [
+                    Button.inline(
+                        text=f"{EMOJI} الوقت : {uptime}"
+                    ),
+                    Button.inline(
+                        text=f"{EMOJI} المنصب : {mention}"
+                    ),
+                ],
+            ]
+            iresult = builder.article(
+                title="Ialive", 
+                description="Alive MSG", 
+                text=CUSTOM_ALIVE_TEXT, 
+                thumb=InputWebDocument(url=CAT_IMG, size=42, mime_type="image/jpeg", attributes=[]) if CAT_IMG else None, 
+                buttons=alive_buttons
+            )
+            await event.answer([iresult] if result else None)
         elif string == "help":
             _result = main_menu()
             result = builder.article(
