@@ -13,7 +13,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from validators.url import url
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
@@ -36,7 +36,7 @@ SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
 # =========================================================== #
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="song(320)?(?:\s|$)([\s\S]*)",
     command=("song", plugin_category),
     info={
@@ -123,7 +123,7 @@ async def delete_messages(event, chat, from_message):
     await event.client.send_read_acknowledge(chat)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="vsong(?:\s|$)([\s\S]*)",
     command=("vsong", plugin_category),
     info={
@@ -197,7 +197,7 @@ async def _(event):
             os.remove(files)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="shazam$",
     command=("shazam", plugin_category),
     info={
@@ -242,7 +242,7 @@ async def shazamcmd(event):
     await catevent.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="song2(?:\s|$)([\s\S]*)",
     command=("song2", plugin_category),
     info={
@@ -295,7 +295,7 @@ async def _(event):
 
 
 # reverse search by  @Lal_bakthan
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="szm$",
     command=("szm", plugin_category),
     info={
