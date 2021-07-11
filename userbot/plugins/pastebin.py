@@ -9,7 +9,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.utils import get_extension
 from urlextract import URLExtract
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core.events import MessageEdited
@@ -38,7 +38,7 @@ def get_key(val):
             return key
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="pcode(?:\s|$)([\s\S]*)",
     command=("pcode", plugin_category),
     info={
@@ -101,7 +101,7 @@ async def paste_img(event):
         await edit_delete(catevent, f"**Error:**\n`{str(e)}`", time=10)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="(d|p|s|n)?(paste|neko)(?:\s|$)([\S\s]*)",
     command=("paste", plugin_category),
     info={
@@ -176,7 +176,7 @@ async def paste_bin(event):
         await edit_delete(catevent, f"**Error while pasting text:**\n`{str(e)}`")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     command=("neko", plugin_category),
     info={
         "header": "To paste text to a neko bin.",
@@ -193,7 +193,7 @@ async def _(event):
     # just to show in help menu as seperate
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="g(et)?paste(?:\s|$)([\s\S]*)",
     command=("getpaste", plugin_category),
     info={
@@ -253,7 +253,7 @@ async def get_dogbin_content(event):
     await edit_or_reply(catevent, reply_text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="paster(?:\s|$)([\s\S]*)",
     command=("paster", plugin_category),
     info={
