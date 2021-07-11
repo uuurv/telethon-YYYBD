@@ -5,7 +5,7 @@ import os
 
 import requests
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
@@ -13,7 +13,7 @@ from ..core.managers import edit_delete, edit_or_reply
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="detect$",
     command=("detect", plugin_category),
     info={
