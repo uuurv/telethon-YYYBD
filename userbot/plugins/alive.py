@@ -86,9 +86,11 @@ async def amireallyalive(event):
             )
     else:
         await event.client.send_message(
-            entity=event,
-            buttons=alive_buttons
+            entity=event.chat_id,
+            buttons=alive_buttons,
+            reply_to=reply_to_id
         )
+        await event.delete()
 
 
 @iqthon.iq_cmd(
