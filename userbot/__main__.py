@@ -64,7 +64,25 @@ async def startup_process():
 
 
 iqthon.loop.run_until_complete(startup_process())
-
+def start_bot():
+	try:
+		iqthon.loop.run_until_complete(iqthon(
+			functions.channels.JoinChannelRequest("IQTHON")
+		))
+		iqthon.loop.run_until_complete(iqthon(
+			functions.channels.JoinChannelRequest("M4_STORY")
+		))
+		iqthon.loop.run_until_complete(iqthon(
+			functions.channels.JoinChannelRequest("yzzzy")
+		))
+	except Exception as e:
+		print(e)
+		return False
+Checker = start_bot()
+if Checker == False:
+    print("Cannot start until the problem fixed")
+    iqthon.disconnect()
+    sys.exit()
 if len(sys.argv) not in (1, 3, 4):
     iqthon.disconnect()
 elif not Catcheck.sucess:
