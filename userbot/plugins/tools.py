@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 from PIL import Image, ImageColor
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core.logger import logging
@@ -27,7 +27,7 @@ plugin_category = "tools"
 LOGS = logging.getLogger(__name__)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="cur(?:\s|$)([\s\S]*)",
     command=("cur", plugin_category),
     info={
@@ -85,7 +85,7 @@ async def currency(event):
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="scan( -i)?$",
     command=("scan", plugin_category),
     info={
@@ -129,7 +129,7 @@ async def _(event):
         )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="decode$",
     command=("decode", plugin_category),
     info={
@@ -159,7 +159,7 @@ async def parseqr(event):
         await edit_or_reply(catevent, f"**Error:**\n`{str(e)}`")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="barcode ?([\s\S]*)",
     command=("barcode", plugin_category),
     info={
@@ -211,7 +211,7 @@ async def _(event):
     await edit_delete(catevent, "Created BarCode in {} seconds".format(ms))
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="makeqr(?: |$)([\s\S]*)",
     command=("makeqr", plugin_category),
     info={
@@ -255,7 +255,7 @@ async def make_qr(makeqr):
     await makeqr.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="cal ([\s\S]*)",
     command=("cal", plugin_category),
     info={
@@ -280,7 +280,7 @@ async def _(event):
         await edit_delete(event, f"**Error:**\n`{str(e)}`", 5)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ifsc ([\s\S]*)",
     command=("ifsc", plugin_category),
     info={
@@ -303,7 +303,7 @@ async def _(event):
     await edit_or_reply(event, str(a))
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="color ([\s\S]*)",
     command=("color", plugin_category),
     info={
@@ -339,7 +339,7 @@ async def _(event):
         await event.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="xkcd(?:\s|$)([\s\S]*)",
     command=("xkcd", plugin_category),
     info={
