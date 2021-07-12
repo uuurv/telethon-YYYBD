@@ -63,9 +63,9 @@ async def startupmessage():
         if BOTLOG:
             Config.CATUBLOGO = await iqthon.tgbot.send_file(
                 BOTLOG_CHATID,
-                "https://telegra.ph/file/4e3ba8e8f7e535d5a2abe.jpg",
-                caption="**Your CatUserbot has been started successfully.**",
-                buttons=[(Button.url("Support", "https://t.me/catuserbot"),)],
+                "https://telegra.ph/file/0366b6cd478d7dcef8ecd.jpg",
+                caption="**Your iqthonbot has been started successfully.**",
+                buttons=[(Button.url("Support", "https://t.me/iqthon"),)],
             )
     except Exception as e:
         LOGS.error(e)
