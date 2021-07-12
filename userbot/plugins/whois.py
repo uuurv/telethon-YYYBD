@@ -8,7 +8,7 @@ from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.utils import get_input_location
 
-from userbot import catub
+from userbot import iqthon
 from userbot.core.logger import logging
 
 from ..Config import Config
@@ -74,7 +74,7 @@ async def fetch_info(replied_user, event):
     return photo, caption
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="userinfo(?:\s|$)([\s\S]*)",
     command=("userinfo", plugin_category),
     info={
@@ -146,7 +146,7 @@ async def _(event):
     await edit_or_reply(catevent, caption)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="whois(?:\s|$)([\s\S]*)",
     command=("whois", plugin_category),
     info={
@@ -186,7 +186,7 @@ async def who(event):
         await cat.edit(caption, parse_mode="html")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="link(?:\s|$)([\s\S]*)",
     command=("link", plugin_category),
     info={
