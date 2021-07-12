@@ -8,7 +8,7 @@ import urllib3
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-from userbot import HEROKU_APP, UPSTREAM_REPO_URL, catub
+from userbot import HEROKU_APP, UPSTREAM_REPO_URL, iqthon
 
 from ..Config import Config
 from ..core.logger import logging
@@ -183,7 +183,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         pass
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="update(| now)?$",
     command=("update", plugin_category),
     info={
@@ -276,7 +276,7 @@ async def upstream(event):
     return
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="update deploy$",
 )
 async def upstream(event):
@@ -311,7 +311,7 @@ async def upstream(event):
     await deploy(event, repo, ups_rem, ac_br, txt)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="badcat$",
     command=("badcat", plugin_category),
     info={
