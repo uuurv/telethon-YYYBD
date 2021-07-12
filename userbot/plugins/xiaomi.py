@@ -4,14 +4,14 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 
 plugin_category = "extra"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="firmware ([\s\S]*)",
     command=("firmware", plugin_category),
     info={
@@ -41,7 +41,7 @@ async def _(event):
             await event.client.forward_messages(event.chat_id, respond.message)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="vendor ([\s\S]*)",
     command=("vendor", plugin_category),
     info={
@@ -71,7 +71,7 @@ async def _(event):
             await event.client.forward_messages(event.chat_id, respond.message)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="xspecs ([\s\S]*)",
     command=("xspecs", plugin_category),
     info={
@@ -101,7 +101,7 @@ async def _(event):
             await event.client.forward_messages(event.chat_id, respond.message)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="fastboot ([\s\S]*)",
     command=("fastboot", plugin_category),
     info={
@@ -131,7 +131,7 @@ async def _(event):
             await event.client.forward_messages(event.chat_id, respond.message)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="recovery ([\s\S]*)",
     command=("recovery", plugin_category),
     info={
@@ -161,7 +161,7 @@ async def _(event):
             await event.client.forward_messages(event.chat_id, respond.message)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="pb ([\s\S]*)",
     command=("pb", plugin_category),
     info={
@@ -191,7 +191,7 @@ async def _(event):
             await event.client.forward_messages(event.chat_id, respond.message)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="of ([\s\S]*)",
     command=("of", plugin_category),
     info={
