@@ -22,7 +22,7 @@ from youtube_dl.utils import (
 )
 
 from ..helpers.utils import _format
-from . import catub, edit_delete, edit_or_reply, hmention, progress, reply_id, ytsearch
+from . import iqthon, edit_delete, edit_or_reply, hmention, progress, reply_id, ytsearch
 
 plugin_category = "misc"
 
@@ -151,7 +151,7 @@ async def _get_file_name(path: pathlib.Path, full: bool = True) -> str:
     return str(path.absolute()) if full else path.stem + path.suffix
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="yta(?:\s|$)([\s\S]*)",
     command=("yta", plugin_category),
     info={
@@ -218,7 +218,7 @@ async def download_audio(event):
     await catevent.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="ytv(?:\s|$)([\s\S]*)",
     command=("ytv", plugin_category),
     info={
@@ -283,7 +283,7 @@ async def download_video(event):
     await event.delete()
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="yts(?: |$)(\d*)? ?([\s\S]*)",
     command=("yts", plugin_category),
     info={
@@ -321,7 +321,7 @@ async def yt_search(event):
     await edit_or_reply(video_q, reply_text)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="insta ([\s\S]*)",
     command=("insta", plugin_category),
     info={
