@@ -24,7 +24,7 @@ from telethon.tl.types import (
     MessageMediaPhoto,
 )
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.functions import crop_and_divide
@@ -236,7 +236,7 @@ async def add_to_pack(
     return pack, packname
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="kang(?:\s|$)([\s\S]*)",
     command=("kang", plugin_category),
     info={
@@ -388,7 +388,7 @@ async def kang(args):  # sourcery no-metrics
                 )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="pkang(?:\s|$)([\s\S]*)",
     command=("pkang", plugin_category),
     info={
@@ -559,7 +559,7 @@ async def pack_kang(event):  # sourcery no-metrics
     await catevent.edit(result)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="gridpack(?:\s|$)([\s\S]*)",
     command=("gridpack", plugin_category),
     info={
@@ -666,7 +666,7 @@ async def pic2packcmd(event):
             )
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="stkrinfo$",
     command=("stkrinfo", plugin_category),
     info={
@@ -720,7 +720,7 @@ async def get_pack_info(event):
     await catevent.edit(OUTPUT)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="stickers ?([\s\S]*)",
     command=("stickers", plugin_category),
     info={
