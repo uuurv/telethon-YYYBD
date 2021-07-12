@@ -12,7 +12,7 @@ from hachoir.parser import createParser
 from telethon.tl import types
 from telethon.utils import get_attributes
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
@@ -133,7 +133,7 @@ async def upload(path, event, udir_event, catflag=None):  # sourcery no-metrics
         UPLOAD_.uploaded += 1
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="upload( -f)? ([\s\S]*)",
     command=("upload", plugin_category),
     info={
