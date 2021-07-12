@@ -8,7 +8,7 @@ from PIL import Image
 from telegraph import Telegraph, exceptions, upload_file
 from telethon.utils import get_display_name
 
-from userbot import catub
+from userbot import iqthon
 
 from ..Config import Config
 from ..core.logger import logging
@@ -29,7 +29,7 @@ def resize_image(image):
     im.save(image, "PNG")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="(t(ele)?g(raph)?) ?(m|t|media|text)(?:\s|$)([\s\S]*)",
     command=("telegraph", plugin_category),
     info={
