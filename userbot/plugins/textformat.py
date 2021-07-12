@@ -1,11 +1,11 @@
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 
 plugin_category = "Extra"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="upper(?: |$)([\s\S]*)",
     command=("upper", plugin_category),
     info={
@@ -28,7 +28,7 @@ async def some(event):
     await edit_or_reply(event, mystring)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="lower(?: |$)([\s\S]*)",
     command=("lower", plugin_category),
     info={
@@ -51,7 +51,7 @@ async def good(event):
     await edit_or_reply(event, mystring)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="title(?: |$)([\s\S]*)",
     command=("title", plugin_category),
     info={
@@ -74,7 +74,7 @@ async def stuff(event):
     await edit_or_reply(event, mystring)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="(|r)camel(?: |$)([\s\S]*)",
     command=("camel", plugin_category),
     info={
