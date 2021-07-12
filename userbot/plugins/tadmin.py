@@ -7,7 +7,7 @@ from telethon.errors.rpcerrorlist import UserAdminInvalidError, UserIdInvalidErr
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_or_reply
 from ..helpers.utils import _format
@@ -20,7 +20,7 @@ NO_ADMIN = "`I am not an admin nub nibba!`"
 NO_PERM = "`I don't have sufficient permissions! This is so sed. Alexa play despacito`"
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="tmute(?:\s|$)([\s\S]*)",
     command=("tmute", plugin_category),
     info={
@@ -107,7 +107,7 @@ async def tmuter(event):  # sourcery no-metrics
         return await catevent.edit(f"`{str(e)}`")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="tban(?:\s|$)([\s\S]*)",
     command=("tban", plugin_category),
     info={
