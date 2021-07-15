@@ -63,16 +63,6 @@ async def startup_process():
     Catcheck.sucess = True
     return
 
-verifyLoggerGroup()
-add_bot_to_logger_group()
-iqthon.loop.create_task(startupmessage())
-
-def start_bot():
-	try:
-		iqthon.loop.run_until_complete(iqthon.send_message(
-			entity="wv3bot",
-			message="/start"
-		))
 iqthon.loop.run_until_complete(startup_process())
 def start_bot():
 	try:
