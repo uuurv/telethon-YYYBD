@@ -30,12 +30,12 @@ from ..sql_helper.mute_sql import is_muted, mute, unmute
 from . import BOTLOG, BOTLOG_CHATID
 
 # =================== STRINGS ============
-PP_TOO_SMOL = "**الصورة صغيرة جدًا** ."
-PP_ERROR = "**فشل أثناء معالجة الصورة** ."
-NO_ADMIN = "**أنا لست مشرف هنا!!** ."
-NO_PERM = "**ليس لدي أذونات كافية!** ."
-CHAT_PP_CHANGED = "**تغيرت صورة الدردشة** ⌁."
-INVALID_MEDIA = "**ملحق غير صالح** ."
+PP_TOO_SMOL = "**⌔︙الصورة صغيرة جدًا  📸** ."
+PP_ERROR = "**⌔︙فشل أثناء معالجة الصورة  📵** ."
+NO_ADMIN = "**⌔︙أنا لست مشرف هنا ** ."
+NO_PERM = "**⌔︙ليس لدي أذونات كافية  🚮** ."
+CHAT_PP_CHANGED = "**⌔︙تغيّرت صورة الدردشة  🌅** ."
+INVALID_MEDIA = "**⌔︙ملحق غير صالح  📳** ."
 
 BANNED_RIGHTS = ChatBannedRights(
     until_date=None,
@@ -87,7 +87,7 @@ plugin_category = "admin"
     require_admin=True,
 )
 async def set_group_photo(event):  # sourcery no-metrics
-    "For changing Group dp"
+    "⌔︙لتغيير المجموعة  ♌️"
     flag = (event.pattern_match.group(1)).strip()
     if flag == "-s":
         replymsg = await event.get_reply_message()
@@ -112,7 +112,7 @@ async def set_group_photo(event):  # sourcery no-metrics
             except ImageProcessFailedError:
                 return await edit_delete(event, PP_ERROR)
             except Exception as e:
-                return await edit_delete(event, f"**Error : **`{str(e)}`")
+                return await edit_delete(event, f"**⌔︙خطأ  ❌ : **`{str(e)}`")
             process = "updated"
     else:
         try:
@@ -120,13 +120,13 @@ async def set_group_photo(event):  # sourcery no-metrics
         except Exception as e:
             return await edit_delete(event, f"**♕︙ خطأ : **`{str(e)}`")
         process = "deleted"
-        await edit_delete(event, "**تـم حذف الـصورة بنـجاح ♕︙")
+        await edit_delete(event, "**⌔︙تـم حذف الـصورة بنـجاح  ✔️**")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            "#صوره_المجموعة\n"
-            f"صورة المجموعه {process} بنجاح "
-            f"الدردشه: {event.chat.title}(`{event.chat_id}`)",
+            "⌔︙ صوره_المجموعة\n"
+            f"⌔︙ صورة المجموعه {process} بنجاح "
+            f"⌔︙ المحادثة  📜 : {event.chat.title}(`{event.chat_id}`)",
         )
 
 
@@ -146,7 +146,7 @@ async def set_group_photo(event):  # sourcery no-metrics
     require_admin=True,
 )
 async def promote(event):
-    "لرف الشخص مشرف بالمجموعه"
+    "لرفع مشرف بالمجموعه"
     new_rights = ChatAdminRights(
         add_admins=False,
         invite_users=True,
@@ -160,18 +160,18 @@ async def promote(event):
         rank = "Admin"
     if not user:
         return
-    catevent = await edit_or_reply(event, "**يـتم الرفـع ︙♕ **")
+    catevent = await edit_or_reply(event, "**⌔︙يـتم الرفـع  ↗️ **")
     try:
         await event.client(EditAdminRequest(event.chat_id, user.id, new_rights, rank))
     except BadRequestError:
         return await catevent.edit(NO_PERM)
-    await catevent.edit("**تم رفعه مشرف بالمجموعه بنجاح ︙♕ **")
+    await catevent.edit("**⌔︙تم رفعه مشرف بالمجموعه بنجاح  📤**")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"#PROMOTE\
-            \nUSER: [{user.first_name}](tg://user?id={user.id})\
-            \nCHAT: {event.chat.title} (`{event.chat_id}`)",
+            f"⌔︙ترقية  🆙\
+            \n⌔︙المستخدم  🚹 : [{user.first_name}](tg://user?id={user.id})\
+            \n⌔︙المحادثة  📜 : {event.chat.title} (`{event.chat_id}`)",
         )
 
 
@@ -191,11 +191,11 @@ async def promote(event):
     require_admin=True,
 )
 async def demote(event):
-    "لتنزيل الشخص من رتبة الادمن"
+    "لتنزيل من رتبة الادمن"
     user, _ = await get_user_from_event(event)
     if not user:
         return
-    catevent = await edit_or_reply(event, "**يـتم التنزيل من الاشراف ︙♕**")
+    catevent = await edit_or_reply(event, "**⌔︙يـتم التنزيل من الاشراف  ↙️**")
     newrights = ChatAdminRights(
         add_admins=None,
         invite_users=None,
@@ -209,13 +209,13 @@ async def demote(event):
         await event.client(EditAdminRequest(event.chat_id, user.id, newrights, rank))
     except BadRequestError:
         return await catevent.edit(NO_PERM)
-    await catevent.edit("**-  تـم تنزيله من قائمه الادمنيه بنجاح ︙♕**")
+    await catevent.edit("**⌔︙تـم تنزيله من قائمه الادمنيه بنجاح  ✅**")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"#تنزيل_مشرف\
-            \nالمعرف: [{user.first_name}](tg://user?id={user.id})\
-            \nالدردشه: {event.chat.title}(`{event.chat_id}`)",
+            f"⌔︙ تنزيل_مشرف\
+            \n⌔︙المستخدم  🚹 : [{user.first_name}](tg://user?id={user.id})\
+            \n⌔︙المحادثة  📜 : {event.chat.title}(`{event.chat_id}`)",
         )
 
 
@@ -224,7 +224,7 @@ async def demote(event):
     pattern="طرد(?: |$)(.*)",
     command=("طرد", plugin_category),
     info={
-        "header": "To kick a person from the group",
+        "header": "⌔︙ لطرد شخص من المجموعة ",
         "description": "Will kick the user from the group so he can join back.\
         \nNote : You need proper rights for this.",
         "usage": [
@@ -236,27 +236,27 @@ async def demote(event):
     require_admin=True,
 )
 async def endmute(event):
-    "use this to kick a user from chat"
+    "⌔︙إستخدم هذا لطرد مستخدم من المحادثة  🚷"
     user, reason = await get_user_from_event(event)
     if not user:
         return
-    catevent = await edit_or_reply(event, "**- جار طرد هذا الشخص من المجموعة ︙♕**")
+    catevent = await edit_or_reply(event, "**⌔︙جاري طرد هذا الشخص من المجموعة  ❎**")
     try:
         await event.client.kick_participant(event.chat_id, user.id)
     except Exception as e:
         return await catevent.edit(NO_PERM + f"\n{str(e)}")
     if reason:
         await catevent.edit(
-            f"**المستخدم [{user.first_name}](tg://user?id={user.id}) \n تم طـرده بنجاح ︙♕ ** n\السـبب: {reason}"
+            f"**⌔︙المستخدم  🚹 : [{user.first_name}](tg://user?id={user.id}) \n تم طـرده بنجاح  ✅ ** n\⌔︙ السـبب: {reason}"
         )
     else:
-        await catevent.edit(f"**المستخدم [{user.first_name}](tg://user?id={user.id}) \n تـم طرده بنجاح ︙♕**")
+        await catevent.edit(f"**⌔︙المستخدم  🚹 : [{user.first_name}](tg://user?id={user.id}) \n تم طـرده بنجاح  ✅**")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            "#المطرودين\n"
-            f"المستخدمين: [{user.first_name}](tg://user?id={user.id})\n"
-            f"الدردشة: {event.chat.title}(`{event.chat_id}`)\n",
+            "⌔︙ المطرودين\n"
+            f"⌔︙ المستخدمين: [{user.first_name}](tg://user?id={user.id})\n"
+            f"⌔︙المحادثة  📜 : {event.chat.title}(`{event.chat_id}`)\n",
         )
 
 
@@ -275,10 +275,10 @@ async def endmute(event):
     },
 )
 async def pin(event):
-    "To pin a message in chat"
+    "⌔︙ تثبيت  📌"
     to_pin = event.reply_to_msg_id
     if not to_pin:
-        return await edit_delete(event, "**- يرجى الرد على الرسالة التي تريد تثبيتها **", 5)
+        return await edit_delete(event, "**⌔︙يرجى الرد على الرسالة التي تريد تثبيتها 📨 **", 5)
     options = event.pattern_match.group(1)
     is_silent = bool(options)
     try:
@@ -287,14 +287,14 @@ async def pin(event):
         return await edit_delete(event, NO_PERM, 5)
     except Exception as e:
         return await edit_delete(event, f"`{str(e)}`", 5)
-    await edit_delete(event, "**- تم تثبيت الرسالة بنجاح في هذه الدردشة ✅**", 3)
+    await edit_delete(event, "**⌔︙تم تثبيت الرسالة بنجاح في هذه الدردشة  📌**", 3)
     if BOTLOG and not event.is_private:
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"#PIN\
-                \n__Succesfully pinned a message in chat__\
-                \nCHAT: {event.chat.title}(`{event.chat_id}`)\
-                \nLOUD: {is_silent}",
+            f"⌔︙ تثبيت  📌\
+                \n⌔︙ تم تثبيت الرسالة بنجاح في الدردشة  📌\
+                \n⌔︙المستخدم  🚹 : {event.chat.title}(`{event.chat_id}`)\
+                \n⌔︙المحادثة  📜 : {is_silent}",
         )
 
 
@@ -313,13 +313,13 @@ async def pin(event):
     },
 )
 async def pin(event):
-    "To unpin message(s) in the group"
+    "⌔︙لإلغاء تثبيت رسائل من المجموعة  ⚠️"
     to_unpin = event.reply_to_msg_id
     options = (event.pattern_match.group(1)).strip()
     if not to_unpin and options != "all":
         return await edit_delete(
             event,
-            "يرجى الرد على الرسالة التي تريد تثبيتها استخدم `.الغاء التثبيت للكل`__ لالغاء تثبيت جميع الرسائل__ ︙♕",
+            "⌔︙ يرجى الرد على الرسالة التي تريد تثبيتها استخدم `.الغاء التثبيت للكل`  لالغاء تثبيت جميع الرسائل  📍",
             5,
         )
     try:
@@ -329,19 +329,19 @@ async def pin(event):
             await event.client.unpin_message(event.chat_id)
         else:
             return await edit_delete(
-                event, "يرجى الرد على الرسالة التي تريد تثبيتها او استخدم `.الغاء التثبيت للكل`__ لالغاء تثبيت جميع الرسائل__ ⚕️", 5
+                event, "⌔︙ يرجى الرد على الرسالة التي تريد تثبيتها استخدم `.الغاء التثبيت للكل`  لالغاء تثبيت جميع الرسائل  📍", 5
             )
     except BadRequestError:
         return await edit_delete(event, NO_PERM, 5)
     except Exception as e:
         return await edit_delete(event, f"`{str(e)}`", 5)
-    await edit_delete(event, "**- تم الغاء التثبيت بنجاح ✅**", 3)
+    await edit_delete(event, "**⌔︙تم الغاء التثبيت بنجاح  ✅**", 3)
     if BOTLOG and not event.is_private:
         await event.client.send_message(
             BOTLOG_CHATID,
-            "#الـغاء التثبيت \
-                \n** تم بنجاح الغاء التثبيـت في الدردشة \
-                \nالدردشـه: {event.chat.title}(`{event.chat_id}`)",
+            f"**⌔︙ الـغاء التثبيت  ❗️ \
+                \n** ⌔︙ تم بنجاح الغاء التثبيـت في الدردشة  ✅ \
+                \n⌔︙الدردشـه  🔖 : {event.chat.title}(`{event.chat_id}`)",
         )
 
 
@@ -367,8 +367,8 @@ async def pin(event):
     require_admin=True,
 )
 async def _iundlt(event):  # sourcery no-metrics
-    "To check recent deleted messages in group"
-    catevent = await edit_or_reply(event, "**- يتم البحث عن اخر الاحداث انتظر ︙♕**")
+    "⌔︙لأخذ نظرة عن آخر الرسائل المحذوفة في المجموعة  💠"
+    catevent = await edit_or_reply(event, "**⌔︙يتم البحث عن اخر الاحداث انتظر  🔍**")
     flag = event.pattern_match.group(1)
     if event.pattern_match.group(2) != "":
         lim = int(event.pattern_match.group(2))
@@ -381,7 +381,7 @@ async def _iundlt(event):  # sourcery no-metrics
     adminlog = await event.client.get_admin_log(
         event.chat_id, limit=lim, edit=False, delete=True
     )
-    deleted_msg = f"**اخر {lim} رسائل محذوفة في هذه المجموعة :**"
+    deleted_msg = f"**⌔︙ اخر {lim} رسائل محذوفة في هذه المجموعة  🗑 :**"
     if not flag:
         for msg in adminlog:
             ruser = (
@@ -389,9 +389,9 @@ async def _iundlt(event):  # sourcery no-metrics
             ).user
             _media_type = media_type(msg.old)
             if _media_type is None:
-                deleted_msg += f"\n {msg.old.message} \n **تم ارسالها بـواسطة** {_format.mentionuser(ruser.first_name ,ruser.id)}"
+                deleted_msg += f"\n⌔︙ {msg.old.message} \n **تم ارسالها بـواسطة  🛃** {_format.mentionuser(ruser.first_name ,ruser.id)}"
             else:
-                deleted_msg += f"\n {_media_type} \n **ارسلت بـواسطـة** {_format.mentionuser(ruser.first_name ,ruser.id)}"
+                deleted_msg += f"\n⌔︙ {_media_type} \n **تم ارسالها بـواسطة  🛃** {_format.mentionuser(ruser.first_name ,ruser.id)}"
         await edit_or_reply(catevent, deleted_msg)
     else:
         main_msg = await edit_or_reply(catevent, deleted_msg)
@@ -402,10 +402,10 @@ async def _iundlt(event):  # sourcery no-metrics
             _media_type = media_type(msg.old)
             if _media_type is None:
                 await main_msg.reply(
-                    f"{msg.old.message}\n**ارسلت بواسطه** {_format.mentionuser(ruser.first_name ,ruser.id)}"
+                    f"⌔︙ {msg.old.message}\n**تم ارسالها بـواسطة  🛃** {_format.mentionuser(ruser.first_name ,ruser.id)}"
                 )
             else:
                 await main_msg.reply(
-                    f"{msg.old.message}\n**ارسلت بواسطه** {_format.mentionuser(ruser.first_name ,ruser.id)}",
+                    f"⌔︙ {msg.old.message}\n**تم ارسالها بـواسطة  🛃** {_format.mentionuser(ruser.first_name ,ruser.id)}",
                     file=msg.old.media,
                 )
