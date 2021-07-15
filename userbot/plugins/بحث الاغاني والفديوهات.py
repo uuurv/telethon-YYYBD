@@ -194,8 +194,8 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="عكس الاغنيه$",
-    command=("عكس الاغنيه", plugin_category),
+    pattern="معلومات الاغنيه$",
+    command=("معلومات الاغنيه", plugin_category),
     info={
         "header": "To reverse search song.",
         "description": "Reverse search audio file using shazam api",
