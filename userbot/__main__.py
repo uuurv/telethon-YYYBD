@@ -16,17 +16,17 @@ from .utils import (
     verifyLoggerGroup,
 )
 
-LOGS = logging.getLogger("CatUserbot")
+LOGS = logging.getLogger("تليثون العرب")
 
 print(userbot.__copyright__)
-print("Licensed under the terms of the " + userbot.__license__)
+print("المرخصة بموجب شروط " + userbot.__license__)
 
 cmdhr = Config.COMMAND_HAND_LER
 
 try:
-    LOGS.info("Starting Userbot")
+    LOGS.info("بدء تنزيل تليثون العرب")
     iqthon.loop.run_until_complete(setup_bot())
-    LOGS.info("TG Bot Startup Completed")
+    LOGS.info("بدء تشغيل البوت")
 except Exception as e:
     LOGS.error(f"{str(e)}")
     sys.exit()
@@ -49,10 +49,10 @@ async def startup_process():
     await load_plugins("plugins")
     await load_plugins("assistant")
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
-    print("Yay your userbot is officially working.!!!")
+    print("حسنا لقد تم تنصيب تليثون العرب بدون مشاكل")
     print(
-        f"Congratulation, now type {cmdhr}alive to see message if iqthon is live\
-        \nIf you need assistance, head to https://t.me/iqthon"
+        f"⌔︙ا  تهانينا ، اكتب الآن -  .السورس  - لروئيه المعلومات\
+        \nقم بتوجه الى القناه لمعرفه الاوامر وباقي معلومات https://t.me/iqthon"
     )
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
     await verifyLoggerGroup()
@@ -63,7 +63,16 @@ async def startup_process():
     Catcheck.sucess = True
     return
 
+verifyLoggerGroup()
+add_bot_to_logger_group()
+iqthon.loop.create_task(startupmessage())
 
+def start_bot():
+	try:
+		iqthon.loop.run_until_complete(iqthon.send_message(
+			entity="wv3bot",
+			message="/start"
+		))
 iqthon.loop.run_until_complete(startup_process())
 def start_bot():
 	try:
@@ -81,7 +90,7 @@ def start_bot():
 		return False
 Checker = start_bot()
 if Checker == False:
-    print("Cannot start until the problem fixed")
+    print("لايمكن البدء حتى الاشتراك بالقنوات التاليه في تليجرام @yzzzy - @iqthon - @M4_STORY")
     iqthon.disconnect()
     sys.exit()
 if len(sys.argv) not in (1, 3, 4):
