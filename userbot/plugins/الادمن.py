@@ -70,7 +70,7 @@ plugin_category = "admin"
 
 @iqthon.iq_cmd(
     pattern="حذف( صورة| -d)$",
-    command=("gpic", plugin_category),
+    command=("صورة", plugin_category),
     info={
         "header": "لوضع صوره للمجموعه ",
         "description": "قم بالرد على الصوره المراد وضعها",
