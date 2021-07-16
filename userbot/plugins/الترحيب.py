@@ -190,7 +190,7 @@ async def show_welcome(event):
 
 
 @iqthon.iq_cmd(
-    pattern="رساله الترحيب السابقه(تشغيل|ايقاف)$",
+    pattern="رساله الترحيب السابقه (تشغيل|ايقاف)$",
     command=("رساله الترحيب السابقه", plugin_category),
     info={
         "header": "⌔︙لإيقاف أو تشغيل حذف رسالة الترحيب السابقة ⚠️.",
