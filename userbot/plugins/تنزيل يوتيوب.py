@@ -1,3 +1,5 @@
+#@RRRD7  - @UNZZ  - @JMTHON
+
 import asyncio
 import io
 import os
@@ -21,8 +23,9 @@ from youtube_dl.utils import (
     XAttrMetadataError,
 )
 
+
 from ..helpers.utils import _format
-from . import iqthon, edit_delete, edit_or_reply, hmention, progress, reply_id, ytsearch
+from . import catub, edit_delete, edit_or_reply, hmention, progress, reply_id, ytsearch
 
 plugin_category = "misc"
 
@@ -63,37 +66,37 @@ video_opts = {
 
 async def ytdl_down(event, opts, url):
     try:
-        await event.edit("`Fetching data, please wait..`")
+        await event.edit("**- يتم جلب البيانات انتظر قليلا**")
         with YoutubeDL(opts) as ytdl:
             ytdl_data = ytdl.extract_info(url)
     except DownloadError as DE:
         await event.edit(f"`{str(DE)}`")
         return
     except ContentTooShortError:
-        await event.edit("`The download content was too short.`")
+        await event.edit("**- عذرا هذا المحتوى قصير جدا لتنزيله ⚠️**")
         return None
     except GeoRestrictedError:
         await event.edit(
-            "`Video is not available from your geographic location due to geographic restrictions imposed by a website.`"
+            "**- الفيديو غير متاح من موقعك الجغرافي بسبب القيود الجغرافية التي يفرضها موقع الويب ❕**"
         )
         return None
     except MaxDownloadsReached:
-        await event.edit("`Max-downloads limit has been reached.`")
+        await event.edit("**- تم الوصول إلى الحد الأقصى لعدد التنزيلات ❕**")
         return None
     except PostProcessingError:
-        await event.edit("`There was an error during post processing.`")
+        await event.edit("**كان هناك خطأ أثناء المعالجة**")
         return None
     except UnavailableVideoError:
-        await event.edit("`Media is not available in the requested format.`")
+        await event.edit("`الوسائط غير متوفرة بالتنسيق المطلوب`")
         return None
     except XAttrMetadataError as XAME:
         await event.edit(f"`{XAME.code}: {XAME.msg}\n{XAME.reason}`")
         return None
     except ExtractorError:
-        await event.edit("`There was an error during info extraction.`")
+        await event.edit("**حدث خطأ أثناء استخراج المعلومات يرجى وضعها بشكل صحيح ⚠️**")
         return None
     except Exception as e:
-        await event.edit(f"**Error : **\n__{str(e)}__")
+        await event.edit(f"**حدث خطا : **\n__{str(e)}__")
         return None
     return ytdl_data
 
@@ -151,9 +154,9 @@ async def _get_file_name(path: pathlib.Path, full: bool = True) -> str:
     return str(path.absolute()) if full else path.stem + path.suffix
 
 
-@iqthon.iq_cmd(
-    pattern="yta(?:\s|$)([\s\S]*)",
-    command=("yta", plugin_category),
+@catub.cat_cmd(
+    pattern="تحميل ص(?: |$)(.*)",
+    command=("تحميل ص", plugin_category),
     info={
         "header": "To download audio from many sites like Youtube",
         "description": "downloads the audio from the given link (Suports the all sites which support youtube-dl)",
@@ -171,16 +174,17 @@ async def download_audio(event):
         myString = rmsg.text
         url = re.search("(?P<url>https?://[^\s]+)", myString).group("url")
     if not url:
-        return await edit_or_reply(event, "`What I am Supposed to find? Give link`")
-    catevent = await edit_or_reply(event, "`Preparing to download...`")
+        return await edit_or_reply(event, "**- يجب وضع رابط لتحميله ❕**")
+    catevent = await edit_or_reply(event, "**يتم الاعداد انتظر**")
     reply_to_id = await reply_id(event)
     ytdl_data = await ytdl_down(catevent, audio_opts, url)
     if ytdl_data is None:
+
         return
     await catevent.edit(
-        f"`Preparing to upload song:`\
+        f"**يتم لتحميل الأغنية:**\
         \n**{ytdl_data['title']}**\
-        \nby *{ytdl_data['uploader']}*"
+        \nبواسطة **{ytdl_data['uploader']}**"
     )
     f = pathlib.Path(f"{ytdl_data['title']}.mp3".replace("|", "_"))
     catthumb = pathlib.Path(f"{ytdl_data['title']}.mp3.jpg".replace("|", "_"))
@@ -218,9 +222,9 @@ async def download_audio(event):
     await catevent.delete()
 
 
-@iqthon.iq_cmd(
-    pattern="ytv(?:\s|$)([\s\S]*)",
-    command=("ytv", plugin_category),
+@catub.cat_cmd(
+    pattern="تحميل ف(?: |$)(.*)",
+    command=("تحميل ف", plugin_category),
     info={
         "header": "To download video from many sites like Youtube",
         "description": "downloads the video from the given link(Suports the all sites which support youtube-dl)",
@@ -238,8 +242,8 @@ async def download_video(event):
         myString = rmsg.text
         url = re.search("(?P<url>https?://[^\s]+)", myString).group("url")
     if not url:
-        return await edit_or_reply(event, "What I am Supposed to find? Give link")
-    catevent = await edit_or_reply(event, "`Preparing to download...`")
+        return await edit_or_reply(event, "عـليك وضع رابـط اولا ليتـم تنـزيله")
+    catevent = await edit_or_reply(event, "**يتم التحميل انتظر قليلا**")
     reply_to_id = await reply_id(event)
     ytdl_data = await ytdl_down(catevent, video_opts, url)
     if ytdl_down is None:
@@ -251,9 +255,9 @@ async def download_video(event):
     if not os.path.exists(catthumb):
         catthumb = None
     await catevent.edit(
-        f"`Preparing to upload video:`\
+        f"**التحضيـر للـرفع انتظر**:\
         \n**{ytdl_data['title']}**\
-        \nby *{ytdl_data['uploader']}*"
+        \nبـواسطة *{ytdl_data['uploader']}*"
     )
     ul = io.open(f, "rb")
     c_time = time.time()
@@ -283,9 +287,9 @@ async def download_video(event):
     await event.delete()
 
 
-@iqthon.iq_cmd(
-    pattern="yts(?: |$)(\d*)? ?([\s\S]*)",
-    command=("yts", plugin_category),
+@catub.cat_cmd(
+    pattern="يوت(?: |$)(\d*)? ?(.*)",
+    command=("يوت", plugin_category),
     info={
         "header": "To search youtube videos",
         "description": "Fetches youtube search results with views and duration with required no of count results by default it fetches 10 results",
@@ -304,9 +308,9 @@ async def yt_search(event):
         query = str(event.pattern_match.group(2))
     if not query:
         return await edit_delete(
-            event, "`Reply to a message or pass a query to search!`"
+            event, "** يرجى الرد على الرسالة او كتابة الرابط اولا**"
         )
-    video_q = await edit_or_reply(event, "`Searching...`")
+    video_q = await edit_or_reply(event, "**يتم البحث عن المطلوب انتظر**")
     if event.pattern_match.group(1) != "":
         lim = int(event.pattern_match.group(1))
         if lim <= 0:
@@ -317,13 +321,13 @@ async def yt_search(event):
         full_response = await ytsearch(query, limit=lim)
     except Exception as e:
         return await edit_delete(video_q, str(e), time=10, parse_mode=_format.parse_pre)
-    reply_text = f"**•  Search Query:**\n`{query}`\n\n**•  Results:**\n{full_response}"
+    reply_text = f"**• البحث :**\n`{query}`\n\n**•  نتائج :**\n{full_response}"
     await edit_or_reply(video_q, reply_text)
 
 
-@iqthon.iq_cmd(
-    pattern="insta ([\s\S]*)",
-    command=("insta", plugin_category),
+@catub.cat_cmd(
+    pattern="انستا (.*)",
+    command=("انستا", plugin_category),
     info={
         "header": "To download instagram video/photo",
         "description": "Note downloads only public profile photos/videos.",
@@ -338,11 +342,11 @@ async def kakashi(event):
     link = event.pattern_match.group(1)
     if "www.instagram.com" not in link:
         await edit_or_reply(
-            event, "` I need a Instagram link to download it's Video...`(*_*)"
+            event, "**- يجب كتابة رابط من الانستغرام لتحميله ❕**"
         )
     else:
         start = datetime.now()
-        catevent = await edit_or_reply(event, "**Downloading.....**")
+        catevent = await edit_or_reply(event, "**جار التحميل انتظر قليلا 🔍**")
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -352,7 +356,7 @@ async def kakashi(event):
             details = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await catevent.edit("**Error:** `unblock` @instasavegrambot `and retry!`")
+            await catevent.edit(" قم بفتح الحظر ع بوت @instasavegrambot")
             return
         await catevent.delete()
         cat = await event.client.send_file(
@@ -362,7 +366,7 @@ async def kakashi(event):
         end = datetime.now()
         ms = (end - start).seconds
         await cat.edit(
-            f"<b><i>➥ Video uploaded in {ms} seconds.</i></b>\n<b><i>➥ Uploaded by :- {hmention}</i></b>",
+            f"꙳ ¦ تم تنزيل بواسطة  : @ظز ",
             parse_mode="html",
         )
     await event.client.delete_messages(
