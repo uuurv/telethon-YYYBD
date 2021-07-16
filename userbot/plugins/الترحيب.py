@@ -190,12 +190,12 @@ async def show_welcome(event):
 
 
 @iqthon.iq_cmd(
-    pattern="$رساله الترحيب السابقه(تشغيل|ايقاف)",
+    pattern="رساله الترحيب السابقه(تشغيل|ايقاف)$",
     command=("رساله الترحيب السابقه", plugin_category),
     info={
         "header": "⌔︙لإيقاف أو تشغيل حذف رسالة الترحيب السابقة ⚠️.",
         "description": "⌔︙ إذا كنت ترغب في حذف رسالة الترحيب السابقة وإرسال رسالة ترحيب جديدة ، فقم بتشغيلها عن طريق  قم بإيقاف تشغيله إذا كنت بحاجة",
-        "usage": "{tr}<رساله الترحيب <تشغيل/ايقاف",
+        "usage": "{tr}<رساله الترحيب السابقه <تشغيل/ايقاف",
     },
 )
 async def del_welcome(event):
@@ -207,7 +207,7 @@ async def del_welcome(event):
         delgvar("clean_welcome")
         return await edit_delete(
             event,
-            "**⌔︙من الآن رسالة الترحيب السابقة سيتم حذفها وسيتم إرسال رسالة الترحيب الجديدة ⚠️**",
+            "**⌔︙ من الآن رسالة الترحيب السابقة سيتم حذفها وسيتم إرسال رسالة الترحيب الجديدة ⚠️**",
         )
     if gvarstatus("clean_welcome") is None:
         addgvar("clean_welcome", "false")
