@@ -66,12 +66,12 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="اعادة$",
-    command=("اعادة", plugin_category),
+    pattern="الغاء الانتحال$",
+    command=("الغاء الانتحال", plugin_category),
     info={
         "header": "To revert back to your original name , bio and profile pic",
         "note": "For proper Functioning of this command you need to set AUTONAME and DEFAULT_BIO with your profile name and bio respectively.",
-        "usage": "{tr}revert",
+        "usage": "{tr}الغاء الانتحال",
     },
 )
 async def _(event):
