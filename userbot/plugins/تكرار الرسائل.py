@@ -11,20 +11,17 @@ from userbot import iqthon
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.tools import media_type
 from ..helpers.utils import _catutils
-from ..sql_helper.globals import addgvar, gvarstatus
 from . import BOTLOG, BOTLOG_CHATID
 
 plugin_category = "extra"
 
 
 async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=False):
-    # sourcery no-metrics
+  
     counter = int(cat[0])
     if len(cat) == 2:
         spam_message = str(cat[1])
         for _ in range(counter):
-            if gvarstatus("spamwork") is None:
-                return
             if event.reply_to_msg_id:
                 await sandy.reply(spam_message)
             else:
@@ -32,8 +29,6 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
             await asyncio.sleep(sleeptimet)
     elif event.reply_to_msg_id and sandy.media:
         for _ in range(counter):
-            if gvarstatus("spamwork") is None:
-                return
             sandy = await event.client.send_file(
                 event.chat_id, sandy, caption=sandy.text
             )
@@ -44,7 +39,7 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
                 if event.is_private:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        "#SPAM\n"
+                        "#التكرار\n"
                         + f"Spam was executed successfully in [User](tg://user?id={event.chat_id}) chat with {counter} times with below message",
                     )
                 else:
@@ -72,8 +67,6 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
     elif event.reply_to_msg_id and sandy.text:
         spam_message = sandy.text
         for _ in range(counter):
-            if gvarstatus("spamwork") is None:
-                return
             await event.client.send_message(event.chat_id, spam_message)
             await asyncio.sleep(sleeptimet)
     else:
@@ -83,7 +76,7 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
             if event.is_private:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    "#SPAM\n"
+                    "#تكرار\n"
                     + f"Spam was executed successfully in [User](tg://user?id={event.chat_id}) chat with {counter} messages of \n"
                     + f"`{spam_message}`",
                 )
@@ -112,8 +105,8 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
 
 
 @iqthon.iq_cmd(
-    pattern="spam ([\s\S]*)",
-    command=("spam", plugin_category),
+    pattern="تكرار (.*)",
+    command=("تكرار", plugin_category),
     info={
         "header": "Floods the text in the chat !! with given number of times,",
         "description": "Sends the replied media/message <count> times !! in the chat",
@@ -138,7 +131,6 @@ async def spammer(event):
         sleeptimet = 0.1
         sleeptimem = 0.3
     await event.delete()
-    addgvar("spamwork", True)
     await spam_function(event, sandy, cat, sleeptimem, sleeptimet)
 
 
@@ -193,10 +185,7 @@ async def stickerpack_spam(event):
             )
         )
     )
-    addgvar("spamwork", True)
     for m in reqd_sticker_set.documents:
-        if gvarstatus("spamwork") is None:
-            return
         await event.client.send_file(event.chat_id, m)
         await asyncio.sleep(0.7)
     if BOTLOG:
@@ -216,7 +205,7 @@ async def stickerpack_spam(event):
 
 
 @iqthon.iq_cmd(
-    pattern="cspam ([\s\S]*)",
+    pattern="cspam (.*)",
     command=("cspam", plugin_category),
     info={
         "header": "Spam the text letter by letter",
@@ -230,10 +219,7 @@ async def tmeme(event):
     cspam = str("".join(event.text.split(maxsplit=1)[1:]))
     message = cspam.replace(" ", "")
     await event.delete()
-    addgvar("spamwork", True)
     for letter in message:
-        if gvarstatus("spamwork") is None:
-            return
         await event.respond(letter)
     if BOTLOG:
         if event.is_private:
@@ -251,7 +237,7 @@ async def tmeme(event):
 
 
 @iqthon.iq_cmd(
-    pattern="wspam ([\s\S]*)",
+    pattern="wspam (.*)",
     command=("wspam", plugin_category),
     info={
         "header": "Spam the text word by word.",
@@ -265,10 +251,7 @@ async def tmeme(event):
     wspam = str("".join(event.text.split(maxsplit=1)[1:]))
     message = wspam.split()
     await event.delete()
-    addgvar("spamwork", True)
     for word in message:
-        if gvarstatus("spamwork") is None:
-            return
         await event.respond(word)
     if BOTLOG:
         if event.is_private:
@@ -286,7 +269,7 @@ async def tmeme(event):
 
 
 @iqthon.iq_cmd(
-    pattern="(delayspam|dspam) ([\s\S]*)",
+    pattern="(delayspam|dspam) (.*)",
     command=("delayspam", plugin_category),
     info={
         "header": "To spam the chat with count number of times with given text and given delay sleep time.",
@@ -310,5 +293,4 @@ async def spammer(event):
         )
     cat = input_str[1:]
     await event.delete()
-    addgvar("spamwork", True)
     await spam_function(event, reply, cat, sleeptimem, sleeptimet, DelaySpam=True)
