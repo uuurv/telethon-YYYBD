@@ -39,26 +39,26 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
                 if event.is_private:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        "#التكرار\n"
-                        + f"Spam was executed successfully in [User](tg://user?id={event.chat_id}) chat with {counter} times with below message",
+                        "**⌔︙ التڪـرار  ♽**\n"
+                        + f"**⌔︙ تم تنفيذ التكرار بنجاح في ▷** [User](tg://user?id={event.chat_id}) **الدردشـة مـع** {counter} **عدد المرات مع الرسالة أدناه**",
                     )
                 else:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        "#SPAM\n"
-                        + f"Spam was executed successfully in {get_display_name(await event.get_chat())}(`{event.chat_id}`) with {counter} times with below message",
+                        "**⌔︙ التڪـرار  ♽**\n"
+                        + f"**⌔︙ تم تنفيذ التكرار بنجاح في ▷** {get_display_name(await event.get_chat())}(`{event.chat_id}`) **مـع** {counter} **عدد المرات مع الرسالة أدناه**",
                     )
             elif event.is_private:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    "#DELAYSPAM\n"
-                    + f"Delay spam was executed successfully in [User](tg://user?id={event.chat_id}) chat with {counter} times with below message with delay {sleeptimet} seconds",
+                    "**⌔︙ التكرار الوقتي 💢**\n"
+                    + f"**⌔︙ تم تنفيذ التكرار الوقتي  بنجاح في ▷** [User](tg://user?id={event.chat_id}) **الدردشـة مـع** {counter} **عدد المرات مع الرسالة أدناه مع التأخير** {sleeptimet} ** الثوانـي ⏱**",
                 )
             else:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    "#DELAYSPAM\n"
-                    + f"Delay spam was executed successfully in {get_display_name(await event.get_chat())}(`{event.chat_id}`) with {counter} times with below message with delay {sleeptimet} seconds",
+                    "**⌔︙ التكرار الوقتي 💢**\n"
+                    + f"**⌔︙ تم تنفيذ التكرار الوقتي  بنجاح في ▷** {get_display_name(await event.get_chat())}(`{event.chat_id}`) **مـع** {counter} **عدد المرات مع الرسالة أدناه مع التأخير** {sleeptimet} ** الثوانـي ⏱**",
                 )
 
             sandy = await event.client.send_file(BOTLOG_CHATID, sandy)
@@ -76,53 +76,53 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
             if event.is_private:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    "#تكرار\n"
-                    + f"Spam was executed successfully in [User](tg://user?id={event.chat_id}) chat with {counter} messages of \n"
-                    + f"`{spam_message}`",
+                    "**⌔︙ التڪـرار  ♽**\n"
+                    + f"**⌔︙ تم تنفيذ التكرار بنجاح في ▷** [User](tg://user?id={event.chat_id}) **الدردشـة مـع** {counter} **رسائـل الـ  ✉️ :** \n"
+                    + f"⌔︙ `{spam_message}`",
                 )
             else:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    "#SPAM\n"
-                    + f"Spam was executed successfully in {get_display_name(await event.get_chat())}(`{event.chat_id}`) chat  with {counter} messages of \n"
-                    + f"`{spam_message}`",
+                    "**⌔︙ التڪـرار  ♽**\n"
+                    + f"**⌔︙ تم تنفيذ التكرار بنجاح في ▷** {get_display_name(await event.get_chat())}(`{event.chat_id}`) **الدردشـة مـع** {counter} **رسائـل الـ  ✉️ :** \n"
+                    + f"⌔︙ `{spam_message}`",
                 )
     elif BOTLOG:
         if event.is_private:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#DELAYSPAM\n"
-                + f"Delay Spam was executed successfully in [User](tg://user?id={event.chat_id}) chat with delay {sleeptimet} seconds and with {counter} messages of \n"
-                + f"`{spam_message}`",
+                "**⌔︙ التكرار الوقتي 💢**\n"
+                + f"**⌔︙ تم تنفيذ التكرار الوقتي  بنجاح في ▷** [User](tg://user?id={event.chat_id}) **الدردشـة مـع** {sleeptimet} seconds and with {counter} **رسائـل الـ  ✉️ :** \n"
+                + f"⌔︙ `{spam_message}`",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#DELAYSPAM\n"
-                + f"Delay spam was executed successfully in {get_display_name(await event.get_chat())}(`{event.chat_id}`) chat with delay {sleeptimet} seconds and with {counter} messages of \n"
-                + f"`{spam_message}`",
+                "**⌔︙ التكرار الوقتي 💢**\n"
+                + f"**⌔︙ تم تنفيذ التكرار الوقتي  بنجاح في ▷** {get_display_name(await event.get_chat())}(`{event.chat_id}`) **الدردشـة مـع** {sleeptimet} **الثوانـي و مـع** {counter} **رسائـل الـ  ✉️ :** \n"
+                + f"⌔︙ `{spam_message}`",
             )
 
 
 @iqthon.iq_cmd(
-    pattern="تكرار (.*)",
-    command=("تكرار", plugin_category),
+    pattern="تكرار الكلمه (.*)",
+    command=("تكرار الكلمه", plugin_category),
     info={
-        "header": "Floods the text in the chat !! with given number of times,",
-        "description": "Sends the replied media/message <count> times !! in the chat",
-        "usage": ["{tr}spam <count> <text>", "{tr}spam <count> reply to message"],
-        "examples": "{tr}spam 10 hi",
+        "header": "⌔︙ ملـئ النـص في الدردشـة مع عدد معيّن من المـرات 📝",
+        "description": "⌔︙ إرسـال الوسائط/الرسائل التي تم الردّ عليها <عدد> مرّة في الدردشـة 🔖",
+        "usage": ["{tr}<تكرار الكلمه <عدد> <الكلمه", "{tr}تكرار الكلمه <عدد> الـرّد علـىٰ رسـالة ↪️"],
+        "examples": "{tr}تكرار الكلمه 10 الكلمه",
     },
 )
 async def spammer(event):
-    "Floods the text in the chat !!"
+    "⌔︙ملـئ النـص في الدردشـة 🔖"
     sandy = await event.get_reply_message()
     cat = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
     try:
         counter = int(cat[0])
     except Exception:
         return await edit_delete(
-            event, "__Use proper syntax to spam. Foe syntax refer help menu.__"
+            event, "⌔︙إستخـدم بناء الجملة المناسب للإزعاج، صيغة Foe تشير إلىٰ قائمة التعليمات 💡"
         )
     if counter > 50:
         sleeptimet = 0.5
@@ -135,29 +135,29 @@ async def spammer(event):
 
 
 @iqthon.iq_cmd(
-    pattern="spspam$",
-    command=("spspam", plugin_category),
+    pattern="تكرار الملصق$",
+    command=("تكرار الملصق", plugin_category),
     info={
-        "header": "To spam the chat with stickers.",
-        "description": "To spam chat with all stickers in that replied message sticker pack.",
-        "usage": "{tr}spspam",
+        "header": "⌔︙ للتكرار الدردشـة بالملصقـات  💢.",
+        "description": "⌔︙ للدردشة العشوائية مع جميع الملصقات في حزمة ملصقات الرسائل التي تم الرد عليها 💢.",
+        "usage": "{tr}تكرار الملصق",
     },
 )
 async def stickerpack_spam(event):
-    "To spam the chat with stickers."
+    "للتكرار الدردشـة بالملصقـات."
     reply = await event.get_reply_message()
     if not reply or media_type(reply) is None or media_type(reply) != "Sticker":
         return await edit_delete(
-            event, "`reply to any sticker to send all stickers in that pack`"
+            event, "**⌔︙ قم بالـردّ على أيّ ملصق لإرسـال جميع ملصقات الحزمة  ↪️**"
         )
     hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     try:
         stickerset_attr = reply.document.attributes[1]
         catevent = await edit_or_reply(
-            event, "`Fetching details of the sticker pack, please wait..`"
+            event, "**⌔︙ جاري إحضار تفاصيل حزمة الملصقات، يرجى الإنتظار قليلا  ⏱**"
         )
     except BaseException:
-        await edit_delete(event, "`This is not a sticker. Reply to a sticker.`", 5)
+        await edit_delete(event, "⌔︙أعتقد أنّ هذا الملصق ليس جزءًا من أيّ حزمة لذا لا أستطيع إيجاد حزمته ⚠️", 5)
         return
     try:
         get_stickerset = await event.client(
@@ -171,7 +171,7 @@ async def stickerpack_spam(event):
     except Exception:
         return await edit_delete(
             catevent,
-            "`I guess this sticker is not part of any pack so i cant kang this sticker pack try kang for this sticker`",
+            "`⌔︙أعتقد أنّ هذا الملصق ليس جزءًا من أيّ حزمة لذا لا أستطيع إيجاد حزمته ⚠️",
         )
     try:
         hmm = Get(hmm)
@@ -192,30 +192,30 @@ async def stickerpack_spam(event):
         if event.is_private:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#SPSPAM\n"
-                + f"Sticker Pack Spam was executed successfully in [User](tg://user?id={event.chat_id}) chat with pack ",
+                "**⌔︙ تكرار الملصق :**\n"
+                + f"**⌔︙ تم تنفيذ الإزعـاج بواسطة حزمة الملصقات في  ▷ :** [User](tg://user?id={event.chat_id}) **الدردشـة مع الحزمـة ⚜️**",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#SPSPAM\n"
-                + f"Sticker Pack Spam was executed successfully in {get_display_name(await event.get_chat())}(`{event.chat_id}`) chat with pack",
+                "**⌔︙ تكرار الملصق :**\n"
+                + f"**⌔︙ تم تنفيذ الإزعـاج بواسطة حزمة الملصقات في  ▷ :** {get_display_name(await event.get_chat())}(`{event.chat_id}`) **الدردشـة مع الحزمـة ⚜️**",
             )
         await event.client.send_file(BOTLOG_CHATID, reqd_sticker_set.documents[0])
 
 
 @iqthon.iq_cmd(
-    pattern="cspam (.*)",
-    command=("cspam", plugin_category),
+    pattern="تكرار بالحرف (.*)",
+    command=("تكرار بالحرف", plugin_category),
     info={
-        "header": "Spam the text letter by letter",
-        "description": "Spam the chat with every letter in given text as new message.",
-        "usage": "{tr}cspam <text>",
-        "examples": "{tr}cspam Catuserbot",
+        "header": "⌔︙ ڪتابة النّص حرف بعد حرف 📝",
+        "description": "⌔︙ لإزعـاج الدردشـة بجميع الأحرف في النّص المعطى ڪرسـالة جديدة 💢",
+        "usage": "{tr}تكرار بالحرف <text>",
+        "examples": "{tr}تكرار بالحرف تليثون ",
     },
 )
 async def tmeme(event):
-    "Spam the text letter by letter."
+    "⌔︙ ڪتابة النّص حرف بعد حرف 📝."
     cspam = str("".join(event.text.split(maxsplit=1)[1:]))
     message = cspam.replace(" ", "")
     await event.delete()
@@ -225,29 +225,29 @@ async def tmeme(event):
         if event.is_private:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#CSPAM\n"
-                + f"Letter Spam was executed successfully in [User](tg://user?id={event.chat_id}) chat with : `{message}`",
+                "**⌔︙ تكرار بالحرف 📝 :**\n"
+                + f"**⌔︙ تم تنفيذ الإزعـاج بواسطة الأحرف في   ▷  :** [User](tg://user?id={event.chat_id}) **الدردشـة مـع** : `{message}`",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#CSPAM\n"
-                + f"Letter Spam was executed successfully in {get_display_name(await event.get_chat())}(`{event.chat_id}`) chat with : `{message}`",
+                "**⌔︙ تكرار بالحرف 📝 :**\n"
+                + f"**⌔︙ تم تنفيذ الإزعـاج بواسطة الأحرف في   ▷  :** {get_display_name(await event.get_chat())}(`{event.chat_id}`) **الدردشـة مـع** : `{message}`",
             )
 
 
 @iqthon.iq_cmd(
-    pattern="wspam (.*)",
-    command=("wspam", plugin_category),
+    pattern="تكرار بالكلمه (.*)",
+    command=("تكرار بالكلمه", plugin_category),
     info={
-        "header": "Spam the text word by word.",
-        "description": "Spams the chat with every word in given text asnew message.",
-        "usage": "{tr}wspam <text>",
-        "examples": "{tr}wspam I am using catuserbot",
+        "header": "⌔︙ڪتابة النّص ڪلمة بعد ڪلمة 📝",
+        "description": "⌔︙للتكرار الدردشـة بجميع الڪلمات في النّص المعطى ڪرسـالة جديدة 💢.",
+        "usage": "{tr}تكرار بالكلمه <text>",
+        "examples": "{tr}تكرار بالكلمه كلمه1 كلمه2 كلمه3",
     },
 )
 async def tmeme(event):
-    "Spam the text word by word"
+    "⌔︙ڪتابة النّص ڪلمة بعد ڪلمة 📝"
     wspam = str("".join(event.text.split(maxsplit=1)[1:]))
     message = wspam.split()
     await event.delete()
@@ -257,39 +257,39 @@ async def tmeme(event):
         if event.is_private:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#WSPAM\n"
-                + f"Word Spam was executed successfully in [User](tg://user?id={event.chat_id}) chat with : `{message}`",
+                "**⌔︙ تكرار بالكلمه : **\n"
+                + f"**⌔︙ تم تنفيذ التكرار بواسطة الڪلمات في  ▷ :** [User](tg://user?id={event.chat_id}) **الدردشـة مـع :** `{message}`",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#WSPAM\n"
-                + f"Word Spam was executed successfully in {get_display_name(await event.get_chat())}(`{event.chat_id}`) chat with : `{message}`",
+                "**⌔︙ تكرار بالكلمه : **\n"
+                + f"**⌔︙ تم تنفيذ التكرار بواسطة الڪلمات في  ▷ :** {get_display_name(await event.get_chat())}(`{event.chat_id}`) **الدردشـة مـع :** `{message}`",
             )
 
 
 @iqthon.iq_cmd(
-    pattern="(delayspam|dspam) (.*)",
-    command=("delayspam", plugin_category),
+    pattern="(التكرار الوقتي المتطور|dspam) (.*)",
+    command=("التكرار الوقتي المتطور", plugin_category),
     info={
-        "header": "To spam the chat with count number of times with given text and given delay sleep time.",
-        "description": "For example if you see this dspam 2 10 hi. Then you will send 10 hi text messages with 2 seconds gap between each message.",
+        "header": "⌔︙لإرسال إزعـاج إلى الدردشة مع عدد معيّن من المرات مع نص معين وإعطاء وقت إيقاف متأخر ⚠️",
+        "description": "⌔︙على سبيل المثال، إذا رأيت هذا الإزعـاج المتأخـر { .مرحباً 10 2 } عندها سترسل 10 رسائل نصية {مرحباً} بفاصل ثانيتين بين كل رسالة ⚠️",
         "usage": [
-            "{tr}delayspam <delay> <count> <text>",
-            "{tr}dspam <delay> <count> <text>",
+            "{tr}التكرار الوقتي المتطور <الوقت المعين> <عدد المرات> <الكلمه>",
+            "{tr}التكرار الوقتي المتطور <الوقت المعين> <عدد المرات> <الكلمه>",
         ],
-        "examples": ["{tr}delayspam 2 10 hi", "{tr}dspam 2 10 hi"],
+        "examples": ["{tr}التكرار الوقتي المتطور 2 10 hi", "{tr}التكرار الوقتي المتطور 2 10 hi"],
     },
 )
 async def spammer(event):
-    "To spam with custom sleep time between each message"
+    "**⌔︙ لإرسال التكرار مع تخصيص وقت إيقـاف بين كل رسالة ❗️**"
     reply = await event.get_reply_message()
     input_str = "".join(event.text.split(maxsplit=1)[1:]).split(" ", 2)
     try:
         sleeptimet = sleeptimem = float(input_str[0])
     except Exception:
         return await edit_delete(
-            event, "__Use proper syntax to spam. Foe syntax refer help menu.__"
+            event, "**⌔︙ إستخـدم بناء الجملة المناسب للإزعاج، صيغة تشير إلىٰ قائمة التعليمات 💡**"
         )
     cat = input_str[1:]
     await event.delete()
