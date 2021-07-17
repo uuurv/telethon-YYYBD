@@ -269,7 +269,7 @@ async def tmeme(event):
 
 
 @iqthon.iq_cmd(
-    pattern="(التكرار الوقتي|dspam) (.*)",
+    pattern="التكرار الوقتي (.*)",
     command=("التكرار الوقتي", plugin_category),
     info={
         "header": "⌔︙لإرسال إزعـاج إلى الدردشة مع عدد معيّن من المرات مع نص معين وإعطاء وقت إيقاف متأخر ⚠️",
