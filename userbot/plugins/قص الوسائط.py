@@ -54,52 +54,6 @@ async def cult_small_video(
     return None
 
 
-@iqthon.iq_cmd(
-    pattern="ffmpegsave$",
-    command=("ffmpegsave", plugin_category),
-    info={
-        "header": "Saves the media file in bot to trim mutliple times",
-        "description": "Will download the replied media into the bot so that you an trim it as your needs.",
-        "usage": "{tr}ffmpegsave <reply>",
-    },
-)
-async def ff_mpeg_trim_cmd(event):
-    "Saves the media file in bot to trim mutliple times"
-    if not os.path.exists(FF_MPEG_DOWN_LOAD_MEDIA_PATH):
-        reply_message = await event.get_reply_message()
-        if reply_message:
-            start = datetime.now()
-            media = media_type(reply_message)
-            if media not in ["Video", "Audio", "Voice", "Round Video", "Gif"]:
-                return await edit_delete(event, "`Only media files are supported`", 5)
-            catevent = await edit_or_reply(event, "`Saving the file...`")
-            try:
-                c_time = time.time()
-                dl = io.FileIO(FF_MPEG_DOWN_LOAD_MEDIA_PATH, "a")
-                await event.client.fast_download_file(
-                    location=reply_message.document,
-                    out=dl,
-                    progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                        progress(d, t, catevent, c_time, "trying to download")
-                    ),
-                )
-                dl.close()
-            except Exception as e:
-                await catevent.edit(f"**Error:**\n`{str(e)}`")
-            else:
-                end = datetime.now()
-                ms = (end - start).seconds
-                await catevent.edit(
-                    f"Saved file to `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}` in `{ms}` seconds."
-                )
-        else:
-            await edit_delete(event, "`Reply to a any media file`")
-    else:
-        await edit_delete(
-            event,
-            f"A media file already exists in path. Please remove the media and try again!\n`.ffmpegclear`",
-        )
-
 
 @iqthon.iq_cmd(
     pattern="vtrim(?:\s|$)([\s\S]*)",
@@ -250,23 +204,3 @@ async def ff_mpeg_trim_cmd(event):
     ms = (end - start).seconds
     await edit_delete(catevent, f"`Completed Process in {ms} seconds`", 3)
 
-
-@iqthon.iq_cmd(
-    pattern="ffmpegclear$",
-    command=("ffmpegclear", plugin_category),
-    info={
-        "header": "Deletes the saved media so you can save new one",
-        "description": "Only after deleting the old saved file you can add new file",
-        "usage": "{tr}ffmpegclear",
-    },
-)
-async def ff_mpeg_trim_cmd(event):
-    "Deletes the saved media so you can save new one"
-    if not os.path.exists(FF_MPEG_DOWN_LOAD_MEDIA_PATH):
-        await edit_delete(event, "`There is no media saved in bot for triming`")
-    else:
-        os.remove(FF_MPEG_DOWN_LOAD_MEDIA_PATH)
-        await edit_delete(
-            event,
-            "`The media saved in bot for triming is deleted now . you can save now new one `",
-        )
