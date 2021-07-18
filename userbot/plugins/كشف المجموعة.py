@@ -30,27 +30,27 @@ plugin_category = "utils"
 
 
 @iqthon.iq_cmd(
-    pattern="admins(?:\s|$)([\s\S]*)",
-    command=("admins", plugin_category),
+    pattern="المشرفين(?: |$)(.*)",
+    command=("المشرفين", plugin_category),
     info={
-        "header": "To get list of admins.",
-        "description": "Will show you the list of admins and if you use this in group then will tag them.",
+        "header": "لإظهـار قائمـة المشرفيـن  ✪",
+        "description": "⌔︙سيظهـر لك قائمـة المشرفيـن، وإذا ڪنت تستخـدم هـذا الأمـر في مجموعـة عندهـا سيتـم عمـل تـاك لهـم 💡",
         "usage": [
-            "{tr}admins <username/userid>",
-            "{tr}admins <in group where you need>",
+            "{tr}المشرفيـن +إسم المستخـدم/معرّف المستخـدم> ✪",
+            "{tr}المشرفيـن + في المجموعـة التي تريدهـا> ✪",
         ],
-        "examples": "{tr}admins @catuserbot_support",
+        "examples": "{tr}المشرفين @IQTHON",
     },
 )
 async def _(event):
-    "To get list of admins."
-    mentions = "**Admins in this Group**: \n"
+    "لإظهـار قائمـة المشرفيـن  ✪"
+    mentions = "**⌔︙ مشرفيـن هـذه المجموعـة  ✪**: \n"
     reply_message = await reply_id(event)
     input_str = event.pattern_match.group(1)
     to_write_chat = await event.get_input_chat()
     chat = None
     if input_str:
-        mentions = f"Admins in {input_str} Group: \n"
+        mentions = f"**⌔︙مشرفيـن فـي → :** {input_str} **مـن المجموعـات ⌂ :** \n"
         try:
             chat = await event.client.get_entity(input_str)
         except Exception as e:
@@ -58,13 +58,13 @@ async def _(event):
     else:
         chat = to_write_chat
         if not event.is_group:
-            return await edit_or_reply(event, "`Are you sure this is a group?`")
+            return await edit_or_reply(event, "**⌔︙ هـذه ليسـت مجموعـة ✕**")
     try:
         async for x in event.client.iter_participants(
             chat, filter=ChannelParticipantsAdmins
         ):
             if not x.deleted and isinstance(x.participant, ChannelParticipantCreator):
-                mentions += "\n 👑 [{}](tg://user?id={}) `{}`".format(
+                mentions += "\n - [{}](tg://user?id={}) `{}`".format(
                     x.first_name, x.id, x.id
                 )
         mentions += "\n"
@@ -75,7 +75,7 @@ async def _(event):
                 mentions += "\n `{}`".format(x.id)
             else:
                 if isinstance(x.participant, ChannelParticipantAdmin):
-                    mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(
+                    mentions += "\n- [{}](tg://user?id={}) `{}`".format(
                         x.first_name, x.id, x.id
                     )
     except Exception as e:
@@ -85,26 +85,26 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="bots(?:\s|$)([\s\S]*)",
-    command=("bots", plugin_category),
+    pattern="البوتات(?: |$)(.*)",
+    command=("البوتات", plugin_category),
     info={
-        "header": "To get list of bots.",
-        "description": "Will show you the list of bots.",
+        "header": "⌔︙ لإظهـار قائمـة البوتـات 🝰",
+        "description": "⌔︙ سيظهـر لك قائمـة البوتـات  🝰",
         "usage": [
-            "{tr}bots <username/userid>",
-            "{tr}bots <in group where you need>",
+            "{tr}البوتات + إسم المستخـدم/معرّف المستخـدم> 🝰 ",
+            "{tr}البوتات + في المجموعـة التي تريدهـا 🝰 ",
         ],
-        "examples": "{tr}bots @catuserbot_support",
+        "examples": "{tr}البوتات @IQTHON",
     },
 )
 async def _(event):
-    "To get list of bots."
-    mentions = "**Bots in this Group**: \n"
+    "⌔︙ لإظهـار قائمـة البوتـات 🝰"
+    mentions = "**⌔︙البـوتات في هذه الـمجموعة 🝰 : ** \n"
     input_str = event.pattern_match.group(1)
     if not input_str:
         chat = await event.get_input_chat()
     else:
-        mentions = "Bots in {} Group: \n".format(input_str)
+        mentions = "**⌔︙البوتـات في {} من المجموعات 🝰 : ** \n".format(input_str)
         try:
             chat = await event.client.get_entity(input_str)
         except Exception as e:
@@ -114,7 +114,7 @@ async def _(event):
             chat, filter=ChannelParticipantsBots
         ):
             if isinstance(x.participant, ChannelParticipantAdmin):
-                mentions += "\n ⚜️ [{}](tg://user?id={}) `{}`".format(
+                mentions += "\n - [{}](tg://user?id={}) `{}`".format(
                     x.first_name, x.id, x.id
                 )
             else:
@@ -127,38 +127,38 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="users(?:\s|$)([\s\S]*)",
-    command=("users", plugin_category),
+    pattern="الأعضاء(?: |$)(.*)",
+    command=("الأعضاء", plugin_category),
     info={
-        "header": "To get list of users.",
-        "description": "Will show you the list of users.",
-        "note": "There was limitation in this you cant get more 10k users",
+        "header": "⌔︙لإظهـار قائمـة الأعضـاء 𖤍",
+        "description": "⌔︙سيظهـر لك قائمـة الأعضـاء 𖤍",
+        "note": "⌔︙هناك حـدّ في هـذا، لايمڪنك الحصـول على أڪثر من 10 آلاف عضـو ꉩ",
         "usage": [
-            "{tr}users <username/userid>",
-            "{tr}users <in group where you need>",
+            "{tr}الأعضاء + إسم المستخـدم/معرّف المستخـدم",
+            "{tr}الأعضاء + في المجموعـة التي تريدهـا",
         ],
     },
 )
 async def get_users(show):
-    "To get list of Users."
-    mentions = "**Users in this Group**: \n"
+    "⌔︙لإظهـار قائمـة الأعضـاء 𖤍"
+    mentions = "**مستخدمين هذه المجموعة**: \n"
     await reply_id(show)
     input_str = show.pattern_match.group(1)
     if input_str:
-        mentions = "Users in {} Group: \n".format(input_str)
+        mentions = "**⌔︙الأعضاء في {} من المجموعات 𖤍  :** \n".format(input_str)
         try:
             chat = await show.client.get_entity(input_str)
         except Exception as e:
             return await edit_delete(show, f"`{str(e)}`", 10)
     else:
         if not show.is_group:
-            return await edit_or_reply(show, "`Are you sure this is a group?`")
-    catevent = await edit_or_reply(show, "`getting users list wait...`  ")
+            return await edit_or_reply(show, "**⌔︙هـذه ليسـت مجموعـة ✕**")
+    catevent = await edit_or_reply(show, "**⌔︙جـاري سحـب قائمـة معرّفـات الأعضـاء 🝛**")
     try:
         if show.pattern_match.group(1):
             async for user in show.client.iter_participants(chat.id):
                 if user.deleted:
-                    mentions += f"\nDeleted Account `{user.id}`"
+                    mentions += f"\n**⌔︙الحسـابات المحذوفـة ⌦** `{user.id}`"
                 else:
                     mentions += (
                         f"\n[{user.first_name}](tg://user?id={user.id}) `{user.id}`"
@@ -166,7 +166,7 @@ async def get_users(show):
         else:
             async for user in show.client.iter_participants(show.chat_id):
                 if user.deleted:
-                    mentions += f"\nDeleted Account `{user.id}`"
+                    mentions += f"\n**⌔︙الحسـابات المحذوفـة ⌦** `{user.id}`"
                 else:
                     mentions += (
                         f"\n[{user.first_name}](tg://user?id={user.id}) `{user.id}`"
@@ -177,33 +177,32 @@ async def get_users(show):
 
 
 @iqthon.iq_cmd(
-    pattern="chatinfo(?:\s|$)([\s\S]*)",
-    command=("chatinfo", plugin_category),
+    pattern="معلومات(?: |$)(.*)",
+    command=("معلومات", plugin_category),
     info={
-        "header": "To get Group details.",
-        "description": "Shows you the total information of the required chat.",
+        "header": "⌔︙للحصـول على معلومـات المجموعـة 🝢",
+        "description": "⌔︙يُظهـر لك إجمالـي المعلومـات للدردشـة المطلوبـة 🝢",
         "usage": [
-            "{tr}chatinfo <username/userid>",
-            "{tr}chatinfo <in group where you need>",
+            "{tr}المعلومـات 
+            "إسم المستخـدم/معرّف المستخـدم 🝢",
+            "{tr}معلومات + <في المجموعـة التي تريدهـا",
         ],
-        "examples": "{tr}chatinfo @catuserbot_support",
+        "examples": "{tr}معلومات @IQTHON",
     },
 )
 async def info(event):
-    "To get group information"
-    catevent = await edit_or_reply(event, "`Analysing the chat...`")
+    "⌔︙للحصـول على معلومـات المجموعـة 🝢"
+    catevent = await edit_or_reply(event, "**⌔︙يتـمّ جلـب معلومـات الدردشـة، إنتظـر ⅏**")
     chat = await get_chatinfo(event, catevent)
-    if chat is None:
-        return
     caption = await fetch_info(chat, event)
     try:
         await catevent.edit(caption, parse_mode="html")
     except Exception as e:
         if BOTLOG:
             await event.client.send_message(
-                BOTLOG_CHATID, f"**Error in chatinfo : **\n`{str(e)}`"
+                BOTLOG_CHATID, f"**⌔︙هنـاك خطـأ في معلومـات الدردشـة ✕ : **\n`{str(e)}`"
             )
-        await catevent.edit("`An unexpected error has occurred.`")
+        await catevent.edit("**⌔︙ حـدث خـطأ مـا، يرجـى التحقق من الأمـر ⎌**")
 
 
 async def get_chatinfo(event, catevent):
@@ -227,19 +226,18 @@ async def get_chatinfo(event, catevent):
         try:
             chat_info = await event.client(GetFullChannelRequest(chat))
         except ChannelInvalidError:
-            await catevent.edit("`Invalid channel/group`")
+            await catevent.edit("**⌔︙لـم يتـمّ العثـور على القنـاة/المجموعـة ✕**")
             return None
         except ChannelPrivateError:
             await catevent.edit(
-                "`This is a private channel/group or I am banned from there`"
+                '**⌔︙ هـذه مجموعـة أو قنـاة خاصـة أو لقد تمّ حظـري منه ⛞**'
             )
             return None
         except ChannelPublicGroupNaError:
-            await catevent.edit("`Channel or supergroup doesn't exist`")
+            await catevent.edit("**⌔︙القنـاة أو المجموعـة الخارقـة غيـر موجـودة ✕**")
             return None
         except (TypeError, ValueError) as err:
-            LOGS.info(err)
-            await edit_delete(catevent, "**Error:**\n__Can't fetch the chat__")
+            await catevent.edit(str(err))
             return None
     return chat_info
 
@@ -269,12 +267,12 @@ async def fetch_info(chat, event):  # sourcery no-metrics
     except Exception as e:
         msg_info = None
         LOGS.error(f"Exception: {str(e)}")
-    # No chance for IndexError as it checks for msg_info.messages first
+   
     first_msg_valid = bool(
         msg_info and msg_info.messages and msg_info.messages[0].id == 1
     )
 
-    # Same for msg_info.users
+    
     creator_valid = bool(first_msg_valid and msg_info.users)
     creator_id = msg_info.users[0].id if creator_valid else None
     creator_firstname = (
@@ -345,9 +343,9 @@ async def fetch_info(chat, event):  # sourcery no-metrics
         else "No"
     )
     slowmode = (
-        "<b>Yes</b>"
+        "<b>مـفعل</b>"
         if hasattr(chat_obj_info, "slowmode_enabled") and chat_obj_info.slowmode_enabled
-        else "No"
+        else "غير مفـعل"
     )
     slowmode_time = (
         chat.full_chat.slowmode_seconds
@@ -355,14 +353,14 @@ async def fetch_info(chat, event):  # sourcery no-metrics
         else None
     )
     restricted = (
-        "<b>Yes</b>"
+        "<b>نـعم</b>"
         if hasattr(chat_obj_info, "restricted") and chat_obj_info.restricted
-        else "No"
+        else "لا"
     )
     verified = (
-        "<b>Yes</b>"
+        "<b>مـوثق</b>"
         if hasattr(chat_obj_info, "verified") and chat_obj_info.verified
-        else "No"
+        else "غيـر موثق"
     )
     username = "@{}".format(username) if username else None
     creator_username = "@{}".format(creator_username) if creator_username else None
@@ -386,56 +384,56 @@ async def fetch_info(chat, event):  # sourcery no-metrics
             LOGS.error(f"Exception:{str(e)}")
     if bots_list:
         for _ in bots_list:
-            bots += 1
+            bots += 1  
 
-    caption = "<b>CHAT INFO:</b>\n"
-    caption += f"ID: <code>{chat_obj_info.id}</code>\n"
+    caption = "<b>**⌔︙معلومـات الدردشـة 🝢 :**</b>\n"
+    caption += f"⌔︙الآيـدي 𝗜𝗗 : <code>{chat_obj_info.id}</code>\n"
     if chat_title is not None:
-        caption += f"{chat_type} name: {chat_title}\n"
+        caption += f"**⌔︙إسـم المجموعـة ⎀ :** {chat_title}\n"
     if former_title is not None:  # Meant is the very first title
-        caption += f"Former name: {former_title}\n"
+        caption += f"**⌔︙الإسم السابـق ⎇ :** {former_title}\n"
     if username is not None:
-        caption += f"{chat_type} type: Public\n"
-        caption += f"Link: {username}\n"
+        caption += f"**⌔︙نـوع المجموعـة ⌂ : مجموعـة عامّـة 🝀 **\n"
+        caption += f"**⌔︙الرابـط 🝖 :** {username}\n"
     else:
-        caption += f"{chat_type} type: Private\n"
+        caption += f"**⌔︙ نـوع المجموعـة ⌂ : مجموعـة عامّـة 🝀** \n"
     if creator_username is not None:
-        caption += f"Creator: {creator_username}\n"
+        caption += f"**⌔︙ المالـك ♕ :**  {creator_username}\n"
     elif creator_valid:
         caption += (
-            f'Creator: <a href="tg://user?id={creator_id}">{creator_firstname}</a>\n'
+            '⌔︙ المالـك ♕ : <a href="tg://user?id={creator_id}">{creator_firstname}</a>\n'
         )
     if created is not None:
-        caption += f"Created: <code>{created.date().strftime('%b %d, %Y')} - {created.time()}</code>\n"
+        caption += f"**⌔︙تاريـخ الإنشـاء ✎** : <code>{created.date().strftime('%b %d, %Y')} - {created.time()}</code>\n"
     else:
-        caption += f"Created: <code>{chat_obj_info.date.date().strftime('%b %d, %Y')} - {chat_obj_info.date.time()}</code> {warn_emoji}\n"
-    caption += f"Data Centre ID: {dc_id}\n"
+        caption += f"**⌔︙ الإنتـاج 🜾 :** <code>{chat_obj_info.date.date().strftime('%b %d, %Y')} - {chat_obj_info.date.time()}</code> {warn_emoji}\n"
+    caption += f"**⌔︙آيـدي قاعـدة البيانـات 𝗜𝗗  :** {dc_id}\n"
     if exp_count is not None:
         chat_level = int((1 + sqrt(1 + 7 * exp_count / 14)) / 2)
-        caption += f"{chat_type} level: <code>{chat_level}</code>\n"
+        caption += f"**⌔︙الأعضـاء 𖤍 :** <code>{chat_level}</code>\n"
     if messages_viewable is not None:
-        caption += f"Viewable messages: <code>{messages_viewable}</code>\n"
+        caption += f"**⌔︙ الرسائـل التي يمڪن مشاهدتها ⎚  :** <code>{messages_viewable}</code>\n"
     if messages_sent:
-        caption += f"Messages sent: <code>{messages_sent}</code>\n"
+        caption += f"**⌔︙الرسائـل المرسلـة ⎗ :** <code>{messages_sent}</code>\n"
     elif messages_sent_alt:
-        caption += f"Messages sent: <code>{messages_sent_alt}</code> {warn_emoji}\n"
+        caption += f"** الرسـائل المرسلة:** <code>{messages_sent_alt}</code> {warn_emoji}\n"
     if members is not None:
-        caption += f"Members: <code>{members}</code>\n"
+        caption += f"** ⌔︙الأعضـاء 𖤍  :** <code>{members}</code>\n"
     if admins is not None:
-        caption += f"Administrators: <code>{admins}</code>\n"
+        caption += f"** ⌔︙المشرفيـن ✪ :** <code>{admins}</code>\n"
     if bots_list:
-        caption += f"Bots: <code>{bots}</code>\n"
+        caption += f"**⌔︙ البـوتات :** <code>{bots}</code>\n"
     if members_online:
-        caption += f"Currently online: <code>{members_online}</code>\n"
+        caption += f"**⌔︙المتصليـن حـالياً ᯤ :** <code>{members_online}</code>\n"
     if restrcited_users is not None:
-        caption += f"Restricted users: <code>{restrcited_users}</code>\n"
+        caption += f"**⌔︙الأعضـاء المقيّديـن ⌫ :** <code>{restrcited_users}</code>\n"
     if banned_users is not None:
-        caption += f"Banned users: <code>{banned_users}</code>\n"
+        caption += f"**⌔︙الأعضـاء المحظوريـن 🝱 :** <code>{banned_users}</code>\n"
     if group_stickers is not None:
-        caption += f'{chat_type} stickers: <a href="t.me/addstickers/{chat.full_chat.stickerset.short_name}">{group_stickers}</a>\n'
+        caption += f'{chat_type} **⌔︙الملصقـات ⏣ :** <a href="t.me/addstickers/{chat.full_chat.stickerset.short_name}">{group_stickers}</a>\n'
     caption += "\n"
     if not broadcast:
-        caption += f"Slow mode: {slowmode}"
+        caption += f"** ⌔︙ الوضـع البطـيئ 🝒 :** {slowmode}"
         if (
             hasattr(chat_obj_info, "slowmode_enabled")
             and chat_obj_info.slowmode_enabled
@@ -443,19 +441,19 @@ async def fetch_info(chat, event):  # sourcery no-metrics
             caption += f", <code>{slowmode_time}s</code>\n\n"
         else:
             caption += "\n\n"
-        caption += f"Supergroup: {supergroup}\n\n"
+        caption += f"** ⌔︙ الـمجموعـة الخارقـة  ϟ :** {supergroup}\n\n"
     if hasattr(chat_obj_info, "restricted"):
-        caption += f"Restricted: {restricted}\n"
+        caption += f"**⌔︙المقيّـد ⌫  :** {restricted}\n"
         if chat_obj_info.restricted:
-            caption += f"> Platform: {chat_obj_info.restriction_reason[0].platform}\n"
-            caption += f"> Reason: {chat_obj_info.restriction_reason[0].reason}\n"
-            caption += f"> Text: {chat_obj_info.restriction_reason[0].text}\n\n"
+            caption += f"> : {chat_obj_info.restriction_reason[0].platform}\n"
+            caption += f"> **⌔︙السـبب ⎈  :** {chat_obj_info.restriction_reason[0].reason}\n"
+            caption += f"> **⌔︙النّـص 🝛  :** {chat_obj_info.restriction_reason[0].text}\n\n"
         else:
             caption += "\n"
     if hasattr(chat_obj_info, "scam") and chat_obj_info.scam:
-        caption += "Scam: <b>Yes</b>\n\n"
+        caption += "**⌔︙السارقيـن 𖣳 :** <b>Yes</b>\n\n"
     if hasattr(chat_obj_info, "verified"):
-        caption += f"Verified by Telegram: {verified}\n\n"
+        caption += f"**⌔︙الحسابـات الموثقـة 🝄  :** {verified}\n\n"
     if description:
-        caption += f"Description: \n<code>{description}</code>\n"
+        caption += f"**⌔︙ الوصـف 🝩  :** \n<code>{description}</code>\n"
     return caption
