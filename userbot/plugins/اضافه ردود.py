@@ -163,7 +163,7 @@ async def on_snip_list(event):
     OUT_STR = "**⌔︙لايوجـد أيّ رد في هـذه الدردشـة  ✕**"
     filters = get_filters(event.chat_id)
     for filt in filters:
-        if OUT_STR == "**⌔︙ لايوجـد أيّ رد في هـذه الدردشـة  ✕**"
+        if OUT_STR == "**⌔︙ لايوجـد أيّ رد في هـذه الدردشـة  ✕**":
             OUT_STR = "**⌔︙الـردود المتوفـرة في هـذه الدردشـة ⎙ :** \n"
         OUT_STR += "▷  `{}`\n".format(filt.keyword)
     await edit_or_reply(
