@@ -427,7 +427,7 @@ async def fetch_info(chat, event):  # sourcery no-metrics
     if restrcited_users is not None:
         caption += f"⌔︙الأعضـاء المقيّديـن : <code>{restrcited_users}</code>\n"
     if banned_users is not None:
-        caption += f"⌔︙الأعضـاء المحظوريـن : <code>{banned_users}</code>\n"
+        caption += f"⌔︙الأعضـاء المحظوريـن : <code>{banned_users}</code>"
     if group_stickers is not None:
         caption += f'{chat_type} ⌔︙الملصقـات : <a href="t.me/addstickers/{chat.full_chat.stickerset.short_name}">{group_stickers}</a>'
     caption += "\n"
@@ -440,7 +440,7 @@ async def fetch_info(chat, event):  # sourcery no-metrics
             caption += f", <code>{slowmode_time}s</code>\n"
         else:
             caption += "\n"
-        caption += f" ⌔︙الـمجموعـة الخارقـة  : {supergroup}\n"
+        caption += f"⌔︙الـمجموعـة الخارقـة  : {supergroup}\n"
     if hasattr(chat_obj_info, "restricted"):
         caption += f"⌔︙المقيّـد : {restricted}"
         if chat_obj_info.restricted:
