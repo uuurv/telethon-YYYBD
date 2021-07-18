@@ -1,4 +1,3 @@
-# ported from paperplaneExtended by avinashreddy3108 for media support
 import re
 
 from userbot import iqthon
@@ -86,32 +85,32 @@ async def filter_incoming_handler(handler):  # sourcery no-metrics
 
 
 @iqthon.iq_cmd(
-    pattern="filter ([\s\S]*)",
-    command=("filter", plugin_category),
+    pattern="اضف رد ([\s\S]*)",
+    command=("اضف رد", plugin_category),
     info={
-        "header": "To save filter for the given keyword.",
-        "description": "If any user sends that filter then your bot will reply.",
+        "header": "⌔︙لحفـظ رد للڪلمـة المعطـاة ⎙",
+        "description": "⌔︙ إذا قـام أيّ مستخـدم بإرسـال تلك الڪلمة عندهـا سيقوم البـوت بالـردّ عليـه  💡",
         "option": {
-            "{mention}": "To mention the user",
-            "{title}": "To get chat name in message",
-            "{count}": "To get group members",
-            "{first}": "To use user first name",
-            "{last}": "To use user last name",
-            "{fullname}": "To use user full name",
-            "{userid}": "To use userid",
-            "{username}": "To use user username",
-            "{my_first}": "To use my first name",
-            "{my_fullname}": "To use my full name",
-            "{my_last}": "To use my last name",
-            "{my_mention}": "To mention myself",
-            "{my_username}": "To use my username.",
+            "{mention}": "⌔︙ لذكر المستخدم",
+            "{title}": "⌔︙ للحصول على اسم الدردشة في الرسالة",
+            "{count}": "⌔︙ للحصول على أعضاء المجموعة",
+            "{first}": "⌔︙ لاستخدام اسم المستخدم الأول",
+            "{last}": "⌔︙ لاستخدام اسم المستخدم الأخير",
+            "{fullname}": "⌔︙ لاستخدام اسم المستخدم الكامل",
+            "{userid}": "⌔︙ لاستخدام معرف المستخدم",
+            "{username}": "⌔︙ لاستخدام اسم المستخدم الخاص بالمستخدم",
+            "{my_first}": "⌔︙ لاستخدام اسمي الأول",
+            "{my_fullname}": "⌔︙ لاستخدام اسمي الكامل",
+            "{my_last}": "⌔︙ لاستخدام اسم عائلتي",
+            "{my_mention}": "⌔︙ أن أذكر نفسي",
+            "{my_username}": "⌔︙ لاستخدام اسم المستخدم الخاص بي.",
         },
-        "note": "For saving media/stickers as filters you need to set PRIVATE_GROUP_BOT_API_ID.",
-        "usage": "{tr}filter <keyword>",
+        "note": "⌔︙لحفـظ الوسائـط/الملصقـات ڪردّ، يجـب عليـك بأن تقـوم بتعييـن الأمـر PRIVATE_GROUP_BOT_API_ID 💡 ",
+        "usage": "{tr}اضف رد + الڪلمـة  ⎗",
     },
 )
 async def add_new_filter(new_handler):
-    "To save the filter"
+    "⌔︙لحفـظ رد للڪلمـة المعطـاة ⎙"
     keyword = new_handler.pattern_match.group(1)
     string = new_handler.text.partition(keyword)[2]
     msg = await new_handler.get_reply_message()
@@ -120,10 +119,10 @@ async def add_new_filter(new_handler):
         if BOTLOG:
             await new_handler.client.send_message(
                 BOTLOG_CHATID,
-                f"#FILTER\
-            \nCHAT ID: {new_handler.chat_id}\
-            \nTRIGGER: {keyword}\
-            \n\nThe following message is saved as the filter's reply data for the chat, please do NOT delete it !!",
+                f"**⌔︙ اضـافه ردّ ⎗ :**\
+            \n**⌔︙آيـدي الدردشـة 🆔 :** {new_handler.chat_id}\
+            \n**⌔︙آثـار ⌬ :** {keyword}\
+            \n\n**⌔︙تـم حفظ الرسـالة التاليـة ڪردّ على الكلمـة في الدردشـة، يرجـى عـدم حذفهـا ✻**",
             )
             msg_o = await new_handler.client.forward_messages(
                 entity=BOTLOG_CHATID,
@@ -135,76 +134,76 @@ async def add_new_filter(new_handler):
         else:
             await edit_or_reply(
                 new_handler,
-                "__Saving media as reply to the filter requires the__ `PRIVATE_GROUP_BOT_API_ID` __to be set.__",
+                "**⌔︙ لحفـظ الوسائـط ڪرد يتوجـب تعييـن - PRIVATE_GROUP_BOT_API_ID. 💡**",
             )
             return
     elif new_handler.reply_to_msg_id and not string:
         rep_msg = await new_handler.get_reply_message()
         string = rep_msg.text
-    success = "`Filter` **{}** `{} successfully`"
+    success = "**⌔︙تـم حفـظ الـرد {} بنجـاح ✓**"
     if add_filter(str(new_handler.chat_id), keyword, string, msg_id) is True:
         return await edit_or_reply(new_handler, success.format(keyword, "added"))
     remove_filter(str(new_handler.chat_id), keyword)
     if add_filter(str(new_handler.chat_id), keyword, string, msg_id) is True:
         return await edit_or_reply(new_handler, success.format(keyword, "Updated"))
-    await edit_or_reply(new_handler, f"Error while setting filter for {keyword}")
+    await edit_or_reply(new_handler, f"**⌔︙ حـدث خطـأ عنـد تعييـن الـردّ ✕ :** {keyword}")
 
 
 @iqthon.iq_cmd(
-    pattern="filters$",
-    command=("filters", plugin_category),
+    pattern="جميع الردود$",
+    command=("جميع الردود", plugin_category),
     info={
-        "header": "To list all filters in that chat.",
-        "description": "Lists all active (of your userbot) filters in a chat.",
-        "usage": "{tr}filters",
+        "header": "⌔︙ لإظهـار جميع الـردود لهـذه الدردشـة  ⎙",
+        "description": "⌔︙لإظهـار جميع ردود (البـوت) في هـذه الدردشـة ⎙",
+        "usage": "{tr}جميع الردود",
     },
 )
 async def on_snip_list(event):
-    "To list all filters in that chat."
-    OUT_STR = "There are no filters in this chat."
+    "⌔︙لإظهـار جميع الـردود لهـذه الدردشـة ⎙"
+    OUT_STR = "**⌔︙لايوجـد أيّ رد في هـذه الدردشـة  ✕**"
     filters = get_filters(event.chat_id)
     for filt in filters:
-        if OUT_STR == "There are no filters in this chat.":
-            OUT_STR = "Active filters in this chat:\n"
-        OUT_STR += "👉 `{}`\n".format(filt.keyword)
+        if OUT_STR == "**⌔︙ لايوجـد أيّ رد في هـذه الدردشـة  ✕**"
+            OUT_STR = "**⌔︙الـردود المتوفـرة في هـذه الدردشـة ⎙ :** \n"
+        OUT_STR += "▷  `{}`\n".format(filt.keyword)
     await edit_or_reply(
         event,
         OUT_STR,
-        caption="Available Filters in the Current Chat",
+        caption="**⌔︙الـردود المتاحـة في الدردشـة الحاليـة ⎙ **",
         file_name="filters.text",
     )
 
 
 @iqthon.iq_cmd(
-    pattern="stop ([\s\S]*)",
-    command=("stop", plugin_category),
+    pattern="مسح رد ([\s\S]*)",
+    command=("مسح رد", plugin_category),
     info={
-        "header": "To delete that filter . so if user send that keyword bot will not reply",
-        "usage": "{tr}stop <keyword>",
+        "header": "⌔︙ لحـذف ذلك الـرد، يتوجب على المستخـدم إرسـال الڪلمـة  💡",
+        "usage": "{tr}مسح رد + الڪلمـة",
     },
 )
 async def remove_a_filter(r_handler):
-    "Stops the specified keyword."
+    "⌔︙مسح رد الڪلمـة المحـددة ✕"
     filt = r_handler.pattern_match.group(1)
     if not remove_filter(r_handler.chat_id, filt):
-        await r_handler.edit("Filter` {} `doesn't exist.".format(filt))
+        await r_handler.edit("**⌔︙ الـرد  {}  غيـر موجـود ❗️**".format(filt))
     else:
-        await r_handler.edit("Filter `{} `was deleted successfully".format(filt))
+        await r_handler.edit("**⌔︙تـم حـذف الـردّ  {}  بنجـاح ✓**".format(filt))
 
 
 @iqthon.iq_cmd(
-    pattern="rmfilters$",
-    command=("rmfilters", plugin_category),
+    pattern="مسح جميع الردود$",
+    command=("مسح جميع الردود", plugin_category),
     info={
-        "header": "To delete all filters in that group.",
-        "usage": "{tr}rmfilters",
+        "header": "⌔︙ لحـذف جميـع ردود المجموعـة 💡.",
+        "usage": "{tr}مسح جميع الردود",
     },
 )
 async def on_all_snip_delete(event):
-    "To delete all filters in that group."
+    "⌔︙ لحـذف جميـع ردود المجموعـة 💡"
     filters = get_filters(event.chat_id)
     if filters:
         remove_all_filters(event.chat_id)
-        await edit_or_reply(event, f"filters in current chat deleted successfully")
+        await edit_or_reply(event, f"**⌔︙تـم حـذف ردود الدردشـة الحاليـة بنجـاح ✓**")
     else:
-        await edit_or_reply(event, f"There are no filters in this group")
+        await edit_or_reply(event, f"**⌔︙لايوجـد أيّ رد في هـذه المجموعـة ✕**")
