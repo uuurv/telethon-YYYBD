@@ -100,7 +100,7 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="التحديثات (ايقاف|تشغيل)$",
+    pattern="التحديثات (تشغيل|ايقاف)$",
     command=("التحديثات", plugin_category),
     info={
         "header": "⌔︙ لتحديـث الدردشـة بعـد إعـادة التشغيـل  أو إعـادة التحميـل  ෴",
