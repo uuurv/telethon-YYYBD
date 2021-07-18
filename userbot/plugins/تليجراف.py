@@ -1,4 +1,3 @@
-# telegraph utils for catuserbot
 import os
 import random
 import string
@@ -30,8 +29,8 @@ def resize_image(image):
 
 
 @iqthon.iq_cmd(
-    pattern="(t(ele)?g(raph)?) ?(m|t|media|text)(?:\s|$)([\s\S]*)",
-    command=("telegraph", plugin_category),
+    pattern="(ت(لي)?ج(راف)?) ?(m|t|ميديا|كتابه)(?: |$)(.*)",
+    command=("تلجراف", plugin_category),
     info={
         "header": "To get telegraph link.",
         "description": "Reply to text message to paste that text on telegraph you can also pass input along with command \
