@@ -80,7 +80,7 @@ async def _(event):
             ms = (end - start).seconds
             os.remove(downloaded_file_name)
             await catevent.edit(
-                 f" [تليجـراف](https://telegra.ph{media_urls[0]}) **: ☍ الرابـط︙ ⌔** \ 
+                 f"**⌔︙ الرابـط ☍ : ** [Press here](https://telegra.ph{media_urls[0]})\
                     \n**⌔︙الوقـت المستغـرق ⏱  : ** `{ms} الثوانـي.`",
                 link_preview=True,
             )
@@ -117,7 +117,7 @@ async def _(event):
         ms = (end - start).seconds
         cat = f"https://telegra.ph/{response['path']}"
         await catevent.edit(
-            f"[تليجـراف]({cat}) **: ☍ الرابـط︙ ⌔** \
+            f"**⌔︙ الرابـط ☍ : ** [Press here]({cat})\
                  \n**⌔︙الوقـت المستغـرق ⏱  : ** `{ms} الثوانـي.`",
             link_preview=True,
         )
