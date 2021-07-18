@@ -32,12 +32,11 @@ def resize_image(image):
     pattern="(ت(لي)?ج(راف)?) ?(m|t|ميديا|كتابه)(?: |$)(.*)",
     command=("تلجراف", plugin_category),
     info={
-        "header": "To get telegraph link.",
-        "description": "Reply to text message to paste that text on telegraph you can also pass input along with command \
-            So that to customize title of that telegraph and reply to media file to get sharable link of that media(atmost 5mb is supported)",
+        "header": "⌔︙للحصـول على رابـط تليڪـراف ☍ :",
+        "description": "⌔︙قـم بالـرد على رسـالة نصيّـة، للـصق هذا النّص على تليڪـراف ڪما يمڪنك الإدخـال   مع الأمـر/ لغـرض تخصيـص عنـوان لهـذا التليڪـراف والـردّ على ملـف الوسائـط للحصـول على رابـط قابـل للمشـارڪة لتلك الوسائـط (يدعم 5 ميڪابايت تقريباً) 💡",
         "options": {
-            "m or media": "To get telegraph link of replied sticker/image/video/gif.",
-            "t or text": "To get telegraph link of replied text you can use custom title.",
+            "m or media": "⌔︙للحصـول على رابـط تليڪـراف لـ (ملصـق/صـورة/فيديـو/متحرڪة) ☍ :",
+            "t or text": "⌔︙للحصـول على رابـط تليڪـراف للنّـص الـذي تـمّ الـردّ عليه، يمڪنك إستخـدام عنـوان مخصـص ☍ :",
         },
         "usage": [
             "{tr}tgm",
@@ -48,17 +47,17 @@ def resize_image(image):
     },
 )  # sourcery no-metrics
 async def _(event):
-    "To get telegraph link."
-    catevent = await edit_or_reply(event, "`processing........`")
+    "⌔︙للحصـول على رابـط تليڪـراف ☍ :."
+    catevent = await edit_or_reply(event, "**⌔︙جـاري المعالجـة ⌯**")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"Created New Telegraph account {auth_url} for the current session. \n**Do not give this url to anyone, even if they say they are from Telegram!**",
+            f"**⌔︙تـمّ إنشـاء تليجـراف جديـد ✓ :** {auth_url} \n **للجلسـة الحاليـة، لا تقـم بإعطـاء هـذا الرابـط إلى أي أحـد، حتى وإن قـال بأنّـه موظـف لـدى تليڪـرام !**",
         )
     optional_title = event.pattern_match.group(5)
     if not event.reply_to_msg_id:
         return await catevent.edit(
-            "`Reply to a message to get a permanent telegra.ph link.`",
+            "**⌔︙قـم بالـردّ على رسالـة للحصـول على رابـط صـورة تليجـراف دائـم ☍**",
         )
 
     start = datetime.now()
@@ -68,21 +67,21 @@ async def _(event):
         downloaded_file_name = await event.client.download_media(
             r_message, Config.TEMP_DIR
         )
-        await catevent.edit(f"`Downloaded to {downloaded_file_name}`")
+        await catevent.edit(f"**⌔︙تـم التحميـل إلى**  {downloaded_file_name}`")
         if downloaded_file_name.endswith((".webp")):
             resize_image(downloaded_file_name)
         try:
             media_urls = upload_file(downloaded_file_name)
         except exceptions.TelegraphException as exc:
-            await catevent.edit(f"**Error : **\n`{str(exc)}`")
+            await catevent.edit(f"**⌔︙حـدث خـطأ مـا ✕ : **\n`{str(exc)}`")
             os.remove(downloaded_file_name)
         else:
             end = datetime.now()
             ms = (end - start).seconds
             os.remove(downloaded_file_name)
             await catevent.edit(
-                f"**link : **[telegraph](https://telegra.ph{media_urls[0]})\
-                    \n**Time Taken : **`{ms} seconds.`",
+                 f" [تليجـراف](https://telegra.ph{media_urls[0]}) **: ☍ الرابـط︙ ⌔** \ 
+                    \n**⌔︙الوقـت المستغـرق ⏱  : ** `{ms} الثوانـي.`",
                 link_preview=True,
             )
     elif input_str in ["text", "t"]:
@@ -118,7 +117,7 @@ async def _(event):
         ms = (end - start).seconds
         cat = f"https://telegra.ph/{response['path']}"
         await catevent.edit(
-            f"**link : ** [telegraph]({cat})\
-                 \n**Time Taken : **`{ms} seconds.`",
+            f"[تليجـراف]({cat}) **: ☍ الرابـط︙ ⌔** \
+                 \n**⌔︙الوقـت المستغـرق ⏱  : ** `{ms} الثوانـي.`",
             link_preview=True,
         )
