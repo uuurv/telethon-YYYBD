@@ -1,4 +1,3 @@
-#    Credts @Mrconfused
 from geopy.geocoders import Nominatim
 from telethon.tl import types
 
@@ -11,19 +10,19 @@ plugin_category = "extra"
 
 
 @iqthon.iq_cmd(
-    pattern="gps ([\s\S]*)",
-    command=("gps", plugin_category),
+    pattern="موقع ([\s\S]*)",
+    command=("موقع", plugin_category),
     info={
-        "header": "To send the map of the given location.",
-        "usage": "{tr}gps <place>",
-        "examples": "{tr}gps Hyderabad",
+        "header": "⌔︙لإرسـال خارطـة الموقـع المعطـىٰ 🗺",
+        "usage": "{tr}⌔︙موقع <المڪـان> 𖠕",
+        "examples": "{tr}⌔︙موقع <المڪـان> 𖠕",
     },
 )
 async def gps(event):
-    "Map of the given location."
+    "⌔︙لإرسـال خارطـة الموقـع المعطـىٰ 🗺"
     reply_to_id = await reply_id(event)
     input_str = event.pattern_match.group(1)
-    catevent = await edit_or_reply(event, "`finding.....`")
+    catevent = await edit_or_reply(event, "** ⌔︙ جاري العثـور على الموقع  … **")
     geolocator = Nominatim(user_agent="catuserbot")
     geoloc = geolocator.geocode(input_str)
     if geoloc:
@@ -32,9 +31,9 @@ async def gps(event):
         await event.client.send_file(
             event.chat_id,
             file=types.InputMediaGeoPoint(types.InputGeoPoint(lat, lon)),
-            caption=f"**Location : **`{input_str}`",
+            caption=f"**⌔︙ الموقـع 𖠕  : **`{input_str}`",
             reply_to=reply_to_id,
         )
         await catevent.delete()
     else:
-        await catevent.edit("`i coudn't find it`")
+        await catevent.edit("⌔︙ عـذراً، لـم أستطـع إيجـاده  ⚠️")
