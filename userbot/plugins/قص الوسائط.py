@@ -56,25 +56,25 @@ async def cult_small_video(
 
 
 @iqthon.iq_cmd(
-    pattern="vtrim(?:\s|$)([\s\S]*)",
-    command=("vtrim", plugin_category),
+    pattern="قص(?:\s|$)([\s\S]*)",
+    command=("قص", plugin_category),
     info={
-        "header": "Trims the saved media with specific given time internval and outputs as video if it is video",
-        "description": "Will trim the saved media with given given time interval.",
-        "note": "if you haven't mentioned time interval and just time then will send screenshot at that location.",
-        "usage": "{tr}vtrim <time interval>",
-        "examples": "{tr}vtrim 00:00 00:10",
+        "header": "⌔︙يقـوم بقـص الوسائـط المحفوظـة بفتـرة زمنـية محـددة ومخـرجات ڪفيديـو إذا ڪـان فيديـو ✁",
+        "description": "⌔︙سيقـوم بقـص الوسائـط المحفوظـة بفتـرة زمنـية محـددة ✁",
+        "note": "⌔︙إذا لم تڪـن قـد ذڪرت الفتـرة الزمنيـة بل الوقـت فقـط، فعندهـا سترسـل لقطـة شاشـة في ذلك الموقـع 💡",
+        "usage": "{tr}قص +الوقـت المحـدد",
+        "examples": "{tr}قص 00:00 00:10",
     },
 )
 async def ff_mpeg_trim_cmd(event):
-    "Trims the saved media with specific given time internval and outputs as video if it is video"
+    "⌔︙سيقـوم بقـص الوسائـط المحفوظـة بفتـرة زمنـية محـددة ✁"
     if not os.path.exists(FF_MPEG_DOWN_LOAD_MEDIA_PATH):
         return await edit_delete(
             event,
-            f"a media file needs to be download, and save to the following path: `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}`",
+            f"**⌔︙يجـب تنزيـل ملـف وسائـط وحفظـه في المسـار التالـي  ⇨  :** `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}`",
         )
     reply_to_id = await reply_id(event)
-    catevent = await edit_or_reply(event, "`Triming the media......`")
+    catevent = await edit_or_reply(event, "**⌔︙جـاري قـص الوسائـط ✁**")
     current_message_text = event.raw_text
     cmt = current_message_text.split(" ")
     start = datetime.now()
@@ -89,7 +89,7 @@ async def ff_mpeg_trim_cmd(event):
         )
         if o is None:
             return await edit_delete(
-                catevent, f"**Error : **`Can't complete the process`"
+                catevent, f"**⌔︙حـدث خـطأ : لايمڪن إتمـام العمليـة ✕ **"
             )
         try:
             c_time = time.time()
@@ -107,14 +107,14 @@ async def ff_mpeg_trim_cmd(event):
             )
             os.remove(o)
         except Exception as e:
-            return await edit_delete(catevent, f"**Error : **`{e}`")
+            return await edit_delete(catevent, f"**⌔︙حـدث خـطأ ✕ : **`{e}`")
     elif len(cmt) == 2:
         # output should be image
         cmd, start_time = cmt
         o = await _cattools.take_screen_shot(FF_MPEG_DOWN_LOAD_MEDIA_PATH, start_time)
         if o is None:
             return await edit_delete(
-                catevent, f"**Error : **`Can't complete the process`"
+                catevent, f"**⌔︙حـدث خـطأ : لايمڪن إتمـام العمليـة ✕ **"
             )
         try:
             c_time = time.time()
@@ -132,75 +132,11 @@ async def ff_mpeg_trim_cmd(event):
             )
             os.remove(o)
         except Exception as e:
-            return await edit_delete(catevent, f"**Error : **`{e}`")
+            return await edit_delete(catevent, f"**⌔︙ حـدث خـطأ  ✕  : **`{e}`")
     else:
         await edit_delete(catevent, "RTFM")
         return
     end = datetime.now()
     ms = (end - start).seconds
-    await edit_delete(catevent, f"`Completed Process in {ms} seconds`", 3)
-
-
-@iqthon.iq_cmd(
-    pattern="atrim(?:\s|$)([\s\S]*)",
-    command=("atrim", plugin_category),
-    info={
-        "header": "Trims the saved media with specific given time internval and outputs as audio",
-        "description": "Will trim the saved media with given given time interval. and output only audio part",
-        "usage": "{tr}atrim <time interval>",
-        "examples": "{tr}atrim 00:00 00:10",
-    },
-)
-async def ff_mpeg_trim_cmd(event):
-    "Trims the saved media with specific given time internval and outputs as audio"
-    if not os.path.exists(FF_MPEG_DOWN_LOAD_MEDIA_PATH):
-        return await edit_delete(
-            event,
-            f"a media file needs to be download, and save to the following path: `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}`",
-        )
-    reply_to_id = await reply_id(event)
-    catevent = await edit_or_reply(event, "`Triming the media...........`")
-    current_message_text = event.raw_text
-    cmt = current_message_text.split(" ")
-    start = datetime.now()
-    out_put_file_name = os.path.join(
-        Config.TMP_DOWNLOAD_DIRECTORY, f"{str(round(time.time()))}.mp3"
-    )
-    if len(cmt) == 3:
-        # output should be audio
-        cmd, start_time, end_time = cmt
-        o = await cult_small_video(
-            FF_MPEG_DOWN_LOAD_MEDIA_PATH,
-            Config.TMP_DOWNLOAD_DIRECTORY,
-            start_time,
-            end_time,
-            out_put_file_name,
-        )
-        if o is None:
-            return await edit_delete(
-                catevent, f"**Error : **`Can't complete the process`"
-            )
-        try:
-            c_time = time.time()
-            await event.client.send_file(
-                event.chat_id,
-                o,
-                caption=" ".join(cmt[1:]),
-                force_document=False,
-                supports_streaming=True,
-                allow_cache=False,
-                reply_to=reply_to_id,
-                progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, catevent, c_time, "trying to upload")
-                ),
-            )
-            os.remove(o)
-        except Exception as e:
-            return await edit_delete(catevent, f"**Error : **`{e}`")
-    else:
-        await edit_delete(catevent, "RTFM")
-        return
-    end = datetime.now()
-    ms = (end - start).seconds
-    await edit_delete(catevent, f"`Completed Process in {ms} seconds`", 3)
+    await edit_delete(catevent, f"**⌔︙ تـمّ إتمـام العمليـة في {ms} ثانيـة ⏱**", 3)
 
