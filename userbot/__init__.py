@@ -14,11 +14,11 @@ __copyright__ = "telethon AR (C) 2020 - 2021  " + __author__
 
 iqthon.version = __version__
 iqthon.tgbot.version = __version__
-LOGS = logging.getLogger("CatUserbot")
+LOGS = logging.getLogger("IQTHON")
 bot = iqthon
 
 StartTime = time.time()
-catversion = "3.0.3"
+catversion = "1.0.0"
 
 if Config.UPSTREAM_REPO == "Telethon-Araab":
     UPSTREAM_REPO_URL = "https://github.com/telethontesthelp/Telethon-arabb"
