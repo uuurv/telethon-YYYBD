@@ -1,5 +1,3 @@
-# batmanpfp and thorpfp by @Nihinivi
-
 import asyncio
 import base64
 import os
@@ -48,7 +46,7 @@ autopic_path = os.path.join(os.getcwd(), "userbot", "original_pic.png")
 digitalpic_path = os.path.join(os.getcwd(), "userbot", "digital_pic.png")
 autophoto_path = os.path.join(os.getcwd(), "userbot", "photo_pfp.png")
 
-digitalpfp = Config.DIGITAL_PIC or "https://telegra.ph/file/aeaebe33b1f3988a0b690.jpg"
+digitalpfp = Config.DIGITAL_PIC or "https://telegra.ph/file/1bf9c1b0a084c258b1f97.jpg"
 
 COLLECTION_STRINGS = {
     "batmanpfp_strings": [
@@ -68,15 +66,15 @@ COLLECTION_STRINGS = {
 
 
 async def autopicloop():
-    AUTOPICSTART = gvarstatus("autopic") == "true"
+    AUTOPICSTART = gvarstatus("صوره وقتيه") == "true"
     if AUTOPICSTART and Config.DEFAULT_PIC is None:
         if BOTLOG:
             return await iqthon.send_message(
                 BOTLOG_CHATID,
-                "**Error**\n`For functing of autopic you need to set DEFAULT_PIC var in Heroku vars`",
+                "**⌔︙حـدث خـطأ، مـن أجـل وظيفـة الصـورة التلقائيـة، يلزمـك تعييـن ڤـار DEFAULT_PIC في ڤـارات موقـع  هيروڪـو 💡**",
             )
         return
-    if gvarstatus("autopic") is not None:
+    if gvarstatus("صوره وقتيه") is not None:
         try:
             counter = int(gvarstatus("autopic_counter"))
         except Exception as e:
@@ -104,7 +102,7 @@ async def autopicloop():
             await asyncio.sleep(Config.CHANGE_TIME)
         except BaseException:
             return
-        AUTOPICSTART = gvarstatus("autopic") == "true"
+        AUTOPICSTART = gvarstatus("صوره وقتيه") == "true"
 
 
 async def custompfploop():
@@ -112,7 +110,7 @@ async def custompfploop():
     i = 0
     while CUSTOMPICSTART:
         if len(get_collection_list("CUSTOM_PFP_LINKS")) == 0:
-            LOGS.error("No custom pfp images to set.")
+            LOGS.error("**⌔︙لا توجـد صـور ملـف شخصـي للتعييـن !**")
             return
         pic = random.choice(list(get_collection_list("CUSTOM_PFP_LINKS")))
         urllib.request.urlretrieve(pic, "donottouch.jpg")
@@ -134,7 +132,7 @@ async def custompfploop():
 
 
 async def digitalpicloop():
-    DIGITALPICSTART = gvarstatus("digitalpic") == "true"
+    DIGITALPICSTART = gvarstatus("تجديد الصوره") == "true"
     i = 0
     while DIGITALPICSTART:
         if not os.path.exists(digitalpic_path):
@@ -144,7 +142,7 @@ async def digitalpicloop():
                 pass
         shutil.copy(digitalpic_path, autophoto_path)
         Image.open(autophoto_path)
-        current_time = datetime.now().strftime("%H:%M")
+        current_time = datetime.now().strftime("%I:%M")
         img = Image.open(autophoto_path)
         drawn_text = ImageDraw.Draw(img)
         cat = str(base64.b64decode("dXNlcmJvdC9oZWxwZXJzL3N0eWxlcy9kaWdpdGFsLnR0Zg=="))[
@@ -167,16 +165,16 @@ async def digitalpicloop():
             await asyncio.sleep(60)
         except BaseException:
             return
-        DIGITALPICSTART = gvarstatus("digitalpic") == "true"
+        DIGITALPICSTART = gvarstatus("تجديد الصوره") == "true"
 
 
 async def bloom_pfploop():
-    BLOOMSTART = gvarstatus("bloom") == "true"
+    BLOOMSTART = gvarstatus("تجديد الصوره الملونه") == "true"
     if BLOOMSTART and Config.DEFAULT_PIC is None:
         if BOTLOG:
             return await iqthon.send_message(
                 BOTLOG_CHATID,
-                "**Error**\n`For functing of bloom you need to set DEFAULT_PIC var in Heroku vars`",
+                "**⌔︙حـدث خـطأ، مـن أجـل وظيفـة الصـورة التلقائيـة، يلزمـك تعييـن ڤـار DEFAULT_PIC في ڤـارات موقـع  هيروڪـو 💡**",
             )
         return
     while BLOOMSTART:
@@ -196,7 +194,7 @@ async def bloom_pfploop():
         image = Image.open(autophoto_path)
         image.paste((R, G, B), [0, 0, image.size[0], image.size[1]])
         image.save(autophoto_path)
-        current_time = datetime.now().strftime("\n Time: %H:%M:%S \n \n Date: %d/%m/%y")
+        current_time = datetime.now().strftime("\n Time: %I:%M:%S \n \n Date: %d/%m/%y")
         img = Image.open(autophoto_path)
         drawn_text = ImageDraw.Draw(img)
         fnt = ImageFont.truetype(FONT_FILE_TO_USE, 60)
@@ -211,15 +209,15 @@ async def bloom_pfploop():
             await asyncio.sleep(Config.CHANGE_TIME)
         except BaseException:
             return
-        BLOOMSTART = gvarstatus("bloom") == "true"
+        BLOOMSTART = gvarstatus("تجديد الصوره الملونه") == "true"
 
 
 async def autoname_loop():
-    AUTONAMESTART = gvarstatus("autoname") == "true"
+    AUTONAMESTART = gvarstatus("اسم وقتي") == "true"
     while AUTONAMESTART:
         DM = time.strftime("%d-%m-%y")
-        HM = time.strftime("%H:%M")
-        name = f"⌚️ {HM}||›  {DEFAULTUSER} ‹||📅 {DM}"
+        HM = time.strftime("%I:%M")
+        name = f"❖ {HM} - "
         LOGS.info(name)
         try:
             await iqthon(functions.account.UpdateProfileRequest(first_name=name))
@@ -227,15 +225,15 @@ async def autoname_loop():
             LOGS.warning(str(ex))
             await asyncio.sleep(ex.seconds)
         await asyncio.sleep(Config.CHANGE_TIME)
-        AUTONAMESTART = gvarstatus("autoname") == "true"
+        AUTONAMESTART = gvarstatus("اسم وقتي") == "true"
 
 
 async def autobio_loop():
-    AUTOBIOSTART = gvarstatus("autobio") == "true"
+    AUTOBIOSTART = gvarstatus("نبذه وقتيه") == "true"
     while AUTOBIOSTART:
         DMY = time.strftime("%d.%m.%Y")
-        HM = time.strftime("%H:%M")
-        bio = f"📅 {DMY} | {DEFAULTUSERBIO} | ⌚️ {HM}"
+        HM = time.strftime("%I:%M")
+        bio = f"❖ {DEFAULTUSERBIO}  - {DMY}"
         LOGS.info(bio)
         try:
             await iqthon(functions.account.UpdateProfileRequest(about=bio))
@@ -243,7 +241,7 @@ async def autobio_loop():
             LOGS.warning(str(ex))
             await asyncio.sleep(ex.seconds)
         await asyncio.sleep(Config.CHANGE_TIME)
-        AUTOBIOSTART = gvarstatus("autobio") == "true"
+        AUTOBIOSTART = gvarstatus("نبذه وقتيه") == "true"
 
 
 async def animeprofilepic(collection_images):
@@ -288,70 +286,65 @@ async def autopfp_start():
 
 
 @iqthon.iq_cmd(
-    pattern="batmanpfp$",
-    command=("batmanpfp", plugin_category),
+    pattern="صوره باتمان$",
+    command=("صوره باتمان", plugin_category),
     info={
-        "header": "Changes profile pic with random batman pics every 1 minute",
-        "description": "Changes your profile pic every 1 minute with random batman pics.\
-        If you like to change the time then set CHANGE_TIME var in Heroku with time (in seconds) between each change of profilepic.",
-        "note": "To stop this do '.end batmanpfp'",
-        "usage": "{tr}batmanpfp",
+        "header": "⌔︙تغييـر صـورة الملـف الشخصـي مع صـور ثـور عشوائيـة ڪل دقيقـة",
+        "description": "⌔︙تغييـر صـورة الملـف الشخصـي مع صـور ثـور عشوائيـة ڪل دقيقـة، إذا ڪنت تريد تغيير الوقت، عندها يتوجب عليك تعيين ڤـار CHANGE_TIME في موقـع هيرڪـو والوقـت (بالثوانـي) بيـن ڪل تغييـر للصـورة الشخصيـة 💡",
+        "note": "T⌔︙لإيقـاف هـذا، قـم بإرسـال الأمـر  ⩥ : ايقاف صوره باتمان",
+        "usage": "{tr}صوره باتمان",
     },
 )
 async def _(event):
-    "To set random batman profile pics"
+    "⌔︙لتعييـن صـور باتمـان عشوائيـة 🦇"
     if gvarstatus("autopfp_strings") is not None:
         pfp_string = gvarstatus("autopfp_strings")[:-8]
-        return await edit_delete(event, f"`{pfp_string} is already running.`")
+        return await edit_delete(event, f"⌔︙ {pfp_string} ** إنّـه يعمـل بالفعـل !**")
     addgvar("autopfp_strings", "batmanpfp_strings")
-    await event.edit("`Starting batman Profile Pic.`")
+    await event.edit("**⌔︙جـاري بـدأ صـورة باتمـان ✓**")
     await autopfp_start()
 
 
 @iqthon.iq_cmd(
-    pattern="thorpfp$",
-    command=("thorpfp", plugin_category),
+    pattern="صوره ثور$",
+    command=("صوره ثور", plugin_category),
     info={
-        "header": "Changes profile pic with random thor pics every 1 minute",
-        "description": "Changes your profile pic every 1 minute with random thor pics.\
-        If you like to change the time then set CHANGE_TIME var in Heroku with time(in seconds) between each change of profilepic.",
-        "note": "To stop this do '.end thorpfp'",
-        "usage": "{tr}thorpfp",
+        "header": "⌔︙تغييـر صـورة الملـف الشخصـي ڪل دقيقـة مع صـورة مخصصـة مع الوقـت 𒀭",
+        "description": "⌔︙إذا ڪنت تريد تغيير الوقـت المخصص لكل صـورة جديـدة، عندها يتوجـب عليك تعييـن ڤـار CHANGE_TIME في موقـع هيرڪـو والوقـت (بالثوانـي) بيـن ڪل تغييـر للصـورة الشخصيـة 💡",
+        "note": "⌔︙لإيقـاف هـذا، قـم بإرسـال الأمـر  ⩥ : ايقاف صوره ثور",
+        "usage": "{tr}صوره ثور",
     },
 )
 async def _(event):
-    "To set random thor profile pics"
+    "⌔︙لتعييـن صـور ثـور عشوائيـة"
     if gvarstatus("autopfp_strings") is not None:
         pfp_string = gvarstatus("autopfp_strings")[:-8]
-        return await edit_delete(event, f"`{pfp_string} is already running.`")
+        return await edit_delete(event, f"⌔︙ {pfp_string} ** إنّـه يعمـل بالفعـل !** ")
     addgvar("autopfp_strings", "thorpfp_strings")
-    await event.edit("`Starting thor Profile Pic.`")
+    await event.edit("**⌔︙جـاري بـدأ صـورة ثـور ✓**")
     await autopfp_start()
 
 
 @iqthon.iq_cmd(
-    pattern="autopic ?([\s\S]*)",
-    command=("autopic", plugin_category),
+    pattern="صوره وقتيه ?([\s\S]*)",
+    command=("صوره وقتيه", plugin_category),
     info={
-        "header": "Changes profile pic every 1 minute with the custom pic with time",
-        "description": "If you like to change the time interval for every new pic change \
-            then set CHANGE_TIME var in Heroku with time(in seconds) between each change of profilepic.",
-        "options": "you can give integer input with cmd like 40,55,75 ..etc.\
-             So that your profile pic will rotate with that specific angle",
-        "note": "For functioning of this cmd you need to set DEFAULT_PIC var in heroku. \
-            To stop this do '.end autopic'",
+        "header": "⌔︙تغييـر صـورة الملـف الشخصـي ڪل دقيقـة مع صـورة مخصصـة مع الوقـت 𒀭",
+        "description": "⌔︙إذا ڪنت تريد تغيير الوقـت المخصص لكل صـورة جديـدة، عندها يتوجـب عليك تعييـن ڤـار CHANGE_TIME في موقـع هيرڪـو والوقـت (بالثوانـي) بيـن ڪل تغييـر للصـورة الشخصيـة 💡",
+        "options": "⌔︙يمڪنك إعطـاء إدخـال عدد صحيح مع الأمـر مثل 40،55،75 .. إلخ بحيـث يتم تدويـر صورتـك الشخصيـة بتـلك الزاويـة المحـدده ⦩",
+        "note": "⌔︙لتشغيـل هـذا الأمـر، تحتـاج إلى ضبـط ڤـار DEFAULT_PIC في موقـع هيروڪـو،لإيقـاف هـذا، قـم بإرسـال الأمـر  ⩥ : end autopic",
         "usage": [
-            "{tr}autopic",
-            "{tr}autopic <any integer>",
+            "{tr}صوره وقتيه",
+            "{tr}صوره وقتيه + أيّ عـدد صحيـح",
         ],
     },
 )
 async def _(event):
-    "To set time on your profile pic"
+    "⌔︙لتعييـن وقـت على صـورة ملفـك الشخصـي ⏱"
     if Config.DEFAULT_PIC is None:
         return await edit_delete(
             event,
-            "**Error**\nFor functing of autopic you need to set DEFAULT_PIC var in Heroku vars",
+            "**⌔︙حـدث خـطأ، مـن أجـل وظيفـة الصـورة التلقائيـة، يلزمـك تعييـن ڤـار DEFAULT_PIC في ڤـارات موقـع  هيروڪـو 💡**",
             parse_mode=_format.parse_pre,
         )
     downloader = SmartDL(Config.DEFAULT_PIC, autopic_path, progress_bar=False)
@@ -367,66 +360,63 @@ async def _(event):
     elif gvarstatus("autopic_counter") is None:
         addgvar("autopic_counter", 30)
     if gvarstatus("autopic") is not None and gvarstatus("autopic") == "true":
-        return await edit_delete(event, f"`Autopic is already enabled`")
-    addgvar("autopic", True)
+        return await edit_delete(event, f"**⌔︙الصـورة الوقـتيـه مفعّلـة بالفعـل !**")
+    addgvar("صوره وقتيه", True)
     if input_str:
         addgvar("autopic_counter", input_str)
-    await edit_delete(event, f"`Autopic has been started by my Master`")
+    await edit_delete(event, f"**⌔︙ تـمّ بـدأ الصـورة الوقـتيـه بواسطـة المـالك ✓**")
     await autopicloop()
 
 
 @iqthon.iq_cmd(
-    pattern="digitalpfp$",
-    command=("digitalpfp", plugin_category),
+    pattern="تجديد الصوره$",
+    command=("تجديد الصوره", plugin_category),
     info={
-        "header": "Updates your profile pic every 1 minute with time on it",
-        "description": "Deletes old profile pic and Update profile pic with new image with time on it.\
-             You can change this image by setting DIGITAL_PIC var in heroku with telegraph image link",
-        "note": "To stop this do '.end digitalpfp'",
-        "usage": "{tr}digitalpfp",
+        "header": "⌔︙يحـدّث صـورة ملفـك الشخصـي ڪل دقيقـة مـع وضـع وقـت عليـها 💡",
+        "description": "⌔︙يحـذف صـورة الملـف الشخصـي القديمـة وقـم بتحـديث صـورة الملـف الشخصـي مـع صـورة جديـدة مـع مـرور الوقـت، يمڪنـك تغييـر هـذه الصـورة عن طريـق ضبـط ڤـار DIGITAL_PIC في موقـع هيروڪـو بإستخـدام رابـط صـورة التلڪـراف 💡",
+        "note": "⌔︙لإيقـاف هـذا، قـم بإرسـال الأمـر  ⩥ :  '.ايقاف تجديد الصوره'",
+        "usage": "{tr}تجديد الصوره",
     },
 )
 async def _(event):
-    "To set random colour pic with time to profile pic"
+    "⌔︙لتعييـن لـون صـورة عشوائـي مع وضـع وقـت لصـورة الملـف الشخصـي 💡"
     downloader = SmartDL(digitalpfp, digitalpic_path, progress_bar=False)
     downloader.start(blocking=False)
     while not downloader.isFinished():
         pass
-    if gvarstatus("digitalpic") is not None and gvarstatus("digitalpic") == "true":
-        return await edit_delete(event, f"`Digitalpic is already enabled`")
-    addgvar("digitalpic", True)
-    await edit_delete(event, f"`digitalpfp has been started by my Master`")
+    if gvarstatus("تجديد الصوره") is not None and gvarstatus("تجديد الصوره") == "true":
+        return await edit_delete(event, f"**⌔︙تجديد الصوره مفعّلـة بالفعـل !**")
+    addgvar("تجديد الصوره", True)
+    await edit_delete(event, f"**⌔︙تـمّ بـدأ الصـورة الديجيتـال بواسطـة المستخـدم ✓**")
     await digitalpicloop()
 
 
 @iqthon.iq_cmd(
-    pattern="bloom$",
-    command=("bloom", plugin_category),
+    pattern="تجديد الصوره الملونه$",
+    command=("تجديد الصوره الملونه", plugin_category),
     info={
-        "header": "Changes profile pic every 1 minute with the random colour pic with time on it",
-        "description": "If you like to change the time interval for every new pic chnage \
-            then set CHANGE_TIME var in Heroku with time(in seconds) between each change of profilepic.",
-        "note": "For functioning of this cmd you need to set DEFAULT_PIC var in heroku. \
-            To stop this do '.end bloom'",
-        "usage": "{tr}bloom",
+        "header": "⌔︙تغييـر صـورة الملـف الشخصـي ڪل دقيقـة مـع لـون صـورة عشوائـي مع وضـع وقـت على الصـورة ❖",
+        "description": "⌔︙إذا ڪنت تريد تغيير الوقـت المخصص لكل صـورة جديـدة، عندها يتوجـب عليك تعييـن ڤـار CHANGE_TIME في موقـع هيرڪـو والوقـت (بالثوانـي) بيـن ڪل تغييـر للصـورة الشخصيـة 💡",
+        "note": "⌔︙لتشغيـل هـذا الأمـر، تحتـاج إلى ضبـط ڤـار DEFAULT_PIC في موقـع هيروڪـو،لإيقـاف هـذا، قـم بإرسـال الأمـر  ⩥ : .ايقاف تجديد الصوره الملونه",
+        "usage": "{tr}تجديد الصوره الملونه",
     },
 )
 async def _(event):
-    "To set random colour pic with time to profile pic"
+    "⌔︙لتعييـن لـون صـورة عشوائـي مع وضـع وقـت لصـورة الملـف الشخصـي 💡"
     if Config.DEFAULT_PIC is None:
         return await edit_delete(
             event,
-            "**Error**\nFor functing of bloom you need to set DEFAULT_PIC var in Heroku vars",
+            "**⌔︙حـدث خـطأ، مـن أجـل هـذه الوظيفـة ، يلزمـك تعييـن ڤـار DEFAULT_PIC في ڤـارات موقـع  هيروڪـو 💡**",
             parse_mode=_format.parse_pre,
         )
     downloader = SmartDL(Config.DEFAULT_PIC, autopic_path, progress_bar=True)
     downloader.start(blocking=False)
     while not downloader.isFinished():
         pass
-    if gvarstatus("bloom") is not None and gvarstatus("bloom") == "true":
-        return await edit_delete(event, f"`Bloom is already enabled`")
-    addgvar("bloom", True)
-    await edit_delete(event, f"`Bloom has been started by my Master`")
+    if gvarstatus("تجديد الصوره الملونه") is not None and gvarstatus("تجديد الصوره الملونه") == "true":
+        return await edit_delete(event, f"**⌔︙تجديد الصوره الملونه مفعّلـة بالفعـل !**")
+    addgvar("تجديد الصوره الملونه", True)
+    await edit_delete(event, f"**⌔︙تـمّ بـدأ تجديد الصوره الملونه بواسطـة المستخـدم ✓**")
     await bloom_pfploop()
 
 
@@ -439,7 +429,7 @@ async def _(event):
         "flags": {
             "a": "To add links for custom pfp",
             "r": "To remove links for custom pfp",
-            "l": "To get links of custom pfp",
+            "l": "To remove links for custom pfp",
             "s": "To stop custom pfp",
         },
         "usage": [
@@ -517,52 +507,52 @@ async def useless(event):  # sourcery no-metrics
 
 
 @iqthon.iq_cmd(
-    pattern="autoname$",
-    command=("autoname", plugin_category),
+    pattern="اسم وقتي$",
+    command=("اسم وقتي", plugin_category),
     info={
-        "header": "Changes your name with time",
-        "description": "Updates your profile name along with time. Set AUTONAME var in heroku with your profile name,",
-        "note": "To stop this do '.end autoname'",
-        "usage": "{tr}autoname",
+        "header": "⌔︙تغييـر إسمـك مـع الوقـت 🜲",
+        "description": "⌔︙يحـدّث إسم ملفـك الشخصـي مع الوقـت، قم بتعييـن ڤـار AUTONAME  في موقـع هيرڪـو بإسـم ملفـك الشخصـي 💡",
+        "note": "⌔︙لإيقـاف هـذا، قـم بإرسـال الأمـر  ⩥ :  '.ايقاف اسم وقتي'",
+        "usage": "{tr}اسم وقتي",
     },
 )
 async def _(event):
-    "To set your display name along with time"
-    if gvarstatus("autoname") is not None and gvarstatus("autoname") == "true":
-        return await edit_delete(event, f"`Autoname is already enabled`")
-    addgvar("autoname", True)
-    await edit_delete(event, "`AutoName has been started by my Master `")
+    "⌔︙لتعييـن إسـمك مع الوقـت 🜲"
+    if gvarstatus("اسم وقتي") is not None and gvarstatus("اسم وقتي") == "true":
+        return await edit_delete(event, f"**⌔︙الإسـم الوقتـي قيـد التشغيـل بالفعـل !**")
+    addgvar("اسم وقتي", True)
+    await edit_delete(event, "**⌔︙تـمّ بـدأ الإسـم الوقتـي بواسطـة المستخـدم ✓**")
     await autoname_loop()
 
 
 @iqthon.iq_cmd(
-    pattern="autobio$",
-    command=("autobio", plugin_category),
+    pattern="نبذه وقتيه$",
+    command=("نبذه وقتيه", plugin_category),
     info={
-        "header": "Changes your bio with time",
-        "description": "Updates your profile bio along with time. Set DEFAULT_BIO var in heroku with your fav bio,",
-        "note": "To stop this do '.end autobio'",
-        "usage": "{tr}autobio",
+        "header": "⌔︙تغييـر وصف مـع الوقـت 🜾",
+        "description": "⌔︙يحـدّث إسم البايـو مع الوقـت، قم بتعييـن ڤـار DEFAULT_BIO  في موقـع هيرڪـو بإسـم ملفـك الشخصـي 💡",
+        "note": "⌔︙لإيقـاف هـذا، قـم بإرسـال الأمـر  ⩥ : .ايقاف بايو وقتي",
+        "usage": "{tr}وصف وقتيه",
     },
 )
 async def _(event):
-    "To update your bio along with time"
-    if gvarstatus("autobio") is not None and gvarstatus("autobio") == "true":
-        return await edit_delete(event, f"`Autobio is already enabled`")
-    addgvar("autobio", True)
-    await edit_delete(event, "`Autobio has been started by my Master `")
+    "⌔︙يحـدّث البايـو مع الوقـت 💡"
+    if gvarstatus("نبذه وقتيه") is not None and gvarstatus("نبذه وقتيه") == "true":
+        return await edit_delete(event, f"**⌔︙البايـو الوقتـي قيـد التشغيـل بالفعـل !**")
+    addgvar("نبذه وقتيه", True)
+    await edit_delete(event, "**⌔︙تـمّ بـدأ البايـو الوقتـي بواسطـة المستخـدم ✓**")
     await autobio_loop()
 
 
 @iqthon.iq_cmd(
-    pattern="end ([\s\S]*)",
-    command=("end", plugin_category),
+    pattern="ايقاف ([\s\S]*)",
+    command=("ايقاف", plugin_category),
     info={
-        "header": "To stop the functions of autoprofile",
-        "description": "If you want to stop autoprofile functions then use this cmd.",
+        "header": "⌔︙لإيقـاف أمـر التغييـر التلقائـي للبروفايـل ✦",
+        "description": "إذا ڪنت تريـد إيقـاف أمـر التغييـر التلقائـي للبروفايـل، فإستخـدم هـذا الأمـر 💡",
         "options": {
-            "autopic": "To stop autopic",
-            "digitalpfp": "To stop difitalpfp",
+            "autopic": "⌔︙لإيقـاف الصـورة التلقائيـة ✦",
+            "digitalpfp": "⌔︙لإيقـاف أمـر التغييـر التلقائـي للبروفايـل ✦",
             "bloom": "To stop bloom",
             "autoname": "To stop autoname",
             "autobio": "To stop autobio",
@@ -577,31 +567,31 @@ async def _(event):
 async def _(event):  # sourcery no-metrics
     "To stop the functions of autoprofile plugin"
     input_str = event.pattern_match.group(1)
-    if input_str == "thorpfp" and gvarstatus("autopfp_strings") is not None:
+    if input_str == "صوره ثور" and gvarstatus("autopfp_strings") is not None:
         pfp_string = gvarstatus("autopfp_strings")[:-8]
-        if pfp_string != "thorpfp":
-            return await edit_delete(event, f"`thorpfp is not started`")
+        if pfp_string != "صوره ثور":
+            return await edit_delete(event, f"**⌔︙لم يتـم بـدأ صـورة ثـور !**")
         await event.client(
             functions.photos.DeletePhotosRequest(
                 await event.client.get_profile_photos("me", limit=1)
             )
         )
         delgvar("autopfp_strings")
-        return await edit_delete(event, "`thorpfp has been stopped now`")
-    if input_str == "batmanpfp" and gvarstatus("autopfp_strings") is not None:
+        return await edit_delete(event, "**⌔︙تم إيقـاف صورة ثـور الآن ✓**")
+    if input_str == "صوره باتمان" and gvarstatus("autopfp_strings") is not None:
         pfp_string = gvarstatus("autopfp_strings")[:-8]
-        if pfp_string != "batmanpfp":
-            return await edit_delete(event, f"`batmanpfp is not started`")
+        if pfp_string != "صوره باتمان":
+            return await edit_delete(event, f"**⌔︙لم يتـم بـدأ صـورة باتمـان !**")
         await event.client(
             functions.photos.DeletePhotosRequest(
                 await event.client.get_profile_photos("me", limit=1)
             )
         )
         delgvar("autopfp_strings")
-        return await edit_delete(event, "`batmanpfp has been stopped now`")
-    if input_str == "autopic":
-        if gvarstatus("autopic") is not None and gvarstatus("autopic") == "true":
-            delgvar("autopic")
+        return await edit_delete(event, "**⌔︙تم إيقـاف صورة باتمـان الآن ✓**")
+    if input_str == "صوره وقتيه":
+        if gvarstatus("صوره وقتيه") is not None and gvarstatus("صوره وقتيه") == "true":
+            delgvar("صوره وقتيه")
             if os.path.exists(autopic_path):
                 file = await event.client.upload_file(autopic_path)
                 try:
@@ -609,21 +599,21 @@ async def _(event):  # sourcery no-metrics
                     os.remove(autopic_path)
                 except BaseException:
                     return
-            return await edit_delete(event, "`Autopic has been stopped now`")
-        return await edit_delete(event, "`Autopic haven't enabled`")
-    if input_str == "digitalpfp":
-        if gvarstatus("digitalpic") is not None and gvarstatus("digitalpic") == "true":
-            delgvar("digitalpic")
+            return await edit_delete(event, "**⌔︙تم إيقـاف الصـورة التلقائيـة الآن ✓**")
+        return await edit_delete(event, "**⌔︙لم يتـم تفعيـل الصـورة التلقائيـة ✕**")
+    if input_str == "تجديد الصوره":
+        if gvarstatus("تجديد الصوره") is not None and gvarstatus("تجديد الصوره") == "true":
+            delgvar("تجديد الصوره")
             await event.client(
                 functions.photos.DeletePhotosRequest(
                     await event.client.get_profile_photos("me", limit=1)
                 )
             )
-            return await edit_delete(event, "`Digitalpfp has been stopped now`")
-        return await edit_delete(event, "`Digitalpfp haven't enabled`")
-    if input_str == "bloom":
-        if gvarstatus("bloom") is not None and gvarstatus("bloom") == "true":
-            delgvar("bloom")
+            return await edit_delete(event, "**⌔︙تم إيقـاف  تجديد الصوره الآن ✓**")
+        return await edit_delete(event, "**⌔︙لم يتـم تفعيـل تجديد الصوره ✕**")
+    if input_str == "تجديد الصوره الملونه":
+        if gvarstatus("تجديد الصوره الملونه") is not None and gvarstatus("تجديد الصوره الملونه") == "true":
+            delgvar("تجديد الصوره الملونه")
             if os.path.exists(autopic_path):
                 file = await event.client.upload_file(autopic_path)
                 try:
@@ -631,43 +621,43 @@ async def _(event):  # sourcery no-metrics
                     os.remove(autopic_path)
                 except BaseException:
                     return
-            return await edit_delete(event, "`Bloom has been stopped now`")
-        return await edit_delete(event, "`Bloom haven't enabled`")
-    if input_str == "autoname":
-        if gvarstatus("autoname") is not None and gvarstatus("autoname") == "true":
-            delgvar("autoname")
+            return await edit_delete(event, "**⌔︙تم إيقـاف بلـوم الآن ✓**")
+        return await edit_delete(event, "**⌔︙لم يتـم تفعيـل بلـوم ✕**")
+    if input_str == "اسم وقتي":
+        if gvarstatus("اسم وقتي") is not None and gvarstatus("اسم وقتي") == "true":
+            delgvar("اسم وقتي")
             await event.client(
                 functions.account.UpdateProfileRequest(first_name=DEFAULTUSER)
             )
-            return await edit_delete(event, "`Autoname has been stopped now`")
-        return await edit_delete(event, "`Autoname haven't enabled`")
-    if input_str == "autobio":
-        if gvarstatus("autobio") is not None and gvarstatus("autobio") == "true":
-            delgvar("autobio")
+            return await edit_delete(event, "**⌔︙تم إيقـاف الإسـم الوقتـي الآن ✓**")
+        return await edit_delete(event, "**⌔︙لم يتـم تفعيـل الإسـم الوقتـي ✕**")
+    if input_str == "نبذه وقتيه":
+        if gvarstatus("نبذه وقتيه") is not None and gvarstatus("نبذه وقتيه") == "true":
+            delgvar("نبذه وقتيه")
             await event.client(
                 functions.account.UpdateProfileRequest(about=DEFAULTUSERBIO)
             )
-            return await edit_delete(event, "`Autobio has been stopped now`")
-        return await edit_delete(event, "`Autobio haven't enabled`")
+            return await edit_delete(event, "**⌔︙تم إيقـاف البايـو التلقائـي الآن ✓**")
+        return await edit_delete(event, "**⌔︙لم يتـم تفعيـل البايـو التلقائـي ✕**")
     if input_str == "spam":
         if gvarstatus("spamwork") is not None and gvarstatus("spamwork") == "true":
             delgvar("spamwork")
-            return await edit_delete(event, "`Spam cmd has been stopped now`")
-        return await edit_delete(event, "`You haven't started spam`")
+            return await edit_delete(event, "**⌔︙تم إيقـاف تڪـرار الأمـر الآن ✓**")
+        return await edit_delete(event, "**⌔︙لم تقـم بتفعيـل التكـرار !**")
     END_CMDS = [
-        "autopic",
-        "digitalpfp",
-        "bloom",
-        "autoname",
-        "autobio",
-        "thorpfp",
-        "batmanpfp",
+        "صوره وقتيه",
+        "تجديد الصوره",
+        "تجديد الصوره الملونه",
+        "اسم وقتي",
+        "بايو وقتي",
+        "صوره ثور",
+        "صوره باتمان",
         "spam",
     ]
     if input_str not in END_CMDS:
         await edit_delete(
             event,
-            f"{input_str} is invalid end command.Mention clearly what should i end.",
+            f"⌔︙ {input_str} أمـر الإنهـاء غيـر صالـح، اذڪـر بوضـوح ما يجـب أن أنهـي !",
             parse_mode=_format.parse_pre,
         )
 
