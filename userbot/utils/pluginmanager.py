@@ -20,7 +20,7 @@ def load_module(shortname, plugin_path=None):
     if shortname.startswith("__"):
         pass
     elif shortname.endswith("_"):
-        path = Path(f"userbot/plugins/{shortname}.py")
+        path = Path(f"⌔︙ ملف تليثون العرب : {shortname}.py")
         checkplugins(path)
         name = "userbot.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
@@ -29,11 +29,11 @@ def load_module(shortname, plugin_path=None):
         LOGS.info("⌔︙ تم بنجاح تحميل ملف " + shortname)
     else:
         if plugin_path is None:
-            path = Path(f"userbot/plugins/{shortname}.py")
-            name = f"userbot.plugins.{shortname}"
+            path = Path(f"⌔︙ ملف تليثون العرب : {shortname}.py")
+            name = f"⌔︙ ملف تليثون العرب : {shortname}"
         else:
-            path = Path((f"{plugin_path}/{shortname}.py"))
-            name = f"{plugin_path}/{shortname}".replace("/", ".")
+            path = Path((f"⌔︙ {plugin_path}/{shortname}.py"))
+            name = f"⌔︙ {plugin_path}/{shortname}".replace("/", ".")
         checkplugins(path)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
@@ -57,7 +57,7 @@ def load_module(shortname, plugin_path=None):
         mod.borg = iqthon
         spec.loader.exec_module(mod)
         # for imports
-        sys.modules["userbot.plugins." + shortname] = mod
+        sys.modules["⌔︙ ملف تليثون العرب :" + shortname] = mod
         LOGS.info("⌔︙ تم بنجاح تحميل ملف " + shortname)
 
 
@@ -83,7 +83,7 @@ def remove_plugin(shortname):
     except BaseException:
         pass
     try:
-        name = f"userbot.plugins.{shortname}"
+        name = f"⌔︙ ملف تليثون العرب : {shortname}"
         for i in reversed(range(len(iqthon._event_builders))):
             ev, cb = iqthon._event_builders[i]
             if cb.__module__ == name:
