@@ -370,7 +370,7 @@ async def inline_handler(event):  # sourcery no-metrics
         elif string == "ialive":
             EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
             _, check_sgnirts = check_data_base_heal_th()
-            CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "✮ تليثون العرب ✮"
+            CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "𓆩. تليثـون العـرب .𓆪"
             uptime = await get_readable_time((time.time() - StartTime))
             CAT_IMG = gvarstatus("ALIVE_PIC")
             alive_buttons = [
@@ -381,17 +381,13 @@ async def inline_handler(event):  # sourcery no-metrics
                     Button.inline(
                         text=f"{EMOJI} نسخه تليثون : {version.__version__}"
                     ),
-                ],
-                [
                     Button.inline(
                         text=f"{EMOJI} نسخه العرب : {catversion}"
                     ),
                     Button.inline(
                         text=f"{EMOJI} نسخه البايثون : {python_version()}"
                     ),
-                ],
-                [
-                    Button.inline(
+                   Button.inline(
                         text=f"{EMOJI} الوقت : {uptime}"
                     ),
                     Button.inline(
