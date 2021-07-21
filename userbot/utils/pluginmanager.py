@@ -32,8 +32,8 @@ def load_module(shortname, plugin_path=None):
             path = Path(f"userbot/plugins/{shortname}.py")
             name = f"userbot.plugins.{shortname}"
         else:
-            path = Path((f"⌔︙ {plugin_path}/{shortname}.py"))
-            name = f"⌔︙ {plugin_path}/{shortname}".replace("/", ".")
+            path = Path((f"{plugin_path}/{shortname}.py"))
+            name = f"{plugin_path}/{shortname}".replace("/", ".")
         checkplugins(path)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
