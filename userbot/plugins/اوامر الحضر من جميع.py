@@ -42,8 +42,8 @@ UNBAN_RIGHTS = ChatBannedRights(
 
 
 @iqthon.iq_cmd(
-    pattern="حظر(?:\s|$)([\s\S]*)",
-    command=("حظر", plugin_category),
+    pattern="gban(?:\s|$)([\s\S]*)",
+    command=("gban", plugin_category),
     info={
         "header": "To ban user in every group where you are admin.",
         "description": "Will ban the person in every group where you are admin only.",
@@ -126,8 +126,8 @@ async def catgban(event):  # sourcery no-metrics
 
 
 @iqthon.iq_cmd(
-    pattern="الغاء الحظر(?:\s|$)([\s\S]*)",
-    command=("الغاء الحظر", plugin_category),
+    pattern="ungban(?:\s|$)([\s\S]*)",
+    command=("ungban", plugin_category),
     info={
         "header": "To unban the person from every group where you are admin.",
         "description": "will unban and also remove from your gbanned list.",
@@ -202,7 +202,7 @@ async def catgban(event):
 
 
 @iqthon.iq_cmd(
-    pattern="المحظورين$",
+    pattern="listgban$",
     command=("المحظورين", plugin_category),
     info={
         "header": "Shows you the list of all gbanned users by you.",
@@ -227,8 +227,8 @@ async def gablist(event):
 
 
 @iqthon.iq_cmd(
-    pattern="كتم(?:\s|$)([\s\S]*)",
-    command=("كتم", plugin_category),
+    pattern="gmute(?:\s|$)([\s\S]*)",
+    command=("gmute", plugin_category),
     info={
         "header": "To mute a person in all groups where you are admin.",
         "description": "It doesnt change user permissions but will delete all messages sent by him in the groups where you are admin including in private messages.",
@@ -259,7 +259,7 @@ async def startgmute(event):
             f"{_format.mentionuser(user.first_name ,user.id)} ` is already gmuted`",
         )
     try:
-        mute(userid, "كتم")
+        mute(userid, "gmute")
     except Exception as e:
         await edit_or_reply(event, f"**Error**\n`{str(e)}`")
     else:
@@ -356,13 +356,13 @@ async def endgmute(event):
 
 @iqthon.iq_cmd(incoming=True)
 async def watcher(event):
-    if is_muted(event.sender_id, "كتم"):
+    if is_muted(event.sender_id, "gmute"):
         await event.delete()
 
 
 @iqthon.iq_cmd(
-    pattern="طرد(?:\s|$)([\s\S]*)",
-    command=("طرد", plugin_category),
+    pattern="kick(?:\s|$)([\s\S]*)",
+    command=("kick", plugin_category),
     info={
         "header": "kicks the person in all groups where you are admin.",
         "usage": "{tr}gkick <username/reply/userid> <reason (optional)>",
