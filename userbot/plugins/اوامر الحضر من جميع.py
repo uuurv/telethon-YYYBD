@@ -293,8 +293,8 @@ async def startgmute(event):
 
 
 @iqthon.iq_cmd(
-    pattern="الغاء الكتم(?:\s|$)([\s\S]*)",
-    command=("الغاء الكتم", plugin_category),
+    pattern="ungmute(?:\s|$)([\s\S]*)",
+    command=("ungmute", plugin_category),
     info={
         "header": "To unmute the person in all groups where you were admin.",
         "description": "This will work only if you mute that person by your gmute command.",
@@ -324,7 +324,7 @@ async def endgmute(event):
             event, f"{_format.mentionuser(user.first_name ,user.id)} `is not gmuted`"
         )
     try:
-        unmute(userid, "الغاء الكتم")
+        unmute(userid, "ungmute")
     except Exception as e:
         await edit_or_reply(event, f"**Error**\n`{str(e)}`")
     else:
