@@ -324,7 +324,7 @@ async def endgmute(event):
             event, f"{_format.mentionuser(user.first_name ,user.id)} `is not gmuted`"
         )
     try:
-        unmute(userid, "gmute")
+        unmute(userid, "الغاء الكتم")
     except Exception as e:
         await edit_or_reply(event, f"**Error**\n`{str(e)}`")
     else:
