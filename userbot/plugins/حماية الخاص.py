@@ -588,7 +588,7 @@ async def on_plug_in_callback_query_handler(event):
 
 
 @iqthon.iq_cmd(
-    pattern="الحماية  (تشغيل|ايقاف)$",
+    pattern="الحماية (on|off)$",
     command=("الحماية", plugin_category),
     info={
         "header": "To turn on or turn off pmpermit.",
@@ -598,7 +598,7 @@ async def on_plug_in_callback_query_handler(event):
 async def pmpermit_on(event):
     "Turn on/off pmpermit."
     input_str = event.pattern_match.group(1)
-    if input_str == "تشغيل":
+    if input_str == "on":
         if gvarstatus("pmpermit") is None:
             addgvar("pmpermit", "true")
             await edit_delete(
@@ -626,7 +626,7 @@ async def pmpermit_on(event):
 async def pmpermit_on(event):
     "Turn on/off pmmenu."
     input_str = event.pattern_match.group(1)
-    if input_str == "ايقاف":
+    if input_str == "off":
         if gvarstatus("pmmenu") is None: 
             addgvar("pmmenu", "false")
             await edit_delete(
