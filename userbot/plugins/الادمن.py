@@ -537,26 +537,26 @@ async def watcher(event):
 async def startmute(event):
     "To mute a person in that paticular chat"
     if event.is_private:
-        await event.edit("⌔︙ قـد تـكون هـنالك بـعض المـشاكل والأخطـاء")
+        await event.edit("**⌔︙ قـد تـكون هـنالك بـعض المـشاكل والأخطـاء**")
         await sleep(2)
         await event.get_reply_message()
         replied_user = await event.client(GetFullUserRequest(event.chat_id))
         if is_muted(event.chat_id, event.chat_id):
             return await event.edit(
-                "⌔︙ هـذا الـشخص بالـفعـل مكـتوم"
+                "**⌔︙ هـذا الـشخص بالـفعـل مكـتوم**"
             )
         if event.chat_id == iqthon.uid:
-            return await edit_delete(event, "⌔︙ لا يـمكنك حـظر نـفسك")
+            return await edit_delete(event, "**⌔︙ لا يـمكنك حـظر نـفسك**")
         try:
             mute(event.chat_id, event.chat_id)
         except Exception as e:
             await event.edit(f"**خـطأ **\n`{str(e)}`")
         else:
-            await event.edit("⌔︙ تـم كـتم الـمستـخدم بـنجاح ✅")
+            await event.edit("**⌔︙ تـم كـتم الـمستـخدم بـنجاح ✅**")
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "⌔︙ الـكتم \n"
+                "**⌔︙ الـكتم **\n"
                 f"**المسـتخدم :** [{replied_user.user.first_name}](tg://user?id={event.chat_id})\n",
             )
     else:
@@ -565,16 +565,16 @@ async def startmute(event):
         creator = chat.creator
         if not admin and not creator:
             return await edit_or_reply(
-                event, "⌔︙ تـحتاج الصلاحـيات لـهذا الأمـر"
+                event, "**⌔︙ تـحتاج الصلاحـيات لـهذا الأمـر**"
             )
         user, reason = await get_user_from_event(event)
         if not user:
             return
         if user.id == iqthon.uid:
-            return await edit_or_reply(event, "⌔︙ لا يـمكنك حـظر نـفسك")
+            return await edit_or_reply(event, "**⌔︙ لا يـمكنك حـظر نـفسك**")
         if is_muted(user.id, event.chat_id):
             return await edit_or_reply(
-                event, "⌔︙ هـذا الـشخص بالـفعـل مكـتوم"
+                event, "**⌔︙ هـذا الـشخص بالـفعـل مكـتوم**"
             )
         result = await event.client(
             functions.channels.GetParticipantRequest(event.chat_id, user.id)
@@ -583,7 +583,7 @@ async def startmute(event):
             if result.participant.banned_rights.send_messages:
                 return await edit_or_reply(
                     event,
-                    "⌔︙ هـذا الـشخص بالـفعـل مكـتوم",
+                    "**⌔︙ هـذا الـشخص بالـفعـل مكـتوم**",
                 )
         except AttributeError:
             pass
@@ -596,11 +596,11 @@ async def startmute(event):
                 if chat.admin_rights.delete_messages is not True:
                     return await edit_or_reply(
                         event,
-                        "⌔︙ تـحتاج صـلاحـيات الـحذف لـهذا الأمـر",
+                        "**⌔︙ تـحتاج صـلاحـيات الـحذف لـهذا الأمـر**",
                     )
             elif "creator" not in vars(chat):
                 return await edit_or_reply(
-                    event, "⌔︙ تـحتاج الصلاحـيات لـهذا الأمـر "
+                    event, "**⌔︙ تـحتاج الصلاحـيات لـهذا الأمـر **"
                 )
             mute(user.id, event.chat_id)
         except Exception as e:
@@ -608,18 +608,18 @@ async def startmute(event):
         if reason:
             await edit_or_reply(
                 event,
-                f"⌔︙ الـمستخدم {_format.mentionuser(user.first_name ,user.id)}\n ⌔︙ تـم كتمه بنـجاح\n ⌔︙ الدردشـة {event.chat.title}\n"
-                f"⌔︙ السـبب: {reason}",
+                f"**⌔︙ الـمستخدم** {_format.mentionuser(user.first_name ,user.id)}\n **⌔︙ تـم كتمه بنـجاح**\n **⌔︙ الدردشـة** {event.chat.title}\n"
+                f"**⌔︙ السـبب:** {reason}",
             )
         else:
             await edit_or_reply(
                 event,
-                f"⌔︙ الـمستخدم {_format.mentionuser(user.first_name ,user.id)}\n ⌔︙ تـم كتمه بنـجاح ✅\n ⌔︙ الدردشـة {event.chat.title}"
+                f"**⌔︙ الـمستخدم :** {_format.mentionuser(user.first_name ,user.id)}\n **⌔︙ تـم كتمه بنـجاح ✅**\n **⌔︙ الدردشـة** {event.chat.title}"
             )
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "⌔︙ الـكتم\n"
+                "**⌔︙ الـكتم**\n"
                 f"**الـمستخدم :** [{user.first_name}](tg://user?id={user.id})\n"
                 f"**الـدردشـة :** {event.chat.title}\n"
                 f"**ايدي الكروب:** (`{event.chat_id}`)",
@@ -642,12 +642,12 @@ async def startmute(event):
 async def endmute(event):
     "To mute a person in that paticular chat"
     if event.is_private:
-        await event.edit("⌔︙ قـد تـحدث بعـض الأخـطاء")
+        await event.edit("**⌔︙ قـد تـحدث بعـض الأخـطاء**")
         await sleep(1)
         replied_user = await event.client(GetFullUserRequest(event.chat_id))
         if not is_muted(event.chat_id, event.chat_id):
             return await event.edit(
-                "⌔︙ هـذا الـمستخدم لـيس مكـتوم"
+                "**⌔︙ هـذا الـمستخدم لـيس مكـتوم**"
             )
         try:
             unmute(event.chat_id, event.chat_id)
@@ -655,12 +655,12 @@ async def endmute(event):
             await event.edit(f"**خـطأ **\n`{str(e)}`")
         else:
             await event.edit(
-                "⌔︙ تـم الـغاء كـتم الـمستـخدم بـنجاح"
+                "**⌔︙ تـم الـغاء كـتم الـمستـخدم بـنجاح**"
             )
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "⌔︙ الـغاء الكـتم\n"
+                "**⌔︙ الـغاء الكـتم**\n"
                 f"**الـمستخدم :** [{replied_user.user.first_name}](tg://user?id={event.chat_id})\n",
             )
     else:
@@ -681,7 +681,7 @@ async def endmute(event):
         except AttributeError:
             return await edit_or_reply(
                 event,
-                "⌔︙ هـذا الـمستخدم يسـتطيع الـتحدث بِـحريـة هـنا",
+                "**⌔︙ هـذا الـمستخدم يسـتطيع الـتحدث بِـحريـة هـنا**",
             )
         except Exception as e:
             return await edit_or_reply(event, f"**خـطأ : **`{str(e)}`")
@@ -692,7 +692,7 @@ async def endmute(event):
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "⌔︙ الـغاء الكـتم\n"
+                "**⌔︙ الـغاء الكـتم**\n"
                 f"**المـستخدم :** [{user.first_name}](tg://user?id={user.id})\n"
                 f"**الـدردشـة :** {event.chat.title}(`{event.chat_id}`)",
             )
