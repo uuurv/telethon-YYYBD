@@ -377,31 +377,27 @@ async def inline_handler(event):  # sourcery no-metrics
                 [
                     Button.inline(
                         text=f"{EMOJI} قاعدة البيانات : {check_sgnirts}"
-                ], 
-                [
+                ),),
                     Button.inline(
                         text=f"{EMOJI} نسخه تليثون : {version.__version__}"
                     
-                ],
-                [
+                ),),
                     Button.inline(
                         text=f"{EMOJI} نسخه العرب : {catversion}"
-                ],
-                [    
+                ),),   
                     Button.inline(
                         text=f"{EMOJI} نسخه البايثون : {python_version()}"
                     
-                ],
-                [
+               ),),
                     Button.inline(
                         text=f"{EMOJI} الوقت : {uptime}"
-                ],
-                [   
+                ),),  
                     Button.inline(
                         text=f"{EMOJI} المنصب : {Config.ALIVE_NAME}"
                     
-                ],
-            ]
+                ),
+        ),
+    ]
             await event.answer([
                 builder.article(
                     title="Ialive", 
