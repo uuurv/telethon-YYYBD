@@ -37,13 +37,13 @@ plugin_category = "utils"
 async def amireallyalive(event):
     "A kind of showing bot details"
     reply_to_id = await reply_id(event)
-    results = await event.client.inline_query(Config.TG_BOT_USERNAME, 'ialive')
+    results = await event.client.inline_query(Config.TG_BOT_USERNAME, 'السورس')
     await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
     await event.delete()
 
 
 @iqthon.iq_cmd(
-    pattern="ialive$",
+    pattern="السورس$",
     command=("ialive", plugin_category),
     info={
         "header": "To check bot's alive status via inline mode",
