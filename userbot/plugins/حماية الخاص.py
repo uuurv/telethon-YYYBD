@@ -250,8 +250,8 @@ async def do_pm_enquire_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل. ⚠️ \ 
-⌔︙ تـم حـظـرڪ مـن الـحـسـاب. 🚫  \
+    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل ⚠️. \ 
+⌔︙ تـم حـظـرڪ مـن الـحـسـاب 🚫. \
 ⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸♥️**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
@@ -278,8 +278,8 @@ async def do_pm_request_action(event, chat):
     except AttributeError:
         PMMESSAGE_CACHE = {}
     if str(chat.id) not in PM_WARNS:
-        text = """**⌔︙يـرجـى الانـتـظـار لــ حـيـن قرائة رسالتك  .🌀 \
-⌔︙ مـالـڪ الـحـسـاب سَــوف يـرد عـلـيـڪ عـنـد اسـتـطـاعـتـه .. \
+        text = """**⌔︙يـرجـى الانـتـظـار لــ حـيـن قرائة رسالتك  🌀. \
+⌔︙ مـالـڪ الـحـسـاب سَــوف يـرد عـلـيـڪ عـنـد اسـتـطـاعـتـه . . \
 ⌔︙ يـرجـى عـدم تـڪـرار الـرسـائـل لـتـجـنـب الـحـظـر 🙂🌿**"""
         await event.reply(text)
         PM_WARNS[str(chat.id)] = 1
@@ -299,8 +299,8 @@ async def do_pm_request_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل. ⚠️ \ 
-⌔︙ تـم حـظـرڪ مـن الـحـسـاب. 🚫  \
+    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل ⚠️. \ 
+⌔︙ تـم حـظـرڪ مـن الـحـسـاب 🚫. \
 ⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸♥️**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
@@ -327,8 +327,8 @@ async def do_pm_chat_action(event, chat):
     except AttributeError:
         PMMESSAGE_CACHE = {}
     if str(chat.id) not in PM_WARNS:
-        text = """**⌔︙يـرجـى الانـتـظـار لــ حـيـن قرائة رسالتك  .🌀 \
-⌔︙ مـالـڪ الـحـسـاب سَــوف يـرد عـلـيـڪ عـنـد اسـتـطـاعـتـه .. \
+        text = """**⌔︙يـرجـى الانـتـظـار لــ حـيـن قرائة رسالتك  🌀. \
+⌔︙ مـالـڪ الـحـسـاب سَــوف يـرد عـلـيـڪ عـنـد اسـتـطـاعـتـه . . \
 ⌔︙ يـرجـى عـدم تـڪـرار الـرسـائـل لـتـجـنـب الـحـظـر 🙂🌿**"""
         await event.reply(text)
         PM_WARNS[str(chat.id)] = 1
@@ -348,8 +348,8 @@ async def do_pm_chat_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل. ⚠️ \ 
-⌔︙ تـم حـظـرڪ مـن الـحـسـاب. 🚫  \
+    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل ⚠️. \ 
+⌔︙ تـم حـظـرڪ مـن الـحـسـاب 🚫. \
 ⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸♥️**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
@@ -377,8 +377,8 @@ async def do_pm_spam_action(event, chat):
             del PMMESSAGE_CACHE[str(chat.id)]
     except Exception as e:
         LOGS.info(str(e))
-    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل. ⚠️ \ 
-⌔︙ تـم حـظـرڪ مـن الـحـسـاب. 🚫  \
+    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل ⚠️. \ 
+⌔︙ تـم حـظـرڪ مـن الـحـسـاب. 🚫. \
 ⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸♥️**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
@@ -418,7 +418,7 @@ async def on_new_private_message(event):
     await do_pm_permit_action(event, chat)
 
 
-@catub.iq_cmd(outgoing=True, func=lambda e: e.is_private, edited=False, forword=None)
+@iqthon.iq_cmd(outgoing=True, func=lambda e: e.is_private, edited=False, forword=None)
 async def you_dm_other(event):
     if gvarstatus("pmpermit") is None:
         return
@@ -470,7 +470,7 @@ async def you_dm_other(event):
         sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"show_pmpermit_options")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"show_pmpermit_options")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "**⌔︙ عـذرا ، هـذه الـخـيـارات لـلـمـسـتـخـدم الـذي يـراسـلـك 🧸♥️**"
@@ -501,7 +501,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text, buttons=buttons)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"to_enquire_something")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"to_enquire_something")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "**⌔︙ عـذرا ، هـذه الـخـيـارات لـلـمـسـتـخـدم الـذي يـراسـلـك 🧸♥️**"
@@ -521,7 +521,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"to_request_something")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"to_request_something")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "**⌔︙ عـذرا ، هـذه الـخـيـارات لـلـمـسـتـخـدم الـذي يـراسـلـك 🧸♥️**"
@@ -542,7 +542,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"to_chat_with_my_master")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"to_chat_with_my_master")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "**⌔︙ عـذرا ، هـذه الـخـيـارات لـلـمـسـتـخـدم الـذي يـراسـلـك 🧸♥️**"
@@ -563,7 +563,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text)
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(rb"to_spam_my_master_inbox")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"to_spam_my_master_inbox")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "**⌔︙ عـذرا ، هـذه الـخـيـارات لـلـمـسـتـخـدم الـذي يـراسـلـك 🧸♥️**"
