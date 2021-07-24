@@ -201,9 +201,9 @@ async def do_pm_options_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل. ⚠️ \ 
-⌔︙ تـم حـظـرڪ مـن الـحـسـاب. 🚫  \
-⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸♥️**"
+    USER_BOT_WARN_ZERO = f"⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل . \
+⌔︙ تـم حـظـرڪ مـن الـحـسـاب 🚫. \
+⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"**⌔︙حـمـايـة الـخـاص  (الـبـرايـفـت)  : 📩** \
