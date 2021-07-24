@@ -202,7 +202,7 @@ async def catgban(event):
 
 
 @iqthon.iq_cmd(
-    pattern="listgban$",
+    pattern="المحظورين$",
     command=("المحظورين", plugin_category),
     info={
         "header": "Shows you the list of all gbanned users by you.",
