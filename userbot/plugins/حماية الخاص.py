@@ -250,9 +250,9 @@ async def do_pm_enquire_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل ⚠️. \ 
+    USER_BOT_WARN_ZERO = f"⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل . \
 ⌔︙ تـم حـظـرڪ مـن الـحـسـاب 🚫. \
-⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸♥️**"
+⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"**⌔︙حـمـايـة الـخـاص  (الـبـرايـفـت)  : 📩** \
@@ -299,9 +299,9 @@ async def do_pm_request_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل ⚠️. \ 
+    USER_BOT_WARN_ZERO = f"⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل . \
 ⌔︙ تـم حـظـرڪ مـن الـحـسـاب 🚫. \
-⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸♥️**"
+⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"**⌔︙حـمـايـة الـخـاص  (الـبـرايـفـت)  : 📩**\
@@ -348,9 +348,9 @@ async def do_pm_chat_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل ⚠️. \ 
+    USER_BOT_WARN_ZERO = f"⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل . \
 ⌔︙ تـم حـظـرڪ مـن الـحـسـاب 🚫. \
-⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸♥️**"
+⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"**⌔︙حـمـايـة الـخـاص  (الـبـرايـفـت)  : 📩**\
@@ -377,9 +377,9 @@ async def do_pm_spam_action(event, chat):
             del PMMESSAGE_CACHE[str(chat.id)]
     except Exception as e:
         LOGS.info(str(e))
-    USER_BOT_WARN_ZERO = f"**⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل ⚠️. \ 
-⌔︙ تـم حـظـرڪ مـن الـحـسـاب. 🚫. \
-⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸♥️**"
+    USER_BOT_WARN_ZERO = f"⌔︙تـم تـحـذيـرڪ مـسـبـقـاً مـن تـڪـرار الـرسـائـل . \
+⌔︙ تـم حـظـرڪ مـن الـحـسـاب 🚫. \
+⌔︙لـن اسـتـلـم رسـائـلـڪ الـى ان يـاتـي مـالـڪ الـحـسـاب .🧸"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"**⌔︙حـمـايـة الـخـاص  (الـبـرايـفـت)  : 📩**\
@@ -506,8 +506,8 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "**⌔︙ عـذرا ، هـذه الـخـيـارات لـلـمـسـتـخـدم الـذي يـراسـلـك 🧸♥️**"
         return await event.answer(text, cache_time=0, alert=True)
-    text = ""**⌔︙حـسـنـاً ، تـم ارسـال طـلـبـڪ بـنـجـاح 💕 . لا تـقـم بـأخـتـيـار خـيـار ثـانـي .\
-⌔︙سَــ يـتـم الـرد عـلـيـڪ عـنـد تَـفَـرُغ الـمـالـڪ . ♥️🧸**""
+    text = """**⌔︙حـسـنـاً ، تـم ارسـال طـلـبـڪ بـنـجـاح 💕 . لا تـقـم بـأخـتـيـار خـيـار ثـانـي .\
+⌔︙سَــ يـتـم الـرد عـلـيـڪ عـنـد تَـفَـرُغ الـمـالـڪ . ♥️🧸**"""
     sqllist.add_to_list("pmenquire", event.query.user_id)
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
