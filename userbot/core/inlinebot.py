@@ -376,11 +376,6 @@ async def inline_handler(event):  # sourcery no-metrics
             alive_buttons = [
                 [
                     Button.inline(
-                        text=f"{EMOJI} قاعدة البيانات : ✅"
-                    ),
-                ], 
-                [
-                    Button.inline(
                         text=f"{EMOJI} الأصدار : {catversion}"
                     ),
                 ],
@@ -389,14 +384,13 @@ async def inline_handler(event):  # sourcery no-metrics
                         text=f"{EMOJI} التيليثون : {version.__version__}"
                     ),
                 ],
-                [    
-                    Button.inline(
-                        text=f"{EMOJI} البايثون : {python_version()}"
-                    ),
-                ],
                 [
                     Button.inline(
                         text=f"{EMOJI} الوقت : {uptime}"
+                    ),
+                ],
+                [   
+                    Button.url("رابط السورس", "https://github.com/klanrali/Telethon-Arab"
                     ),
                 ],
                 [   
