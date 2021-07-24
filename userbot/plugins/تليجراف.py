@@ -29,8 +29,8 @@ def resize_image(image):
 
 
 @iqthon.iq_cmd(
-    pattern="(ت(لي)?ج(راف)?) ?(m|t|ميديا|كتابه)(?: |$)(.*)",
-    command=("تلجراف", plugin_category),
+    pattern="(ت(لي)?ج(راف)?) ?(م|ك|ميديا|كتابه)(?:\s|$)([\s\S]*)",
+    command=("تليجراف", plugin_category),
     info={
         "header": "⌔︙للحصـول على رابـط تليڪـراف ☍ :",
         "description": "⌔︙قـم بالـرد على رسـالة نصيّـة، للـصق هذا النّص على تليڪـراف ڪما يمڪنك الإدخـال   مع الأمـر/ لغـرض تخصيـص عنـوان لهـذا التليڪـراف والـردّ على ملـف الوسائـط للحصـول على رابـط قابـل للمشـارڪة لتلك الوسائـط (يدعم 5 ميڪابايت تقريباً) 💡",
@@ -63,7 +63,7 @@ async def _(event):
     start = datetime.now()
     r_message = await event.get_reply_message()
     input_str = (event.pattern_match.group(4)).strip()
-    if input_str in ["media", "m"]:
+    if input_str in ["ميديا", "م"]:
         downloaded_file_name = await event.client.download_media(
             r_message, Config.TEMP_DIR
         )
@@ -84,7 +84,7 @@ async def _(event):
                     \n**⌔︙الوقـت المستغـرق ⏱  : ** `{ms} الثوانـي.`",
                 link_preview=True,
             )
-    elif input_str in ["text", "t"]:
+    elif input_str in ["كتابه", "ك"]:
         user_object = await event.client.get_entity(r_message.sender_id)
         title_of_page = get_display_name(user_object)
         # apparently, all Users do not have last_name field
