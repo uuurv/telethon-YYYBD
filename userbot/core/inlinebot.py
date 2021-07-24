@@ -367,7 +367,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(jsondata, open(secret, "w"))
             else:
                 json.dump(newsecret, open(secret, "w"))
-        elif string == "ialive":
+        elif string == "السورس":
             EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
             _, check_sgnirts = check_data_base_heal_th()
             CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "𓆩. تليثـون العـرب .𓆪"
@@ -376,28 +376,35 @@ async def inline_handler(event):  # sourcery no-metrics
             alive_buttons = [
                 [
                     Button.inline(
-                        text=f"{EMOJI} قاعدة البيانات : {check_sgnirts}"
-                ),),
+                        text=f"{EMOJI} قاعدة البيانات : ✅"
+                    ),
+                ], 
+                [
                     Button.inline(
-                        text=f"{EMOJI} نسخه تليثون : {version.__version__}"
-                    
-                ),),
+                        text=f"{EMOJI} الأصدار : {catversion}"
+                    ),
+                ],
+                [
                     Button.inline(
-                        text=f"{EMOJI} نسخه العرب : {catversion}"
-                ),),   
+                        text=f"{EMOJI} التيليثون : {version.__version__}"
+                    ),
+                ],
+                [    
                     Button.inline(
-                        text=f"{EMOJI} نسخه البايثون : {python_version()}"
-                    
-               ),),
+                        text=f"{EMOJI} البايثون : {python_version()}"
+                    ),
+                ],
+                [
                     Button.inline(
                         text=f"{EMOJI} الوقت : {uptime}"
-                ),),  
+                    ),
+                ],
+                [   
                     Button.inline(
-                        text=f"{EMOJI} المنصب : {Config.ALIVE_NAME}"
-                    
-                ),
-        ),
-    ]
+                        text=f"{EMOJI} المالك : {Config.ALIVE_NAME}"
+                    ),
+                ],
+            ]
             await event.answer([
                 builder.article(
                     title="Ialive", 
