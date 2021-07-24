@@ -57,7 +57,7 @@ async def catgban(event):  # sourcery no-metrics
     user, reason = await get_user_from_event(event, cate)
     if not user:
         return
-    if user.id == catub.uid:
+    if user.id == iqthon.uid:
         return await edit_delete(cate, "`why would I ban myself`")
     if gban_sql.is_gbanned(user.id):
         await cate.edit(
@@ -227,8 +227,8 @@ async def gablist(event):
 
 
 @iqthon.iq_cmd(
-    pattern="gmute(?:\s|$)([\s\S]*)",
-    command=("gmute", plugin_category),
+    pattern="كتم عام (?:\s|$)([\s\S]*)",
+    command=("كتم عام", plugin_category),
     info={
         "header": "To mute a person in all groups where you are admin.",
         "description": "It doesnt change user permissions but will delete all messages sent by him in the groups where you are admin including in private messages.",
@@ -238,7 +238,7 @@ async def gablist(event):
 async def startgmute(event):
     "To mute a person in all groups where you are admin."
     if event.is_private:
-        await event.edit("`Unexpected issues or ugly errors may occur!`")
+        await event.edit("**⌔︙ قـد تـكون هـنالك بـعض المـشاكل والأخطـاء**")
         await asyncio.sleep(2)
         userid = event.chat_id
         reason = event.pattern_match.group(1)
@@ -246,55 +246,55 @@ async def startgmute(event):
         user, reason = await get_user_from_event(event)
         if not user:
             return
-        if user.id == catub.uid:
-            return await edit_or_reply(event, "`Sorry, I can't gmute myself`")
+        if user.id == iqthon.uid:
+            return await edit_or_reply(event, "**⌔︙ لا يـمكنك كتم نـفسك**")
         userid = user.id
     try:
         user = (await event.client(GetFullUserRequest(userid))).user
     except Exception:
-        return await edit_or_reply(event, "`Sorry. I am unable to fetch the user`")
-    if is_muted(userid, "gmute"):
+        return await edit_or_reply(event, "**⌔︙ تـحتاج صـلاحـيات الـحذف لـهذا الأمـر**")
+    if is_muted(userid, "كتم عام"):
         return await edit_or_reply(
             event,
-            f"{_format.mentionuser(user.first_name ,user.id)} ` is already gmuted`",
+            f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ هـذا الـشخص بالـفعـل مكـتوم عام**",
         )
     try:
-        mute(userid, "gmute")
+        mute(userid, "كتم عام")
     except Exception as e:
-        await edit_or_reply(event, f"**Error**\n`{str(e)}`")
+        await edit_or_reply(event, f"**خـطأ : **\n`{str(e)}`")
     else:
         if reason:
             await edit_or_reply(
                 event,
-                f"{_format.mentionuser(user.first_name ,user.id)} `is Successfully gmuted`\n**Reason :** `{reason}`",
+                f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ تـم كتمه بنـجاح**\n **⌔︙ السـبب:** `{reason}`",
             )
         else:
             await edit_or_reply(
                 event,
-                f"{_format.mentionuser(user.first_name ,user.id)} `is Successfully gmuted`",
+                f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ تـم كتمه بنـجاح**",
             )
     if BOTLOG:
         reply = await event.get_reply_message()
         if reason:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#GMUTE\n"
-                f"**User :** {_format.mentionuser(user.first_name ,user.id)} \n"
-                f"**Reason :** `{reason}`",
+                "**⌔︙ الـكتم العام**\n"
+                f"**⌔︙ الـشخـص :** {_format.mentionuser(user.first_name ,user.id)} \n"
+                f"**⌔︙ السـبب:** `{reason}`",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#GMUTE\n"
-                f"**User :** {_format.mentionuser(user.first_name ,user.id)} \n",
+                "**⌔︙ الـكتم العام**\n"
+                f"**⌔︙ الـشخـص :** {_format.mentionuser(user.first_name ,user.id)} \n",
             )
         if reply:
             await reply.forward_to(BOTLOG_CHATID)
 
 
 @iqthon.iq_cmd(
-    pattern="ungmute(?:\s|$)([\s\S]*)",
-    command=("ungmute", plugin_category),
+    pattern="الغاء كتم العام (?:\s|$)([\s\S]*)",
+    command=("الغاء كتم العام", plugin_category),
     info={
         "header": "To unmute the person in all groups where you were admin.",
         "description": "This will work only if you mute that person by your gmute command.",
@@ -304,7 +304,7 @@ async def startgmute(event):
 async def endgmute(event):
     "To remove gmute on that person."
     if event.is_private:
-        await event.edit("`Unexpected issues or ugly errors may occur!`")
+        await event.edit("**⌔︙ قـد تـكون هـنالك بـعض المـشاكل والأخطـاء**")
         await asyncio.sleep(2)
         userid = event.chat_id
         reason = event.pattern_match.group(1)
@@ -312,51 +312,51 @@ async def endgmute(event):
         user, reason = await get_user_from_event(event)
         if not user:
             return
-        if user.id == catub.uid:
-            return await edit_or_reply(event, "`Sorry, I can't gmute myself`")
+        if user.id == iqthon.uid:
+            return await edit_or_reply(event, "**⌔︙ لا يـمكنك كتم نـفسك**")
         userid = user.id
     try:
         user = (await event.client(GetFullUserRequest(userid))).user
     except Exception:
-        return await edit_or_reply(event, "`Sorry. I am unable to fetch the user`")
-    if not is_muted(userid, "gmute"):
+        return await edit_or_reply(event, "**⌔︙ تـحتاج صـلاحـيات الـحذف لـهذا الأمـر**")
+    if not is_muted(userid, "كتم عام"):
         return await edit_or_reply(
-            event, f"{_format.mentionuser(user.first_name ,user.id)} `is not gmuted`"
+            event, f"{_format.mentionuser(user.first_name ,user.id)} \n **⌔︙ هـذا الـمستخدم لـيس مكـتوم**"
         )
     try:
-        unmute(userid, "ungmute")
+        unmute(userid, "الغاء كتم العام")
     except Exception as e:
         await edit_or_reply(event, f"**Error**\n`{str(e)}`")
     else:
         if reason:
             await edit_or_reply(
                 event,
-                f"{_format.mentionuser(user.first_name ,user.id)} `is Successfully ungmuted`\n**Reason :** `{reason}`",
+                f"{_format.mentionuser(user.first_name ,user.id)} \n **⌔︙ تـم الـغاء كـتم العام الـمستـخدم بـنجاح**\n**⌔︙ السـبب:** `{reason}`",
             )
         else:
             await edit_or_reply(
                 event,
-                f"{_format.mentionuser(user.first_name ,user.id)} `is Successfully ungmuted`",
+                f"{_format.mentionuser(user.first_name ,user.id)} \n **⌔︙ تـم الـغاء كـتم العام الـمستـخدم بـنجاح**",
             )
     if BOTLOG:
         if reason:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#UNGMUTE\n"
-                f"**User :** {_format.mentionuser(user.first_name ,user.id)} \n"
-                f"**Reason :** `{reason}`",
+                "**⌔︙ الغاء الـكتم العام**\n"
+                f"**⌔︙ الـشخـص :** {_format.mentionuser(user.first_name ,user.id)} \n"
+                f"**⌔︙ السـبب:** `{reason}`",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#UNGMUTE\n"
-                f"**User :** {_format.mentionuser(user.first_name ,user.id)} \n",
+                "**⌔︙ الغاء الـكتم العام**\n"
+                f"**⌔︙ الـشخـص :** {_format.mentionuser(user.first_name ,user.id)} \n",
             )
 
 
 @iqthon.iq_cmd(incoming=True)
 async def watcher(event):
-    if is_muted(event.sender_id, "gmute"):
+    if is_muted(event.sender_id, "كتم عام"):
         await event.delete()
 
 
@@ -375,7 +375,7 @@ async def catgkick(event):  # sourcery no-metrics
     user, reason = await get_user_from_event(event, cate)
     if not user:
         return
-    if user.id == catub.uid:
+    if user.id == iqthon.uid:
         return await edit_delete(cate, "`why would I kick myself`")
     san = await admin_groups(event.client)
     count = 0
