@@ -45,13 +45,13 @@ async def get_tz(con):
 
 
 @iqthon.iq_cmd(
-    pattern="وقت(?:\s|$)([\s\S]*)(?<![0-9])(?: |$)([0-9]+)?",
-    command=("وقت", plugin_category),
+    pattern="الوقت(?:\s|$)([\s\S]*)(?<![0-9])(?: |$)([0-9]+)?",
+    command=("الوقت", plugin_category),
     info={
         "header": "للحصول على الوقت الحالي لبلد",
         "note": "For country names check [this link](https://telegra.ph/country-names-10-24)",
-        "usage": "{tr}وقت + الدوله او الكود الزمني",
-        "examples": "{tr}وقت + الدوله",
+        "usage": "{tr}الوقت + الدوله او الكود الزمني",
+        "examples": "{tr}الوقت + الدوله",
     },
 )
 async def time_func(tdata):
@@ -112,19 +112,19 @@ async def time_func(tdata):
 
 
 @iqthon.iq_cmd(
-    pattern="الوقت(?:\s|$)([\s\S]*)",
-    command=("الوقت", plugin_category),
+    pattern="وقتي(?:\s|$)([\s\S]*)",
+    command=("وقتي", plugin_category),
     info={
         "header": "لإظهار الوقت الحالي.",
-        "الوصف": "يعرض الوقت الافتراضي الحالي الذي يمكنك تغييره عن طريق تغيير TZ في متغيرات heroku.",
-        "usage": "{tr}الوقت",
+        "description": "يظهر الوقت الافتراضي الحالي الذي يمكنك تغييره عن طريق تغيير TZ في فارسات heroku.",
+        "usage": "{tr}وقتي",
     },
 )
 async def _(event):
     "لإظهار الوقت الحالي."
     reply_msg_id = await reply_id(event)
     current_time = dt.now().strftime(
-        f"𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕\n𖠕 - Arab time 𖠕\n𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕\n   {os.path.basename(Config.TZ)}\n  Time: %I:%M:%S \n  Date: %d.%m.%y \n𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕"
+        f"⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁\n ⌁ Arab time ⌁𖠕\n⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁\n   {os.path.basename(Config.TZ)}\n  Time: %I:%M:%S \n  Date: %d.%m.%y \n⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁"
     )
     input_str = event.pattern_match.group(1)
     if input_str:
