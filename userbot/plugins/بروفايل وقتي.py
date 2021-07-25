@@ -36,7 +36,7 @@ from . import (
 )
 
 plugin_category = "tools"
-DEFAULTUSERBIO = DEFAULT_BIO or " ᗯᗩᏆᎢᏆᑎᏀ ᏞᏆᏦᗴ ᎢᏆᗰᗴ  "
+DEFAULTUSERBIO = DEFAULT_BIO or "الحـمـد الله دائـمآ وأبـدآ"
 DEFAULTUSER = AUTONAME or Config.ALIVE_NAME
 LOGS = logging.getLogger(__name__)
 
