@@ -74,7 +74,7 @@ async def time_func(tdata):
     else:
         return await edit_or_reply(
             tdata,
-            f"**⌔︙ ألوقـت 🕛 : **{dt.now().strftime(t_form)}** لـتاريـخ :**{dt.now().strftime(d_form)}**  : الـيوم**",
+            f"**⌔︙ ألوقـت 🕛 : **{dt.now().strftime(t_form)} \n** لـتاريـخ :**{dt.now().strftime(d_form)}",
         )
     if not timezones:
         return await edit_or_reply(tdata, "**⌔︙ البـلد غيـر مـوجود 𖠕**")
@@ -124,7 +124,7 @@ async def _(event):
     "لإظهار الوقت الحالي."
     reply_msg_id = await reply_id(event)
     current_time = dt.now().strftime(
-        f"⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁\n ⌁ Arab time ⌁𖠕\n⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁\n   {os.path.basename(Config.TZ)}\n  Time: %I:%M:%S \n  Date: %d.%m.%y \n⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁"
+        f"⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁\n ⌁ Arab time \n⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁\n   {os.path.basename(Config.TZ)}\n  Time: %I:%M:%S \n  Date: %d.%m.%y \n⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁"
     )
     input_str = event.pattern_match.group(1)
     if input_str:
