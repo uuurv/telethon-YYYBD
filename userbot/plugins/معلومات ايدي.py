@@ -25,7 +25,7 @@ async def fetch_info(replied_user, event):
             user_id=replied_user.user.id, offset=42, max_id=0, limit=80
         )
     )
-    replied_user_profile_photos_count = "• ⚜️ | لم يقم المستخدم بتعيين صورة الملف الشخصي"
+    replied_user_profile_photos_count = "`لم يقم المستخدم بتعيين صورة الملف الشخصي`"
     try:
         replied_user_profile_photos_count = replied_user_profile_photos.count
     except AttributeError:
@@ -36,7 +36,7 @@ async def fetch_info(replied_user, event):
     try:
         dc_id, location = get_input_location(replied_user.profile_photo)
     except Exception:
-        dc_id = "• ⚜️ | تعذر جلب معرف DC"
+        dc_id = "`تعذر جلب معرف DC`"
     common_chat = replied_user.common_chats_count
     username = replied_user.user.username
     user_bio = replied_user.about
@@ -51,21 +51,21 @@ async def fetch_info(replied_user, event):
     first_name = (
         first_name.replace("\u2060", "")
         if first_name
-        else ("• ⚜️ | هذا المستخدم ليس له اسم")
+        else ("`هذا المستخدم ليس له اسم`")
     )
     last_name = last_name.replace("\u2060", "") if last_name else (" ")
-    username = "@{}".format(username) if username else ("• ⚜️ | هذا الشخص لايوجد لديه معرف")
+    username = "@{}".format(username) if username else ("`هذا الشخص لايوجد لديه معرف`")
     user_bio = "• ⚜️ | هذا الشخص لايوجد لديه ايدي" if not user_bio else user_bio
-    caption = "<b><i>• ⚜️ | مــعــلــومــاتہ الــمــســتــخــدمہ :</i></b>\n\n"
-    caption += f"<b>• ⚜️ | الاســم : </b> {first_name} {last_name}\n"
-    caption += f"<b>• ⚜️ | الــمــ؏ــࢪفہ :</b> {username}\n"
-    caption += f"<b>• ⚜️ | الايــديہ :  </b> <code>{user_id}</code>\n"
-    caption += f"<b>• ⚜️ | ــدد صــوࢪڪہ؏ :</b> {replied_user_profile_photos_count}\n"
-    caption += f"<b>• ⚜️ | الــنــبــذة :</b> \n<code>{user_bio}</code>\n\n"
-    caption += f"<b>• ⚜️ | الــمــجــمــو؏ــاتہ الـمـشـتـࢪكـة :</b> {common_chat}\n"
-    caption += f"<b>• ⚜️ | رابــط مــبـاشـࢪ لــہ الـحـسـابہ :</b> "
+    caption = "<b>• ⚜️ | مــعــلــومــات الــمــســتــخــدم :</b>\n"
+    caption += f"<b>• ⚜️ | الاســم  :  </b> {first_name} {last_name}\n"
+    caption += f"<b>• ⚜️ | الــمــ؏ــࢪفہ  : </b> {username}\n"
+    caption += f"<b>• ⚜️ | الايــديہ  :  </b> <code>{user_id}</code>\n"
+    caption += f"<b>• ⚜️ | ؏ــدد صــوࢪڪہ  : </b> {replied_user_profile_photos_count}\n"
+    caption += f"<b>• ⚜️ | الــنــبــذة  : </b>  <code>{user_bio}</code>\n"
+    caption += f"<b>• ⚜️ | الــمــجــمــو؏ــاتہ الـمـشـتـࢪكـة  : </b> {common_chat}\n"
+    caption += f"<b>• ⚜️ | رابــط مــبـاشـࢪ لــہ الـحـسـابہ  :  </b> \n"
     caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-    caption += f"<b> 𓆩 تليثون العرب </b> - @IQTHON 𓆪 "
+    caption += f"<b> 𓆩 تلـيثـون الـ؏ـࢪب </b> - @IQTHON 𓆪 "
     return photo, caption
 
 
