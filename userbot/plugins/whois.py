@@ -1,5 +1,3 @@
-# Userbot module for fetching info about any user on Telegram(including you!).
-
 import html
 import os
 
@@ -27,7 +25,7 @@ async def fetch_info(replied_user, event):
             user_id=replied_user.user.id, offset=42, max_id=0, limit=80
         )
     )
-    replied_user_profile_photos_count = "User haven't set profile pic"
+    replied_user_profile_photos_count = "• ⚜️ | لم يقم المستخدم بتعيين صورة الملف الشخصي"
     try:
         replied_user_profile_photos_count = replied_user_profile_photos.count
     except AttributeError:
@@ -38,7 +36,7 @@ async def fetch_info(replied_user, event):
     try:
         dc_id, location = get_input_location(replied_user.profile_photo)
     except Exception:
-        dc_id = "Couldn't fetch DC ID!"
+        dc_id = "• ⚜️ | تعذر جلب معرف DC"
     common_chat = replied_user.common_chats_count
     username = replied_user.user.username
     user_bio = replied_user.about
@@ -53,25 +51,26 @@ async def fetch_info(replied_user, event):
     first_name = (
         first_name.replace("\u2060", "")
         if first_name
-        else ("This User has no First Name")
+        else ("• ⚜️ | هذا المستخدم ليس له اسم")
     )
     last_name = last_name.replace("\u2060", "") if last_name else (" ")
-    username = "@{}".format(username) if username else ("This User has no Username")
-    user_bio = "This User has no About" if not user_bio else user_bio
-    caption = "<b><i>USER INFO from Durov's Database :</i></b>\n\n"
-    caption += f"<b>👤 First Name:</b> {first_name} {last_name}\n"
-    caption += f"<b>🤵 Username:</b> {username}\n"
-    caption += f"<b>🔖 ID:</b> <code>{user_id}</code>\n"
-    caption += f"<b>🌏 Data Centre ID:</b> {dc_id}\n"
-    caption += f"<b>🖼 Number of Profile Pics:</b> {replied_user_profile_photos_count}\n"
-    caption += f"<b>🤖 Is Bot:</b> {is_bot}\n"
-    caption += f"<b>🔏 Is Restricted:</b> {restricted}\n"
-    caption += f"<b>🌐 Is Verified by Telegram:</b> {verified}\n\n"
-    caption += f"<b>✍️ Bio:</b> \n<code>{user_bio}</code>\n\n"
-    caption += f"<b>👥 Common Chats with this user:</b> {common_chat}\n"
-    caption += f"<b>🔗 Permanent Link To Profile:</b> "
-    caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
-    return photo, caption
+    username = "@{}".format(username) if username else ("• ⚜️ | هذا الشخص لايوجد لديه معرف")
+    user_bio = "• ⚜️ | هذا الشخص لايوجد لديه ايدي" if not user_bio else user_bio
+     caption = "<b><i>𝐔𝐬𝐞𝐫 𝐈𝐍𝐅𝐎 𝐟𝐫𝐨𝐦 𝐃𝐮𝐫𝐨𝐯'𝐬 𝐃𝐚𝐭𝐚𝐛𝐚𝐬𝐞 :</i></b>\n\n"
+     caption += f"<b>• ⚜️ | 𝐅𝐢𝐫𝐬𝐭 𝐍𝐚𝐦𝐞 : </b> {first_name} {last_name}\n"
+     caption += f"<b>• ⚜️ | 𝐔𝐬𝐞𝐫𝐧𝐚𝐦𝐞 :</b> {username}\n"
+     caption += f"<b>• ⚜️ | 𝐈𝐃 : </b> <code>{user_id}</code>\n"
+     caption += f"<b>• ⚜️ | 𝐃𝐚𝐭𝐚 𝐜𝐞𝐧𝐭𝐫𝐞 𝐈𝐃 :</b> {dc_id}\n"
+     caption += f"<b>• ⚜️ | 𝐍𝐮𝐦𝐛𝐞𝐫 𝐨𝐟 𝐏𝐫𝐨𝐟𝐢𝐥𝐞 𝐏𝐢𝐜𝐬 :</b> {replied_user_profile_photos_count}\n"
+     caption += f"<b>• ⚜️ | 𝐈𝐬 𝐛𝐨𝐭 :</b> {is_bot}\n"
+     caption += f"<b>• ⚜️ | 𝐈𝐬 𝐫𝐞𝐬𝐭𝐫𝐢𝐜𝐭𝐞𝐝 :</b> {restricted}\n"
+     caption += f"<b>• ⚜️ | 𝐈𝐬 𝐯𝐞𝐫𝐢𝐟𝐢𝐞𝐝 𝐛𝐲 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 : </b> {verified}\n\n"
+     caption += f"<b>• ⚜️ | 𝐁𝐢𝐨 :</b> \n<code>{user_bio}</code>\n\n"
+     caption += f"<b>• ⚜️ | 𝐂𝐨𝐦𝐦𝐨𝐧 𝐜𝐡𝐚𝐭𝐬 𝐰𝐢𝐭𝐡 𝐭𝐡𝐢𝐬 𝐮𝐬𝐞𝐫 :</b> {common_chat}\n"
+     caption += f"<b>• ⚜️ | 𝐭𝐡𝐞 𝐥𝐢𝐧𝐤 :</b> "
+     caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+     caption += f"<b> 𓆩 تليثون العرب </b> - @IQTHON 𓆪 "
+     return photo, caption
 
 
 @iqthon.iq_cmd(
@@ -147,8 +146,8 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="whois(?:\s|$)([\s\S]*)",
-    command=("whois", plugin_category),
+    pattern="ايدي(?:\s|$)([\s\S]*)",
+    command=("ايدي", plugin_category),
     info={
         "header": "Gets info of an user.",
         "description": "User compelete details.",
@@ -162,12 +161,12 @@ async def who(event):
     replied_user, reason = await get_user_from_event(event)
     if not replied_user:
         return
-    cat = await edit_or_reply(event, "`Fetching userinfo wait....`")
+    cat = await edit_or_reply(event, "**• ⚜️ | جـاري جـلب ايـدي المسـتخدم  🆔**")
     replied_user = await event.client(GetFullUserRequest(replied_user.id))
     try:
         photo, caption = await fetch_info(replied_user, event)
     except AttributeError:
-        return await edit_or_reply(cat, "`Could not fetch info of that user.`")
+        return await edit_or_reply(cat, "**• ⚜️ | تعذر جلب معلومات هذا المستخدم.**")
     message_id_to_reply = await reply_id(event)
     try:
         await event.client.send_file(
