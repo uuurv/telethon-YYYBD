@@ -14,7 +14,7 @@ from . import reply_id
 
 plugin_category = "utils"
 
-# Userbot timezone
+
 
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
@@ -45,20 +45,20 @@ async def get_tz(con):
 
 
 @iqthon.iq_cmd(
-    pattern="ctime(?:\s|$)([\s\S]*)(?<![0-9])(?: |$)([0-9]+)?",
-    command=("ctime", plugin_category),
+    pattern="وقت(?:\s|$)([\s\S]*)(?<![0-9])(?: |$)([0-9]+)?",
+    command=("وقت", plugin_category),
     info={
-        "header": "To get current time of a paticular country",
+        "header": "للحصول على الوقت الحالي لبلد",
         "note": "For country names check [this link](https://telegra.ph/country-names-10-24)",
-        "usage": "{tr}ctime <country name/code> <timezone number>",
-        "examples": "{tr}ctime Brazil 2",
+        "usage": "{tr}وقت + الدوله او الكود الزمني",
+        "examples": "{tr}وقت + الدوله",
     },
 )
 async def time_func(tdata):
-    """To get current time of a paticular country"""
+    """للحصول على الوقت الحالي لبلد"""
     con = tdata.pattern_match.group(1).title()
     tz_num = tdata.pattern_match.group(2)
-    t_form = "%H:%M"
+    t_form = "%I:%M"
     d_form = "%d/%m/%y - %A"
     c_name = ""
     if len(con) > 4:
@@ -74,10 +74,10 @@ async def time_func(tdata):
     else:
         return await edit_or_reply(
             tdata,
-            f"`It's`  **{dt.now().strftime(t_form)}**` on `**{dt.now().strftime(d_form)}** `here.`",
+            f"**⌔︙ ألوقـت 🕛 : **{dt.now().strftime(t_form)}** لـتاريـخ :**{dt.now().strftime(d_form)}**  : الـيوم**",
         )
     if not timezones:
-        return await edit_or_reply(tdata, "`Invaild country.`")
+        return await edit_or_reply(tdata, "**⌔︙ البـلد غيـر مـوجود 𖠕**")
     if len(timezones) == 1:
         time_zone = timezones[0]
     elif len(timezones) > 1:
@@ -85,14 +85,14 @@ async def time_func(tdata):
             tz_num = int(tz_num)
             time_zone = timezones[tz_num - 1]
         else:
-            return_str = f"`{c_name} has multiple timezones:`\n\n"
+            return_str = f"**⌔︙ `{c_name}` لها مناطق زمنية متعددة :**\n\n"
 
             for i, item in enumerate(timezones):
                 return_str += f"`{i+1}. {item}`\n"
 
-            return_str += "\n`Choose one by typing the number "
-            return_str += "in the command.`\n"
-            return_str += f"`Example: .ctime {c_name} 2`"
+            return_str += "\n**⌔︙ اختر واحدة عن طريق كتابة الرقم : **"
+            return_str += "**⌔︙ في الأمر .**\n"
+            return_str += f"**⌔︙ الأمر هوه: .وقت** {c_name} 2`"
 
             return await edit_or_reply(tdata, return_str)
 
@@ -101,30 +101,30 @@ async def time_func(tdata):
     if c_name != Config.COUNTRY:
         await edit_or_reply(
             tdata,
-            f"`It's`  **{dtnow1}**` on `**{dtnow2}**  `in {c_name} ({time_zone} timezone).`",
+            f"⌔︙ ألوقـت 🕛 :  {dtnow1} علـى {dtnow2}  فـي {c_name} ({time_zone} الـوقت العـالمي 🌍 .",
         )
     if Config.COUNTRY:
         await edit_or_reply(
             tdata,
-            f"`It's`  **{dtnow1}**` on `**{dtnow2}**  `here, in {Config.COUNTRY}"
-            f"({time_zone} timezone).`",
+            f"⌔︙ ألوقـت 🕛  : {dtnow1} على {dtnow2}  هنـا فـي 🏷️ :  {Config.COUNTRY}"
+            f"({time_zone} الـوقت العـالمي 🌍 .",
         )
 
 
 @iqthon.iq_cmd(
-    pattern="time(?:\s|$)([\s\S]*)",
-    command=("time", plugin_category),
+    pattern="الوقت(?:\s|$)([\s\S]*)",
+    command=("الوقت", plugin_category),
     info={
-        "header": "To show current time.",
-        "description": "shows current default time you can change by changing TZ in heroku vars.",
-        "usage": "{tr}time",
+        "header": "لإظهار الوقت الحالي.",
+        "الوصف": "يعرض الوقت الافتراضي الحالي الذي يمكنك تغييره عن طريق تغيير TZ في متغيرات heroku.",
+        "usage": "{tr}الوقت",
     },
 )
 async def _(event):
-    "To show current time"
+    "لإظهار الوقت الحالي."
     reply_msg_id = await reply_id(event)
     current_time = dt.now().strftime(
-        f"⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡\n⚡USERBOT TIMEZONE⚡\n⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡\n   {os.path.basename(Config.TZ)}\n  Time: %H:%M:%S \n  Date: %d.%m.%y \n⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡"
+        f"𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕\n𖠕 - Arab time 𖠕\n𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕\n   {os.path.basename(Config.TZ)}\n  Time: %I:%M:%S \n  Date: %d.%m.%y \n𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕𖠕"
     )
     input_str = event.pattern_match.group(1)
     if input_str:
