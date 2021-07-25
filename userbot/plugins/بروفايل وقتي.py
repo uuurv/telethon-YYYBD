@@ -110,7 +110,7 @@ async def custompfploop():
     i = 0
     while CUSTOMPICSTART:
         if len(get_collection_list("CUSTOM_PFP_LINKS")) == 0:
-            LOGS.error("**⌔︙لا توجـد صـور ملـف شخصـي للتعييـن !**")
+            LOGS.error("**⌔︙ لا توجـد صـور ملـف شخصـي للتعييـن !**")
             return
         pic = random.choice(list(get_collection_list("CUSTOM_PFP_LINKS")))
         urllib.request.urlretrieve(pic, "donottouch.jpg")
@@ -215,7 +215,7 @@ async def bloom_pfploop():
 async def autoname_loop():
     AUTONAMESTART = gvarstatus("اسم وقتي") == "true"
     while AUTONAMESTART:
-        DM = time.strftime("%d-%m-%y")
+        DM = time.strftime("%Y/%m/%d")
         HM = time.strftime("%I:%M")
         name = f"❖ {HM} - "
         LOGS.info(name)
@@ -231,7 +231,7 @@ async def autoname_loop():
 async def autobio_loop():
     AUTOBIOSTART = gvarstatus("نبذه وقتيه") == "true"
     while AUTOBIOSTART:
-        DMY = time.strftime("%d.%m.%Y")
+        DMY = time.strftime("%Y/%m/%d")
         HM = time.strftime("%I:%M")
         bio = f"❖ {DEFAULTUSERBIO}  - {DMY}"
         LOGS.info(bio)
