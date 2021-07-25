@@ -9,10 +9,10 @@ plugin_category = "extra"
     pattern="كورونا(?:\s|$)([\s\S]*)",
     command=("كورونا", plugin_category),
     info={
-        "header": "للحصول على أحدث المعلومات حول كورونا.",
-        "description": "الوصف": "احصل على معلومات حول بيانات covid-19 في البلد / الولاية المحددة (الولايات الهندية فقط).",
-        "usage": "{tr}كورونا + المنطقه",
-        "examples": ["{tr}كورونا + البلد", "{tr}كورونا + البلد", "{tr}كورونا + العالم
+        "header": "To get latest information about covid-19.",
+        "description": "Get information about covid-19 data in the given country/state(only Indian States).",
+        "usage": "{tr}covid <state_name/country_name>",
+        "examples": ["{tr}covid andhra pradesh", "{tr}covid india", "{tr}covid world"],
     },
 )
 async def corona(event):
