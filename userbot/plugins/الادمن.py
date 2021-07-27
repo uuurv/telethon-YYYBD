@@ -521,8 +521,8 @@ async def watcher(event):
 
 #admin plugin for  iqthon
 @iqthon.iq_cmd(
-    pattern="كتم(?:\s|$)([\s\S]*)",
-    command=("كتم", plugin_category),
+    pattern="كتم عام(?:\s|$)([\s\S]*)",
+    command=("كتم عام", plugin_category),
     info={
         "⌔︙ الأسـتخدام": "To stop sending messages from that user",
         "⌔︙ الشـرح": "If is is not admin then changes his permission in group,\
@@ -627,8 +627,8 @@ async def startmute(event):
 
 #admin plugin for  iqthon
 @iqthon.iq_cmd(
-    pattern="الغاء كتم(?:\s|$)([\s\S]*)",
-    command=("الغاء كتم", plugin_category),
+    pattern="الغاء كتم عام(?:\s|$)([\s\S]*)",
+    command=("الغاء كتم عام", plugin_category),
     info={
         "⌔︙ الأسـتخدام": "لألـغاء كتـم الشـخص ",
         "⌔︙ الشـرح": "لألـغاء كتـم الشـخص في الـمجموعة الذي تـرسل الأمر بهـا.\
