@@ -100,7 +100,7 @@ async def set_pmlog(event):
         await event.edit("**⌔︙  تـخزين رسـائل الخـاص بالفـعل معـطلة ✅**")
 
 
-@iqthon.iq_cmd
+@iqthon.iq_cmd(
     pattern="تخزين الكروبات (تشغيل|ايقاف)$",
     command=("تخزين الكروبات", plugin_category),
     info={
