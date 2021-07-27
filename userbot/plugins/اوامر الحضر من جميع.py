@@ -227,8 +227,8 @@ async def gablist(event):
 
 
 @iqthon.iq_cmd(
-    pattern="كتم عام (?:\s|$)([\s\S]*)",
-    command=("كتم عام", plugin_category),
+    pattern="كتم (?:\s|$)([\s\S]*)",
+    command=("كتم", plugin_category),
     info={
         "header": "To mute a person in all groups where you are admin.",
         "description": "It doesnt change user permissions but will delete all messages sent by him in the groups where you are admin including in private messages.",
@@ -238,7 +238,7 @@ async def gablist(event):
 async def startgmute(event):
     "To mute a person in all groups where you are admin."
     if event.is_private:
-        await event.edit("**⌔︙ قـد تـكون هـنالك بـعض المـشاكل والأخطـاء**")
+        await event.edit("**⌔︙ قـد تـكون هـنالك بـعض المـشاكل والأخطـاء ‼️ جـاري**")
         await asyncio.sleep(2)
         userid = event.chat_id
         reason = event.pattern_match.group(1)
@@ -247,45 +247,45 @@ async def startgmute(event):
         if not user:
             return
         if user.id == iqthon.uid:
-            return await edit_or_reply(event, "**⌔︙ لا يـمكنك كتم نـفسك**")
+            return await edit_or_reply(event, "**⌔︙ لا يـمكنك كتم نـفسك ‼️**")
         userid = user.id
     try:
         user = (await event.client(GetFullUserRequest(userid))).user
     except Exception:
-        return await edit_or_reply(event, "**⌔︙ تـحتاج صـلاحـيات الـحذف لـهذا الأمـر**")
-    if is_muted(userid, "كتم عام"):
+        return await edit_or_reply(event, "**⌔︙ تـحتاج صـلاحـيات الـحذف لـهذا الأمـر ❎**")
+    if is_muted(userid, "كتم"):
         return await edit_or_reply(
             event,
-            f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ هـذا الـشخص بالـفعـل مكـتوم عام**",
+            f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ هـذا الـشخص بالـفعـل مكـتوم ✅**",
         )
     try:
-        mute(userid, "كتم عام")
+        mute(userid, "كتم")
     except Exception as e:
         await edit_or_reply(event, f"**خـطأ : **\n`{str(e)}`")
     else:
         if reason:
             await edit_or_reply(
                 event,
-                f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ تـم كتمه بنـجاح**\n **⌔︙ السـبب:** `{reason}`",
+                f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ تـم كتمه بنـجاح ✅**\n **⌔︙ السـبب:** `{reason}`",
             )
         else:
             await edit_or_reply(
                 event,
-                f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ تـم كتمه بنـجاح**",
+                f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ تـم كتمه بنـجاح ✅**",
             )
     if BOTLOG:
         reply = await event.get_reply_message()
         if reason:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "**⌔︙ الـكتم العام**\n"
+                "**⌔︙ الـكتم **\n"
                 f"**⌔︙ الـشخـص :** {_format.mentionuser(user.first_name ,user.id)} \n"
                 f"**⌔︙ السـبب:** `{reason}`",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "**⌔︙ الـكتم العام**\n"
+                "**⌔︙ الـكتم**\n"
                 f"**⌔︙ الـشخـص :** {_format.mentionuser(user.first_name ,user.id)} \n",
             )
         if reply:
