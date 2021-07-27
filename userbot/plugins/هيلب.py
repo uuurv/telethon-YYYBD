@@ -126,8 +126,8 @@ async def cmdlist():
 
 
 @iqthon.iq_cmd(
-    pattern="الاوامر ?(-c|-p|-t)? ?([\s\S]*)?",
-    command=("الاوامر", plugin_category),
+    pattern="هيلب ?(-c|-p|-t)? ?([\s\S]*)?",
+    command=("هيلب", plugin_category),
     info={
         "header": "To get guide for catuserbot.",
         "description": "To get information or guide for the command or plugin",
@@ -169,8 +169,8 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="جميع الاوامر(?:\s|$)([\s\S]*)",
-    command=("جميع الاوامر", plugin_category),
+    pattern="هيلب ايل(?:\s|$)([\s\S]*)",
+    command=("هيلب ايل", plugin_category),
     info={
         "header": "لإظهار قائمة الاوامر.",
         "description": "إذا لم يتم تقديم أي إدخال ، فسيتم عرض قائمة بجميع الأوامر.",
