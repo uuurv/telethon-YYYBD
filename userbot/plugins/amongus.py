@@ -263,8 +263,8 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="الاوامر 1",
-    command=("الاوامر 1", plugin_category),
+    pattern="الأوامر$",
+    command=("الأوامر", plugin_category),
     info={
         "header": "Find imposter with text animation.",
         "description": "timp for imposter timpn for not imposter",
