@@ -1,8 +1,3 @@
-""" Google Text to Speech
-Available Commands:
-.tts LanguageCode as reply to a message
-.tts LangaugeCode | text to speak"""
-
 import os
 import subprocess
 from datetime import datetime
@@ -18,14 +13,14 @@ plugin_category = "utils"
 
 
 @iqthon.iq_cmd(
-    pattern="tts(?:\s|$)([\s\S]*)",
-    command=("tts", plugin_category),
+    pattern="تكلم(?:\s|$)([\s\S]*)",
+    command=("تكلم", plugin_category),
     info={
         "header": "Text to speech command.",
         "usage": [
-            "{tr}tts <text>",
-            "{tr}tts <reply>",
-            "{tr}tts <language code> ; <text>",
+            "{tr}تكلم <text>",
+            "{tr}تكلم <reply>",
+            "{tr}تكلم <language code> ; <text>",
         ],
     },
 )
@@ -42,17 +37,17 @@ async def _(event):
         lan = input_str or "en"
     else:
         if not input_str:
-            return await edit_or_reply(event, "Invalid Syntax. Module stopping.")
+            return await edit_or_reply(event, "**⌔︙  عـذرا هـذا النص خـطأ **")
         text = input_str
         lan = "en"
-    catevent = await edit_or_reply(event, "`Recording......`")
+    catevent = await edit_or_reply(event, "**⌔︙ يـتم الـتسجيل أنتـظر **")
     text = deEmojify(text.strip())
     lan = lan.strip()
     if not os.path.isdir("./temp/"):
         os.makedirs("./temp/")
     required_file_name = "./temp/" + "voice.ogg"
     try:
-        # https://github.com/SpEcHiDe/UniBorg/commit/17f8682d5d2df7f3921f50271b5b6722c80f4106
+        
         tts = gTTS(text, lang=lan)
         tts.save(required_file_name)
         command_to_execute = [
@@ -91,7 +86,7 @@ async def _(event):
         os.remove(required_file_name)
         await edit_delete(
             catevent,
-            "`Processed text {} into voice in {} seconds!`".format(text[0:20], ms),
+            "**⌔︙ النـص الـذي اخـترتـة  {} في هـذا البـصمة  خـلال 🔎 {} ثـانيـة 🔩".format(text[0:20], ms),
         )
     except Exception as e:
-        await edit_or_reply(catevent, f"**Error:**\n`{str(e)}`")
+        await edit_or_reply(catevent, f"**⌔︙ عـذرا هنـاك خطـأ هـوة 🚫 :**\n`{str(e)}`")
