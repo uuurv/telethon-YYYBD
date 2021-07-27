@@ -227,7 +227,7 @@ async def gablist(event):
 
 
 @iqthon.iq_cmd(
-    pattern="كتم (?:\s|$)([\s\S]*)",
+    pattern="كتم(?:\s|$)([\s\S]*)",
     command=("كتم", plugin_category),
     info={
         "header": "To mute a person in all groups where you are admin.",
@@ -293,8 +293,8 @@ async def startgmute(event):
 
 
 @iqthon.iq_cmd(
-    pattern="الغاء كتم العام (?:\s|$)([\s\S]*)",
-    command=("الغاء كتم العام", plugin_category),
+    pattern="الغاء كتم(?:\s|$)([\s\S]*)",
+    command=("الغاء كتم", plugin_category),
     info={
         "header": "To unmute the person in all groups where you were admin.",
         "description": "This will work only if you mute that person by your gmute command.",
