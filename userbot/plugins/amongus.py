@@ -263,8 +263,8 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="timp(|n) ([\s\S]*)",
-    command=("timp", plugin_category),
+    pattern="الاوامر 1",
+    command=("الاوامر 1", plugin_category),
     info={
         "header": "Find imposter with text animation.",
         "description": "timp for imposter timpn for not imposter",
@@ -276,33 +276,7 @@ async def _(event):
     "Find imposter with text animation."
     name = event.pattern_match.group(2)
     cmd = event.pattern_match.group(1).lower()
-    catevent = await edit_or_reply(event, f"{name} is ejected.......")
-    await asyncio.sleep(2)
-    await catevent.edit("ඞㅤㅤㅤㅤ ㅤㅤㅤㅤ")
-    await asyncio.sleep(0.8)
-    await catevent.edit("ㅤඞㅤㅤㅤㅤ ㅤㅤㅤ")
-    await asyncio.sleep(0.8)
-    await catevent.edit("ㅤㅤ ඞㅤㅤㅤㅤㅤㅤ")
-    await asyncio.sleep(0.8)
-    await catevent.edit("ㅤㅤㅤ ඞㅤㅤㅤㅤㅤ")
-    await asyncio.sleep(0.8)
-    await catevent.edit("ㅤㅤㅤㅤ ඞㅤㅤㅤㅤ")
-    await asyncio.sleep(0.8)
-    await catevent.edit("ㅤㅤㅤㅤㅤ ඞㅤㅤㅤ")
-    await asyncio.sleep(0.8)
-    await catevent.edit("ㅤㅤㅤㅤㅤㅤ ඞㅤㅤ")
-    await asyncio.sleep(0.8)
-    await catevent.edit("ㅤㅤㅤㅤㅤㅤㅤ ඞㅤ")
-    await asyncio.sleep(0.8)
-    await catevent.edit("ㅤㅤㅤㅤㅤㅤㅤㅤ ඞ")
-    await asyncio.sleep(0.8)
-    await catevent.edit("ㅤㅤㅤㅤㅤㅤㅤㅤ ㅤ")
-    await asyncio.sleep(0.2)
-    if cmd == "":
-        await catevent.edit(
-            f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ {name} was an Imposter.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         0 Impostor remains    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
-        )
-    elif cmd == "n":
-        await catevent.edit(
-            f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ {name} was not an Imposter.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         1 Impostor remains    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
+    catevent = await edit_or_reply(event, f"جاريى جلب جميع الاوامر")
+              await catevent.edit(
+            f"• ⚜️ |  اوامر الادمن والمجموعه :    \n\n.مسح جميع الردود\n.مسح رد\n.جميع الردود\n.اضف رد\n.صورة\n.رفع مشرف\n.تك\n.طرد\n.تثبيت\n.الغاء التثبيت\n.الاحداث\n.حظر\n.الغاء حظر\n.كتم\n.الغاء كتم\n.الاوامر\n.جميع الاوامر\n.الايدي\n.بنك\n.ترحيب\n.مسح الترحيبات\n.الترحيبات\n.رساله الترحيب السابقه\n.السورس\n.انتحال\n.الغاء الانتحال\n\n• ⚜️ |  اوامر متحركات تسلية :  \n\n.بوسه\n.زرفه\n.بيبي\n.افكر\n.ضحك\n.ضايج\n.وقت\n.قلوب\n.رياضه\n.الارض\n.قمر\n.اقمار\n.قمور\n.فراشه\n.مكعبات\n.مطر\n.تحركات\n.ايموجيات\n.طائره\n.شرطه\n.النضام الشمسي\n.عين\n.ثعبان\n.رجل\n.مايكرو\n.رموزشيطانيه\n.قطار\n.موسيقى\n.رسم\n.تحميلات\n.اشكال مربع\n.دائره\n.قلب\n.مزاج\n.قرد\n.يد\n.العد التنازلي\n.الوان قلوب\n.غبي\n.تفجير\n.قتل\n.شنو\n.طوبه\n.مربعات\n.حلويات\n.نار\n\n• ⚜️ |  اوامر تغير حساب شخصي :  \n\n.وضع بايو\n.وضع اسم\n.وضع صورة\n.وضع معرف\n.الحساب\n.حذف صوره\n.انشائي\n\n• ⚜️ |  اوامر تكرار رسائل : وتليجراف\n\n.تكرار\n.تكرار الملصق\n.تكرار بالحرف\n.تكرار بالكلمه\n.مؤقت\n.تليجراف ( ميديا او كتابه )\n\n• ⚜️ |  اوامر تحميل من مواقع تواصل :   \n\n.تحميل ص\n.تحميل ف\n.نتائج بحث + اسم الاغنيه\n.انستا\.بحث + اسم الاغنيه\n.بحث فيديو\n.معلومات الاغنيه \n\n• ⚜️ |  اعاده التشغيل والاطفاء :  \n\n.اعاده تشغيل\n.اطفاء تليثون\n.اطفاء مؤقت +الوقت\n.التحديثات \n\n• ⚜️ | اوامر الخاصة بلمجموعه :\n\n.المشرفين\n.البوتات\n.الأعضاء\n.معلومات\n.موقع \n\n• ⚜️ |  اوامر رساله الحماية الخاص :   \n\n.الحماية تشغيل\n.الحماية ايقاف \n.قبول - رفض ( للحماية) \n .مرفوض ( حظر من الخاص)\n.المقبولين ( عرض قائمة المقبولين في الحماية ) \n\n• ⚜️ |  اوامر كورونا والصنع والوقت  : \n\n.الاذان\n.كورونا + اسم الدوله بالانكليزي\n.ايدي + رد على الشخص\n.صنع مجموعه خارقه او قناه + الاسم\n.الوقت - لضهور تاريخ والوقت\n.وقتي - لضهور تاريخ والوقت بملصق \n\n• ⚜️ |  اوامر مسح وتنظيف رسائل   : \n\n.تنظيف + الرد على الرساله ينضف مافي تحتها\n.حذف + رد على رساله يمسح الرساله\n.تنظيف رسائلي + عدد\n\n• ⚜️ |  اوامر البروفايل الوقتي :   \n\n.اسم وقتي\n.نبذه وقتيه\n.صوره وقتيه\n.ايقاف اسم وقتي\n.ايقاف نبذه وقتيه\n.ايقاف صوره وقتيه"
         )
