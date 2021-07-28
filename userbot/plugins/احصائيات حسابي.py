@@ -106,7 +106,9 @@ async def stats(event):  # sourcery no-metrics
     response += f"**⌔︙ عـدد القنـوات  🚻:** {broadcast_channels} \n"
     response += f"**⌔︙ عـدد المجـموعات التـي تكـون فيها ادمـن  🛂:** {admin_in_groups} \n"
     response += f"**⌔︙ عـدد المجموعات التـي أنـشأتـها  🛃**: {creator_in_groups}` \n"
-    response += f"**⌔︙ عـدد المجـموعات التـي تكـون فيها ادمـن 📶:** {admin_in_broadcast_channels} \n"
+    response += f"**⌔︙ عـدد القنوات التـي تكـون فيها ادمـن 📶:** {admin_in_broadcast_channels} \n"
+    response += (
+        f"**⌔︙ حقوق المسؤول في القنوات  🛂 :** {admin_in_broadcast_channels - creator_in_channels}` \n"
     )
     response += f"**عـدد المحـادثـات الغيـر مقـروء 📄 :** {unread} \n"
     response += f"**عـدد الـتاكـات الغيـر مقـروء 📌:** {unread_mentions} \n"
