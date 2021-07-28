@@ -1,7 +1,3 @@
-"""
-All Thenks goes to Emily ( The creater of This Plugin) from ftg userbot
-"""
-
 from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
@@ -12,8 +8,8 @@ name = "Profile Photos"
 
 
 @iqthon.iq_cmd(
-    pattern="poto(?:\s|$)([\s\S]*)",
-    command=("poto", plugin_category),
+    pattern="الصور(?:\s|$)([\s\S]*)",
+    command=("الصور", plugin_category),
     info={
         "header": "To get user or group profile pic.",
         "description": "Reply to a user to get his profile pic or use command along\
@@ -42,11 +38,11 @@ async def potocmd(event):
         uid = 1
         if int(uid) > (len(photos)):
             return await edit_delete(
-                event, "`No photo found of this NIBBA / NIBBI. Now u Die!`"
+                event, "**⌔︙ لم يتم العثور على صورة لهذا  الشخص 🏞**"
             )
         send_photos = await event.client.download_media(photos[uid - 1])
         await event.client.send_file(event.chat_id, send_photos)
-    elif uid.strip() == "all":
+    elif uid.strip() == "جميعها":
         if len(photos) > 0:
             await event.client.send_file(event.chat_id, photos)
         else:
@@ -57,21 +53,21 @@ async def potocmd(event):
                     photo = await event.client.download_profile_photo(event.input_chat)
                 await event.client.send_file(event.chat_id, photo)
             except Exception:
-                return await edit_delete(event, "`This user has no photos to show you`")
+                return await edit_delete(event, "**⌔︙ هذا المستخدم ليس لديه صور لتظهر لك  🙅🏼  **")
     else:
         try:
             uid = int(uid)
             if uid <= 0:
                 await edit_or_reply(
-                    event, "```number Invalid!``` **Are you Comedy Me ?**"
+                    event, "**⌔︙ الرقم غير صحيح - اختر رقم صوره موجود فعليا ⁉️**"
                 )
                 return
         except BaseException:
-            await edit_or_reply(event, "`Are you comedy me ?`")
+            await edit_or_reply(event, "**⌔︙ هناك خطا  ⁉️**")
             return
         if int(uid) > (len(photos)):
             return await edit_delere(
-                event, "`No photo found of this NIBBA / NIBBI. Now u Die!`"
+                event, "**⌔︙ لم يتم العثور على صورة لهذا  الشخص 🏞**"
             )
 
         send_photos = await event.client.download_media(photos[uid - 1])
