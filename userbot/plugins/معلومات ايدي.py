@@ -55,16 +55,16 @@ async def fetch_info(replied_user, event):
     )
     last_name = last_name.replace("\u2060", "") if last_name else (" ")
     username = "@{}".format(username) if username else ("`هذا الشخص لايوجد لديه معرف`")
-    user_bio = "• ⚜️ | هذا الشخص لايوجد لديه ايدي" if not user_bio else user_bio
+    user_bio = "`هذا الشخص لايوجد لديه نــبــذة`" if not user_bio else user_bio
     caption = "<b>• ⚜️ | مــعــلــومــات الــمــســتــخــدم :</b>\n"
-    caption += f"<b>• ⚜️ | الاســم  :  </b> {first_name} {last_name}\n"
+    caption += f"<b>• ⚜️ | الاســم  :  </b> `{first_name} {last_name}`\n"
     caption += f"<b>• ⚜️ | الــمــ؏ــࢪفہ  : </b> {username}\n"
     caption += f"<b>• ⚜️ | الايــديہ  :  </b> <code>{user_id}</code>\n"
-    caption += f"<b>• ⚜️ | ؏ــدد صــوࢪڪہ  : </b> {replied_user_profile_photos_count}\n"
-    caption += f"<b>• ⚜️ | الــنــبــذة  : </b>  <code>{user_bio}</code>\n"
-    caption += f"<b>• ⚜️ | الــمــجــمــو؏ــاتہ الـمـشـتـࢪكـة  : </b> {common_chat}\n"
+    caption += f"<b>• ⚜️ | ؏ــدد صــوࢪڪہ  : </b> `{replied_user_profile_photos_count}`\n"
+    caption += f"<b>• ⚜️ | الــنــبــذة  : </b>  `<code>{user_bio}</code>`\n"
+    caption += f"<b>• ⚜️ | الــمــجــمــو؏ــاتہ الـمـشـتـࢪكـة  : </b> `{common_chat}`\n"
     caption += f"<b>• ⚜️ | رابــط مــبـاشـࢪ لــہ الـحـسـابہ  :  </b> \n"
-    caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
+    caption += f'• ⚜️ | <a href="tg://user?id={user_id}">{first_name}</a> \n'
     caption += f"<b> 𓆩 تلـيثـون الـ؏ـࢪب </b> - @IQTHON 𓆪 "
     return photo, caption
 
@@ -182,8 +182,8 @@ async def who(event):
 
 
 @iqthon.iq_cmd(
-    pattern="link(?:\s|$)([\s\S]*)",
-    command=("link", plugin_category),
+    pattern="رابط الحساب(?:\s|$)([\s\S]*)",
+    command=("رابط الحساب", plugin_category),
     info={
         "header": "Generates a link to the user's PM .",
         "usage": "{tr}link <username/userid/reply>",
@@ -195,6 +195,6 @@ async def permalink(mention):
     if not user:
         return
     if custom:
-        return await edit_or_reply(mention, f"[{custom}](tg://user?id={user.id})")
+        return await edit_or_reply(mention, f"• ⚜️ | [{custom}](tg://user?id={user.id})")
     tag = user.first_name.replace("\u2060", "") if user.first_name else user.username
-    await edit_or_reply(mention, f"[{tag}](tg://user?id={user.id})")
+    await edit_or_reply(mention, f"• ⚜️ | [{tag}](tg://user?id={user.id})")
