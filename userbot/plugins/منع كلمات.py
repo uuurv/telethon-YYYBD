@@ -2,7 +2,7 @@ from datetime import datetime
 
 from telethon.utils import get_display_name
 
-from userbot import iqthon
+from userbot import catub
 from userbot.core.logger import logging
 
 from ..core.data import blacklist_chats_list
@@ -71,84 +71,176 @@ async def chat_blacklist(event):
     await edit_delete(event, "**⌔︙ تــم ايقـافـه بالـفعـل ✅ .**")
 
 
-@iqthon.iq_cmd(
-    pattern="منع(?:\s|$)([\s\S]*)",
+@catub.cat_cmd(
+    pattern="منع(s)?(?:\s|$)([\s\S]*)",
     command=("منع", plugin_category),
     info={
-        "header": "To add blacklist words to database",
-        "description": "The given word or words will be added to blacklist in that specific chat if any user sends then the message gets deleted.",
-        "note": "if you are adding more than one word at time via this, then remember that new word must be given in a new line that is not [hi hello]. It must be as\
-            \n[hi \n hello]",
-        "usage": "{tr}addblacklist <word(s)>",
-        "examples": ["{tr}addblacklist fuck", "{tr}addblacklist fuck\nsex"],
+        "header": "To add chats to blacklist.",
+        "description": "to add the chats to database so your bot doesn't work in\
+         thoose chats. Either give chatids as input or do this cmd in the chat\
+         which you want to add to db.",
+        "usage": [
+            "{tr}addblkchat <chat ids>",
+            "{tr}addblkchat in the chat which you want to add",
+        ],
     },
-    groups_only=True,
-    require_admin=True,
 )
-async def _(event):
-    "To add blacklist words to database"
-    text = event.pattern_match.group(1)
-    to_blacklist = list(
-        {trigger.strip() for trigger in text.split("\n") if trigger.strip()}
-    )
+async def add_blacklist_chat(event):
+    "To add chats to blacklist."
+    input_str = event.pattern_match.group(2)
+    errors = ""
+    result = ""
+    blkchats = blacklist_chats_list()
+    try:
+        blacklistchats = sql.get_collection("blacklist_chats_list").json
+    except AttributeError:
+        blacklistchats = {}
+    if input_str:
+        input_str = input_str.split(" ")
+        for chatid in input_str:
+            try:
+                chatid = int(chatid.strip())
+                if chatid in blkchats:
+                    errors += f"**⌔︙ عزيزي الكلمه المحدده {chatid} غير موجوه بقائمه المنع  👁‍🗨**\n"
+                    continue
+                chat = await event.client.get_entity(chatid)
+                date = str(datetime.now().strftime("%B %d, %Y"))
+                chatdata = {
+                    "chat_id": chat.id,
+                    "chat_name": get_display_name(chat),
+                    "chat_username": chat.username,
+                    "date": date,
+                }
+                blacklistchats[str(chat.id)] = chatdata
+                result += (
+                    f"**⌔︙ تم اضافة  {get_display_name (chat)} الكلمة في قائمة المنع بنجاح ✅**\n"
+                )
+            except Exception as e:
+                errors += f"**{chatid}** - __{str(e)}__\n"
+    else:
+        chat = await event.get_chat()
+        try:
+            chatid = chat.id
+            if chatid in blkchats:
+                errors += f"**⌔︙ حدث خطأ اثناء اضافة كلمـة ❌ :  {chatid}  الكلمة في قائمة المنع بالفعل **\n"
+            else:
+                date = str(datetime.now().strftime("%B %d, %Y"))
+                chatdata = {
+                    "chat_id": chat.id,
+                    "chat_name": get_display_name(chat),
+                    "chat_username": chat.username,
+                    "date": date,
+                }
+                blacklistchats[str(chat.id)] = chatdata
+                result += (
+                    f"**⌔︙ تم اضافة  {get_display_name (chat)} الكلمة في قائمة المنع بنجاح ✅**\n"
+                )
+        except Exception as e:
+            errors += f"**⌔︙ حدث خطأ اثناء اضافة كلمـة ❌ : {chatid}** - __{str(e)}__\n"
+    sql.del_collection("blacklist_chats_list")
+    sql.add_collection("blacklist_chats_list", blacklistchats, {})
+    output = ""
+    if result != "":
+        output += f"**⌔︙ النجاح بالاضافه ✅:**\n{result}\n"
+    if errors != "":
+        output += f"**⌔︙ الاخطاء ❌:**\n{errors}\n"
+    if result != "":
+        output += "**⌔︙ يقوم البوت بإعادة التحميل لتطبيق التغييرات. من فضلك انتظر دقيقة 👁‍🗨**"
+    msg = await edit_or_reply(event, output)
+    await event.client.reload(msg)
 
-    for trigger in to_blacklist:
-        sql.add_to_blacklist(event.chat_id, trigger.lower())
-    await edit_or_reply(
-        event,
-        "⌔︙ تـم اضـافـة {} الكلمـة فـي قائمـة المنـع بنجـاح".format(
-            len(to_blacklist)
-        ),
-    )
 
-
-@iqthon.iq_cmd(
-    pattern="الغاء منع(?:\s|$)([\s\S]*)",
+@catub.cat_cmd(
+    pattern="الغاء منع(s)?(?:\s|$)([\s\S]*)",
     command=("الغاء منع", plugin_category),
     info={
-        "header": "To remove blacklist words from database",
-        "description": "The given word or words will be removed from blacklist in that specific chat",
-        "note": "if you are removing more than one word at time via this, then remember that new word must be given in a new line that is not [hi hello]. It must be as\
-            \n[hi \n hello]",
-        "usage": "{tr}rmblacklist <word(s)>",
-        "examples": ["{tr}rmblacklist fuck", "{tr}rmblacklist fuck\nsex"],
+        "header": "To remove chats to blacklist.",
+        "description": "to remove the chats from database so your bot will work in\
+         those chats. Either give chatids as input or do this cmd in the chat\
+         which you want to remove from db.",
+        "usage": [
+            "{tr}rmblkchat <chat ids>",
+            "{tr}rmblkchat in the chat which you want to add",
+        ],
     },
-    groups_only=True,
-    require_admin=True,
 )
-async def _(event):
-    "To Remove Blacklist Words from Database."
-    text = event.pattern_match.group(1)
-    to_unblacklist = list(
-        {trigger.strip() for trigger in text.split("\n") if trigger.strip()}
-    )
-    successful = sum(
-        bool(sql.rm_from_blacklist(event.chat_id, trigger.lower()))
-        for trigger in to_unblacklist
-    )
-    await edit_or_reply(
-        event, f"⌔︙ تـم ازالـة الـكلمـة {successful} / {len(to_unblacklist)} مـن قائمـة المنـع بنجـاح"
-    )
-
-
-@iqthon.iq_cmd(
-    pattern="قائمة المنع$",
-    command=("قائمة المنع", plugin_category),
-    info={
-        "header": "To show the black list words",
-        "description": "Shows you the list of blacklist words in that specific chat",
-        "usage": "{tr}listblacklist",
-    },
-    groups_only=True,
-    require_admin=True,
-)
-async def _(event):
-    "To show the blacklist words in that specific chat"
-    all_blacklisted = sql.get_chat_blacklist(event.chat_id)
-    OUT_STR = "⌔︙ قائمـة الـمنـع في الدردشـة الـحاليـة :\n"
-    if len(all_blacklisted) > 0:
-        for trigger in all_blacklisted:
-            OUT_STR += f"👈 {trigger} \n"
+async def add_blacklist_chat(event):
+    "To remove chats from blacklisted chats."
+    input_str = event.pattern_match.group(2)
+    errors = ""
+    result = ""
+    blkchats = blacklist_chats_list()
+    try:
+        blacklistchats = sql.get_collection("blacklist_chats_list").json
+    except AttributeError:
+        blacklistchats = {}
+    if input_str:
+        input_str = input_str.split(" ")
+        for chatid in input_str:
+            try:
+                chatid = int(chatid.strip())
+                if chatid in blkchats:
+                    chatname = blacklistchats[str(chatid)]["chat_name"]
+                    del blacklistchats[str(chatid)]
+                    result += (
+                        f"**⌔︙ تم بالفعل الغاء منع كلمة - {chatname} من قائمه الممنوعات ✅.**\n"
+                    )
+                else:
+                    errors += f"**⌔︙ عزيزي الكلمه المحدده {chatid} غير موجوه بقائمه المنع  👁‍🗨**\n"
+            except Exception as e:
+                errors += f"**⌔︙ أثناء إزالة الكلمة {chatid}** - __{str(e)}__\n"
     else:
-        OUT_STR = " ⌔︙ لـم تـقـم باضـافـة كلمـات سـوداء ارسـل  `.منع` لمـنع كلمـة"
-    await edit_or_reply(event, OUT_STR)
+        chat = await event.get_chat()
+        try:
+            chatid = chat.id
+            if chatid in blkchats:
+                chatname = blacklistchats[str(chatid)]["chat_name"]
+                del blacklistchats[str(chatid)]
+                result += f"**⌔︙ تم بالفعل الغاء منع كلمة - {chatname} من قائمه الممنوعات ✅.**\n"
+            else:
+                errors += f"**⌔︙ عزيزي الكلمه المحدده {chatid} غير موجوه بقائمه المنع  👁‍🗨**\n"
+        except Exception as e:
+            errors += f"**⌔︙ أثناء إزالة الكلمة {chatid}** - __{str(e)}__\n"
+    sql.del_collection("blacklist_chats_list")
+    sql.add_collection("blacklist_chats_list", blacklistchats, {})
+    output = ""
+    if result != "":
+        output += f"**⌔︙ النجاح بالاضافه ✅:**\n{result}\n"
+    if errors != "":
+        output += f"**⌔︙ الاخطاء ❌:**\n{errors}\n"
+    if result != "":
+        output += "**⌔︙ يقوم البوت بإعادة التحميل لتطبيق التغييرات. من فضلك انتظر دقيقة 👁‍🗨**"
+    msg = await edit_or_reply(event, output)
+    await event.client.reload(msg)
+
+
+@catub.cat_cmd(
+    pattern="قائمه المنع$",
+    command=("قائمه المنع", plugin_category),
+    info={
+        "header": "To list all blacklisted chats.",
+        "description": "Will show you the list of all blacklisted chats",
+        "usage": [
+            "{tr}listblkchat",
+        ],
+    },
+)
+async def add_blacklist_chat(event):
+    "To show list of chats which are blacklisted."
+    blkchats = blacklist_chats_list()
+    try:
+        blacklistchats = sql.get_collection("blacklist_chats_list").json
+    except AttributeError:
+        blacklistchats = {}
+    if len(blkchats) == 0:
+        return await edit_delete(
+            event, "**⌔︙ لا توجد محادثات في القائمة السوداء في الروبوت الخاص بك ⁉️**"
+        )
+    result = "**⌔︙ قائمة المنع في الدردشة الحالية  ⚜️ :**\n\n"
+    for chat in blkchats:
+        result += f"☞ {blacklistchats[str(chat)]['chat_name']}\n"
+        result += f"**⌔︙ ايدي المحادثه 🆔 :** `{chat}`\n"
+        username = blacklistchats[str(chat)]["chat_username"] or "مجموعة خاصة"
+        result += f"**⌔︙المعرف 👁‍🗨 :** {username}\n"
+        result += f"**⌔︙الاضافه 🆕 :** {blacklistchats[str(chat)]['date']}\n\n"
+    await edit_or_reply(event, result)
