@@ -2,7 +2,7 @@ from datetime import datetime
 
 from telethon.utils import get_display_name
 
-from userbot import catub
+from userbot import iqthon
 from userbot.core.logger import logging
 
 from ..core.data import blacklist_chats_list
@@ -71,7 +71,7 @@ async def chat_blacklist(event):
     await edit_delete(event, "**⌔︙ تــم ايقـافـه بالـفعـل ✅ .**")
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="منع(s)?(?:\s|$)([\s\S]*)",
     command=("منع", plugin_category),
     info={
@@ -150,7 +150,7 @@ async def add_blacklist_chat(event):
     await event.client.reload(msg)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="الغاء منع(s)?(?:\s|$)([\s\S]*)",
     command=("الغاء منع", plugin_category),
     info={
@@ -214,7 +214,7 @@ async def add_blacklist_chat(event):
     await event.client.reload(msg)
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="قائمه المنع$",
     command=("قائمه المنع", plugin_category),
     info={
