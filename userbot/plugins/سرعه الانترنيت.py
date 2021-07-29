@@ -1,7 +1,3 @@
-"""Check your internet speed powered by speedtest.net
-Syntax: .speedtest
-Available Options: image, file, text"""
-
 from time import time
 
 import speedtest
@@ -25,8 +21,8 @@ def convert_from_bytes(size):
 
 
 @iqthon.iq_cmd(
-    pattern="speedtest(?:\s|$)([\s\S]*)",
-    command=("speedtest", plugin_category),
+    pattern="سرعه الانترنيت(?:\s|$)([\s\S]*)",
+    command=("سرعه الانترنيت", plugin_category),
     info={
         "header": "Botserver's speedtest by ookla.",
         "options": {
@@ -52,7 +48,7 @@ async def _(event):
     elif input_str == "text":
         as_text = True
     catevent = await edit_or_reply(
-        event, "`Calculating my internet speed. Please wait!`"
+        event, "**⌔︙ جـاري حسـاب سرعـه الانـترنيـت لـديك  🔁**"
     )
     start = time()
     s = speedtest.Speedtest()
@@ -74,13 +70,13 @@ async def _(event):
         speedtest_image = response
         if as_text:
             await catevent.edit(
-                """`SpeedTest completed in {} seconds`
+                """**⌔︙ حسـاب سرعـه الانـترنيـت لـديك  📶 : {} ثانية**
 
-`Download: {} (or) {} MB/s`
-`Upload: {} (or) {} MB/s`
-`Ping: {} ms`
-`Internet Service Provider: {}`
-`ISP Rating: {}`""".format(
+**⌔︙ التنزيل 📶 :** `{} (or) {} ميغا بايت`
+**⌔︙ الرفع 📶 :** `{} (or) {} ميغا بايت`
+**⌔︙ البنك :** {}` بالثانية`
+**⌔︙ مزود خدمة الإنترنت 📢 :** `{}`
+**⌔︙ تقيم الانترنيت :** `{}`""".format(
                     ms,
                     convert_from_bytes(download_speed),
                     round(download_speed / 8e6, 2),
@@ -103,12 +99,12 @@ async def _(event):
             await event.delete()
     except Exception as exc:
         await catevent.edit(
-            """**SpeedTest** completed in {} seconds
-Download: {} (or) {} MB/s
-Upload: {} (or) {} MB/s
-Ping: {} ms
+            """**⌔︙ حسـاب سرعـه الانـترنيـت لـديك  📶 : {} ثانية**
+**⌔︙ التنزيل 📶:** `{} (or) {} ميغا بايت`
+**⌔︙ الرفع 📶:** `{} (or) {} ميغا بايت`
+**⌔︙ البنك :** {}` بالثانية`
 
-__With the Following ERRORs__
+**⌔︙مع الأخطاء التالية :**
 {}""".format(
                 ms,
                 convert_from_bytes(download_speed),
