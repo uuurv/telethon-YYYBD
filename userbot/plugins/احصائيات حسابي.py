@@ -100,18 +100,18 @@ async def stats(event):  # sourcery no-metrics
     full_name = inline_mention(await event.client.get_me())
     response = f"📌 **• ⚜️ |  احصائيات حسـابك العـامة لـ {full_name} 📊** \n"
     response += f"**⌔︙الدردشات الخاصة 🏷️  :** {private_chats} \n"
-    response += f"**⌔︙ الاشـخاص 🚹: {private_chats - bots}` \n"
-    response += f"**⌔︙ الـبوتـات 🤖**: {bots}` \n"
-    response += f"**⌔︙ عـدد المجـموعـات 🚻:** {groups} \n"
-    response += f"**⌔︙ عـدد القنـوات  🚻:** {broadcast_channels} \n"
-    response += f"**⌔︙ عـدد المجـموعات التـي تكـون فيها ادمـن  🛂:** {admin_in_groups} \n"
-    response += f"**⌔︙ عـدد المجموعات التـي أنـشأتـها  🛃**: {creator_in_groups}` \n"
-    response += f"**⌔︙ عـدد القنوات التـي تكـون فيها ادمـن 📶:** {admin_in_broadcast_channels} \n"
+    response += f"**⌔︙ الاشـخاص 🚹 : {private_chats - bots}` \n"
+    response += f"**⌔︙ الـبوتـات 🤖 : {bots}` **\n"
+    response += f"**⌔︙ عـدد المجـموعـات 🚻 :** `{groups}` \n"
+    response += f"**⌔︙ عـدد القنـوات  🚻 :** `{broadcast_channels}` \n"
+    response += f"**⌔︙ عـدد المجـموعات التـي تكـون فيها ادمـن  🛂 :** `{admin_in_groups}` \n"
+    response += f"**⌔︙ عـدد المجموعات التـي أنـشأتـها  🛃** : `{creator_in_groups}` \n"
+    response += f"**⌔︙ عـدد القنوات التـي تكـون فيها ادمـن 📶 : `{admin_in_broadcast_channels}` **\n"
     response += (
-        f"**⌔︙ حقوق المسؤول في القنوات  🛂 :** {admin_in_broadcast_channels - creator_in_channels}` \n"
+        f"**⌔︙ حقوق المسؤول في القنوات  🛂 : `{admin_in_broadcast_channels - creator_in_channels}` **\n"
     )
     response += f"**عـدد المحـادثـات الغيـر مقـروء 📄 :** {unread} \n"
-    response += f"**عـدد الـتاكـات الغيـر مقـروء 📌:** {unread_mentions} \n"
+    response += f"**عـدد الـتاكـات الغيـر مقـروء 📌 :** {unread_mentions} \n"
     response += f"**⌔︙ استغرق الأمر  🔍  :** `{stop_time:.02f}` ثانيه \n"
     await cat.edit(response)
 
