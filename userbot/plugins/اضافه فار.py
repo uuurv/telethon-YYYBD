@@ -39,7 +39,7 @@ oldvars = {
 
 
 @iqthon.iq_cmd(
-    pattern="(set|get|del)فار(?: |$)([\s\S]*)",
+    pattern="(اضف|جلب|حذف) فار ([\s\S]*)",
     command=("فار", plugin_category),
     info={
         "header": "Set vars in database or Check or Delete",
@@ -81,7 +81,7 @@ async def bad(event):
     if vname in vlist:
         if vname in oldvars:
             vname = oldvars[vname]
-        if cmd == "set":
+        if cmd == "اضف":
             if not vinfo:
                 return await edit_delete(
                     event, f"**⌔︙ يجب وضع اسم الفار اولا لاستخدامه لـ **{vname}**"
@@ -94,12 +94,12 @@ async def bad(event):
             await edit_delete(
                 event, f"**⌔︙📑 القيـمة لـ {vname} \n⌔︙ تـم تغييـرها لـ :-** `{vinfo}`", time=20
             )
-        if cmd == "get":
+        if cmd == "جلب":
             var_data = gvarstatus(vname)
             await edit_delete(
                 event, f"**⌔︙📑 قيـمة الـ {vname}** \n⌔︙ هية  `{var_data}`", time=20
             )
-        elif cmd == "del":
+        elif cmd == "حذف":
             delgvar(vname)
             await edit_delete(
                 event,
@@ -113,8 +113,8 @@ async def bad(event):
 
 
 @iqthon.iq_cmd(
-    pattern="اضف فار (pmpermit|pmpic|pmblock|startmsg)$",
-    command=("اضف فار", plugin_category),
+    pattern="تخصيص فار (pmpermit|pmpic|pmblock|startmsg)$",
+    command=("تخصيص فار", plugin_category),
     info={
         "header": "To customize your CatUserbot.",
         "options": {
@@ -169,8 +169,8 @@ async def custom_catuserbot(event):
 
 
 @iqthon.iq_cmd(
-    pattern="ازالة الفار (pmpermit|pmpic|pmblock|startmsg)$",
-    command=("ازالة الفار", plugin_category),
+    pattern="ازاله تخصيص الفار (pmpermit|pmpic|pmblock|startmsg)$",
+    command=("ازاله تخصيص الفار", plugin_category),
     info={
         "header": "To delete costomization of your CatUserbot.",
         "options": {
