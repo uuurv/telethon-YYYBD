@@ -42,7 +42,7 @@ if Config.PLUGIN_CHANNEL:
             if BOTLOG:
                 await iqthon.send_message(
                     BOTLOG_CHATID,
-                    f"Installed Plugin `{os.path.basename(downloaded_file_name)}` successfully.",
+                    f"**⌔︙ تحـميل المـلف 🗂️  : `{os.path.basename(downloaded_file_name)}`  تـم بنجـاح ✔️**",
                 )
 
     iqthon.loop.create_task(install())
