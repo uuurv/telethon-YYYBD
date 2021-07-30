@@ -52,8 +52,8 @@ async def ban_user(chat_id, i, rights):
 
 
 @iqthon.iq_cmd(
-    pattern="kickme$",
-    command=("kickme", plugin_category),
+    pattern="مغادره$",
+    command=("مغادره", plugin_category),
     info={
         "header": "To kick myself from group.",
         "usage": [
@@ -64,102 +64,14 @@ async def ban_user(chat_id, i, rights):
 )
 async def kickme(leave):
     "to leave the group."
-    await leave.edit("`Nope, no, no, I go away`")
+    await leave.edit("**⌔︙ جـاري مـغادرة المجـموعة مـع السـلامة  🚶‍♂️  ..**")
     await leave.client.kick_participant(leave.chat_id, "me")
 
 
-@iqthon.iq_cmd(
-    pattern="kickall$",
-    command=("kickall", plugin_category),
-    info={
-        "header": "To kick everyone from group.",
-        "description": "To Kick all from the group except admins.",
-        "usage": [
-            "{tr}kickall",
-        ],
-    },
-    groups_only=True,
-    require_admin=True,
-)
-async def _(event):
-    "To kick everyone from group."
-    result = await event.client(
-        functions.channels.GetParticipantRequest(event.chat_id, event.client.uid)
-    )
-    if not result.participant.admin_rights.ban_users:
-        return await edit_or_reply(
-            event, "`It seems like you dont have ban users permission in this group.`"
-        )
-    catevent = await edit_or_reply(event, "`Kicking...`")
-    admins = await event.client.get_participants(
-        event.chat_id, filter=ChannelParticipantsAdmins
-    )
-    admins_id = [i.id for i in admins]
-    total = 0
-    success = 0
-    async for user in event.client.iter_participants(event.chat_id):
-        total += 1
-        try:
-            if user.id not in admins_id:
-                await event.client.kick_participant(event.chat_id, user.id)
-                success += 1
-                await sleep(0.5)
-        except Exception as e:
-            LOGS.info(str(e))
-            await sleep(0.5)
-    await catevent.edit(
-        f"`Sucessfully i have completed kickall process with {success} members kicked out of {total} members`"
-    )
-
 
 @iqthon.iq_cmd(
-    pattern="banall$",
-    command=("banall", plugin_category),
-    info={
-        "header": "To ban everyone from group.",
-        "description": "To ban all from the group except admins.",
-        "usage": [
-            "{tr}kickall",
-        ],
-    },
-    groups_only=True,
-    require_admin=True,
-)
-async def _(event):
-    "To ban everyone from group."
-    result = await event.client(
-        functions.channels.GetParticipantRequest(event.chat_id, event.client.uid)
-    )
-    if not result:
-        return await edit_or_reply(
-            event, "`It seems like you dont have ban users permission in this group.`"
-        )
-    catevent = await edit_or_reply(event, "`banning...`")
-    admins = await event.client.get_participants(
-        event.chat_id, filter=ChannelParticipantsAdmins
-    )
-    admins_id = [i.id for i in admins]
-    total = 0
-    success = 0
-    async for user in event.client.iter_participants(event.chat_id):
-        total += 1
-        try:
-            if user.id not in admins_id:
-                await event.client(
-                    EditBannedRequest(event.chat_id, user.id, BANNED_RIGHTS)
-                )
-                success += 1
-                await sleep(0.5) # for avoid any flood waits !!-> do not remove it 
-        except Exception as e:
-            LOGS.info(str(e))
-    await catevent.edit(
-        f"`Sucessfully i have completed banall process with {success} members banned out of {total} members`"
-    )
-
-
-@iqthon.iq_cmd(
-    pattern="unbanall$",
-    command=("unbanall", plugin_category),
+    pattern="مسح المحظورين$",
+    command=("مسح المحظورين", plugin_category),
     info={
         "header": "To unban all banned users from group.",
         "usage": [
@@ -172,7 +84,7 @@ async def _(event):
 async def _(event):
     "To unban all banned users from group."
     catevent = await edit_or_reply(
-        event, "__Unbanning all banned accounts in this group.__"
+        event, "**⌔︙  إلغاء حظر جميع الحسابات المحظورة في هذه المجموعة 🆘**"
     )
     succ = 0
     total = 0
@@ -188,9 +100,9 @@ async def _(event):
                 functions.channels.EditBannedRequest(event.chat_id, i, rights)
             )
         except FloodWaitError as e:
-            LOGS.warn(f"A flood wait of {e.seconds} occurred.")
+            LOGS.warn(f"**⌔︙ هناك ضغط كبير بالاستخدام يرجى الانتضار .. ‼️ بسبب  : {e.seconds} **")
             await catevent.edit(
-                f"__A wait of {readable_time(e.seconds)} needed again to continue the process.__"
+                f"**⌔︙ {readable_time(e.seconds)} مطلـوب المـعاودة مـرة اخـرى للـمسح 🔁 **"
             )
             await sleep(e.seconds + 5)
         except Exception as ex:
@@ -204,17 +116,17 @@ async def _(event):
             try:
                 if succ % 10 == 0:
                     await catevent.edit(
-                        f"__Unbanning all banned accounts...,\n{succ} accounts are unbanned untill now.__"
+                        f"**⌔︙ جـاري مسـح المحـظورين ⭕️  : \n {succ} الحسـابات الـتي غيـر محظـورة لحـد الان.**"
                     )
             except MessageNotModifiedError:
                 pass
-    await catevent.edit(f"**Unbanned :**__{succ}/{total} in the chat {chat.title}__")
+    await catevent.edit(f"**⌔︙ تـم مسـح المحـظورين مـن أصـل 🆘 :**{succ}/{total} \n اسـم المجـموعـة 📄 : {chat.title}")
 
 
-# Ported by ©[NIKITA](t.me/kirito6969) and ©[EYEPATCH](t.me/NeoMatrix90)
+
 @iqthon.iq_cmd(
-    pattern="zombies ?([\s\S]*)",
-    command=("zombies", plugin_category),
+    pattern="حذف ?([\s\S]*)",
+    command=("حذف", plugin_category),
     info={
         "header": "To check deleted accounts and clean",
         "description": "Searches for deleted accounts in a group. Use `.zombies clean` to remove deleted accounts from the group.",
@@ -227,7 +139,7 @@ async def rm_deletedacc(show):
     con = show.pattern_match.group(1).lower()
     del_u = 0
     del_status = "`No zombies or deleted accounts found in this group, Group is clean`"
-    if con != "clean":
+    if con != "الحسابات المحذوفه":
         event = await edit_or_reply(
             show, "`Searching for ghost/deleted/zombie accounts...`"
         )
@@ -236,8 +148,8 @@ async def rm_deletedacc(show):
                 del_u += 1
                 await sleep(0.5)
         if del_u > 0:
-            del_status = f"__Found__ **{del_u}** __ghost/deleted/zombie account(s) in this group,\
-                           \nclean them by using__ `.zombies clean`"
+            del_status = f"Found__ **{del_u}** ghost/deleted/zombie account(s) in this group,\
+                           \nclean them by using .zombies clean`"
         await event.edit(del_status)
         return
     chat = await show.get_chat()
@@ -278,8 +190,8 @@ async def rm_deletedacc(show):
 
 
 @iqthon.iq_cmd(
-    pattern="ikuck ?([\s\S]*)",
-    command=("ikuck", plugin_category),
+    pattern="احصائيات الاعضاء ?([\s\S]*)",
+    command=("احصائيات الاعضاء", plugin_category),
     info={
         "header": "To get breif summary of members in the group",
         "description": "To get breif summary of members in the group . Need to add some features in future.",
