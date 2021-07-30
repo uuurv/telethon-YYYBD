@@ -138,28 +138,27 @@ async def rm_deletedacc(show):
     "To check deleted accounts and clean"
     con = show.pattern_match.group(1).lower()
     del_u = 0
-    del_status = "**⌔︙  لم يتم العثور على حسابات متروكه او حسابات محذوفة الكروب نظيف**"
+    del_status = "**⌔︙لا توجـد حـسابات محذوفـة في هـذه المجموعـة !**"
     if con != "تنظيف":
         event = await edit_or_reply(
-            show, "**⌔︙  يتم البحث عن حسابات محذوفة او حسابات متروكة انتظر**"
+            show, "**⌔︙جـاري البحـث عـن الحسابـات المحذوفـة ⌯**"
         )
         async for user in show.client.iter_participants(show.chat_id):
             if user.deleted:
                 del_u += 1
                 await sleep(0.5)
         if del_u > 0:
-            del_status = f"**⌔︙ تـم العـثور : `{del_u}` على حسابات محذوفة ومتروكه في هذه الدردشه من الحسابات في هذه الدردشه**\
-                           \`قم بحذفهم بواسطه : `.المحذوفين تنظيف"
+            del_status = f"**⌔︙لقد وجـدت  {del_u}  من  حسابـات محذوفـة في هـذه المجموعـة لحذفهـم إستخـدم الأمـر  ⩥ :  `.المحذوفين تنظيف`"
         await event.edit(del_status)
         return
     chat = await show.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
     if not admin and not creator:
-        await edit_delete(show, "أنا لسـت مشرف هـنا", 5)
+        await edit_delete(show, "⌔︙أنـا لسـت مشـرفـاً هنـا !", 5)
         return
     event = await edit_or_reply(
-        show, "**⌔︙ جاري حذف الحسابات المحذوفة**"
+        show, "**⌔︙جـاري حـذف الحسـابات المحذوفـة ⌯**"
     )
     del_u = 0
     del_a = 0
@@ -175,17 +174,16 @@ async def rm_deletedacc(show):
             except UserAdminInvalidError:
                 del_a += 1
     if del_u > 0:
-        del_status = f"**⌔︙ التنظيف `{del_u}` من الحسابات المحذوفة**"
+        del_status = f"**⌔︙تـم حـذف  {del_u}  الحسـابات المحذوفـة ✓**"
     if del_a > 0:
-        del_status = f"**⌔︙ التنظيف `{del_u}` من الحسابات المحذوف **\
-        \n**⌔︙ `{del_a}` لا يمكنني حذف حسابات المشرفين المحذوفة**"
+        del_status = f"**⌔︙تـم حـذف {del_u} الحسـابات المحذوفـة، ولڪـن لـم يتـم حذف الحسـابات المحذوفـة للمشرفيـن !**"
     await edit_delete(event, del_status, 5)
     if BOTLOG:
         await show.client.send_message(
             BOTLOG_CHATID,
-            f"**⌔︙ تنـظيف الـمحذوفات :**\
+            f"**⌔︙تنظيف :**\
             \n⌔︙ {del_status}\
-            \n**⌔︙ الـدردشة :** {show.chat.title}(`{show.chat_id}`)",
+            \n*⌔︙المحادثـة ⌂** {show.chat.title}(`{show.chat_id}`)",
         )
 
 
@@ -221,7 +219,7 @@ async def _(event):  # sourcery no-metrics
     o = 0
     q = 0
     r = 0
-    et = await edit_or_reply(event, "**⌔︙ يتم البحث في القوائم **")
+    et = await edit_or_reply(event, "**⌔︙ جـاري البحـث عـن قوائـم المشارڪيـن ⌯**")
     async for i in event.client.iter_participants(event.chat_id):
         p += 1
         #
@@ -235,7 +233,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
+                    await et.edit("**⌔︙أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusLastMonth):
@@ -245,7 +243,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
+                    await et.edit("**⌔︙أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusLastWeek):
@@ -255,7 +253,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
+                    await et.edit("**⌔︙أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusOffline):
@@ -263,7 +261,7 @@ async def _(event):  # sourcery no-metrics
             if "o" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
+                    await et.edit("**⌔︙أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
                     break
                 else:
@@ -273,7 +271,7 @@ async def _(event):  # sourcery no-metrics
             if "q" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
+                    await et.edit("**⌔︙أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
                     break
                 else:
@@ -285,7 +283,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
+                    await et.edit("**⌔︙أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
                     break
         if i.bot:
@@ -305,7 +303,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
+                    await et.edit("**⌔︙أحتـاج إلى صلاحيـات المشـرف لإجـراء هـذا الأمـر !**")
                     e.append(str(e))
         elif i.status is None:
             n += 1
