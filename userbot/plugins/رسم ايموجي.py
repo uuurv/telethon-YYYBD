@@ -1,9 +1,3 @@
-"""
-Created by @Jisan7509
-modified by  @mrconfused
-Userbot plugin for CatUserbot
-"""
-
 from userbot import iqthon
 
 from ..core.managers import edit_or_reply
@@ -13,8 +7,8 @@ plugin_category = "fun"
 
 
 @iqthon.iq_cmd(
-    pattern="emoji(?:\s|$)([\s\S]*)",
-    command=("emoji", plugin_category),
+    pattern="رسم قلوب(?:\s|$)([\s\S]*)",
+    command=("رسم قلوب", plugin_category),
     info={
         "header": "Converts your text to big emoji text, with some default emojis.",
         "usage": "{tr}emoji <text>",
@@ -29,7 +23,7 @@ async def itachi(event):
         args = get.text
     if not args:
         await edit_or_reply(
-            event, "__What am I Supposed to do with this idiot, Give me a text.__"
+            event, "**⌔︙ قم بكتابه الكلمه بجانب الامر **"
         )
         return
     result = ""
@@ -44,12 +38,12 @@ async def itachi(event):
 
 
 @iqthon.iq_cmd(
-    pattern="cmoji(?:\s|$)([\s\S]*)",
+    pattern="رسم شعار(?:\s|$)([\s\S]*)",
     command=("cmoji", plugin_category),
     info={
         "header": "Converts your text to big emoji text, with your custom emoji.",
         "usage": "{tr}cmoji <emoji> <text>",
-        "examples": ["{tr}cmoji 😺 catuserbot"],
+        "examples": ["{tr}cmoji 8 telethon"],
     },
 )
 async def itachi(event):
@@ -60,13 +54,13 @@ async def itachi(event):
         args = get.text
     if not args:
         return await edit_or_reply(
-            event, "__What am I Supposed to do with this idiot, Give me a text.__"
+            event, "**⌔︙ قم بكتابه الكلمه بجانب الامر **"
         )
     try:
         emoji, arg = args.split(" ", 1)
     except Exception:
         arg = args
-        emoji = "😺"
+        emoji = "8"
     result = ""
     for a in arg:
         a = a.lower()
