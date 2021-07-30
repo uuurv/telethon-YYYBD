@@ -125,8 +125,8 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="حذف ?([\s\S]*)",
-    command=("حذف", plugin_category),
+    pattern="المحذوفين ?([\s\S]*)",
+    command=("المحذوفين", plugin_category),
     info={
         "header": "To check deleted accounts and clean",
         "description": "Searches for deleted accounts in a group. Use `.zombies clean` to remove deleted accounts from the group.",
@@ -138,28 +138,28 @@ async def rm_deletedacc(show):
     "To check deleted accounts and clean"
     con = show.pattern_match.group(1).lower()
     del_u = 0
-    del_status = "`No zombies or deleted accounts found in this group, Group is clean`"
-    if con != "الحسابات المحذوفه":
+    del_status = "**⌔︙  لم يتم العثور على حسابات متروكه او حسابات محذوفة الكروب نظيف**"
+    if con != "تنظيف":
         event = await edit_or_reply(
-            show, "`Searching for ghost/deleted/zombie accounts...`"
+            show, "**⌔︙  يتم البحث عن حسابات محذوفة او حسابات متروكة انتظر**"
         )
         async for user in show.client.iter_participants(show.chat_id):
             if user.deleted:
                 del_u += 1
                 await sleep(0.5)
         if del_u > 0:
-            del_status = f"Found__ **{del_u}** ghost/deleted/zombie account(s) in this group,\
-                           \nclean them by using .zombies clean`"
+            del_status = f"**⌔︙ تـم العـثور : `{del_u}` على حسابات محذوفة ومتروكه في هذه الدردشه من الحسابات في هذه الدردشه**\
+                           \`قم بحذفهم بواسطه : `.المحذوفين تنظيف"
         await event.edit(del_status)
         return
     chat = await show.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
     if not admin and not creator:
-        await edit_delete(show, "`I am not an admin here!`", 5)
+        await edit_delete(show, "أنا لسـت مشرف هـنا", 5)
         return
     event = await edit_or_reply(
-        show, "`Deleting deleted accounts...\nOh I can do that?!?!`"
+        show, "**⌔︙ جاري حذف الحسابات المحذوفة**"
     )
     del_u = 0
     del_a = 0
@@ -170,22 +170,22 @@ async def rm_deletedacc(show):
                 await sleep(0.5)
                 del_u += 1
             except ChatAdminRequiredError:
-                await edit_delete(event, "`I don't have ban rights in this group`", 5)
+                await edit_delete(event, "**⌔︙  ليس لدي صلاحيات الحظر هنا**", 5)
                 return
             except UserAdminInvalidError:
                 del_a += 1
     if del_u > 0:
-        del_status = f"Cleaned **{del_u}** deleted account(s)"
+        del_status = f"**⌔︙ التنظيف `{del_u}` من الحسابات المحذوفة**"
     if del_a > 0:
-        del_status = f"Cleaned **{del_u}** deleted account(s) \
-        \n**{del_a}** deleted admin accounts are not removed"
+        del_status = f"**⌔︙ التنظيف `{del_u}` من الحسابات المحذوف **\
+        \n**⌔︙ `{del_a}` لا يمكنني حذف حسابات المشرفين المحذوفة**"
     await edit_delete(event, del_status, 5)
     if BOTLOG:
         await show.client.send_message(
             BOTLOG_CHATID,
-            f"#CLEANUP\
-            \n{del_status}\
-            \nCHAT: {show.chat.title}(`{show.chat_id}`)",
+            f"**⌔︙ تنـظيف الـمحذوفات :**\
+            \n⌔︙ {del_status}\
+            \n**⌔︙ الـدردشة :** {show.chat.title}(`{show.chat_id}`)",
         )
 
 
@@ -207,7 +207,7 @@ async def _(event):  # sourcery no-metrics
     if input_str:
         chat = await event.get_chat()
         if not chat.admin_rights and not chat.creator:
-            await edit_or_reply(event, "`You aren't an admin here!`")
+            await edit_or_reply(event, "**⌔︙ انت لست مشرف هنا**")
             return False
     p = 0
     b = 0
@@ -221,7 +221,7 @@ async def _(event):  # sourcery no-metrics
     o = 0
     q = 0
     r = 0
-    et = await edit_or_reply(event, "Searching Participant Lists.")
+    et = await edit_or_reply(event, "**⌔︙ يتم البحث في القوائم **")
     async for i in event.client.iter_participants(event.chat_id):
         p += 1
         #
@@ -235,7 +235,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusLastMonth):
@@ -245,7 +245,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusLastWeek):
@@ -255,7 +255,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusOffline):
@@ -263,7 +263,7 @@ async def _(event):  # sourcery no-metrics
             if "o" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
                 else:
@@ -273,7 +273,7 @@ async def _(event):  # sourcery no-metrics
             if "q" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
                 else:
@@ -285,7 +285,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
         if i.bot:
@@ -293,7 +293,7 @@ async def _(event):  # sourcery no-metrics
             if "b" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
                 else:
@@ -305,34 +305,34 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("I need admin priveleges to perform this action!")
+                    await et.edit("**⌔︙ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
         elif i.status is None:
             n += 1
     if input_str:
-        required_string = """Kicked {} / {} users
-Deleted Accounts: {}
-UserStatusEmpty: {}
-UserStatusLastMonth: {}
-UserStatusLastWeek: {}
-UserStatusOffline: {}
-UserStatusOnline: {}
-UserStatusRecently: {}
-Bots: {}
-None: {}"""
+        required_string = """**⌔︙ الـمطرودين {} / {} الأعـضاء
+⌔︙ الحـسابـات المـحذوفة: {}
+⌔︙ حـالة المستـخدم الفـارغه: {}
+⌔︙ اخر ظهور منذ شـهر: {}
+⌔︙ اخر ظـهور منـذ اسبوع: {}
+⌔︙ غير متصل: {}
+⌔︙ المستخدمين النشطون: {}
+⌔︙ اخر ظهور قبل قليل: {}
+⌔︙ البوتات: {}
+⌔︙ مـلاحظة: {}**"""
         await et.edit(required_string.format(c, p, d, y, m, w, o, q, r, b, n))
         await sleep(5)
     await et.edit(
-        """Total: {} users
-Deleted Accounts: {}
-UserStatusEmpty: {}
-UserStatusLastMonth: {}
-UserStatusLastWeek: {}
-UserStatusOffline: {}
-UserStatusOnline: {}
-UserStatusRecently: {}
-Bots: {}
-None: {}""".format(
+        """**⌔︙ : {} مـجموع المـستخدمين
+⌔︙ الحـسابـات المـحذوفة: {}
+⌔︙ حـالة المستـخدم الفـارغه: {}
+⌔︙ اخر ظهور منذ شـهر: {}
+⌔︙ اخر ظـهور منـذ اسبوع: {}
+⌔︙ غير متصل: {}
+⌔︙ المستخدمين النشطون: {}
+⌔︙ اخر ظهور قبل قليل: {}
+⌔︙ البوتات: {}
+⌔︙ مـلاحظة: {}**""".format(
             p, d, y, m, w, o, q, r, b, n
         )
     )
