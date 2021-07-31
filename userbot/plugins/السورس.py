@@ -11,7 +11,7 @@ from telethon.errors.rpcerrorlist import (
 )
 from telethon.events import CallbackQuery
 
-from userbot import StartTime, catub, catversion
+from userbot import StartTime, iqthon, catversion
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
@@ -23,9 +23,9 @@ from . import mention
 plugin_category = "utils"
 
 
-@catub.cat_cmd(
-    pattern="alive$",
-    command=("alive", plugin_category),
+@iqthon.iq_cmd(
+    pattern="السورس$",
+    command=("السورس", plugin_category),
     info={
         "header": "To check bot's alive status",
         "options": "To show media in this cmd you need to set ALIVE_PIC with media link, get this by replying the media by .tgm",
@@ -76,9 +76,9 @@ async def amireallyalive(event):
         )
 
 
-@catub.cat_cmd(
-    pattern="ialive$",
-    command=("ialive", plugin_category),
+@iqthon.iq_cmd(
+    pattern="سورس$",
+    command=("سورس", plugin_category),
     info={
         "header": "To check bot's alive status via inline mode",
         "options": "To show media in this cmd you need to set ALIVE_PIC with media link, get this by replying the media by .tgm",
@@ -101,7 +101,7 @@ async def amireallyalive(event):
     await event.delete()
 
 
-@catub.tgbot.on(CallbackQuery(data=re.compile(b"stats")))
+@iqthon.tgbot.on(CallbackQuery(data=re.compile(b"stats")))
 async def on_plug_in_callback_query_handler(event):
     statstext = await catalive(StartTime)
     await event.answer(statstext, cache_time=0, alert=True)
