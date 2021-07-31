@@ -3,7 +3,7 @@ import re
 import time
 from platform import python_version
 
-from telethon import version, Button
+from telethon import version
 from telethon.errors.rpcerrorlist import (
     MediaEmptyError,
     WebpageCurlFailedError,
@@ -40,18 +40,18 @@ async def amireallyalive(event):
     uptime = await get_readable_time((time.time() - StartTime))
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
-    CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**• ⚜️ ~  تـليـثون العـرب ~ ⚜️ •  :**"
+    CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "✮ MY BOT IS RUNNING SUCCESSFULLY ✮"
     CAT_IMG = gvarstatus("ALIVE_PIC")
     if CAT_IMG:
         CAT = [x for x in CAT_IMG.split()]
         A_IMG = list(CAT)
         PIC = random.choice(A_IMG)
-        cat_caption += f"**• ⚜️ ~  تـليـثون العـرب ~ ⚜️ •  :**\n\n"
-        cat_caption += f"**⌔︙ اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
+        cat_caption += "**• ⚜️ ~  تـليـثون العـرب ~ ⚜️ •  :**\n\n"
+        cat_caption += "**⌔︙ اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
         cat_caption += f"**⌔︙ مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
         cat_caption += f"**⌔︙ اسـم الـمنصـب 🚹  :**  `{mention}`\n"
-        cat_caption += f"**⌔︙ قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
-        cat_caption += f"**⌔︙ مـطـور الـسورس 🛃 :** @KLANR\n"
+        cat_caption += "**⌔︙ قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
+        cat_caption += "**⌔︙ مـطـور الـسورس 🛃 :** @KLANR\n"
         try:
             await event.client.send_file(
                 event.chat_id, PIC, caption=cat_caption, reply_to=reply_to_id
@@ -60,8 +60,19 @@ async def amireallyalive(event):
         except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
             return await edit_or_reply(
                 event,
-                f"**⌔︙ خطأ في قيمة الوسائط **",
+                f"**Media Value Error!!**\n__Change the link by __`.setdv`\n\n**__Can't get media from this link :-**__ `{PIC}`",
             )
+    else:
+        await edit_or_reply(
+            event,
+            "**• ⚜️ ~  تـليـثون العـرب ~ ⚜️ •  :**\n\n"
+            f"**⌔︙ اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
+            f"**⌔︙ مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
+            f"**⌔︙ اسـم الـمنصـب 🚹  :**  `{mention}`\n"
+            "**⌔︙ قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
+            "**⌔︙ مـطـور الـسورس 🛃 :** @KLANR\n"
+        )
+
 
 @iqthon.iq_cmd(
     pattern="السورس$",
@@ -82,14 +93,15 @@ async def amireallyalive(event):
     await event.delete()
 
 
-@iqthon.iq_cmd(
+
+@iqthon.iq_cmd
     pattern="السورس$",
     command=("السورس", plugin_category),
     info={
         "header": "To check bot's alive status via inline mode",
         "options": "To show media in this cmd you need to set ALIVE_PIC with media link, get this by replying the media by .tgm",
         "usage": [
-            "{tr}السورس",
+            "{tr}alive",
         ],
     },
 )
@@ -97,12 +109,11 @@ async def amireallyalive(event):
     "A kind of showing bot details by your inline bot"
     reply_to_id = await reply_id(event)
     EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
-    cat_caption = f"**• ⚜️ ~  تـليـثون العـرب ~ ⚜️ •  :**\n\n"
-    cat_caption += f"**⌔︙ اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
-    cat_caption += f"**⌔︙ مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
-    cat_caption += f"**⌔︙ اسـم الـمنصـب 🚹  :**  `{mention}`\n"
-    cat_caption += f"**⌔︙ قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
-    cat_caption += f"**⌔︙ مـطـور الـسورس 🛃 :** @KLANR\n"
+    cat_caption = f"**Catuserbot is Up and Running**\n"
+    cat_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
+    cat_caption += f"**{EMOJI} Catuserbot Version :** `{catversion}`\n"
+    cat_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
+    cat_caption += f"**{EMOJI} Master:** {mention}\n"
     results = await event.client.inline_query(Config.TG_BOT_USERNAME, cat_caption)
     await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
     await event.delete()
@@ -112,3 +123,5 @@ async def amireallyalive(event):
 async def on_plug_in_callback_query_handler(event):
     statstext = await catalive(StartTime)
     await event.answer(statstext, cache_time=0, alert=True)
+
+
