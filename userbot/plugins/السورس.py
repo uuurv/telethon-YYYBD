@@ -39,20 +39,19 @@ async def amireallyalive(event):
     reply_to_id = await reply_id(event)
     uptime = await get_readable_time((time.time() - StartTime))
     _, check_sgnirts = check_data_base_heal_th()
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
-    CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "✮ MY BOT IS RUNNING SUCCESSFULLY ✮"
-    CAT_IMG = gvarstatus("ALIVE_PIC")
+    EMOJI = gvarstatus("ALIVE_EMOJI") or "⌔︙"
+    CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "• ⚜️ ~  تـليـثون العـرب ~ ⚜️ •  :"
+    CAT_IMG = Config.ALIVE_PIC or "https://telegra.ph/file/25917eb62d664deffa22b.jpg"
     if CAT_IMG:
         CAT = [x for x in CAT_IMG.split()]
         A_IMG = list(CAT)
         PIC = random.choice(A_IMG)
-        cat_caption = f"**{CUSTOM_ALIVE_TEXT}**\n\n"
-        cat_caption += f"**{EMOJI} Database :** `{check_sgnirts}`\n"
-        cat_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
-        cat_caption += f"**{EMOJI} Catuserbot Version :** `{catversion}`\n"
-        cat_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
-        cat_caption += f"**{EMOJI} Uptime :** `{uptime}\n`"
-        cat_caption += f"**{EMOJI} Master:** {mention}\n"
+        cat_caption += f"**{CUSTOM_ALIVE_TEXT}**\n\n"
+        cat_caption += f"**{EMOJI} اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
+        cat_caption += f"**{EMOJI} مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
+        cat_caption += f"**{EMOJI} اسـم الـمنصـب 🚹  :**  `{mention}`\n"
+        cat_caption += f"**{EMOJI} قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
+        cat_caption += f"**{EMOJI} مـطـور الـسورس 🛃 :** @KLANR\n"
         try:
             await event.client.send_file(
                 event.chat_id, PIC, caption=cat_caption, reply_to=reply_to_id
@@ -77,7 +76,7 @@ async def amireallyalive(event):
 
 
 @iqthon.iq_cmd(
-    pattern="سورس$",
+    pattern="ialive$",
     command=("سورس", plugin_category),
     info={
         "header": "To check bot's alive status via inline mode",
