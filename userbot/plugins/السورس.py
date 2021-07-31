@@ -97,12 +97,12 @@ async def amireallyalive(event):
     "A kind of showing bot details by your inline bot"
     reply_to_id = await reply_id(event)
     EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
-        cat_caption += f"**• ⚜️ ~  تـليـثون العـرب ~ ⚜️ •  :**\n\n"
-        cat_caption += f"**⌔︙ اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
-        cat_caption += f"**⌔︙ مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
-        cat_caption += f"**⌔︙ اسـم الـمنصـب 🚹  :**  `{mention}`\n"
-        cat_caption += f"**⌔︙ قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
-        cat_caption += f"**⌔︙ مـطـور الـسورس 🛃 :** @KLANR\n"
+    cat_caption = f"**• ⚜️ ~  تـليـثون العـرب ~ ⚜️ •  :**\n\n"
+    cat_caption += f"**⌔︙ اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
+    cat_caption += f"**⌔︙ مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
+    cat_caption += f"**⌔︙ اسـم الـمنصـب 🚹  :**  `{mention}`\n"
+    cat_caption += f"**⌔︙ قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
+    cat_caption += f"**⌔︙ مـطـور الـسورس 🛃 :** @KLANR\n"
     results = await event.client.inline_query(Config.TG_BOT_USERNAME, cat_caption)
     await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
     await event.delete()
