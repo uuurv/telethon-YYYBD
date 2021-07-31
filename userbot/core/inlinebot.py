@@ -367,7 +367,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(jsondata, open(secret, "w"))
             else:
                 json.dump(newsecret, open(secret, "w"))
-        elif string == "السورس":
+        elif string == "سورس":
             EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
             _, check_sgnirts = check_data_base_heal_th()
             CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "𓆩. تليثـون العـرب .𓆪"
