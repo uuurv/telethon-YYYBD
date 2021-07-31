@@ -39,19 +39,19 @@ async def amireallyalive(event):
     reply_to_id = await reply_id(event)
     uptime = await get_readable_time((time.time() - StartTime))
     _, check_sgnirts = check_data_base_heal_th()
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "⌔︙"
-    CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "• ⚜️ ~  تـليـثون العـرب ~ ⚜️ •  :"
-    CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/25917eb62d664deffa22b.jpg"
-    if CAT_IMG:
-        CAT = [x for x in CAT_IMG.split()]
+    EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or "⌔︙"
+    IQTHON_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "• ⚜️ ~  تـليـثون العـرب ~ ⚜️ •  :"
+    IQTHON_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/25917eb62d664deffa22b.jpg"
+    if IQTHON_IMG:
+        CAT = [x for x in IQTHON_IMG.split()]
         A_IMG = list(CAT)
         PIC = random.choice(A_IMG)
-        cat_caption += f"**{CUSTOM_ALIVE_TEXT}**\n\n"
-        cat_caption += f"**{EMOJI} اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
-        cat_caption += f"**{EMOJI} مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
-        cat_caption += f"**{EMOJI} اسـم الـمنصـب 🚹  :**  `{mention}`\n"
-        cat_caption += f"**{EMOJI} قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
-        cat_caption += f"**{EMOJI} مـطـور الـسورس 🛃 :** @KLANR\n"
+        cat_caption = f"**{IQTHON_ALIVE_TEXT}**\n\n"
+        cat_caption += f"**{EMOJI_TELETHON} اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
+        cat_caption += f"**{EMOJI_TELETHON} مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
+        cat_caption += f"**{EMOJI_TELETHON} اسـم الـمنصـب 🚹  :**  `{mention}`\n"
+        cat_caption += f"**{EMOJI_TELETHON} قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
+        cat_caption += f"**{EMOJI_TELETHON} مـطـور الـسورس 🛃 :** @KLANR\n"
         try:
             await event.client.send_file(
                 event.chat_id, PIC, caption=cat_caption, reply_to=reply_to_id
@@ -65,13 +65,12 @@ async def amireallyalive(event):
     else:
         await edit_or_reply(
             event,
-            f"**{CUSTOM_ALIVE_TEXT}**\n\n"
-            f"**{EMOJI} Database :** `{check_sgnirts}`\n"
-            f"**{EMOJI} Telethon Version :** `{version.__version__}\n`"
-            f"**{EMOJI} Catuserbot Version :** `{catversion}`\n"
-            f"**{EMOJI} Python Version :** `{python_version()}\n`"
-            f"**{EMOJI} Uptime :** `{uptime}\n`"
-            f"**{EMOJI} Master:** {mention}\n",
+            f"**{IQTHON_ALIVE_TEXT}**\n\n"
+            f"**{EMOJI_TELETHON} اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
+            f"**{EMOJI_TELETHON} مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
+            f"**{EMOJI_TELETHON} اسـم الـمنصـب 🚹  :**  `{mention}`\n"
+            f"**{EMOJI_TELETHON} قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
+            f"**{EMOJI_TELETHON} مـطـور الـسورس 🛃 :** @KLANR\n"
         )
 
 
