@@ -521,7 +521,7 @@ async def watcher(event):
 
 #admin plugin for  iqthon
 @iqthon.iq_cmd(
-    pattern="كتم عام(?:\s|$)([\s\S]*)",
+    pattern="كتم(?: |$)(.*)",
     command=("كتم عام", plugin_category),
     info={
         "⌔︙ الأسـتخدام": "To stop sending messages from that user",
@@ -627,7 +627,7 @@ async def startmute(event):
 
 #admin plugin for  iqthon
 @iqthon.iq_cmd(
-    pattern="الغاء كتم عام(?:\s|$)([\s\S]*)",
+    pattern="الغاء كتم(?: |$)(.*)",
     command=("الغاء كتم عام", plugin_category),
     info={
         "⌔︙ الأسـتخدام": "لألـغاء كتـم الشـخص ",
@@ -696,3 +696,7 @@ async def endmute(event):
                 f"**المـستخدم :** [{user.first_name}](tg://user?id={user.id})\n"
                 f"**الـدردشـة :** {event.chat.title}(`{event.chat_id}`)",
             )
+@iqthon.iq_cmd(incoming=True)
+async def watcher(event):
+    if is_muted(event.sender_id, "gmute"):
+        await event.delete()            
