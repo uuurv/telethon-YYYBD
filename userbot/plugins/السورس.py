@@ -49,7 +49,7 @@ async def amireallyalive(event):
         cat_caption = f"**{IQTHON_ALIVE_TEXT}**\n\n"
         cat_caption += f"**{EMOJI_TELETHON} اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
         cat_caption += f"**{EMOJI_TELETHON} مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
-        cat_caption += f"**{EMOJI_TELETHON} اسـم الـمنصـب 🚹  :**  `{mention}`\n"
+        cat_caption += f"**{EMOJI_TELETHON} المستخدم 🚹  :**  {mention}\n"
         cat_caption += f"**{EMOJI_TELETHON} قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
         cat_caption += f"**{EMOJI_TELETHON} مـطـور الـسورس 🛃 :** @KLANR\n"
         try:
@@ -68,7 +68,7 @@ async def amireallyalive(event):
             f"**{IQTHON_ALIVE_TEXT}**\n\n"
             f"**{EMOJI_TELETHON} اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
             f"**{EMOJI_TELETHON} مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
-            f"**{EMOJI_TELETHON} اسـم الـمنصـب 🚹  :**  `{mention}`\n"
+            f"**{EMOJI_TELETHON} المستخدم 🚹  :**  {mention}\n"
             f"**{EMOJI_TELETHON} قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
             f"**{EMOJI_TELETHON} مـطـور الـسورس 🛃 :** @KLANR\n"
         )
