@@ -227,8 +227,8 @@ async def gablist(event):
 
 
 @iqthon.iq_cmd(
-    pattern="كتم(?:\s|$)([\s\S]*)",
-    command=("كتم", plugin_category),
+    pattern="gmute(?:\s|$)([\s\S]*)",
+    command=("gmute", plugin_category),
     info={
         "header": "To mute a person in all groups where you are admin.",
         "description": "It doesnt change user permissions but will delete all messages sent by him in the groups where you are admin including in private messages.",
@@ -253,13 +253,13 @@ async def startgmute(event):
         user = (await event.client(GetFullUserRequest(userid))).user
     except Exception:
         return await edit_or_reply(event, "**⌔︙ تـحتاج صـلاحـيات الـحذف لـهذا الأمـر ❎**")
-    if is_muted(userid, "كتم"):
+    if is_muted(userid, "gmute"):
         return await edit_or_reply(
             event,
             f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ هـذا الـشخص بالـفعـل مكـتوم ✅**",
         )
     try:
-        mute(userid, "كتم")
+        mute(userid, "gmute")
     except Exception as e:
         await edit_or_reply(event, f"**خـطأ : **\n`{str(e)}`")
     else:
@@ -293,8 +293,8 @@ async def startgmute(event):
 
 
 @iqthon.iq_cmd(
-    pattern="الغاء كتم(?:\s|$)([\s\S]*)",
-    command=("الغاء كتم", plugin_category),
+    pattern="ungmute(?:\s|$)([\s\S]*)",
+    command=("ungmute", plugin_category),
     info={
         "header": "To unmute the person in all groups where you were admin.",
         "description": "This will work only if you mute that person by your gmute command.",
@@ -319,12 +319,12 @@ async def endgmute(event):
         user = (await event.client(GetFullUserRequest(userid))).user
     except Exception:
         return await edit_or_reply(event, "**⌔︙ تـحتاج صـلاحـيات الـحذف لـهذا الأمـر**")
-    if not is_muted(userid, "كتم عام"):
+    if not is_muted(userid, "ungmute"):
         return await edit_or_reply(
             event, f"{_format.mentionuser(user.first_name ,user.id)} \n **⌔︙ هـذا الـمستخدم لـيس مكـتوم**"
         )
     try:
-        unmute(userid, "الغاء كتم العام")
+        unmute(userid, "ungmute")
     except Exception as e:
         await edit_or_reply(event, f"**Error**\n`{str(e)}`")
     else:
@@ -356,7 +356,7 @@ async def endgmute(event):
 
 @iqthon.iq_cmd(incoming=True)
 async def watcher(event):
-    if is_muted(event.sender_id, "كتم عام"):
+    if is_muted(event.sender_id, "gmute"):
         await event.delete()
 
 
