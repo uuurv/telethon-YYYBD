@@ -32,11 +32,11 @@ async def all_groups_id(cat):
 
 
 @iqthon.iq_cmd(
-    pattern="frwd$",
-    command=("frwd", plugin_category),
+    pattern="اعاده ارسال$",
+    command=("اعاده ارسال", plugin_category),
     info={
         "header": "To get view counter for the message. that is will delete old message and send new message where you can see how any people saw your message",
-        "usage": "{tr}frwd",
+        "usage": "{tr}اعاده ارسال",
     },
 )
 async def _(event):
@@ -44,7 +44,7 @@ async def _(event):
     if Config.PRIVATE_CHANNEL_BOT_API_ID == 0:
         return await edit_or_reply(
             event,
-            "Please set the required environment variable `PRIVATE_CHANNEL_BOT_API_ID` for this plugin to work",
+            "**⌔︙ يرجـىٰ تعييـن الڤـار المطلـوب** `PRIVATE_CHANNEL_BOT_API_ID` لڪي يعمـل هـذا الأمـر ⚠️",
         )
     try:
         e = await event.client.get_entity(Config.PRIVATE_CHANNEL_BOT_API_ID)
@@ -62,11 +62,11 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="resend$",
-    command=("resend", plugin_category),
+    pattern="ازاله التوجيه$",
+    command=("ازاله التوجيه", plugin_category),
     info={
         "header": "To resend the message again. Useful to remove forword tag",
-        "usage": "{tr}resend",
+        "usage": "{tr}ازاله التوجيه",
     },
 )
 async def _(event):
@@ -83,34 +83,3 @@ async def _(event):
     await event.client.send_message(event.chat_id, m.text)
 
 
-@iqthon.iq_cmd(
-    pattern="fpost ([\s\S]*)",
-    command=("fpost", plugin_category),
-    info={
-        "header": "Split the word and forwards each letter from previous messages in that group",
-        "usage": "{tr}fpost <text>",
-        "examples": "{tr}fpost catuserbot",
-    },
-)
-async def _(event):
-    "Split the word and forwards each letter from previous messages in that group"
-    await event.delete()
-    text = event.pattern_match.group(1)
-    destination = await event.get_input_chat()
-    if len(FPOST_.GROUPSID) == 0:
-        FPOST_.GROUPSID = await all_groups_id(event)
-    for c in text.lower():
-        if c not in string.ascii_lowercase:
-            continue
-        if c not in FPOST_.MSG_CACHE:
-            async for msg in event.client.iter_messages(event.chat_id, search=c):
-                if msg.raw_text.lower() == c and msg.media is None:
-                    FPOST_.MSG_CACHE[c] = msg
-                    break
-        if c not in FPOST_.MSG_CACHE:
-            for i in FPOST_.GROUPSID:
-                async for msg in event.client.iter_messages(event.chat_id, search=c):
-                    if msg.raw_text.lower() == c and msg.media is None:
-                        MSG_CACHE[c] = msg
-                        break
-        await event.client.forward_messages(destination, FPOST_.MSG_CACHE[c])
