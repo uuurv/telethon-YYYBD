@@ -1,10 +1,3 @@
-# collage plugin for catuserbot by @sandy1709
-
-# Copyright (C) 2020 Alfiananda P.A
-#
-# Licensed under the Raphielscape Public License, Version 1.d (the "License");
-# you may not use this file except in compliance with the License.import os
-
 import os
 
 from userbot import iqthon
@@ -17,7 +10,7 @@ plugin_category = "utils"
 
 
 @iqthon.iq_cmd(
-    pattern="collage(?:\s|$)([\s\S]*)",
+    pattern="جلب لقطات(?:\s|$)([\s\S]*)",
     command=("collage", plugin_category),
     info={
         "header": "To create collage from still images extracted from video/gif.",
@@ -31,28 +24,28 @@ async def collage(event):
     reply = await event.get_reply_message()
     catid = await reply_id(event)
     event = await edit_or_reply(
-        event, "```collaging this may take several minutes too..... 😁```"
+        event, "**⌔︙جاري الالتقاط قـد يستغـرق هـذا الأمـر عـدة دقائـق انتضر ...**"
     )
     if not (reply and (reply.media)):
-        await event.edit("`Media not found...`")
+        await event.edit("**⌔︙تنسيـق الوسائـط غيـر مدعـوم ⚠️**")
         return
     if not os.path.isdir("./temp/"):
         os.mkdir("./temp/")
     catsticker = await reply.download_media(file="./temp/")
     if not catsticker.endswith((".mp4", ".mkv", ".tgs")):
         os.remove(catsticker)
-        await event.edit("`Media format is not supported...`")
+        await event.edit("**⌔︙تنسيـق الوسائـط غيـر مدعـوم ⚠️**")
         return
     if catinput:
         if not catinput.isdigit():
             os.remove(catsticker)
-            await event.edit("`You input is invalid, check help`")
+            await event.edit("**⌔︙إدخـالك غيـر صالـح، يرجـىٰ التحـقق مـن المساعـدة ⚠️**")
             return
         catinput = int(catinput)
         if not 0 < catinput < 10:
             os.remove(catsticker)
             await event.edit(
-                "`Why too big grid you cant see images, use size of grid between 1 to 9`"
+                "**⌔︙يرجـىٰ وضـع عـدد الصـور بجانـب الأمـر إختـر رقـماً بيـن 1 إلـى 9 ✦**"
             )
             return
     else:
@@ -73,7 +66,7 @@ async def collage(event):
             if files and os.path.exists(files):
                 os.remove(files)
         return await edit_delete(
-            event, f"`media is not supported or try with smaller grid size`", 5
+            event, f"**⌔︙تنسيـق الوسائـط غيـر مدعـوم، حـاول إستخـدام عـدد أصغـر  ⚠️**", 5
         )
     await event.client.send_file(
         event.chat_id,
