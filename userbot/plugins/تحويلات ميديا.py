@@ -491,7 +491,7 @@ async def _(event):  # sourcery no-metrics
         return await edit_or_reply(event, "**⌔︙هـذا ليـس ملصـق متحرك  !**")
     catevent = await edit_or_reply(
         event,
-        "**⌔︙جـاري تحويـل هـذا الملصـق إلى صـورة متحرڪـة، قـد يستغـرق هـذا بضـع دقائـق ✦**",
+        "⌔︙جـاري تحويـل هـذا الملصـق إلى صـورة متحرڪـة، قـد يستغـرق هـذا بضـع دقائـق ✦",
         parse_mode=_format.parse_pre,
     )
     try:
@@ -614,7 +614,7 @@ async def _(event):
     reply = await event.get_reply_message()
     mediatype = media_type(event)
     if mediatype and mediatype != "video":
-        return await edit_delete(event, "⌔︙حـدث خطـأ مـا في الوسائـط، لا أستطيـع تحويلهـا إلى صـورة متحرڪـة !")
+        return await edit_delete(event, "**⌔︙حـدث خطـأ مـا في الوسائـط، لا أستطيـع تحويلهـا إلى صـورة متحرڪـة !**")
     args = event.pattern_match.group(1)
     if not args:
         args = 2.0
@@ -623,12 +623,12 @@ async def _(event):
             args = float(args)
         except ValueError:
             args = 2.0
-    catevent = await edit_or_reply(event, "⌔︙جـاري التحويـل إلى صـورة متحرڪة انتضر دقائق  ↯")
+    catevent = await edit_or_reply(event, "**⌔︙جـاري التحويـل إلى صـورة متحرڪة انتضر دقائق  ↯**")
     inputfile = await reply.download_media()
     outputfile = os.path.join(Config.TEMP_DIR, "vidtogif.gif")
     result = await vid_to_gif(inputfile, outputfile, speed=args)
     if result is None:
-        return await edit_delete(event, "⌔︙غيـر قـادر على تحويلهـا إلى صـورة متحرڪة !")
+        return await edit_delete(event, "**⌔︙غيـر قـادر على تحويلهـا إلى صـورة متحرڪة !**")
     sandy = await event.client.send_file(event.chat_id, result, reply_to=reply)
     await _catutils.unsavegif(event, sandy)
     await catevent.delete()
