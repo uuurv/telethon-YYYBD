@@ -80,8 +80,8 @@ async def _(event):  # sourcery no-metrics
 
 
 @iqthon.iq_cmd(
-    pattern="ترحيب خاص(?:\s|$)([\s\S]*)",
-    command=("ترحيب خاص", plugin_category),
+    pattern="اضف ترحيب خاص(?:\s|$)([\s\S]*)",
+    command=("اضف ترحيب خاص", plugin_category),
     info={
         "header": "To welcome user(sends welcome message to here private messages).",
         "description": "Saves the message as a welcome note in the chat. And will send welcome message to every new user who ever joins newly in group.",
