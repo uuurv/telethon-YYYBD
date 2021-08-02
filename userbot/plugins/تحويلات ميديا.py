@@ -1,4 +1,3 @@
-# by @mrconfused (@sandy1709)
 import asyncio
 import base64
 import io
@@ -50,7 +49,7 @@ thumb_loc = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
 
 
 @iqthon.iq_cmd(
-    pattern="spin(?: |$)((-)?(s)?)$",
+    pattern="تحويل فديو دائري(?: |$)((-)?(s)?)$",
     command=("spin", plugin_category),
     info={
         "header": "To convert replied image or sticker to spining round video.",
@@ -68,13 +67,13 @@ async def pic_gifcmd(event):  # sourcery no-metrics
     args = event.pattern_match.group(1)
     reply = await event.get_reply_message()
     if not reply:
-        return await edit_delete(event, "`Reply to supported Media...`")
+        return await edit_delete(event, "**⌔︙قـم بالـرد على وسائـط مدعومـة !**")
     media_type(reply)
-    catevent = await edit_or_reply(event, "__Making round spin video wait a sec.....__")
+    catevent = await edit_or_reply(event, "**⌔︙جـاري تحويل الملصق الى فيديو مرئي دائـري ⌯**")
     output = await _cattools.media_to_pic(event, reply, noedits=True)
     if output[1] is None:
         return await edit_delete(
-            output[0], "__Unable to extract image from the replied message.__"
+            output[0], "**⌔︙تعـذّر إستخـراج الصـورة من الرسالـة التي تـم الـرّد عليهـا ✕**"
         )
     meme_file = convert_toimage(output[1])
     image = Image.open(meme_file)
@@ -83,7 +82,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
     try:
         outframes = await spin_frames(image, w, h, outframes)
     except Exception as e:
-        return await edit_delete(output[0], f"**Error**\n__{str(e)}__")
+        return await edit_delete(output[0], f"**⌔︙خطـأ ⚠️ :**\n__{str(e)}__")
     output = io.BytesIO()
     output.name = "Output.gif"
     outframes[0].save(output, save_all=True, append_images=outframes[1:], duration=1)
@@ -93,7 +92,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
     final = os.path.join(Config.TEMP_DIR, "output.gif")
     output = await vid_to_gif("Output.gif", final)
     if output is None:
-        return await edit_delete(catevent, "__Unable to make spin gif.__")
+        return await edit_delete(catevent, "**⌔︙تعـذّر صنـع صـورة متحرڪـة دوارة ✕**")
     media_info = MediaInfo.parse(final)
     aspect_ratio = 1
     for track in media_info.tracks:
@@ -146,7 +145,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
 
 
 @iqthon.iq_cmd(
-    pattern="circle ?((-)?s)?$",
+    pattern="تحويل ملصق دائري ?((-)?s)?$",
     command=("circle", plugin_category),
     info={
         "header": "To make circular video note/sticker.",
@@ -160,17 +159,17 @@ async def video_catfile(event):  # sourcery no-metrics
     args = event.pattern_match.group(1)
     catid = await reply_id(event)
     if not reply or not reply.media:
-        return await edit_delete(event, "`Reply to supported media`")
+        return await edit_delete(event, "**⌔︙قـم بالـرد على وسائـط مدعومـة !**")
     mediatype = media_type(reply)
     if mediatype == "Round Video":
         return await edit_delete(
             event,
-            "__Do you think I am a dumb person😏? The replied media is already in round format,recheck._",
+            "⌔︙الوسائـط التي تم الـرد عليهـا هـي بالفعـل في شڪـل دائـري، أعـد التحـقق !",
         )
     if mediatype not in ["Photo", "Audio", "Voice", "Gif", "Sticker", "Video"]:
-        return await edit_delete(event, "```Supported Media not found...```")
+        return await edit_delete(event, "**⌔︙لم يتـم العثـور على وسائـط مدعومـة !**")
     flag = True
-    catevent = await edit_or_reply(event, "`Converting to round format..........`")
+    catevent = await edit_or_reply(event, "**⌔︙جـاري التحويـل إلى شڪـل دائـري ⌯**")
     catfile = await reply.download_media(file="./temp/")
     if mediatype in ["Gif", "Video", "Sticker"]:
         if not catfile.endswith((".webp")):
@@ -224,7 +223,7 @@ async def video_catfile(event):  # sourcery no-metrics
         else:
             os.remove(catfile)
             return await edit_delete(
-                catevent, "`No thumb found to make it video note`", 5
+                catevent, "**لا يوجـد ما يصلـح لجعلـه ملاحظـة فيديـو ⚠️**", 5
             )
     if (
         mediatype
@@ -244,7 +243,7 @@ async def video_catfile(event):  # sourcery no-metrics
             uploaded = await event.client.fast_upload_file(
                 file=ul,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, catevent, c_time, "Uploading....")
+                    progress(d, t, catevent, c_time, "**⌔︙قـم بالـرد على وسائـط مدعومـة !**")
                 ),
             )
             ul.close()
@@ -303,8 +302,8 @@ async def video_catfile(event):  # sourcery no-metrics
 
 
 @iqthon.iq_cmd(
-    pattern="stoi$",
-    command=("stoi", plugin_category),
+    pattern="تحويل صوره$",
+    command=("تحويل صوره", plugin_category),
     info={
         "header": "Reply this command to a sticker to get image.",
         "description": "This also converts every media to image. that is if video then extracts image from that video.if audio then extracts thumb.",
@@ -317,12 +316,12 @@ async def _(event):
     reply = await event.get_reply_message()
     if not reply:
         return await edit_delete(
-            event, "Reply to any sticker/media to convert it to image.__"
+            event, "**⌔︙قم بالـرد على أيّ وسائـط أو ملصـق لتحويلـه إلى صـورة ❖**"
         )
     output = await _cattools.media_to_pic(event, reply)
     if output[1] is None:
         return await edit_delete(
-            output[0], "__Unable to extract image from the replied message.__"
+            output[0], "**⌔︙قم بالـرد على أيّ وسائـط أو ملصـق لتحويلـه إلى صـورة ❖**"
         )
     meme_file = convert_toimage(output[1])
     await event.client.send_file(
@@ -331,37 +330,11 @@ async def _(event):
     await output[0].delete()
 
 
-@iqthon.iq_cmd(
-    pattern="itos$",
-    command=("itos", plugin_category),
-    info={
-        "header": "Reply this command to image to get sticker.",
-        "description": "This also converts every media to sticker. that is if video then extracts image from that video. if audio then extracts thumb.",
-        "usage": "{tr}itos",
-    },
-)
-async def _(event):
-    "Image to Sticker Conversion."
-    reply_to_id = await reply_id(event)
-    reply = await event.get_reply_message()
-    if not reply:
-        return await edit_delete(
-            event, "Reply to any image/media to convert it to sticker.__"
-        )
-    output = await _cattools.media_to_pic(event, reply)
-    if output[1] is None:
-        return await edit_delete(
-            output[0], "__Unable to extract image from the replied message.__"
-        )
-    meme_file = convert_tosticker(output[1])
-    await event.client.send_file(
-        event.chat_id, meme_file, reply_to=reply_to_id, force_document=False
-    )
-    await output[0].delete()
+
 
 
 @iqthon.iq_cmd(
-    pattern="ttf ([\s\S]*)",
+    pattern="تحويل ملف ([\s\S]*)",
     command=("ttf", plugin_category),
     info={
         "header": "Text to file.",
@@ -373,7 +346,7 @@ async def get(event):
     "text to file conversion"
     name = event.text[5:]
     if name is None:
-        await edit_or_reply(event, "reply to text message as `.ttf <file name>`")
+        await edit_or_reply(event, "**⌔︙قم بالـرد على الرسالـة لتحويلها الى ملف**")
         return
     m = await event.get_reply_message()
     if m.text:
@@ -383,11 +356,11 @@ async def get(event):
         await event.client.send_file(event.chat_id, name, force_document=True)
         os.remove(name)
     else:
-        await edit_or_reply(event, "reply to text message as `.ttf <file name>`")
+        await edit_or_reply(event, "**⌔︙قم بالـرد على الرسالـة لتحويلها الى ملف**")
 
 
 @iqthon.iq_cmd(
-    pattern="ftt$",
+    pattern="تحويل رساله$",
     command=("ftt", plugin_category),
     info={
         "header": "File to text.",
@@ -402,7 +375,7 @@ async def get(event):
     mediatype = media_type(reply)
     if mediatype != "Document":
         return await edit_delete(
-            event, "__It seems this is not writable file. Reply to writable file.__"
+            event, "**⌔︙يبـدو أن هـذا الملـف غـير قابـل للڪتابـة،  يرجـى الـرد على ملـف قابـل للكتابـة !**"
         )
     file_loc = await reply.download_media()
     file_content = ""
@@ -421,22 +394,22 @@ async def get(event):
         except Exception as e:
             if os.path.exists(file_loc):
                 os.remove(file_loc)
-            return await edit_delete(event, f"**Error**\n__{str(e)}__")
+            return await edit_delete(event, f"**⌔︙خطـأ ⚠️**\n__{str(e)}__")
     await edit_or_reply(
         event,
         file_content,
         parse_mode=parse_pre,
         aslink=True,
         noformat=True,
-        linktext="**Telegram allows only 4096 charcters in a single message. But replied file has much more. So pasting it to pastebin\nlink :**",
+        linktext="**⌔︙يسمـح تليڪرام فقـط بـ 4096 حرفًـا في الرسالـة الواحـدة، ولڪن الملـف الـذي قمـت بالـرد عليـه يحتـوي على أڪثـر مـن ذلـك بڪثيـر، لذلـك (( لصقها على رابط لصق )) غيرها انت)) !**",
     )
     if os.path.exists(file_loc):
         os.remove(file_loc)
 
 
 @iqthon.iq_cmd(
-    pattern="ftoi$",
-    command=("ftoi", plugin_category),
+    pattern="تحويل ملف صوره$",
+    command=("تحويل ملف صوره", plugin_category),
     info={
         "header": "Reply this command to a image file to convert it to image",
         "usage": "{tr}ftoi",
@@ -448,14 +421,14 @@ async def on_file_to_photo(event):
     try:
         image = target.media.document
     except AttributeError:
-        return await edit_delete(event, "`This isn't an image`")
+        return await edit_delete(event, "**⌔︙هـذه ليسـت صـورة !**")
     if not image.mime_type.startswith("image/"):
-        return await edit_delete(event, "`This isn't an image`")
+        return await edit_delete(event, "**⌔︙هـذه ليسـت صـورة !**")
     if image.mime_type == "image/webp":
-        return await edit_delete(event, "`For sticker to image use stoi command`")
+        return await edit_delete(event, "**⌔︙لتحويـل الملصـق إلى صـورة إستخـدم الأمـر  ⩥ :**  `.تحويل ملف صوره`")
     if image.size > 10 * 1024 * 1024:
         return  # We'd get PhotoSaveFileInvalidError otherwise
-    catt = await edit_or_reply(event, "`Converting.....`")
+    catt = await edit_or_reply(event, "**⌔︙جـاري التحويـل  ↯**")
     file = await event.client.download_media(target, file=BytesIO())
     file.seek(0)
     img = await event.client.upload_file(file)
@@ -476,7 +449,7 @@ async def on_file_to_photo(event):
 
 
 @iqthon.iq_cmd(
-    pattern="gif(?:\s|$)([\s\S]*)",
+    pattern="تحويل ملصق متحرك(?:\s|$)([\s\S]*)",
     command=("gif", plugin_category),
     info={
         "header": "Converts Given animated sticker to gif.",
@@ -494,31 +467,31 @@ async def _(event):  # sourcery no-metrics
         if len(loc) > 2:
             return await edit_delete(
                 event,
-                "wrong syntax . syntax is `.gif quality ; fps(frames per second)`",
+                "**⌔︙بنـاء جملـة خاطـئ !**",
             )
         if len(loc) == 2:
             if 0 < loc[0] < 721:
                 quality = loc[0].strip()
             else:
-                return await edit_delete(event, "Use quality of range 0 to 721")
+                return await edit_delete(event, "**⌔︙إستخـدم جـودة النطـاق مـن 0 إلى 721 ✦**")
             if 0 < loc[1] < 20:
                 quality = loc[1].strip()
             else:
-                return await edit_delete(event, "Use quality of range 0 to 20")
+                return await edit_delete(event, "**⌔︙إستخـدم جـودة النطـاق مـن 0 إلى 20 ✦**")
         if len(loc) == 1:
             if 0 < loc[0] < 721:
                 quality = loc[0].strip()
             else:
-                return await edit_delete(event, "Use quality of range 0 to 721")
+                return await edit_delete(event, "**⌔︙إستخـدم جـودة النطـاق مـن 0 إلى 721 ✦**")
     catreply = await event.get_reply_message()
     cat_event = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if not catreply or not catreply.media or not catreply.media.document:
-        return await edit_or_reply(event, "`Stupid!, This is not animated sticker.`")
+        return await edit_or_reply(event, "**⌔︙هـذا ليـس ملصـق متحرك   !**")
     if catreply.media.document.mime_type != "application/x-tgsticker":
-        return await edit_or_reply(event, "`Stupid!, This is not animated sticker.`")
+        return await edit_or_reply(event, "**⌔︙هـذا ليـس ملصـق متحرك  !**")
     catevent = await edit_or_reply(
         event,
-        "Converting this Sticker to GiF...\n This may takes upto few mins..",
+        "**⌔︙جـاري تحويـل هـذا الملصـق إلى صـورة متحرڪـة، قـد يستغـرق هـذا بضـع دقائـق ✦**",
         parse_mode=_format.parse_pre,
     )
     try:
@@ -543,119 +516,11 @@ async def _(event):  # sourcery no-metrics
             os.remove(files)
 
 
-@iqthon.iq_cmd(
-    pattern="nfc (mp3|voice)",
-    command=("nfc", plugin_category),
-    info={
-        "header": "Converts the required media file to voice or mp3 file.",
-        "usage": [
-            "{tr}nfc mp3",
-            "{tr}nfc voice",
-        ],
-    },
-)
-async def _(event):
-    "Converts the required media file to voice or mp3 file."
-    if not event.reply_to_msg_id:
-        await edit_or_reply(event, "```Reply to any media file.```")
-        return
-    reply_message = await event.get_reply_message()
-    if not reply_message.media:
-        await edit_or_reply(event, "reply to media file")
-        return
-    input_str = event.pattern_match.group(1)
-    event = await edit_or_reply(event, "`Converting...`")
-    try:
-        start = datetime.now()
-        c_time = time.time()
-        downloaded_file_name = await event.client.download_media(
-            reply_message,
-            Config.TMP_DOWNLOAD_DIRECTORY,
-            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, event, c_time, "trying to download")
-            ),
-        )
-    except Exception as e:
-        await event.edit(str(e))
-    else:
-        end = datetime.now()
-        ms = (end - start).seconds
-        await event.edit(
-            "Downloaded to `{}` in {} seconds.".format(downloaded_file_name, ms)
-        )
-        new_required_file_name = ""
-        new_required_file_caption = ""
-        command_to_run = []
-        voice_note = False
-        supports_streaming = False
-        if input_str == "voice":
-            new_required_file_caption = "voice_" + str(round(time.time())) + ".opus"
-            new_required_file_name = (
-                Config.TMP_DOWNLOAD_DIRECTORY + "/" + new_required_file_caption
-            )
-            command_to_run = [
-                "ffmpeg",
-                "-i",
-                downloaded_file_name,
-                "-map",
-                "0:a",
-                "-codec:a",
-                "libopus",
-                "-b:a",
-                "100k",
-                "-vbr",
-                "on",
-                new_required_file_name,
-            ]
-            voice_note = True
-            supports_streaming = True
-        elif input_str == "mp3":
-            new_required_file_caption = "mp3_" + str(round(time.time())) + ".mp3"
-            new_required_file_name = (
-                Config.TMP_DOWNLOAD_DIRECTORY + "/" + new_required_file_caption
-            )
-            command_to_run = [
-                "ffmpeg",
-                "-i",
-                downloaded_file_name,
-                "-vn",
-                new_required_file_name,
-            ]
-            voice_note = False
-            supports_streaming = True
-        else:
-            await event.edit("not supported")
-            os.remove(downloaded_file_name)
-            return
-        process = await asyncio.create_subprocess_exec(
-            *command_to_run,
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
-        )
-        stdout, stderr = await process.communicate()
-        stderr.decode().strip()
-        stdout.decode().strip()
-        os.remove(downloaded_file_name)
-        if os.path.exists(new_required_file_name):
-            force_document = False
-            await event.client.send_file(
-                entity=event.chat_id,
-                file=new_required_file_name,
-                allow_cache=False,
-                silent=True,
-                force_document=force_document,
-                voice_note=voice_note,
-                supports_streaming=supports_streaming,
-                progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, event, c_time, "trying to upload")
-                ),
-            )
-            os.remove(new_required_file_name)
-            await event.delete()
+
 
 
 @iqthon.iq_cmd(
-    pattern="itog(?: |$)((-)?(r|l|u|d|s|i)?)$",
+    pattern="تحويل متحركه(?: |$)((-)?(r|l|u|d|s|i)?)$",
     command=("itog", plugin_category),
     info={
         "header": "To convert replied image or sticker to gif",
@@ -679,19 +544,19 @@ async def pic_gifcmd(event):  # sourcery no-metrics
     reply = await event.get_reply_message()
     mediatype = media_type(reply)
     if not reply or not mediatype or mediatype not in ["Photo", "Sticker"]:
-        return await edit_delete(event, "__Reply to photo or sticker to make it gif.__")
+        return await edit_delete(event, "**⌔︙قم بالـرد على صـورة أو ملصـق لجعلهـا صـورة متحرڪـة **")
     if mediatype == "Sticker" and reply.document.mime_type == "application/i-tgsticker":
         return await edit_delete(
             event,
-            "__Reply to photo or sticker to make it gif. Animated sticker is not supported__",
+            "**⌔︙قم بالـرد على صـورة أو ملصـق لجعلهـا صـورة متحرڪـة، الملصقـات المتحرڪـة غيـر مدعومـة !**",
         )
     args = event.pattern_match.group(1)
     args = "i" if not args else args.replace("-", "")
-    catevent = await edit_or_reply(event, "__🎞 Making Gif from the relied media...__")
+    catevent = await edit_or_reply(event, "**⌔︙جـاري صنـع صـورة متحرڪـة من الوسائـط التي قمـت بالـرد عليهـا ↯**")
     imag = await _cattools.media_to_pic(event, reply, noedits=True)
     if imag[1] is None:
         return await edit_delete(
-            imag[0], "__Unable to extract image from the replied message.__"
+            imag[0], "**⌔︙تعـذّر إستخـراج الصـورة من الرسالـة التي تـم الـرّد عليهـا ✕**"
         )
     image = Image.open(imag[1])
     w, h = image.size
@@ -710,7 +575,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
         elif args == "i":
             outframes = await invert_frames(image, w, h, outframes)
     except Exception as e:
-        return await edit_delete(catevent, f"**Error**\n__{str(e)}__")
+        return await edit_delete(catevent, f"**⌔︙خطـأ ⚠️**\n__{str(e)}__")
     output = io.BytesIO()
     output.name = "Output.gif"
     outframes[0].save(output, save_all=True, append_images=outframes[1:], duration=0.7)
@@ -721,7 +586,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
     output = await vid_to_gif("Output.gif", final)
     if output is None:
         await edit_delete(
-            catevent, "__There was some error in the media. I can't format it to gif.__"
+            catevent, "**⌔︙حـدث خطـأ مـا في الوسائـط، لا أستطيـع تحويلهـا إلى صـورة متحرڪـة !**"
         )
         for i in [final, "Output.gif", imag[1]]:
             if os.path.exists(i):
@@ -736,7 +601,7 @@ async def pic_gifcmd(event):  # sourcery no-metrics
 
 
 @iqthon.iq_cmd(
-    pattern="vtog ?([0-9.]+)?$",
+    pattern="تحويل فديو متحركه ?([0-9.]+)?$",
     command=("vtog", plugin_category),
     info={
         "header": "Reply this command to a video to convert it to gif.",
@@ -745,11 +610,11 @@ async def pic_gifcmd(event):  # sourcery no-metrics
     },
 )
 async def _(event):
-    "Reply this command to a video to convert it to gif."
+    "⌔︙قم بالـرد على فيديـو لجعلـه صـورة متحرڪـة ✦"
     reply = await event.get_reply_message()
     mediatype = media_type(event)
     if mediatype and mediatype != "video":
-        return await edit_delete(event, "__Reply to video to convert it to gif__")
+        return await edit_delete(event, "⌔︙حـدث خطـأ مـا في الوسائـط، لا أستطيـع تحويلهـا إلى صـورة متحرڪـة !")
     args = event.pattern_match.group(1)
     if not args:
         args = 2.0
@@ -758,12 +623,12 @@ async def _(event):
             args = float(args)
         except ValueError:
             args = 2.0
-    catevent = await edit_or_reply(event, "__🎞Converting into Gif..__")
+    catevent = await edit_or_reply(event, "⌔︙جـاري التحويـل إلى صـورة متحرڪة انتضر دقائق  ↯")
     inputfile = await reply.download_media()
     outputfile = os.path.join(Config.TEMP_DIR, "vidtogif.gif")
     result = await vid_to_gif(inputfile, outputfile, speed=args)
     if result is None:
-        return await edit_delete(event, "__I couldn't convert it to gif.__")
+        return await edit_delete(event, "⌔︙غيـر قـادر على تحويلهـا إلى صـورة متحرڪة !")
     sandy = await event.client.send_file(event.chat_id, result, reply_to=reply)
     await _catutils.unsavegif(event, sandy)
     await catevent.delete()
