@@ -1,4 +1,3 @@
-# reverse search and google search  plugin for cat
 import io
 import os
 import re
@@ -61,7 +60,7 @@ async def scam(results, lim):
 
 
 @iqthon.iq_cmd(
-    pattern="gs ([\s\S]*)",
+    pattern="كوكل بحث ([\s\S]*)",
     command=("gs", plugin_category),
     info={
         "header": "Google search command.",
@@ -83,7 +82,7 @@ async def scam(results, lim):
 )
 async def gsearch(q_event):
     "Google search command."
-    catevent = await edit_or_reply(q_event, "`searching........`")
+    catevent = await edit_or_reply(q_event, "**⌔︙جـاري البحـث ↯**")
     match = q_event.pattern_match.group(1)
     page = re.findall(r"-p\d+", match)
     lim = re.findall(r"-l\d+", match)
@@ -117,7 +116,7 @@ async def gsearch(q_event):
             try:
                 gresults = await ysearch.async_search(*search_args)
             except Exception as e:
-                return await edit_delete(catevent, f"**Error:**\n`{str(e)}`", time=10)
+                return await edit_delete(catevent, f"**⌔︙خطـأ ⚠️ :**\n`{str(e)}`", time=10)
     msg = ""
     for i in range(lim):
         if i > len(gresults["links"]):
@@ -131,20 +130,20 @@ async def gsearch(q_event):
             break
     await edit_or_reply(
         catevent,
-        "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg,
+        "**⌔︙إستعـلام البحـث 🝰 :**\n`" + match + "`\n\n**⌔︙النتائـج ⎙ :**\n" + msg,
         link_preview=False,
         aslink=True,
-        linktext=f"**The search results for the query **__{match}__ **are** :",
+        linktext=f"**⌔︙نتائـج البحـث عـن الإستعـلام ⎙ ** `{match}` :",
     )
     if BOTLOG:
         await q_event.client.send_message(
             BOTLOG_CHATID,
-            "Google Search query `" + match + "` was executed successfully",
+            "**⌔︙إستعـلام بحـث جـوجـل 🝰 **" + match + "**تم تنفيـذه بنجـاح ✓**",
         )
 
 
 @iqthon.iq_cmd(
-    pattern="grs$",
+    pattern="البحث العام$",
     command=("grs", plugin_category),
     info={
         "header": "Google reverse search command.",
@@ -155,9 +154,9 @@ async def gsearch(q_event):
 async def _(event):
     "Google Reverse Search"
     start = datetime.now()
-    OUTPUT_STR = "Reply to an image to do Google Reverse Search"
+    OUTPUT_STR = "**⌔︙قم بالـرد على صـورة لإجـراء البحـث العڪـسي في گـوگـل ✦**"
     if event.reply_to_msg_id:
-        catevent = await edit_or_reply(event, "Pre Processing Media")
+        catevent = await edit_or_reply(event, "**⌔︙وسائـط ما قبـل المعالجـة ␥**")
         previous_message = await event.get_reply_message()
         previous_message_text = previous_message.message
         BASE_URL = "http://www.google.com"
@@ -185,7 +184,7 @@ async def _(event):
             request_url = SEARCH_URL.format(BASE_URL, previous_message_text)
             google_rs_response = requests.get(request_url, allow_redirects=False)
             the_location = google_rs_response.headers.get("Location")
-        await catevent.edit("Found Google Result. Pouring some soup on it!")
+        await catevent.edit("**⌔︙تم العثـور على نتيجـة بحـث جـوجـل ✓**")
         headers = {
             "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0"
         }
@@ -202,14 +201,14 @@ async def _(event):
             img_size = img_size_div.find_all("div")
         except Exception:
             return await edit_delete(
-                catevent, "`Sorry. I am unable to find similar images`"
+                catevent, "**⌔︙غيـر قـادر على إيجـاد صـور مشابـهه !**"
             )
         end = datetime.now()
         ms = (end - start).seconds
         OUTPUT_STR = """{img_size}
-<b>Possible Related Search : </b> <a href="{prs_url}">{prs_text}</a> 
-<b>More Info : </b> Open this <a href="{the_location}">Link</a> 
-<i>fetched in {ms} seconds</i>""".format(
+<b>⌔︙بحـث ممڪـن ذو صلـة 🜉  : </b> <a href="{prs_url}">{prs_text}</a> 
+<b>⌔︙مزيـد من المعلومـات 🝰 : </b> إفتـح هـذا ␥ <a href="{the_location}">Link</a> 
+<i>⌔︙تم الجلـب في {ms} ثانيـة ⏱</i>""".format(
             **locals()
         )
     else:
@@ -217,83 +216,16 @@ async def _(event):
     await edit_or_reply(catevent, OUTPUT_STR, parse_mode="HTML", link_preview=False)
 
 
-@iqthon.iq_cmd(
-    pattern="reverse(?:\s|$)([\s\S]*)",
-    command=("reverse", plugin_category),
-    info={
-        "header": "Google reverse search command.",
-        "description": "reverse search replied image or sticker in google and shows results. if count is not used then it send 1 image by default.",
-        "usage": "{tr}reverse <count>",
-    },
-)
-async def _(img):
-    "Google Reverse Search"
-    reply_to = await reply_id(img)
-    if os.path.isfile("okgoogle.png"):
-        os.remove("okgoogle.png")
-    message = await img.get_reply_message()
-    if message and message.media:
-        photo = io.BytesIO()
-        await img.client.download_media(message, photo)
-    else:
-        await edit_or_reply(img, "`Reply to photo or sticker nigger.`")
-        return
-    if photo:
-        catevent = await edit_or_reply(img, "`Processing...`")
-        try:
-            image = Image.open(photo)
-        except OSError:
-            return await catevent.edit("`Unsupported , most likely.`")
-        name = "okgoogle.png"
-        image.save(name, "PNG")
-        image.close()
-        # https://stackoverflow.com/questions/23270175/google-reverse-image-search-using-post-request#28792943
-        searchUrl = "https://www.google.com/searchbyimage/upload"
-        multipart = {"encoded_image": (name, open(name, "rb")), "image_content": ""}
-        response = requests.post(searchUrl, files=multipart, allow_redirects=False)
-        fetchUrl = response.headers["Location"]
-        if response != 400:
-            await img.edit(
-                "`Image successfully uploaded to Google. Maybe.`"
-                "\n`Parsing source now. Maybe.`"
-            )
-        else:
-            return await catevent.edit("`Google told me to fuck off.`")
-        os.remove(name)
-        match = await ParseSauce(fetchUrl + "&preferences?hl=en&fg=1#languages")
-        guess = match["best_guess"]
-        imgspage = match["similar_images"]
-        if guess and imgspage:
-            await catevent.edit(f"[{guess}]({fetchUrl})\n\n`Looking for this Image...`")
-        else:
-            return await catevent.edit("`Can't find any kind similar images.`")
-        lim = img.pattern_match.group(1) or 3
-        images = await scam(match, lim)
-        yeet = []
-        for i in images:
-            k = requests.get(i)
-            yeet.append(k.content)
-        try:
-            await img.client.send_file(
-                entity=await img.client.get_input_entity(img.chat_id),
-                file=yeet,
-                reply_to=reply_to,
-            )
-        except TypeError:
-            pass
-        await catevent.edit(
-            f"[{guess}]({fetchUrl})\n\n[Visually similar images]({imgspage})"
-        )
 
 
 @iqthon.iq_cmd(
-    pattern="google(?:\s|$)([\s\S]*)",
-    command=("google", plugin_category),
+    pattern="البحث اونلاين(?:\s|$)([\s\S]*)",
+    command=("بحث اونلاين", plugin_category),
     info={
         "header": "To get link for google search",
         "description": "Will show google search link as button instead of google search results try {tr}gs for google search results.",
         "usage": [
-            "{tr}google query",
+            "{tr}بحث اونلاين",
         ],
     },
 )
@@ -303,13 +235,13 @@ async def google_search(event):
     reply_to_id = await reply_id(event)
     if not input_str:
         return await edit_delete(
-            event, "__What should i search? Give search query plox.__"
+            event, "**⌔︙ما الذي يجـب أن أبحـث عنـه؟ يرجـىٰ إعطـاء معلومـات عن البحـث ⚠️**"
         )
     input_str = deEmojify(input_str).strip()
     if len(input_str) > 195 or len(input_str) < 1:
         return await edit_delete(
             event,
-            "__Plox your search query exceeds 200 characters or you search query is empty.__",
+            "**⌔︙لقـد تجـاوز إستعـلام البحـث 200 حـرف أو أن إستعـلام البحـث فـارغ ⚠️**",
         )
     query = "#12" + input_str
     results = await event.client.inline_query("@StickerizerBot", query)
