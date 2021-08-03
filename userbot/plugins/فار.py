@@ -113,8 +113,8 @@ async def bad(event):
 
 
 @iqthon.iq_cmd(
-    pattern="وضع (pmpermit|pmpic|pmblock|startmsg)$",
-    command=("وضع", plugin_category),
+    pattern="تخصيص (pmpermit|pmpic|pmblock|startmsg)$",
+    command=("تخصيص", plugin_category),
     info={
         "header": "To customize your CatUserbot.",
         "options": {
@@ -169,8 +169,8 @@ async def custom_catuserbot(event):
 
 
 @iqthon.iq_cmd(
-    pattern="ازالة (pmpermit|pmpic|pmblock|startmsg)$",
-    command=("ازالة", plugin_category),
+    pattern="ازالة تخصيص (pmpermit|pmpic|pmblock|startmsg)$",
+    command=("ازالة تخصيص", plugin_category),
     info={
         "header": "To delete costomization of your CatUserbot.",
         "options": {
