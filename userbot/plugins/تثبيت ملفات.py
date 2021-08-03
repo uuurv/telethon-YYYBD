@@ -12,8 +12,8 @@ thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg"
 
 
 @iqthon.iq_cmd(
-    pattern="install$",
-    command=("install", plugin_category),
+    pattern="تثبيت ملف$",
+    command=("تثبيت ملف", plugin_category),
     info={
         "header": "To install an external plugin.",
         "description": "Reply to any external plugin(supported by cat) to install it in your bot.",
@@ -48,8 +48,8 @@ async def install(event):
 
 
 @iqthon.iq_cmd(
-    pattern="load ([\s\S]*)",
-    command=("load", plugin_category),
+    pattern="تثبيت ثاني ([\s\S]*)",
+    command=("تثبيت ثاني", plugin_category),
     info={
         "header": "To load a plugin again. if you have unloaded it",
         "description": "To load a plugin again which you unloaded by {tr}unload",
@@ -74,61 +74,12 @@ async def load(event):
         )
 
 
-@iqthon.iq_cmd(
-    pattern="send ([\s\S]*)",
-    command=("send", plugin_category),
-    info={
-        "header": "To upload a plugin file to telegram chat",
-        "usage": "{tr}send <plugin name>",
-        "examples": "{tr}send markdown",
-    },
-)
-async def send(event):
-    "To uplaod a plugin file to telegram chat"
-    reply_to_id = await reply_id(event)
-    thumb = None
-    if os.path.exists(thumb_image_path):
-        thumb = thumb_image_path
-    input_str = event.pattern_match.group(1)
-    the_plugin_file = f"./userbot/plugins/{input_str}.py"
-    if os.path.exists(the_plugin_file):
-        caat = await event.client.send_file(
-            event.chat_id,
-            the_plugin_file,
-            force_document=True,
-            allow_cache=False,
-            reply_to=reply_to_id,
-            thumb=thumb,
-            caption=f"**➥ Plugin Name:-** `{input_str}`",
-        )
-        await event.delete()
-    else:
-        await edit_or_reply(event, "404: File Not Found")
+
 
 
 @iqthon.iq_cmd(
-    pattern="unload ([\s\S]*)",
-    command=("unload", plugin_category),
-    info={
-        "header": "To unload a plugin temporarily.",
-        "description": "You can load this unloaded plugin by restarting or using {tr}load cmd. Useful for cases like seting notes in rose bot({tr}unload markdown).",
-        "usage": "{tr}unload <plugin name>",
-        "examples": "{tr}unload markdown",
-    },
-)
-async def unload(event):
-    "To unload a plugin temporarily."
-    shortname = event.pattern_match.group(1)
-    try:
-        remove_plugin(shortname)
-        await edit_or_reply(event, f"Unloaded {shortname} successfully")
-    except Exception as e:
-        await edit_or_reply(event, f"Successfully unload {shortname}\n{str(e)}")
-
-
-@iqthon.iq_cmd(
-    pattern="uninstall ([\s\S]*)",
-    command=("uninstall", plugin_category),
+    pattern="حذف التثبيت ([\s\S]*)",
+    command=("حذف التثبيت", plugin_category),
     info={
         "header": "To uninstall a plugin temporarily.",
         "description": "To stop functioning of that plugin and remove that plugin from bot.",
