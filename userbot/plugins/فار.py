@@ -38,7 +38,7 @@ oldvars = {
 }
 
 
-@iqthon.iq_cmd(
+@catub.cat_cmd(
     pattern="(اضف|جلب|حذف) فار ([\s\S]*)",
     command=("فار", plugin_category),
     info={
@@ -63,7 +63,7 @@ oldvars = {
         ],
     },
 )
-async def bad(event):  
+async def bad(event):  # sourcery no-metrics
     "To manage vars in database"
     cmd = event.pattern_match.group(1).lower()
     vname = event.pattern_match.group(2)
@@ -114,7 +114,7 @@ async def bad(event):
 
 @iqthon.iq_cmd(
     pattern="تخصيص (pmpermit|pmpic|pmblock|startmsg)$",
-    command=("تخصيص", plugin_category),
+    command=("custom", plugin_category),
     info={
         "header": "To customize your CatUserbot.",
         "options": {
@@ -165,12 +165,12 @@ async def custom_catuserbot(event):
         if not urls:
             return await edit_delete(event, "**⌔︙ الرابط المـرسل غيـر مدعـوم ❕**", 5)
         addgvar("pmpermit_pic", urls)
-    await edit_or_reply(event, f"**⌔︙ تم تحـديث الفار الخاص بك بـنجاح ✅ **")
+    await edit_or_reply(event, f"**⌔︙ تم تحـديث الفار : {input_str}  بـنجاح ✅ **")
 
 
 @iqthon.iq_cmd(
-    pattern="ازالة تخصيص (pmpermit|pmpic|pmblock|startmsg)$",
-    command=("ازالة تخصيص", plugin_category),
+    pattern="ازاله تخصيص (pmpermit|pmpic|pmblock|startmsg)$",
+    command=("delcustom", plugin_category),
     info={
         "header": "To delete costomization of your CatUserbot.",
         "options": {
@@ -207,5 +207,5 @@ async def custom_catuserbot(event):
             )
         delgvar("START_TEXT")
     await edit_or_reply(
-        event, f"**⌔︙ تم بنجاح ازالة هذا الفار ✅**"
+        event, f"**⌔︙ تم بنجاح ازالة هذا الفار  : {input_str}  ✅**"
     )
