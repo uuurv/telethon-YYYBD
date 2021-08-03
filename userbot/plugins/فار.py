@@ -38,7 +38,7 @@ oldvars = {
 }
 
 
-@catub.cat_cmd(
+@iqthon.iq_cmd(
     pattern="(اضف|جلب|حذف) فار ([\s\S]*)",
     command=("فار", plugin_category),
     info={
