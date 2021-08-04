@@ -25,8 +25,8 @@ CMD_FIG = {
 
 
 @iqthon.iq_cmd(
-    pattern="figlet(?:\s|$)([\s\S]*)",
-    command=("figlet", plugin_category),
+    pattern="نص ثري دي(?:\s|$)([\s\S]*)",
+    command=("نص ثري دي", plugin_category),
     info={
         "header": "Changes the given text into the given style",
         "usage": ["{tr}figlet <style> ; <text>", "{tr}figlet <text>"],
@@ -59,7 +59,7 @@ async def figlet(event):
         cmd = None
         text = input_str
     else:
-        await edit_or_reply(event, "`Give some text to change it`")
+        await edit_or_reply(event, "**⌔︙قم بإعطـاء نـص لتغييـره ␥**")
         return
     style = cmd
     text = text.strip()
@@ -68,7 +68,7 @@ async def figlet(event):
             font = CMD_FIG[style.strip()]
         except KeyError:
             return await edit_delete(
-                event, "**Invalid style selected**, __Check__ `.info figlet`."
+                event, "**⌔︙تم تحديـد نمـط غيـر صالـح ⚠️**"
             )
         result = pyfiglet.figlet_format(deEmojify(text), font=font)
     else:
