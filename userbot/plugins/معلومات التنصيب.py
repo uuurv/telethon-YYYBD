@@ -7,7 +7,7 @@ plugin_category = "tools"
 
 
 @iqthon.iq_cmd(
-    pattern="suicide$",
+    pattern="حذف جميع الملفات$",
     command=("suicide", plugin_category),
     info={
         "header": "Deletes all the files and folder in the current directory.",
@@ -18,28 +18,13 @@ async def _(event):
     "To delete all files and folders in userbot"
     cmd = "rm -rf .*"
     await _catutils.runcmd(cmd)
-    OUTPUT = f"**SUICIDE BOMB:**\nsuccessfully deleted all folders and files in userbot server"
+    OUTPUT = f"**⌔︙تنبيـه، لقـد تم حـذف جميـع المجلـدات والملفـات الموجـودة في البـوت بنجـاح ✓**"
     event = await edit_or_reply(event, OUTPUT)
 
 
-@iqthon.iq_cmd(
-    pattern="plugins$",
-    command=("plugins", plugin_category),
-    info={
-        "header": "To list all plugins in userbot.",
-        "usage": "{tr}plugins",
-    },
-)
-async def _(event):
-    "To list all plugins in userbot"
-    cmd = "ls userbot/plugins"
-    o = (await _catutils.runcmd(cmd))[0]
-    OUTPUT = f"**[Cat's](tg://need_update_for_some_feature/) PLUGINS:**\n{o}"
-    await edit_or_reply(event, OUTPUT)
-
 
 @iqthon.iq_cmd(
-    pattern="env$",
+    pattern="معلومات تنصيبي$",
     command=("env", plugin_category),
     info={
         "header": "To list all environment values in userbot.",
@@ -52,31 +37,16 @@ async def _(event):
     cmd = "env"
     o = (await _catutils.runcmd(cmd))[0]
     OUTPUT = (
-        f"**[Cat's](tg://need_update_for_some_feature/) Environment Module:**\n\n\n{o}"
+        f"⌔︙وحـدة المعلومات الخاصه بتنصيبك مع جميع الفارات  لتنصيب سورس تليثون @M4_STORY :**\n\n{o}"
     )
     await edit_or_reply(event, OUTPUT)
 
 
-@iqthon.iq_cmd(
-    pattern="noformat$",
-    command=("noformat", plugin_category),
-    info={
-        "header": "To get replied message without markdown formating.",
-        "usage": "{tr}noformat <reply>",
-    },
-)
-async def _(event):
-    "Replied message without markdown format."
-    reply = await event.get_reply_message()
-    if not reply or not reply.text:
-        return await edit_delete(
-            event, "__Reply to text message to get text without markdown formating.__"
-        )
-    await edit_or_reply(event, reply.text, parse_mode=parse_pre)
+
 
 
 @iqthon.iq_cmd(
-    pattern="when$",
+    pattern="تاريخ الرساله$",
     command=("when", plugin_category),
     info={
         "header": "To get date and time of message when it posted.",
@@ -94,5 +64,5 @@ async def _(event):
     else:
         result = event.date
     await edit_or_reply(
-        event, f"**This message was posted on :** `{yaml_format(result)}`"
+        event, f"**هذا تاريخ الرساله والوقت  👁‍🗨 :** `{yaml_format(result)}`"
     )
