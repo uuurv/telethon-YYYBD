@@ -115,7 +115,7 @@ class CatUserBotClient(TelegramClient):
                     if not disable_errors:
                         if Config.PRIVATE_GROUP_BOT_API_ID == 0:
                             return
-                        date = (datetime.datetime.now()).strftime("%m/%d/%Y, %H:%M:%S")
+                        date = (datetime.datetime.now()).strftime("%m/%d/%Y, %I:%M:%S")
                         ftext = f"\nDisclaimer:\nThis file is pasted only here ONLY here,\
                                   \nwe logged only fact of error and date,\nwe respect your privacy,\
                                   \nyou may not report this error if you've\
@@ -140,14 +140,11 @@ class CatUserBotClient(TelegramClient):
                         pastelink = await paste_message(
                             ftext, pastetype="s", markdown=False
                         )
-                        text = "**CatUserbot Error report**\n\n"
-                        link = "[here](https://t.me/catuserbot_support)"
-                        text += "If you wanna you can report it"
-                        text += f"- just forward this message {link}.\n"
+                        text = "**• ⚜️ | عـذرا يـوجد هنـاك خطـأ لـديك :**\n\n"
                         text += (
-                            "Nothing is logged except the fact of error and date\n\n"
+                            "**⌔︙قـم بـمراسـلة المطـور لمعـرفة الخطـأ او قـم بـزيارة قنـاة المسـاعدة ** : @YZZZY\n\n"
                         )
-                        text += f"**Error report : ** [{new['error']}]({pastelink})"
+                        text += f"**⌔︙ الخطـأ الذي لديك هـوة  🆘  : ** [{new['error']}]({pastelink})"
                         await check.client.send_message(
                             Config.PRIVATE_GROUP_BOT_API_ID, text, link_preview=False
                         )
@@ -257,14 +254,11 @@ class CatUserBotClient(TelegramClient):
                         pastelink = await paste_message(
                             ftext, pastetype="s", markdown=False
                         )
-                        text = "**CatUserbot Error report**\n\n"
-                        link = "[here](https://t.me/catuserbot_support)"
-                        text += "If you wanna you can report it"
-                        text += f"- just forward this message {link}.\n"
+                        text = "**• ⚜️ | عـذرا يـوجد هنـاك خطـأ لـديك :**\n\n"
                         text += (
-                            "Nothing is logged except the fact of error and date\n\n"
+                            "**⌔︙قـم بـمراسـلة المطـور لمعـرفة الخطـأ او قـم بـزيارة قنـاة المسـاعدة ** : @YZZZY\n\n"
                         )
-                        text += f"**Error report : ** [{new['error']}]({pastelink})"
+                        text += f"**⌔︙ الخطـأ الذي لديك هـوة  🆘  : ** [{new['error']}]({pastelink})"
                         await check.client.send_message(
                             Config.PRIVATE_GROUP_BOT_API_ID, text, link_preview=False
                         )
