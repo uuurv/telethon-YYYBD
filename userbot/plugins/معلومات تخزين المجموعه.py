@@ -32,17 +32,17 @@ def weird_division(n, d):
 
 
 @iqthon.iq_cmd(
-    pattern="userfs(?:\s|$)([\s\S]*)",
-    command=("userfs", plugin_category),
+    pattern="معلومات تخزين المجموعه(?:\s|$)([\s\S]*)",
+    command=("معلومات تخزين المجموعه", plugin_category),
     info={
         "header": "Shows you the complete media/file summary of the that user in that group.",
         "description": "As of now limited to last 10000 messages of that person in the group u used",
-        "usage": "{tr}userfs <reply/username/id>",
-        "examples": "{tr}userfs @MissRose_bot",
+        "usage": "{tr}معلومات تخزين المجموعه",
+        "examples": "{tr}معلومات تخزين المجموعه",
     },
 )
 async def _(event):  # sourcery no-metrics
-    "Shows you the complete media/file summary of the that user in that group."
+    "معلومات تخزين المجموعه."
     reply = await event.get_reply_message()
     input_str = event.pattern_match.group(1)
     if reply and input_str:
@@ -68,18 +68,18 @@ async def _(event):  # sourcery no-metrics
     totalcount = totalsize = msg_count = 0
     x.title = "File Summary"
     x.field_names = ["Media", "Count", "File size"]
-    largest = "   <b>Largest Size</b>\n"
+    largest = "   <b>أكبر حجم</b>\n"
     try:
         chatdata = await event.client.get_entity(entity)
     except Exception as e:
         return await edit_delete(
-            event, f"<b>Error : </b><code>{str(e)}</code>", 5, parse_mode="HTML"
+            event, f"<b>⌔︙خطـأ ⚠️ : </b><code>{str(e)}</code>", 5, parse_mode="HTML"
         )
     try:
         userdata = await event.client.get_entity(userentity)
     except Exception as e:
         return await edit_delete(
-            event, f"<b>Error : </b><code>{str(e)}</code>", time=5, parse_mode="HTML"
+            event, f"<b>⌔︙خطـأ ⚠️ : </b><code>{str(e)}</code>", time=5, parse_mode="HTML"
         )
     if type(chatdata).__name__ == "Channel":
         if chatdata.username:
@@ -90,7 +90,7 @@ async def _(event):  # sourcery no-metrics
         link = f"<a href='tg://user?id={chatdata.id}'>{chatdata.first_name}</a>"
     catevent = await edit_or_reply(
         event,
-        f"<code>Counting files and file size by </code>{_format.htmlmentionuser(userdata.first_name,userdata.id)}<code> in Group </code><b>{link}</b>\n<code>This may take some time also depends on number of user messages</code>",
+        f"<code>⌔︙حسـاب عـدد الملفـات وحجـم الملـف حسـب ✦ </code>{_format.htmlmentionuser(userdata.first_name,userdata.id)}<code> in Group </code><b>{link}</b>\n<code>This may take some time also depends on number of user messages</code>",
         parse_mode="HTML",
     )
 
@@ -138,17 +138,17 @@ async def _(event):  # sourcery no-metrics
         str(round((weird_division((endtime - starttime), totalcount)) * 1000, 2))
         + " ms"
     )
-    totalstring = f"<code><b>Total files : </b>       | {str(totalcount)}\
-                  \nTotal file size :    | {humanbytes(totalsize)}\
-                  \nAvg. file size :     | {avghubytes}\
+    totalstring = f"<code><b> ⌔︙إجمالـي الملفـات ✦ : </b>       | {str(totalcount)}\
+                  \n <b> ⌔︙الحجـم الإجمالـي للملـف ✦ : </b>   | {humanbytes(totalsize)}\
+                  \n <b> حجم الملف  : </b>    | {avghubytes}\
                   \n</code>"
-    runtimestring = f"<code>Runtime :            | {runtime}\
-                    \nRuntime per file :   | {avgruntime}\
+    runtimestring = f"<code><b> ⌔︙وقـت التشغيـل ✦ :</b>            | {runtime}\
+                    \n <b> وقـت التشغيـل لڪل ملـف ✦ :</b>   | {avgruntime}\
                     \n</code>"
     line = "<code>+--------------------+-----------+</code>\n"
-    result = f"<b>Group : {link}\nUser : {_format.htmlmentionuser(userdata.first_name,userdata.id)}\n\n"
-    result += f"<code>Total Messages: {msg_count}</code>\n"
-    result += "<b>File Summary : </b>\n"
+    result = f"<b>⌔︙المجموعـة ✦ : {link}\nUser : {_format.htmlmentionuser(userdata.first_name,userdata.id)}\n\n"
+    result += f"<code><b>⌔︙مجمـوع الرسائـل ✦ :</b> {msg_count}</code>\n"
+    result += "<b>⌔︙ملخـص الملـف ✦ : </b>\n"
     result += f"<code>{str(x)}</code>\n"
     result += f"{largest}"
     result += line + totalstring + line + runtimestring + line
