@@ -1,4 +1,3 @@
-# image search for catuserbot
 import os
 import shutil
 
@@ -12,8 +11,8 @@ plugin_category = "misc"
 
 
 @iqthon.iq_cmd(
-    pattern="img(?: |$)(\d*)? ?([\s\S]*)",
-    command=("img", plugin_category),
+    pattern="صورة(?: |$)(\d*)? ?([\s\S]*)",
+    command=("صورة", plugin_category),
     info={
         "header": "Google image search.",
         "description": "To search images in google. By default will send 3 images.you can get more images(upto 10 only by changing limit value as shown in usage and examples.",
@@ -35,9 +34,9 @@ async def img_sampler(event):
         query = str(event.pattern_match.group(2))
     if not query:
         return await edit_or_reply(
-            event, "Reply to a message or pass a query to search!"
+            event, "**⌔︙ الرد على رسالة أو تمرير استعلام للبحث**"
         )
-    cat = await edit_or_reply(event, "`Processing...`")
+    cat = await edit_or_reply(event, "**⌔︙ جـاري البحـث علـى الصورة 🗾**")
     if event.pattern_match.group(1) != "":
         lim = int(event.pattern_match.group(1))
         if lim > 10:
@@ -54,11 +53,11 @@ async def img_sampler(event):
         "format": "jpg",
         "no_directory": "no_directory",
     }
-    # passing the arguments to the function
+    
     try:
         paths = response.download(arguments)
     except Exception as e:
-        return await cat.edit(f"Error: \n`{e}`")
+        return await cat.edit(f"**⌔︙ حدث خطأ  ❌ :** \n`{e}`")
     lst = paths[0][query]
     await event.client.send_file(event.chat_id, lst, reply_to=reply_to_id)
     shutil.rmtree(os.path.dirname(os.path.abspath(lst[0])))
