@@ -34,16 +34,16 @@ async def install(event):
                 load_module(shortname.replace(".py", ""))
                 await edit_delete(
                     event,
-                    f"Installed Plugin `{os.path.basename(downloaded_file_name)}`",
+                    f"**⌔︙ تم تثبيـت الملـف بنجـاح ✓** `{os.path.basename(downloaded_file_name)}`",
                     10,
                 )
             else:
                 os.remove(downloaded_file_name)
                 await edit_delete(
-                    event, "Errors! This plugin is already installed/pre-installed.", 10
+                    event, "**⌔︙حـدث خطـأ، هـذا الملف مثبـت بالفعـل !**", 10
                 )
         except Exception as e:
-            await edit_delete(event, f"**Error:**\n`{str(e)}`", 10)
+            await edit_delete(event, f"**⌔︙خطـأ ⚠️:**\n`{str(e)}`", 10)
             os.remove(downloaded_file_name)
 
 
@@ -66,11 +66,11 @@ async def load(event):
         except BaseException:
             pass
         load_module(shortname)
-        await edit_delete(event, f"`Successfully loaded {shortname}`", 10)
+        await edit_delete(event, f"**⌔︙تم التحميـل بنجـاح ✓** `{shortname}`", 10)
     except Exception as e:
         await edit_or_reply(
             event,
-            f"Could not load {shortname} because of the following error.\n{str(e)}",
+            f"**⌔︙لا يمڪـن التحميـل ⚠️** {shortname} بسـبب الخطـأ الآتـي ϟ :.\n{str(e)}",
         )
 
 
@@ -94,7 +94,7 @@ async def unload(event):
     path = Path(f"userbot/plugins/{shortname}.py")
     if not os.path.exists(path):
         return await edit_delete(
-            event, f"There is no plugin with path {path} to uninstall it"
+            event, f"**⌔︙لا يوجـد ملـف مـع مسـار ⚠️ {path} لإلغـاء التثبيـت ⊠**"
         )
     os.remove(path)
     if shortname in CMD_LIST:
@@ -105,6 +105,6 @@ async def unload(event):
         CMD_HELP.pop(shortname)
     try:
         remove_plugin(shortname)
-        await edit_or_reply(event, f"{shortname} is Uninstalled successfully")
+        await edit_or_reply(event, f"**⌔︙ {shortname} تم إلغـاء التثبيـت بنجـاح ✓**")
     except Exception as e:
-        await edit_or_reply(event, f"Successfully uninstalled {shortname}\n{str(e)}")
+        await edit_or_reply(event, f"**⌔︙تمـت الإزالـة بنجـاح ✓ : {shortname}\n{str(e)}**")
