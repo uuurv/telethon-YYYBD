@@ -73,7 +73,7 @@ async def autopicloop():
         if BOTLOG:
             return await iqthon.send_message(
                 BOTLOG_CHATID,
-                "**⌔︙حـدث خـطأ، مـن أجـل وظيفـة الصـورة التلقائيـة، يلزمـك تعييـن ڤـار DEFAULT_PIC في ڤـارات موقـع  هيروڪـو 💡**",
+                "⌔︙حـدث خـطأ، مـن أجـل وظيفـة الصـورة التلقائيـة، يلزمـك تعييـن ڤـار DEFAULT_PIC في ڤـارات موقـع  هيروڪـو 💡",
             )
         return
     if gvarstatus("صوره وقتيه") is not None:
@@ -90,7 +90,7 @@ async def autopicloop():
         shutil.copy(autopic_path, autophoto_path)
         im = Image.open(autophoto_path)
         file_test = im.rotate(counter, expand=False).save(autophoto_path, "PNG")
-        current_time = datetime.now().strftime("  Time: %H:%M \n  Date: %d.%m.%y ")
+        current_time = datetime.now().strftime("  Time: %I:%M \n  Date: %d.%m.%y ")
         img = Image.open(autophoto_path)
         drawn_text = ImageDraw.Draw(img)
         fnt = ImageFont.truetype(FONT_FILE_TO_USE, 30)
