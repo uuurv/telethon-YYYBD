@@ -46,6 +46,8 @@ autopic_path = os.path.join(os.getcwd(), "userbot", "original_pic.png")
 digitalpic_path = os.path.join(os.getcwd(), "userbot", "digital_pic.png")
 autophoto_path = os.path.join(os.getcwd(), "userbot", "photo_pfp.png")
 
+EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or "❖"
+
 digitalpfp = Config.DIGITAL_PIC or "https://telegra.ph/file/1bf9c1b0a084c258b1f97.jpg"
 
 COLLECTION_STRINGS = {
@@ -217,7 +219,7 @@ async def autoname_loop():
     while AUTONAMESTART:
         DM = time.strftime("%Y/%m/%d")
         HM = time.strftime("%I:%M")
-        name = f"❖ {HM} - "
+        name = f"{EMOJI_TELETHON} {HM} - "
         LOGS.info(name)
         try:
             await iqthon(functions.account.UpdateProfileRequest(first_name=name))
@@ -233,7 +235,7 @@ async def autobio_loop():
     while AUTOBIOSTART:
         DMY = time.strftime("%Y/%m/%d")
         HM = time.strftime("%I:%M")
-        bio = f"❖ {DEFAULTUSERBIO}  - {DMY}"
+        bio = f"{EMOJI_TELETHON} {DEFAULTUSERBIO}  - {HM}"
         LOGS.info(bio)
         try:
             await iqthon(functions.account.UpdateProfileRequest(about=bio))
