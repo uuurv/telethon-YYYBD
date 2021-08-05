@@ -123,7 +123,7 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="meme",
+    pattern="طياره",
     command=("meme", plugin_category),
     info={
         "header": "Animation command",
