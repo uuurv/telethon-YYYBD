@@ -29,7 +29,7 @@ cmhd = Config.COMMAND_HAND_LER
 
 
 @iqthon.iq_cmd(
-    pattern=f"^/help$",
+    pattern=f"^/مساعدة$",
     from_users=Config.OWNER_ID,
 )
 async def bot_help(event):
@@ -57,27 +57,27 @@ async def bot_help(event):
 
 
 @iqthon.iq_cmd(
-    pattern=f"^/broadcast$",
+    pattern=f"^/اذاعة$",
     from_users=Config.OWNER_ID,
 )
 async def bot_broadcast(event):
     replied = await event.get_reply_message()
     if not replied:
-        return await event.reply("Reply to a message for Broadcasting First !")
+        return await event.reply("**⌔︙ يرجى الرد على الرسالة للأذاعة 📣!**")
     start_ = datetime.now()
-    br_cast = await replied.reply("Broadcasting ...")
+    br_cast = await replied.reply("**⌔︙ جـاري الاذاعة لجمـيع الأعضاء 🚹**")
     blocked_users = []
     count = 0
     bot_users_count = len(get_all_starters())
     if bot_users_count == 0:
-        return await event.reply("`No one started your bot yet.`")
+        return await event.reply("**⌔︙ لا يوجد اي شخص يستخدم بوتك**")
     users = get_all_starters()
     if users is None:
-        return await event.reply("`Errors ocured while fetching users list.`")
+        return await event.reply("**⌔︙ هناك خطأ في فحص قائـمة  المستخدمين 🚸**")
     for user in users:
         try:
             await event.client.send_message(
-                int(user.user_id), "🔊 You received a **new** Broadcast."
+                int(user.user_id), "⌔︙ 🔊 تم استلام اذاعه جديدة."
             )
             await event.client.send_message(int(user.user_id), replied)
             await asyncio.sleep(0.8)
@@ -89,36 +89,36 @@ async def bot_broadcast(event):
             LOGS.error(str(e))
             if BOTLOG:
                 await event.client.send_message(
-                    BOTLOG_CHATID, f"**Error while broadcasting**\n`{str(e)}`"
+                    BOTLOG_CHATID, f"**⌔︙هنـاك خطـأ في الأذاعـة 🔊 🆘**\n`{str(e)}`"
                 )
         else:
             count += 1
             if count % 5 == 0:
                 try:
                     prog_ = (
-                        "🔊 Broadcasting ...\n\n"
+                        "**⌔︙جـاري الأذاعـة 🔊 ..**\n\n"
                         + progress_str(
                             total=bot_users_count,
                             current=count + len(blocked_users),
                         )
-                        + f"\n\n• ✔️ **Success** :  `{count}`\n"
-                        + f"• ✖️ **Failed** :  `{len(blocked_users)}`"
+                        + f"\n\n**⌔︙ بنـجاح ✔️:**  `{count}`\n"
+                        + f"**⌔︙ خطأ ✖️ : **  `{len(blocked_users)}`"
                     )
                     await br_cast.edit(prog_)
                 except FloodWaitError as e:
                     await asyncio.sleep(e.seconds)
     end_ = datetime.now()
-    b_info = f"🔊  Successfully broadcasted message to ➜  <b>{count} users.</b>"
+    b_info = f"⌔︙ 🔊 تـم بنجاح الأذاعه الى :  <b>{count} عدد من المستخدمين 🚹.</b>"
     if len(blocked_users) != 0:
-        b_info += f"\n🚫  <b>{len(blocked_users)} users</b> blocked your bot recently, so have been removed."
+        b_info += f"\n⌔︙ 🚫  <b>{len(blocked_users)} </b> مجموع الاشخاص الذين قـامو بحـضر بوتـك 🆘."
     b_info += (
-        f"\n⏳  <code>Process took: {time_formatter((end_ - start_).seconds)}</code>."
+        f"\n⌔︙⏳  <code> الـوقت المسـتغرق : {time_formatter((end_ - start_).seconds)}</code>."
     )
     await br_cast.edit(b_info, parse_mode="html")
 
 
 @iqthon.iq_cmd(
-    pattern=f"bot_users$",
+    pattern=f"المستخدمين$",
     command=("bot_users", plugin_category),
     info={
         "header": "To get users list who started bot.",
@@ -130,15 +130,15 @@ async def ban_starters(event):
     "To get list of users who started bot."
     ulist = get_all_starters()
     if len(ulist) == 0:
-        return await edit_delete(event, "`No one started your bot yet.`")
-    msg = "**The list of users who started your bot are :\n\n**"
+        return await edit_delete(event, "**⌔︙ لايـوجد اي شخص أستعـمل بوتـك 🚹**")
+    msg = "**⌔︙ الأشخـاص الذيـن اسـتعملو بوتـك 🚻 :\n\n**"
     for user in ulist:
-        msg += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n**ID:** `{user.user_id}`\n**UserName:** @{user.username}\n**Date: **__{user.date}__\n\n"
+        msg += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n**⌔︙ الايدي:** `{user.user_id}`\n**⌔︙ المعرفات:** @{user.username}\n**⌔︙ التاريخ: **__{user.date}__\n\n"
     await edit_or_reply(event, msg)
 
 
 @iqthon.iq_cmd(
-    pattern=f"^/ban\s+([\s\S]*)",
+    pattern=f"^/حظر\s+([\s\S]*)",
     from_users=Config.OWNER_ID,
 )
 async def ban_botpms(event):
@@ -146,34 +146,34 @@ async def ban_botpms(event):
     reply_to = await reply_id(event)
     if not user_id:
         return await event.client.send_message(
-            event.chat_id, "`I can't find user to ban`", reply_to=reply_to
+            event.chat_id, "**⌔︙ لايمكـنني العثـور على المسـتخدم  🚹 ⚠️**", reply_to=reply_to
         )
     if not reason:
         return await event.client.send_message(
-            event.chat_id, "`To ban the user provide reason first`", reply_to=reply_to
+            event.chat_id, "**⌔︙ لحـظر هـذا الشخـص قـم بكتـابة السبـب بجـانب الامـر  🔙**", reply_to=reply_to
         )
     try:
         user = await event.client.get_entity(user_id)
         user_id = user.id
     except Exception as e:
-        return await event.reply(f"**Error:**\n`{str(e)}`")
+        return await event.reply(f"**⌔︙عـذرا هنـاك خطـأ 🚫 :**\n`{str(e)}`")
     if user_id == Config.OWNER_ID:
-        return await event.reply("I can't ban you master")
+        return await event.reply("**⌔︙لاأستطيـع حظـر مالـك البـوت الشخـصي. 🛂**")
     check = check_is_black_list(user.id)
     if check:
         return await event.client.send_message(
             event.chat_id,
-            f"#Already_banned\
-            \nUser already exists in my Banned Users list.\
-            \n**Reason For Bot BAN:** `{check.reason}`\
-            \n**Date:** `{check.date}`.",
+            f"**⌔︙ بالفعل_محظور :**\
+            \n**⌔︙ هـذا المسـتخدم موجـود فـي قائمـة المحظـورين 🚫**\
+            \n**⌔︙ سبب الحظر 🚫 :** `{check.reason}`\
+            \n**⌔︙ التاريخ 📆 :** `{check.date}`.",
         )
     msg = await ban_user_from_bot(user, reason, reply_to)
     await event.reply(msg)
 
 
 @iqthon.iq_cmd(
-    pattern=f"^/unban(?:\s|$)([\s\S]*)",
+     pattern=f"^/فتح الحظر(?:\s|$)([\s\S]*)",
     from_users=Config.OWNER_ID,
 )
 async def ban_botpms(event):
@@ -181,26 +181,26 @@ async def ban_botpms(event):
     reply_to = await reply_id(event)
     if not user_id:
         return await event.client.send_message(
-            event.chat_id, "`I can't find user to unban`", reply_to=reply_to
+            event.chat_id, "**⌔︙ لا استطيع ايجاد المستخـدم للحـظر 🔍⚠️ .**", reply_to=reply_to
         )
     try:
         user = await event.client.get_entity(user_id)
         user_id = user.id
     except Exception as e:
-        return await event.reply(f"**Error:**\n`{str(e)}`")
+        return await event.reply(f"**⌔︙عـذرا هنـاك خطـأ 🚫 :**\n`{str(e)}`")
     check = check_is_black_list(user.id)
     if not check:
         return await event.client.send_message(
             event.chat_id,
-            f"#User_Not_Banned\
-            \n👤 {_format.mentionuser(user.first_name , user.id)} doesn't exist in my Banned Users list.",
+            f"**⌔︙ الغـاء الـحظر 🔓 **\
+            \n⌔︙ 👤 {_format.mentionuser(user.first_name , user.id)} تـم الغـاء حـظرة مـن البـوت بنـجاح ✅",
         )
     msg = await unban_user_from_bot(user, reason, reply_to)
     await event.reply(msg)
 
 
 @iqthon.iq_cmd(
-    pattern=f"bblist$",
+   pattern=f"المحظورين$",
     command=("bblist", plugin_category),
     info={
         "header": "To get users list who are banned in bot.",
@@ -212,15 +212,15 @@ async def ban_starters(event):
     "To get list of users who are banned in bot."
     ulist = get_all_bl_users()
     if len(ulist) == 0:
-        return await edit_delete(event, "`No one is banned in your bot yet.`")
-    msg = "**The list of users who are banned in your bot are :\n\n**"
+        return await edit_delete(event, "**⌔︙ لا يوجـد شخص محـظور في البـوت الـى الان 👤**")
+    msg = "**المسـتخدميـن المحـظورين في بـوتك هـم :\n\n**"
     for user in ulist:
-        msg += f"• 👤 {_format.mentionuser(user.first_name , user.chat_id)}\n**ID:** `{user.chat_id}`\n**UserName:** @{user.username}\n**Date: **__{user.date}__\n**Reason:** __{user.reason}__\n\n"
+        msg += f"• 👤 {_format.mentionuser(user.first_name , user.chat_id)}\n**⌔︙ الايدي:** `{user.chat_id}`\n**⌔︙ المعرف:** @{user.username}\n**⌔︙ التاريخ: **{user.date}\n**⌔︙ السبب:** {user.reason}\n\n"
     await edit_or_reply(event, msg)
 
 
 @iqthon.iq_cmd(
-    pattern=f"bot_antif (on|off)$",
+    pattern=f"حظر التكرار (تشغيل|ايقاف)$",
     command=("bot_antif", plugin_category),
     info={
         "header": "To enable or disable bot antiflood.",
@@ -234,13 +234,13 @@ async def ban_starters(event):
 async def ban_antiflood(event):
     "To enable or disable bot antiflood."
     input_str = event.pattern_match.group(1)
-    if input_str == "on":
+    if input_str == "تشغيل":
         if gvarstatus("bot_antif") is not None:
-            return await edit_delete(event, "`Bot Antiflood was already enabled.`")
+            return await edit_delete(event, "**⌔︙تـم تشغيل حظر التكـرار بالفعل ✅**")
         addgvar("bot_antif", True)
-        await edit_delete(event, "`Bot Antiflood Enabled.`")
-    elif input_str == "off":
+        await edit_delete(event, "**⌔︙تـم تشغيل حظر التكـرار  ✅**")
+    elif input_str == "ايقاف":
         if gvarstatus("bot_antif") is None:
-            return await edit_delete(event, "`Bot Antiflood was already disabled.`")
+            return await edit_delete(event, "**⌔︙تـم تعطيل حظر التكـرار بالفعل ✅**")
         delgvar("bot_antif")
-        await edit_delete(event, "`Bot Antiflood Disabled.`")
+        await edit_delete(event, "**⌔︙تـم تعطيل حظر التكـرار  ✅**")
