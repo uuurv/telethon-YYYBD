@@ -65,10 +65,10 @@ async def gen_chlog(repo, diff):
 
 async def print_changelogs(event, ac_br, changelog):
     changelog_str = (
-        f"**New UPDATE available for [{ac_br}]:\n\nCHANGELOG:**\n`{changelog}`"
+        f"**⌔︙مطـور تـليثون العـرب قام بأضافـة ⚛️ : [{ac_br}]:\n\n⌔︙التغـيرات هيـة 🛃 :**\n`{changelog}`"
     )
     if len(changelog_str) > 4096:
-        await event.edit("`Changelog is too big, view the file to see it.`")
+        await event.edit("**⌔︙ سجل التغيير كبير جدًا ، اعرض الملف لرؤيته.**")
         with open("output.txt", "w+") as file:
             file.write(changelog_str)
         await event.client.send_file(
@@ -107,21 +107,21 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     sandy = await event.edit(
-        "`Successfully Updated!\n" "Bot is restarting... Wait for a minute!`"
+        "**⌔︙تـم تحـديث السـورس تـليثون العـرب بنجـاح ㊙️**\n" "**⌔︙ جـاري التحديث، قـد يستغـرق الأمـر 2-3 دقائـق لاتقم بتحديث مـره اخـرى انتـظـر ⏱**"
     )
     await event.client.reload(sandy)
 
 
 async def deploy(event, repo, ups_rem, ac_br, txt):
     if HEROKU_API_KEY is None:
-        return await event.edit("`Please set up`  **HEROKU_API_KEY**  ` Var...`")
+        return await event.edit("**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**")
     heroku = heroku3.from_key(HEROKU_API_KEY)
     heroku_app = None
     heroku_applications = heroku.apps()
     if HEROKU_APP_NAME is None:
         await event.edit(
-            "`Please set up the` **HEROKU_APP_NAME** `Var`"
-            " to be able to deploy your userbot...`"
+            "**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**"
+            
         )
         repo.__del__()
         return
@@ -131,11 +131,11 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             break
     if heroku_app is None:
         await event.edit(
-            f"{txt}\n" "`Invalid Heroku credentials for deploying userbot dyno.`"
+            f"{txt}\n" "**⌔︙بيانات اعتماد Heroku غير صالحة لنشر userbot dyno.**"
         )
         return repo.__del__()
     sandy = await event.edit(
-        "`Userbot dyno build in progress, please wait until the process finishes it usually takes 4 to 5 minutes .`"
+        "**⌔︙ جـاري التحديث، قـد يستغـرق الأمـر 2-3 دقائـق لاتقم بتحديث مـره اخـرى انتـظـر ⏱**"
     )
     try:
         ulist = get_collectionlist_items()
@@ -277,21 +277,21 @@ async def upstream(event):
 
 
 @iqthon.iq_cmd(
-    pattern="update deploy$",
+    pattern="تحديث الان$",
 )
 async def upstream(event):
-    event = await edit_or_reply(event, "`Pulling the nekopack repo wait a sec ....`")
-    off_repo = "https://github.com/Mr-confused/nekopack"
+    event = await edit_or_reply(event, "**⌔︙جـاري تحديث والاسترداد  يرجـى الإنتظـار ↯**")
+    off_repo = "https://github.com/klanrali/Telethon-Arab-helper"
     os.chdir("/app")
     try:
-        txt = "`Oops.. Updater cannot continue due to "
-        txt += "some problems occured`\n\n**LOGTRACE:**\n"
+        txt = "**⌔︙ عـذرًا، لا يمڪـن لبرنامـج التحديـث المتابعـة بسـبب ϟ**"
+        txt += "**⌔︙حـدثت بعـض المشاڪـل، تتبـع السجـل ⎙ :**\n"
         repo = Repo()
     except NoSuchPathError as error:
-        await event.edit(f"{txt}\n`directory {error} is not found`")
+        await event.edit(f"{txt}\n**⌔︙ الدليل {error} غير موجود **")
         return repo.__del__()
     except GitCommandError as error:
-        await event.edit(f"{txt}\n`Early failure! {error}`")
+        await event.edit(f"{txt}\n**⌔︙فشـل مبڪـر ϟ : {error}`**")
         return repo.__del__()
     except InvalidGitRepositoryError:
         repo = Repo.init()
@@ -307,7 +307,7 @@ async def upstream(event):
     ac_br = repo.active_branch.name
     ups_rem = repo.remote("upstream")
     ups_rem.fetch(ac_br)
-    await event.edit("`Deploying userbot, please wait....`")
+    await event.edit("**⌔︙جـاري تحديث تليثون العرب  ، يرجـى الإنتـظار ↺**")
     await deploy(event, repo, ups_rem, ac_br, txt)
 
 
