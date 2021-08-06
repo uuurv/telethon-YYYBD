@@ -9,7 +9,7 @@ from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
 __version__ = "1.0.0"
 __license__ = "GNU Affero General Public License v3.0"
-__author__ = "telethon <https://github.com/telethontesthelp/Telethon-arabb>"
+__author__ = "تليثون العرب <t.me/iqthon>"
 __copyright__ = "telethon AR (C) 2020 - 2021  " + __author__
 
 iqthon.version = __version__
@@ -44,7 +44,7 @@ else:
 
 if Config.PM_LOGGER_GROUP_ID == 0:
     if gvarstatus("PM_LOGGER_GROUP_ID") is None:
-        Config.PM_LOGGER_GROUP_ID = -100
+        Config.PM_LOGGER_GROUP_ID =-100
     else:
         Config.PM_LOGGER_GROUP_ID = int(gvarstatus("PM_LOGGER_GROUP_ID"))
 elif str(Config.PM_LOGGER_GROUP_ID)[0] != "-":
