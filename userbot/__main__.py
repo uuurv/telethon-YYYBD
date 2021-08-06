@@ -1,7 +1,6 @@
 import sys
 
 import userbot
-from telethon import functions
 from userbot import BOTLOG_CHATID, HEROKU_APP, PM_LOGGER_GROUP_ID
 
 from .Config import Config
@@ -48,7 +47,7 @@ async def startup_process():
     await verifyLoggerGroup()
     await load_plugins("plugins")
     await load_plugins("assistant")
-    print("❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖\n")
+     print("❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖\n")
     print("حسنا لقد تم تنصيب تليثون العرب بدون مشاكل")
     print(
         f"⌔︙ا  تهانينا ، اكتب الآن -  .السورس  - لروئيه المعلومات\
@@ -62,6 +61,7 @@ async def startup_process():
     await startupmessage()
     Catcheck.sucess = True
     return
+
 
 iqthon.loop.run_until_complete(startup_process())
 
