@@ -107,20 +107,20 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     sandy = await event.edit(
-        "**⌔︙تـم تحـديث السـورس تـليثون العـرب بنجـاح ㊙️**\n" "**⌔︙ جـاري التحديث، قـد يستغـرق الأمـر 2-3 دقائـق لاتقم بتحديث مـره اخـرى انتـظـر ⏱**"
+        "**⌔︙تـم تحـديث السـورس تـليثون العـرب بنجـاح ㊙️**\n" "**⌔︙ جـاري التحديث، قـد يستغـرق الأمـر 10 دقائـق لاتقم بتحديث مـره اخـرى انتـظـر ⏱**"
     )
     await event.client.reload(sandy)
 
 
 async def deploy(event, repo, ups_rem, ac_br, txt):
     if HEROKU_API_KEY is None:
-        return await event.edit("**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**")
+        return await event.edit("**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**\n**⌔︙ هنا شرح عن كيفيه وضع كود هيروكو المطلوب  :** https://t.me/L3LL3/15")
     heroku = heroku3.from_key(HEROKU_API_KEY)
     heroku_app = None
     heroku_applications = heroku.apps()
     if HEROKU_APP_NAME is None:
         await event.edit(
-            "**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**"
+            "**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**\n**⌔︙ هنا شرح عن كيفيه وضع كود هيروكو المطلوب  :** https://t.me/L3LL3/15"
             
         )
         repo.__del__()
@@ -161,19 +161,19 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     try:
         remote.push(refspec="HEAD:refs/heads/master", force=True)
     except Exception as error:
-        await event.edit(f"{txt}\n**Error log:**\n`{error}`")
+        await event.edit(f"{txt}\n**⌔︙عذرا هناك خطأ ⁉️ :**\n`{error}`")
         return repo.__del__()
     build_status = heroku_app.builds(order_by="created_at", sort="desc")[0]
     if build_status.status == "failed":
         return await edit_Delete(
-            event, "`Build failed!\n" "Cancelled or there were some errors...`"
+            event, "`Build failed!\n" "**⌔︙تم الإلغاء أو كانت هناك بعض الأخطاء...**"
         )
     try:
         remote.push("master:main", force=True)
     except Exception as error:
-        await event.edit(f"{txt}\n**Here is the error log:**\n`{error}`")
+        await event.edit(f"{txt}\n**⌔︙عذرا هناك خطأ ⁉️ :**\n`{error}`")
         return repo.__del__()
-    await event.edit("`Deploy was failed. So restarting to update`")
+    await event.edit("**⌔︙الان يتـم تحـديث سـورس تـليثون العـرب أنتضر ⚜️**")
     delgvar("ipaddress")
     try:
         await event.client.disconnect()
