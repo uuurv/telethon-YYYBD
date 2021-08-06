@@ -47,7 +47,7 @@ async def startup_process():
     await verifyLoggerGroup()
     await load_plugins("plugins")
     await load_plugins("assistant")
-     print("❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖\n")
+    print("❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖ ❖\n")
     print("حسنا لقد تم تنصيب تليثون العرب بدون مشاكل")
     print(
         f"⌔︙ا  تهانينا ، اكتب الآن -  .السورس  - لروئيه المعلومات\
