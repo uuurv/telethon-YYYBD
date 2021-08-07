@@ -8,8 +8,8 @@ plugin_category = "utils"
 
 
 @iqthon.iq_cmd(
-    pattern="invite ([\s\S]*)",
-    command=("invite", plugin_category),
+    pattern="دعوة ([\s\S]*)",
+    command=("دعوة", plugin_category),
     info={
         "header": "Add the given user/users to the group where u used the command.",
         "description": "Adds only mentioned person or bot not all members",
@@ -43,4 +43,4 @@ async def _(event):
             except Exception as e:
                 return await edit_delete(event, f"`{str(e)}`", 5)
 
-    await edit_or_reply(event, f"`{to_add_users} is/are Invited Successfully`")
+    await edit_or_reply(event, f"**⌔︙ {to_add_users}  تمـت دعوتـه بنجـاح ✓**")
