@@ -36,28 +36,27 @@ async def _(event):
     except Exception as e:
         no_admin_privilege_message = await event.client.send_message(
             entity=event.chat_id,
-            message=f"""**Automatic AntiFlooder**
-@admin [User](tg://user?id={event.message.sender_id}) is flooding this chat.
+            message=f"""**⌔︙ تحذير تكرار فـي المجموعة : لـ**
+@تاك للادمنيه  : [User](tg://user?id={event.message.sender_id}) لقد قام بتكرار الرسائل .
 `{str(e)}`""",
             reply_to=event.message.id,
         )
         await asyncio.sleep(4)
         await no_admin_privilege_message.edit(
-            "This is useless SPAM dude. Stop this, enjoy the chat buddy "
+            "**⌔︙ هذا الشخص الذي قام بتكرار الرسائل والازعاج **"
         )
     else:
         await event.client.send_message(
             entity=event.chat_id,
-            message=f"""**Automatic AntiFlooder**
-[User](tg://user?id={event.message.sender_id}) has been automatically restricted
-because he reached the defined flood limit.""",
+            message=f"""**⌔︙ تحذير تكرار فـي المجموعة : لـ**
+[User](tg://user?id={event.message.sender_id}) تم تقيد الشخص بسبب عمل تكرار للرسائل والازعاج.""",
             reply_to=event.message.id,
         )
 
 
 @iqthon.iq_cmd(
-    pattern="setflood(?:\s|$)([\s\S]*)",
-    command=("setflood", plugin_category),
+    pattern="تحذير تكرار(?:\s|$)([\s\S]*)",
+    command=("تحذير تكرار", plugin_category),
     info={
         "header": "To setup antiflood in a group",
         "description": "It warns the user if he spams the chat and if you are an admin with proper rights then it mutes him in that group.",
@@ -73,11 +72,11 @@ because he reached the defined flood limit.""",
 async def _(event):
     "To setup antiflood in a group to prevent spam"
     input_str = event.pattern_match.group(1)
-    event = await edit_or_reply(event, "`updating flood settings!`")
+    event = await edit_or_reply(event, "⌔︙جـاري تحديـث إعـدادات الـ كملها ↯")
     await asyncio.sleep(2)
     try:
         sql.set_flood(event.chat_id, input_str)
         sql.__load_flood_settings()
-        await event.edit(f"Antiflood updated to {input_str} in the current chat")
+        await event.edit(f"⌔︙تم تحديـث تحذير تكرار إلى : {input_str} في الدردشـة الحاليـة ⌂")
     except Exception as e:
         await event.edit(str(e))
