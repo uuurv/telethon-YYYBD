@@ -6,7 +6,7 @@ plugin_category = "utils"
 
 
 @iqthon.iq_cmd(
-    pattern="schd (\d*) ([\s\S]*)",
+    pattern="رساله وقتيه (\d*) ([\s\S]*)",
     command=("schd", plugin_category),
     info={
         "header": "To schedule a message after given time(in seconds).",
