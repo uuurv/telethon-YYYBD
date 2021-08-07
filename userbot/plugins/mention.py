@@ -8,7 +8,7 @@ plugin_category = "extra"
 
 
 @iqthon.iq_cmd(
-    pattern="(tagall|all)(?:\s|$)([\s\S]*)",
+    pattern="(تاك للكل|الكل)(?:\s|$)([\s\S]*)",
     command=("tagall", plugin_category),
     info={
         "header": "tags recent 100 persons in the group may not work for all",
@@ -22,17 +22,17 @@ async def _(event):
     "To tag all."
     reply_to_id = await reply_id(event)
     input_str = event.pattern_match.group(2)
-    mentions = input_str or "@all"
+    mentions = input_str or "@تاك للكل"
     chat = await event.get_input_chat()
-    async for x in event.client.iter_participants(chat, 100):
+    async for x in event.client.iter_participants(chat, 10000):
         mentions += f"[\u2063](tg://user?id={x.id})"
     await event.client.send_message(event.chat_id, mentions, reply_to=reply_to_id)
     await event.delete()
 
 
 @iqthon.iq_cmd(
-    pattern="report$",
-    command=("report", plugin_category),
+    pattern="ابلاغ الادمنيه$",
+    command=("ابلاغ الادمنيه", plugin_category),
     info={
         "header": "To tags admins in group.",
         "usage": "{tr}report",
@@ -40,7 +40,7 @@ async def _(event):
 )
 async def _(event):
     "To tags admins in group."
-    mentions = "@admin: **Spam Spotted**"
+    mentions = "@تاك للادمنيه : **⌔︙تم رصـد إزعـاج ⚠️**"
     chat = await event.get_input_chat()
     reply_to_id = await reply_id(event)
     async for x in event.client.iter_participants(
@@ -53,8 +53,8 @@ async def _(event):
 
 
 @iqthon.iq_cmd(
-    pattern="men ([\s\S]*)",
-    command=("mention", plugin_category),
+    pattern="تاك بالكلام ([\s\S]*)",
+    command=("تاك بالكلام", plugin_category),
     info={
         "header": "Tags that person with the given custom text.",
         "usage": [
