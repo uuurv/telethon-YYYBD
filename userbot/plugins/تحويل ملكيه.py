@@ -1,7 +1,3 @@
-"""Transfer Ownership of Channels
-Available Commands:
-.otransfer @username"""
-
 import telethon.password as pwd_mod
 from telethon.tl import functions
 
@@ -13,8 +9,8 @@ plugin_category = "utils"
 
 
 @iqthon.iq_cmd(
-    pattern="otransfer ([\s\S]*)",
-    command=("otransfer", plugin_category),
+    pattern="تحويل ملكيه ([\s\S]*)",
+    command=("تحويل ملكيه", plugin_category),
     info={
         "header": "To transfer channel ownership.",
         "description": "Transfers ownership to the given username for this set this var `TG_2STEP_VERIFICATION_CODE` in heroku with your 2-step verification code.",
@@ -33,6 +29,6 @@ async def _(event):
             )
         )
     except Exception as e:
-        await event.edit(f"**Error:**\n`{str(e)}`")
+        await event.edit(f"**⌔︙حـدث خـطأ ✕ :**\n`{str(e)}`")
     else:
-        await event.edit("Transferred 🌚")
+        await event.edit("**⌔︙تم نقل ملكيه ✓**")
