@@ -12,16 +12,16 @@ plugin_category = "utils"
 
 
 @iqthon.iq_cmd(
-    pattern="sg(u)?(?:\s|$)([\s\S]*)",
-    command=("sg", plugin_category),
+    pattern="سجل الاسماء(ألف)?(?:\s|$)([\s\S]*)",
+    command=("سجل الاسماء", plugin_category),
     info={
         "header": "To get name history of the user.",
         "flags": {
             "u": "That is sgu to get username history.",
         },
         "usage": [
-            "{tr}sg <username/userid/reply>",
-            "{tr}sgu <username/userid/reply>",
+            "{tr}سجل الاسماء <username/userid/reply>",
+            "{tr}سجل الاسماء <username/userid/reply>",
         ],
         "examples": "{tr}sg @missrose_bot",
     },
@@ -33,19 +33,19 @@ async def _(event):  # sourcery no-metrics
     if not input_str and not reply_message:
         await edit_delete(
             event,
-            "`reply to  user's text message to get name/username history or give userid/username`",
+            "**⌔︙قم بالـرد على رسالـة لمستخـدم للحصـول على إسمـه/سجل يوزراتـه أو قم بإعطـاء آيـدي المستخـدم/يـوزر المستخـدم ✦**",
         )
     user, rank = await get_user_from_event(event, secondgroup=True)
     if not user:
         return
     uid = user.id
     chat = "@SangMataInfo_bot"
-    catevent = await edit_or_reply(event, "`Processing...`")
+    catevent = await edit_or_reply(event, "**⌔︙جـاري المعالجـة ↯**")
     async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message(f"/search_id {uid}")
         except YouBlockedUserError:
-            await edit_delete(catevent, "`unblock @Sangmatainfo_bot and then try`")
+            await edit_delete(catevent, "**⌔︙قم بإلغـاء حظـر @Sangmatainfo_bot ثم حـاول !!**")
         responses = []
         while True:
             try:
@@ -55,9 +55,9 @@ async def _(event):  # sourcery no-metrics
             responses.append(response.text)
         await event.client.send_read_acknowledge(conv.chat_id)
     if not responses:
-        await edit_delete(catevent, "`bot can't fetch results`")
+        await edit_delete(catevent, "**⌔︙لا يستطيـع البـوت جلـب النتائـج ⚠️**")
     if "No records found" in responses:
-        await edit_delete(catevent, "`The user doesn't have any record`")
+        await edit_delete(catevent, "**⌔︙المستخـدم ليـس لديـه أيّ سجـل ✕**")
     names, usernames = await sanga_seperator(responses)
     cmd = event.pattern_match.group(1)
     sandy = None
