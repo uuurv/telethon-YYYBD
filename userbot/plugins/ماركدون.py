@@ -12,8 +12,8 @@ BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>
 
 
 @iqthon.iq_cmd(
-    pattern="ماركدون شفافيه(?:\s|$)([\s\S]*)",
-    command=("ماركدون شفافيه", plugin_category),
+    pattern="ماركدون(?:\s|$)([\s\S]*)",
+    command=("ماركدون", plugin_category),
     info={
         "header": "To create button posts via inline",
         "note": f"Markdown is Default to html",
