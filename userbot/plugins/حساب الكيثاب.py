@@ -40,8 +40,8 @@ async def source(e):
 
 
 @iqthon.iq_cmd(
-    pattern="معلومات الكيثاب( -l(\d+))? ([\s\S]*)",
-    command=("معلومات كيت هوب", plugin_category),
+    pattern="حساب كيثاب( -l(\d+))? ([\s\S]*)",
+    command=("حساب كيثاب", plugin_category),
     info={
         "header": "Shows the information about an user on GitHub of given username",
         "flags": {"-l": "repo limit : default to 5"},
@@ -58,7 +58,7 @@ async def _(event):
         async with session.get(URL) as request:
             if request.status == 404:
                 return await edit_delete(event, "`" + username + " not found`")
-            catevent = await edit_or_reply(event, "⌔︙جـاري إحضـار معلومـات حساب كيثاب ↯")
+            catevent = await edit_or_reply(event, "**⌔︙جـاري إحضـار معلومـات حساب كيثاب ↯**")
             result = await request.json()
             photo = result["avatar_url"]
             if result["bio"]:
