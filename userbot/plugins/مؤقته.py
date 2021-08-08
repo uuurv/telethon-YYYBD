@@ -8,8 +8,8 @@ LOGS = logging.getLogger(__name__)
 
 
 @iqthon.iq_cmd(
-    pattern="رساله مؤقته (\d*) ([\s\S]*)",
-    command=("رساله مؤقته", plugin_category),
+    pattern="مؤقته (\d*) ([\s\S]*)",
+    command=("مؤقته", plugin_category),
     info={
         "header": "To self destruct the message after paticualr time.",
         "description": "Suppose if you use .sdm 10 hi then message will be immediately send new message as hi and then after 10 sec this message will auto delete.`",
