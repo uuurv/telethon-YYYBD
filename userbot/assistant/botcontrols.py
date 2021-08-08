@@ -34,24 +34,23 @@ cmhd = Config.COMMAND_HAND_LER
 )
 async def bot_help(event):
     await event.reply(
-        f"""The commands in the bot are:
-**Note : **__This commands work only in this bot__ {botusername}
+        f"""**⚜️ ︙ اهلا بك في قائمه الاوامر :
+الخاصه ببوت المطور :** {botusername}
 
-• **Cmd : **/uinfo <reply to user message>
-• **Info : **__You have noticed that forwarded stickers/emoji doesn't have forward tag so you can identify the user who sent thoose messages by this cmd.__
-• **Note : **__It works for all forwarded messages. even for users who's permission forward message nobody.__
+**1︙** `/اذاعة`  + الرد على رساله ⤵️
+⌔︙ اذاعه الرساله لجميع مراسلين بوتك عبر ارسالهم الرساله الى الخاص . 
+ 
+**2︙** `/المستخدمين` ⤵️
+⌔︙ لأضهار جميع مستخدمين البوت لديك  .
 
-• **Cmd : **/ban <reason> or /ban <username/userid> <reason>
-• **Info : **__Reply to a user message with reason so he will be notified as you banned from the bot and his messages will not be forworded to you further.__
-• **Note : **__Reason is must. without reason it won't work. __
+**3︙** `/حظر` + الرد على الشخص  ⤵️
+⌔︙ لحضر الشخص المزعج من البوت فقط قم برد على رسالته او كتابه معرفه بجانب الامر  .
 
-• **Cmd : **/unban <reason(optional)> or /unban <username/userid>
-• **Info : **__Reply to user message or provide username/userid to unban from the bot.__
-• **Note : **__To check banned users list use__ `{cmhd}bblist`.
+**4︙** `/فتح الحظر` + الرد على الشخص  ⤵️
+⌔︙ لفتح حضر الشخص من البوت فقط قم برد على رسالته  او كتابه معرفه بجانب الامر  .
 
-• **Cmd : **/broadcast
-• **Info : **__Reply to a message to get broadcasted to every user who started your bot. To get list of users use__ `{cmhd}bot_users`.
-• **Note : **__if user stoped/blocked the bot then he will be removed from your database that is he will erased from the bot_starters list.__
+**5︙** `/فتح الحظر` + المحظورين  ⤵️
+⌔︙ لأضهار قائمه المحظورين من بوتك   .
 """
     )
 
@@ -118,7 +117,7 @@ async def bot_broadcast(event):
 
 
 @iqthon.iq_cmd(
-    pattern=f"المستخدمين$",
+    pattern=f"^/المستخدمين$",
     command=("bot_users", plugin_category),
     info={
         "header": "To get users list who started bot.",
@@ -200,7 +199,7 @@ async def ban_botpms(event):
 
 
 @iqthon.iq_cmd(
-   pattern=f"المحظورين$",
+   pattern=f"^/المحظورين$",
     command=("bblist", plugin_category),
     info={
         "header": "To get users list who are banned in bot.",
@@ -220,7 +219,7 @@ async def ban_starters(event):
 
 
 @iqthon.iq_cmd(
-    pattern=f"حظر التكرار (تشغيل|ايقاف)$",
+    pattern=f"^/التكرار (تشغيل|ايقاف)$",
     command=("bot_antif", plugin_category),
     info={
         "header": "To enable or disable bot antiflood.",
