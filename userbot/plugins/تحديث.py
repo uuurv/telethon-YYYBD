@@ -114,13 +114,13 @@ async def update(event, repo, ups_rem, ac_br):
 
 async def deploy(event, repo, ups_rem, ac_br, txt):
     if HEROKU_API_KEY is None:
-        return await event.edit("**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**\n**⌔︙ هنا شرح عن كيفيه وضع كود هيروكو المطلوب  :** https://t.me/L3LL3/15")
+        return await event.edit("**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**\n**⌔︙ هنا شرح عن كيفيه وضع كود هيروكو المطلوب  :** https://t.me/teamtelethon/14")
     heroku = heroku3.from_key(HEROKU_API_KEY)
     heroku_app = None
     heroku_applications = heroku.apps()
     if HEROKU_APP_NAME is None:
         await event.edit(
-            "**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**\n**⌔︙ هنا شرح عن كيفيه وضع كود هيروكو المطلوب  :** https://t.me/L3LL3/15"
+            "**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**\n**⌔︙ هنا شرح عن كيفيه وضع كود هيروكو المطلوب  :** https://t.me/teamtelethon/14"
             
         )
         repo.__del__()
@@ -131,11 +131,11 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             break
     if heroku_app is None:
         await event.edit(
-            f"{txt}\n" "**⌔︙بيانات اعتماد Heroku غير صالحة لنشر userbot dyno.**"
+            f"{txt}\n" "**⌔︙يوجد هناك خطا  بفار HEROKU_API_NAME او HEROKU_API_KEY قم بالتاكد منهما او تابع شرح كيفيه اضافه هذا الفارات بشكل صحيح :**\n https://youtu.be/7Zs0Yt3aSsM "
         )
         return repo.__del__()
     sandy = await event.edit(
-        "**⌔︙ جـاري التحديث، قـد يستغـرق الأمـر 2-3 دقائـق لاتقم بتحديث مـره اخـرى انتـظـر ⏱**"
+        "**⌔︙ جـاري التحديث، قـد يستغـرق الأمـر 10-5 دقائـق لاتقم بتحديث مـره اخـرى انتـظـر ⏱**"
     )
     try:
         ulist = get_collectionlist_items()
@@ -171,7 +171,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     try:
         remote.push("master:main", force=True)
     except Exception as error:
-        await event.edit(f"{txt}\n**⌔︙عذرا هناك خطأ ⁉️ :**\n`{error}`")
+        await event.edit(f"{txt}\n**⌔︙يوجد هناك خطا  بفار HEROKU_API_NAME او HEROKU_API_KEY قم بالتاكد منهما او تابع شرح كيفيه اضافه هذا الفارات بشكل صحيح :**\n https://youtu.be/7Zs0Yt3aSsM")
         return repo.__del__()
     await event.edit("**⌔︙الان يتـم تحـديث سـورس تـليثون العـرب أنتضر ⚜️**")
     delgvar("ipaddress")
