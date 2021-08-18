@@ -25,8 +25,8 @@ CMD_FIG = {
 
 
 @iqthon.iq_cmd(
-    pattern="نص ثري دي(?:\s|$)([\s\S]*)",
-    command=("نص ثري دي", plugin_category),
+     pattern="ثريدي(?:\s|$)([\s\S]*)",
+    command=("ثريدي", plugin_category),
     info={
         "header": "Changes the given text into the given style",
         "usage": ["{tr}figlet <style> ; <text>", "{tr}figlet <text>"],
