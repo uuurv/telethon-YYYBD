@@ -233,7 +233,7 @@ async def gablist(event):
 async def startgmute(event):
     "To mute a person in all groups where you are admin."
     if event.is_private:
-        await event.edit("**⌔︙ قـد تحـدث بعـض المـشاكـل أو الأخـطاء **")
+        await event.edit("**⌔︙ يرجى الأنتضار لكتم الشخص 🔕**")
         await asyncio.sleep(2)
         userid = event.chat_id
         reason = event.pattern_match.group(1)
@@ -242,38 +242,38 @@ async def startgmute(event):
         if not user:
             return
         if user.id == iqthon.uid:
-            return await edit_or_reply(event, "**⌔︙ عذرا لايمكن كتم نفسك  **")
+            return await edit_or_reply(event, "**⌔︙ عذرا لايمكن كتم نفسك  ⁉️**")
         userid = user.id
     try:
         user = (await event.client(GetFullUserRequest(userid))).user
     except Exception:
-        return await edit_or_reply(event, "**⌔︙ غيـر قـادر عـلى جـلب مـعلومات الـشخص **")
+        return await edit_or_reply(event, "**⌔︙ غيـر قـادر عـلى جـلب مـعلومات الـشخص 🙅🏼**")
     if is_muted(userid, "gmute"):
         return await edit_or_reply(
             event,
-            f"**⌔︙ هـذا الشـخص مكـتوم بـنجاح **",
+            f"**⌔︙ هـذا الشـخص مكـتوم بـنجاح ✅**",
         )
     try:
         mute(userid, "gmute")
     except Exception as e:
-        await edit_or_reply(event, f"**⌔︙ خـطأ**\n`{e}`")
+        await edit_or_reply(event, f"**⌔︙ خـطأ ⁉️ :**\n`{e}`")
     else:
         if reason:
             await edit_or_reply(
                 event,
-                f"**⌔︙ تـم كـتم الـمستخـدم بـنجاح  ،**",
+                f"**⌔︙ تـم كـتم الـمستخـدم بـنجاح  ✅**",
             )
         else:
             await edit_or_reply(
                 event,
-                f"**⌔︙ تـم كـتم الـمستخـدم بـنجاح  **",
+                f"**⌔︙ تـم كـتم الـمستخـدم بـنجاح  ✅**",
             )
     if BOTLOG:
         reply = await event.get_reply_message()
         if reason:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "⌔︙ الـكتم\n"
+                "⌔︙ الـكتم :\n"
                 f"**⌔︙المستخدم :** {_format.mentionuser(user.first_name ,user.id)} \n"
                 f"**⌔︙السبب :** `{reason}`",
             )
@@ -299,7 +299,7 @@ async def startgmute(event):
 async def endgmute(event):
     "To remove gmute on that person."
     if event.is_private:
-        await event.edit("**⌔︙ قـد تحـدث بعـض المـشاكـل أو الأخـطاء **")
+        await event.edit("**⌔︙ يرجى الأنتضار لكتم الشخص **")
         await asyncio.sleep(2)
         userid = event.chat_id
         reason = event.pattern_match.group(1)
@@ -308,12 +308,12 @@ async def endgmute(event):
         if not user:
             return
         if user.id == iqthon.uid:
-            return await edit_or_reply(event, "**⌔︙ عذرا لايمكن كتم نفسك **")
+            return await edit_or_reply(event, "**⌔︙ عذرا لايمكن كتم نفسك ⁉️**")
         userid = user.id
     try:
         user = (await event.client(GetFullUserRequest(userid))).user
     except Exception:
-        return await edit_or_reply(event, "**⌔︙ غير قـادر عـلى جـلب مـعلومات الـشخص **")
+        return await edit_or_reply(event, "**⌔︙ غير قـادر عـلى جـلب مـعلومات الـشخص 🙅🏼**")
     if not is_muted(userid, "gmute"):
         return await edit_or_reply(
             event, f"**⌔︙ هـذا الشـخص غيـر  مكـتوم اصلا  **"
@@ -321,30 +321,30 @@ async def endgmute(event):
     try:
         unmute(userid, "gmute")
     except Exception as e:
-        await edit_or_reply(event, f"**⌔︙ خطـأ**\n`{e}`")
+        await edit_or_reply(event, f"**⌔︙ خطـأ ⁉️ :**\n`{e}`")
     else:
         if reason:
             await edit_or_reply(
                 event,
-                f"**⌔︙ تـم الغـاء كـتم الـمستخـدم بـنجاح  ، **",
+                f"**⌔︙ تـم الغـاء كـتم الـمستخـدم بـنجاح  ✅**",
             )
         else:
             await edit_or_reply(
                 event,
-                f"**⌔︙ تـم الـغاء كتـم  الـمستخـدم بـنجاح  ، **",
+                f"**⌔︙ تـم الـغاء كتـم  الـمستخـدم بـنجاح  ✅**",
             )
     if BOTLOG:
         if reason:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "⌔︙ الغـاء الـكتم\n"
+                "⌔︙ الغـاء الـكتم :\n"
                 f"**⌔︙ المستخدم :** {_format.mentionuser(user.first_name ,user.id)} \n"
                 f"**⌔︙ السبب :** `{reason}`",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "**⌔︙ الغـاء الـكتم **\n"
+                "**⌔︙ الغـاء الـكتم :**\n"
                 f"**⌔︙ المستخدم :** {_format.mentionuser(user.first_name ,user.id)} \n",
             )
 
@@ -354,79 +354,3 @@ async def endgmute(event):
 async def watcher(event):
     if is_muted(event.sender_id, "gmute"):
         await event.delete()
-
-
-
-
-@iqthon.iq_cmd(
-    pattern="kick(?:\s|$)([\s\S]*)",
-    command=("kick", plugin_category),
-    info={
-        "header": "kicks the person in all groups where you are admin.",
-        "usage": "{tr}gkick <username/reply/userid> <reason (optional)>",
-    },
-)
-async def catgkick(event):  # sourcery no-metrics
-    "kicks the person in all groups where you are admin"
-    cate = await edit_or_reply(event, "`gkicking.......`")
-    start = datetime.now()
-    user, reason = await get_user_from_event(event, cate)
-    if not user:
-        return
-    if user.id == iqthon.uid:
-        return await edit_delete(cate, "`why would I kick myself`")
-    san = await admin_groups(event.client)
-    count = 0
-    sandy = len(san)
-    if sandy == 0:
-        return await edit_delete(cate, "`you are not admin of atleast one group` ")
-    await cate.edit(
-        f"`initiating gkick of the `[user](tg://user?id={user.id}) `in {len(san)} groups`"
-    )
-    for i in range(sandy):
-        try:
-            await event.client.kick_participant(san[i], user.id)
-            await asyncio.sleep(0.5)
-            count += 1
-        except BadRequestError:
-            achat = await event.client.get_entity(san[i])
-            await event.client.send_message(
-                BOTLOG_CHATID,
-                f"`You don't have required permission in :`\n**Chat :** {get_display_name(achat)}(`{achat.id}`)\n`For kicking there`",
-            )
-    end = datetime.now()
-    cattaken = (end - start).seconds
-    if reason:
-        await cate.edit(
-            f"[{user.first_name}](tg://user?id={user.id}) `was gkicked in {count} groups in {cattaken} seconds`!!\n**Reason :** `{reason}`"
-        )
-    else:
-        await cate.edit(
-            f"[{user.first_name}](tg://user?id={user.id}) `was gkicked in {count} groups in {cattaken} seconds`!!"
-        )
-
-    if BOTLOG and count != 0:
-        reply = await event.get_reply_message()
-        if reason:
-            await event.client.send_message(
-                BOTLOG_CHATID,
-                f"#GKICK\
-                \nGlobal Kick\
-                \n**User : **[{user.first_name}](tg://user?id={user.id})\
-                \n**ID : **`{user.id}`\
-                \n**Reason :** `{reason}`\
-                \n__Kicked in {count} groups__\
-                \n**Time taken : **`{cattaken} seconds`",
-            )
-        else:
-            await event.client.send_message(
-                BOTLOG_CHATID,
-                f"#GKICK\
-                \nGlobal Kick\
-                \n**User : **[{user.first_name}](tg://user?id={user.id})\
-                \n**ID : **`{user.id}`\
-                \n__Kicked in {count} groups__\
-                \n**Time taken : **`{cattaken} seconds`",
-            )
-        if reply:
-            await reply.forward_to(BOTLOG_CHATID)
