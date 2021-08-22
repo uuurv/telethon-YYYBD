@@ -51,7 +51,7 @@ async def amireallyalive(event):
         cat_caption += f"**{EMOJI_TELETHON}❬ ٰمـدة الـتشغيل  : {uptime}  ٍَ❭**\n"
         cat_caption += f"**{EMOJI_TELETHON} ❬ ِحسـابك  :   {mention}  ٍَ❭**\n"
         cat_caption += f"**{EMOJI_TELETHON} ❬ ٰقنـاة تليـثون  :** @M4_STORY  ٍَ❭\n"
-        cat_caption += f"**{EMOJI_TELETHON}** ❬ ٰمـطور السورس : @LLL5L ٍَ❭**\n"
+        cat_caption += f"**{EMOJI_TELETHON}** ❬ ٰمـطور السورس : ** @LLL5L ٍَ❭\n"
         try:
             await event.client.send_file(
                 event.chat_id, PIC, caption=cat_caption, reply_to=reply_to_id
@@ -66,11 +66,11 @@ async def amireallyalive(event):
         await edit_or_reply(
             event,
             f"**{IQTHON_ALIVE_TEXT}**\n\n"
-            f"**{EMOJI_TELETHON} اصـدار النسـخة   :**  ` 5.0.0 `\n"
-            f"**{EMOJI_TELETHON} مـدة التشـغيـل  : ** ` {uptime}`\n"
-            f"**{EMOJI_TELETHON} المستخدم   :**  {mention}\n"
-            f"**{EMOJI_TELETHON} قنـاة تـليثـون الـرسميـة  :** @M4_STORY\n"
-            f"**{EMOJI_TELETHON} مـطـور الـسورس  :** @LLL5L\n"
+            f"**{EMOJI_TELETHON} ❬ ٍَ أصدار النسخـة :  ِ5.0.0  ٍَ❭**\n"
+            f"**{EMOJI_TELETHON}❬ ٰمـدة الـتشغيل  : {uptime}  ٍَ❭**\n"
+            f"**{EMOJI_TELETHON} ❬ ِحسـابك  :   {mention}  ٍَ❭**\n"
+            f"**{EMOJI_TELETHON} ❬ ٰقنـاة تليـثون  :** @M4_STORY  ٍَ❭\n"
+            f"**{EMOJI_TELETHON}** ❬ ٰمـطور السورس : ** @LLL5L ٍَ❭\n"
         )
 
 
