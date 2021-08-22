@@ -227,7 +227,7 @@ async def gablist(event):
 
 
 @iqthon.iq_cmd(
-    pattern="gmute(?:\s|$)([\s\S]*)",
+    pattern="كتم(?:\s|$)([\s\S]*)",
     command=("gmute", plugin_category),
     info={
         "header": "To mute a person in all groups where you are admin.",
@@ -253,13 +253,13 @@ async def startgmute(event):
         user = (await event.client(GetFullUserRequest(userid))).user
     except Exception:
         return await edit_or_reply(event, "**⌔︙ تـحتاج صـلاحـيات الـحذف لـهذا الأمـر ❎**")
-    if is_muted(userid, "gmute"):
+    if is_muted(userid, "كتم"):
         return await edit_or_reply(
             event,
             f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ هـذا الـشخص بالـفعـل مكـتوم ✅**",
         )
     try:
-        mute(userid, "gmute")
+        mute(userid, "كتم")
     except Exception as e:
         await edit_or_reply(event, f"**خـطأ : **\n`{str(e)}`")
     else:
@@ -293,7 +293,7 @@ async def startgmute(event):
 
 
 @iqthon.iq_cmd(
-    pattern="ungmute(?:\s|$)([\s\S]*)",
+    pattern="الغاء كتم(?:\s|$)([\s\S]*)",
     command=("ungmute", plugin_category),
     info={
         "header": "To unmute the person in all groups where you were admin.",
@@ -319,12 +319,12 @@ async def endgmute(event):
         user = (await event.client(GetFullUserRequest(userid))).user
     except Exception:
         return await edit_or_reply(event, "**⌔︙ تـحتاج صـلاحـيات الـحذف لـهذا الأمـر**")
-    if not is_muted(userid, "ungmute"):
+    if not is_muted(userid, "الغاء كتم"):
         return await edit_or_reply(
             event, f"{_format.mentionuser(user.first_name ,user.id)} \n **⌔︙ هـذا الـمستخدم لـيس مكـتوم**"
         )
     try:
-        unmute(userid, "ungmute")
+        unmute(userid, "الغاء كتم")
     except Exception as e:
         await edit_or_reply(event, f"**Error**\n`{str(e)}`")
     else:
@@ -356,7 +356,7 @@ async def endgmute(event):
 
 @iqthon.iq_cmd(incoming=True)
 async def watcher(event):
-    if is_muted(event.sender_id, "gmute"):
+    if is_muted(event.sender_id, "كتم"):
         await event.delete()
 
 
