@@ -228,17 +228,12 @@ async def gablist(event):
 
 @iqthon.iq_cmd(
     pattern="كتم(?:\s|$)([\s\S]*)",
-    command=("gmute", plugin_category),
-    info={
-        "header": "To mute a person in all groups where you are admin.",
-        "description": "It doesnt change user permissions but will delete all messages sent by him in the groups where you are admin including in private messages.",
-        "usage": "{tr}gmute username/reply> <reason (optional)>",
-    },
+    command=("كتم", plugin_category),
 )
 async def startgmute(event):
     "To mute a person in all groups where you are admin."
     if event.is_private:
-        await event.edit("**⌔︙ قـد تـكون هـنالك بـعض المـشاكل والأخطـاء ‼️ جـاري**")
+        await event.edit("**⌔︙ قـد تحـدث بعـض المـشاكـل أو الأخـطاء **")
         await asyncio.sleep(2)
         userid = event.chat_id
         reason = event.pattern_match.group(1)
@@ -247,46 +242,46 @@ async def startgmute(event):
         if not user:
             return
         if user.id == iqthon.uid:
-            return await edit_or_reply(event, "**⌔︙ لا يـمكنك كتم نـفسك ‼️**")
+            return await edit_or_reply(event, "**⌔︙ عذرا لايمكن كتم نفسك  **")
         userid = user.id
     try:
         user = (await event.client(GetFullUserRequest(userid))).user
     except Exception:
-        return await edit_or_reply(event, "**⌔︙ تـحتاج صـلاحـيات الـحذف لـهذا الأمـر ❎**")
-    if is_muted(userid, "كتم"):
+        return await edit_or_reply(event, "**⌔︙ غيـر قـادر عـلى جـلب مـعلومات الـشخص **")
+    if is_muted(userid, "gmute"):
         return await edit_or_reply(
             event,
-            f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ هـذا الـشخص بالـفعـل مكـتوم ✅**",
+            f"**⌔︙ هـذا الشـخص مكـتوم بـنجاح **",
         )
     try:
-        mute(userid, "كتم")
+        mute(userid, "gmute")
     except Exception as e:
-        await edit_or_reply(event, f"**خـطأ : **\n`{str(e)}`")
+        await edit_or_reply(event, f"**⌔︙ خـطأ**\n`{e}`")
     else:
         if reason:
             await edit_or_reply(
                 event,
-                f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ تـم كتمه بنـجاح ✅**\n **⌔︙ السـبب:** `{reason}`",
+                f"**⌔︙ تـم كـتم الـمستخـدم بـنجاح  ،**",
             )
         else:
             await edit_or_reply(
                 event,
-                f"{_format.mentionuser(user.first_name ,user.id)} **⌔︙ تـم كتمه بنـجاح ✅**",
+                f"**⌔︙ تـم كـتم الـمستخـدم بـنجاح  **",
             )
     if BOTLOG:
         reply = await event.get_reply_message()
         if reason:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "**⌔︙ الـكتم **\n"
-                f"**⌔︙ الـشخـص :** {_format.mentionuser(user.first_name ,user.id)} \n"
-                f"**⌔︙ السـبب:** `{reason}`",
+                "⌔︙ الـكتم\n"
+                f"**⌔︙المستخدم :** {_format.mentionuser(user.first_name ,user.id)} \n"
+                f"**⌔︙السبب :** `{reason}`",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "**⌔︙ الـكتم**\n"
-                f"**⌔︙ الـشخـص :** {_format.mentionuser(user.first_name ,user.id)} \n",
+                "⌔︙ الـكتم\n"
+                f"**⌔︙ المستخدم :** {_format.mentionuser(user.first_name ,user.id)} \n",
             )
         if reply:
             await reply.forward_to(BOTLOG_CHATID)
@@ -294,7 +289,7 @@ async def startgmute(event):
 
 @iqthon.iq_cmd(
     pattern="الغاء كتم(?:\s|$)([\s\S]*)",
-    command=("ungmute", plugin_category),
+    command=("الغاء كتم", plugin_category),
     info={
         "header": "To unmute the person in all groups where you were admin.",
         "description": "This will work only if you mute that person by your gmute command.",
@@ -304,7 +299,7 @@ async def startgmute(event):
 async def endgmute(event):
     "To remove gmute on that person."
     if event.is_private:
-        await event.edit("**⌔︙ قـد تـكون هـنالك بـعض المـشاكل والأخطـاء**")
+        await event.edit("**⌔︙ قـد تحـدث بعـض المـشاكـل أو الأخـطاء **")
         await asyncio.sleep(2)
         userid = event.chat_id
         reason = event.pattern_match.group(1)
@@ -313,51 +308,54 @@ async def endgmute(event):
         if not user:
             return
         if user.id == iqthon.uid:
-            return await edit_or_reply(event, "**⌔︙ لا يـمكنك كتم نـفسك**")
+            return await edit_or_reply(event, "**⌔︙ عذرا لايمكن كتم نفسك **")
         userid = user.id
     try:
         user = (await event.client(GetFullUserRequest(userid))).user
     except Exception:
-        return await edit_or_reply(event, "**⌔︙ تـحتاج صـلاحـيات الـحذف لـهذا الأمـر**")
-    if not is_muted(userid, "الغاء كتم"):
+        return await edit_or_reply(event, "**⌔︙ غير قـادر عـلى جـلب مـعلومات الـشخص **")
+    if not is_muted(userid, "gmute"):
         return await edit_or_reply(
-            event, f"{_format.mentionuser(user.first_name ,user.id)} \n **⌔︙ هـذا الـمستخدم لـيس مكـتوم**"
+            event, f"**⌔︙ هـذا الشـخص غيـر  مكـتوم اصلا  **"
         )
     try:
-        unmute(userid, "الغاء كتم")
+        unmute(userid, "gmute")
     except Exception as e:
-        await edit_or_reply(event, f"**Error**\n`{str(e)}`")
+        await edit_or_reply(event, f"**⌔︙ خطـأ**\n`{e}`")
     else:
         if reason:
             await edit_or_reply(
                 event,
-                f"{_format.mentionuser(user.first_name ,user.id)} \n **⌔︙ تـم الـغاء كـتم العام الـمستـخدم بـنجاح**\n**⌔︙ السـبب:** `{reason}`",
+                f"**⌔︙ تـم الغـاء كـتم الـمستخـدم بـنجاح  ، **",
             )
         else:
             await edit_or_reply(
                 event,
-                f"{_format.mentionuser(user.first_name ,user.id)} \n **⌔︙ تـم الـغاء كـتم العام الـمستـخدم بـنجاح**",
+                f"**⌔︙ تـم الـغاء كتـم  الـمستخـدم بـنجاح  ، **",
             )
     if BOTLOG:
         if reason:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "**⌔︙ الغاء الـكتم العام**\n"
-                f"**⌔︙ الـشخـص :** {_format.mentionuser(user.first_name ,user.id)} \n"
-                f"**⌔︙ السـبب:** `{reason}`",
+                "⌔︙ الغـاء الـكتم\n"
+                f"**⌔︙ المستخدم :** {_format.mentionuser(user.first_name ,user.id)} \n"
+                f"**⌔︙ السبب :** `{reason}`",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "**⌔︙ الغاء الـكتم العام**\n"
-                f"**⌔︙ الـشخـص :** {_format.mentionuser(user.first_name ,user.id)} \n",
+                "**⌔︙ الغـاء الـكتم **\n"
+                f"**⌔︙ المستخدم :** {_format.mentionuser(user.first_name ,user.id)} \n",
             )
 
 
-@iqthon.iq_cmd(incoming=True)
+
+@iqthon.ar_cmd(incoming=True)
 async def watcher(event):
-    if is_muted(event.sender_id, "كتم"):
+    if is_muted(event.sender_id, "gmute"):
         await event.delete()
+
+
 
 
 @iqthon.iq_cmd(
