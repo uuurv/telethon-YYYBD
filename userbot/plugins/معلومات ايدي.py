@@ -57,15 +57,14 @@ async def fetch_info(replied_user, event):
     username = "@{}".format(username) if username else ("`هذا الشخص لايوجد لديه معرف`")
     user_bio = "`هذا الشخص لايوجد لديه نــبــذة`" if not user_bio else user_bio
     caption = "<b>• ⚜️ | مــعــلــومــات الــمــســتــخــدم :</b>\n"
-    caption += f"<b>• ⚜️ | الاســم  :  </b> `{first_name} {last_name}`\n"
+    caption += f"<b>• ⚜️ | الاســم  :  </b> {first_name} {last_name}\n"
     caption += f"<b>• ⚜️ | الــمــ؏ــࢪفہ  : </b> {username}\n"
     caption += f"<b>• ⚜️ | الايــديہ  :  </b> <code>{user_id}</code>\n"
-    caption += f"<b>• ⚜️ | ؏ــدد صــوࢪڪہ  : </b> `{replied_user_profile_photos_count}`\n"
-    caption += f"<b>• ⚜️ | الــنــبــذة  : </b>  `<code>{user_bio}</code>`\n"
-    caption += f"<b>• ⚜️ | الــمــجــمــو؏ــاتہ الـمـشـتـࢪكـة  : </b> `{common_chat}`\n"
+    caption += f"<b>• ⚜️ | ؏ــدد صــوࢪڪہ  : </b> {replied_user_profile_photos_count}\n"
+    caption += f"<b>• ⚜️ | الــنــبــذة  : </b>  <code>{user_bio}</code>\n"
+    caption += f"<b>• ⚜️ | الــمــجــمــو؏ــاتہ الـمـشـتـࢪكـة  : </b> {common_chat}\n"
     caption += f"<b>• ⚜️ | رابــط مــبـاشـࢪ لــہ الـحـسـابہ  :  </b> \n"
     caption += f'• ⚜️ | <a href="tg://user?id={user_id}">{first_name}</a> \n'
-    caption += f"<b> 𓆩 تلـيثـون الـ؏ـࢪب </b> - @IQTHON 𓆪 "
     return photo, caption
 
 
