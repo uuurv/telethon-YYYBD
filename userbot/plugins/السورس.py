@@ -47,7 +47,7 @@ async def amireallyalive(event):
         A_IMG = list(CAT)
         PIC = random.choice(A_IMG)
         cat_caption = f"**{IQTHON_ALIVE_TEXT}**\n"
-        cat_caption += f"———×"
+        cat_caption += f"———×\n"
         cat_caption += f"**{EMOJI_TELETHON} ❬ ٍَ أصدار النسخـة :  ِ5.0.0  ٍَ❭**\n"
         cat_caption += f"**{EMOJI_TELETHON}❬ ٰمـدة الـتشغيل  : {uptime}  ٍَ❭**\n"
         cat_caption += f"**{EMOJI_TELETHON} ❬ ِحسـابك  :   {mention}  ٍ**\n"
