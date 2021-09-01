@@ -1,5 +1,3 @@
-# copied from https://github.com/tulir/mautrix-telegram/blob/master/mautrix_telegram/util/parallel_file_transfer.py
-# Copyright (C) 2021 Tulir Asokan
 import asyncio
 import hashlib
 import inspect
@@ -379,8 +377,7 @@ async def _internal_transfer_to_telegram(
     await uploader.finish_upload()
     if is_large:
         return InputFileBig(file_id, part_count, "upload"), file_size
-    else:
-        return InputFile(file_id, part_count, "upload", hash_md5.hexdigest()), file_size
+    return InputFile(file_id, part_count, "upload", hash_md5.hexdigest()), file_size
 
 
 async def download_file(
