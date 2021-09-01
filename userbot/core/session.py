@@ -6,7 +6,7 @@ from telethon.sessions import StringSession
 from ..Config import Config
 from .client import CatUserBotClient
 
-__version__ = "2.10.6"
+__version__ = "5.0.0"
 
 loop = None
 
@@ -16,7 +16,7 @@ else:
     session = "catuserbot"
 
 try:
-    iqthon = CatUserBotClient(
+    catub = CatUserBotClient(
         session=session,
         api_id=Config.APP_ID,
         api_hash=Config.API_HASH,
@@ -27,12 +27,12 @@ try:
         connection_retries=None,
     )
 except Exception as e:
-    print(f"STRING_SESSION - {str(e)}")
+    print(f"STRING_SESSION - {e}")
     sys.exit()
 
 
-iqthon.tgbot = tgbot = CatUserBotClient(
-    session="iqTgbot",
+catub.tgbot = tgbot = CatUserBotClient(
+    session="CatTgbot",
     api_id=Config.APP_ID,
     api_hash=Config.API_HASH,
     loop=loop,
