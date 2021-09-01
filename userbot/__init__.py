@@ -18,12 +18,12 @@ LOGS = logging.getLogger("IQTHON")
 bot = iqthon
 
 StartTime = time.time()
-catversion = "1.0.0"
+catversion = "5.0.0"
 
-if Config.UPSTREAM_REPO == "Telethon-Araab":
-    UPSTREAM_REPO_URL = "https://github.com/telethontesthelp/Telethon-arabb"
-elif Config.UPSTREAM_REPO == "goodcat":
-    UPSTREAM_REPO_URL = "https://github.com/sandy1709/catuserbot"
+if Config.UPSTREAM_REPO == "Telethon-Ar":
+    UPSTREAM_REPO_URL = "https://github.com/klanrali/Telethon-Arab"
+elif Config.UPSTREAM_REPO == "Telethon-en":
+    UPSTREAM_REPO_URL = "https://github.com/telethon-Arab/telethon-Ar"
 else:
     UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 
@@ -44,7 +44,7 @@ else:
 
 if Config.PM_LOGGER_GROUP_ID == 0:
     if gvarstatus("PM_LOGGER_GROUP_ID") is None:
-        Config.PM_LOGGER_GROUP_ID =-100
+        Config.PM_LOGGER_GROUP_ID = -100
     else:
         Config.PM_LOGGER_GROUP_ID = int(gvarstatus("PM_LOGGER_GROUP_ID"))
 elif str(Config.PM_LOGGER_GROUP_ID)[0] != "-":
