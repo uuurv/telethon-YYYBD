@@ -54,7 +54,6 @@ async def amireallyalive(event):
         cat_caption += f"**{EMOJI_TELETHON} ❬ ٰقنـاة تليـثون  :** @M4_STORY  ٍَ❭\n"
         cat_caption += f"**{EMOJI_TELETHON} ❬ ٰمـطور السورس : ** @LLL5L ٍَ❭\n"
         cat_caption += f"———×"
-        buttons=[(Button.url("⌔︙رابط تنصيب ", "https://heroku.com/deploy?template=https://github.com/klanrali/Telethon-Arab-helper"),)],
         try:
             await event.client.send_file(
                 event.chat_id, PIC, caption=cat_caption, reply_to=reply_to_id
@@ -76,7 +75,6 @@ async def amireallyalive(event):
             f"**{EMOJI_TELETHON} ❬ ٰقنـاة تليـثون  :** @M4_STORY  ٍَ❭\n"
             f"**{EMOJI_TELETHON}** ❬ ٰمـطور السورس : ** @LLL5L ٍَ❭\n"
             f"———×\n"
-            buttons=[(Button.url("⌔︙رابط تنصيب ", "https://heroku.com/deploy?template=https://github.com/klanrali/Telethon-Arab-helper"),)],
         )
 
 
