@@ -227,7 +227,7 @@ async def gablist(event):
 
 
 @iqthon.iq_cmd(
-    pattern="كتم(?:\s|$)([\s\S]*)",
+    pattern="(كتم|mute)(?:\s|$)([\s\S]*)",
     command=("كتم", plugin_category),
 )
 async def startgmute(event):
