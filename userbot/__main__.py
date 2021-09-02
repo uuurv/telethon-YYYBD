@@ -27,7 +27,7 @@ try:
     iqthon.loop.run_until_complete(setup_bot())
     LOGS.info("بدء تشغيل البوت")
 except Exception as e:
-    LOGS.error(f"{e}")
+    LOGS.error(f"{str(e)}")
     sys.exit()
 
 
@@ -64,7 +64,6 @@ async def startup_process():
 
 
 iqthon.loop.run_until_complete(startup_process())
-
 
 if len(sys.argv) not in (1, 3, 4):
     iqthon.disconnect()
