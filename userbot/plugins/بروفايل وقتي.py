@@ -36,7 +36,7 @@ from . import (
 )
 
 plugin_category = "tools"
-DEFAULTUSERBIO = DEFAULT_BIO or "الحـمـد الله دائـمآ وأبـدآ"
+DEFAULTUSERBIO = DEFAULT_BIO or "الحمد الله "
 DEFAULTUSER = AUTONAME or Config.ALIVE_NAME
 LOGS = logging.getLogger(__name__)
 
@@ -46,7 +46,7 @@ autopic_path = os.path.join(os.getcwd(), "userbot", "original_pic.png")
 digitalpic_path = os.path.join(os.getcwd(), "userbot", "digital_pic.png")
 autophoto_path = os.path.join(os.getcwd(), "userbot", "photo_pfp.png")
 
-EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or "❖"
+EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or "⌗"
 
 digitalpfp = Config.DIGITAL_PIC or "https://telegra.ph/file/1bf9c1b0a084c258b1f97.jpg"
 
