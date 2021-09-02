@@ -288,7 +288,7 @@ async def startgmute(event):
 
 
 @iqthon.iq_cmd(
-    pattern="الغاء كتم(?:\s|$)([\s\S]*)",
+    pattern="(الغاء كتم|unmute)(?:\s|$)([\s\S]*)",
     command=("الغاء كتم", plugin_category),
     info={
         "header": "To unmute the person in all groups where you were admin.",
