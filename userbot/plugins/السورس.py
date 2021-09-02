@@ -24,13 +24,13 @@ plugin_category = "utils"
 
 
 @iqthon.iq_cmd(
-    pattern="السورس$",
-    command=("السورس", plugin_category),
+    pattern="(السورس|alive)$",
+    command=("(السورس|alive)", plugin_category),
     info={
         "header": "To check bot's alive status",
         "options": "To show media in this cmd you need to set ALIVE_PIC with media link, get this by replying the media by .tgm",
         "usage": [
-            "{tr}alive",
+            "{tr}(السورس|alive)",
         ],
     },
 )
@@ -41,14 +41,14 @@ async def amireallyalive(event):
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or " ٍَ 🖤"
     IQTHON_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "❬ تـليثون العـرب - Telethon-Arabe ، 🕸  ❭"
-    IQTHON_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/cd27beb82e7af1aff97d2.mp4"
+    IQTHON_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/17f2ad9df0b5aeed779d1.mp4"
     if IQTHON_IMG:
         CAT = [x for x in IQTHON_IMG.split()]
         A_IMG = list(CAT)
         PIC = random.choice(A_IMG)
         cat_caption = f"**{IQTHON_ALIVE_TEXT}**\n"
         cat_caption += f"———×\n"
-        cat_caption += f"**{EMOJI_TELETHON} ❬ ٍَ أصدار النسخـة :  ِ5.0.0  ٍَ❭**\n"
+        cat_caption += f"**{EMOJI_TELETHON} ❬ ٍَ أصدار النسخـة :  ِ5.0.1  ٍَ❭**\n"
         cat_caption += f"**{EMOJI_TELETHON}❬ ٰمـدة الـتشغيل  : {uptime}  ٍَ❭**\n"
         cat_caption += f"**{EMOJI_TELETHON} ❬ ِحسـابك  :   {mention}  ٍ**\n"
         cat_caption += f"**{EMOJI_TELETHON} ❬ ٰقنـاة تليـثون  :** @M4_STORY  ٍَ❭\n"
