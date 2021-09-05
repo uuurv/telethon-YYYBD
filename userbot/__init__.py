@@ -20,10 +20,10 @@ bot = iqthon
 StartTime = time.time()
 catversion = "1.0.0"
 
-if Config.UPSTREAM_REPO == "Telethon-Araab":
-    UPSTREAM_REPO_URL = "https://github.com/telethontesthelp/Telethon-arabb"
-elif Config.UPSTREAM_REPO == "goodcat":
-    UPSTREAM_REPO_URL = "https://github.com/sandy1709/catuserbot"
+if Config.UPSTREAM_REPO == "Telethon-En":
+    UPSTREAM_REPO_URL = "https://github.com/telethon-Arab/telethon-Ar"
+elif Config.UPSTREAM_REPO == "Telethon-Ar":
+    UPSTREAM_REPO_URL = "https://github.com/klanrali/Telethon-Arab"
 else:
     UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 
