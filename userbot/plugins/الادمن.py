@@ -699,4 +699,13 @@ async def endmute(event):
 @iqthon.iq_cmd(incoming=True)
 async def watcher(event):
     if is_muted(event.sender_id, "gmute"):
-        await event.delete()            
+        await event.delete()  
+
+@iqthon.iq(admin_cmd(pattern="جلب الصورة"))
+async def oho(event):
+  if not event.is_reply:
+    return await event.edit('يجـب عـليك الـرد عـلى صـورة ذاتيـة الـتدمير')
+  rr9r7 = await event.get_reply_message()
+  pic = await rr9r7.download_media()
+  await bot.send_file('me', pic, caption=f"-تـم جـلب الصـورة بنجـاح ✅")
+  await event.delete()        
