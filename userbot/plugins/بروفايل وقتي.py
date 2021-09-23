@@ -46,7 +46,7 @@ autopic_path = os.path.join(os.getcwd(), "userbot", "original_pic.png")
 digitalpic_path = os.path.join(os.getcwd(), "userbot", "digital_pic.png")
 autophoto_path = os.path.join(os.getcwd(), "userbot", "photo_pfp.png")
 
-EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or "❖"
+EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or "𖠕"
 
 digitalpfp = Config.DIGITAL_PIC or "https://telegra.ph/file/1bf9c1b0a084c258b1f97.jpg"
 
