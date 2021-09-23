@@ -24,13 +24,13 @@ plugin_category = "utils"
 
 
 @iqthon.iq_cmd(
-    pattern="السورس$",
-    command=("السورس", plugin_category),
+    pattern="(السورس|alive)$",
+    command=("(السورس|alive)", plugin_category),
     info={
         "header": "To check bot's alive status",
         "options": "To show media in this cmd you need to set ALIVE_PIC with media link, get this by replying the media by .tgm",
         "usage": [
-            "{tr}alive",
+            "{tr}(السورس|alive)",
         ],
     },
 )
@@ -39,19 +39,21 @@ async def amireallyalive(event):
     reply_to_id = await reply_id(event)
     uptime = await get_readable_time((time.time() - StartTime))
     _, check_sgnirts = check_data_base_heal_th()
-    EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or "⌔︙"
-    IQTHON_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "• ⚜️ ~  تـليـثون العـرب ~ ⚜️ •  :"
-    IQTHON_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/25917eb62d664deffa22b.jpg"
+    EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or " ٍَ 🖤"
+    IQTHON_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "❬ تـليثون العـرب - Telethon-Arabe ، 🕸  ❭"
+    IQTHON_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/17f2ad9df0b5aeed779d1.mp4"
     if IQTHON_IMG:
         CAT = [x for x in IQTHON_IMG.split()]
         A_IMG = list(CAT)
         PIC = random.choice(A_IMG)
-        cat_caption = f"**{IQTHON_ALIVE_TEXT}**\n\n"
-        cat_caption += f"**{EMOJI_TELETHON} اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
-        cat_caption += f"**{EMOJI_TELETHON} مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
-        cat_caption += f"**{EMOJI_TELETHON} المستخدم 🚹  :**  {mention}\n"
-        cat_caption += f"**{EMOJI_TELETHON} قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
-        cat_caption += f"**{EMOJI_TELETHON} مـطـور الـسورس 🛃 :** @KLANR\n"
+        cat_caption = f"**{IQTHON_ALIVE_TEXT}**\n"
+        cat_caption += f"———×\n"
+        cat_caption += f"**{EMOJI_TELETHON} ❬ ٍَ أصدار النسخـة :  ِ5.0.1  ٍَ❭**\n"
+        cat_caption += f"**{EMOJI_TELETHON}❬ ٰمـدة الـتشغيل  : {uptime}  ٍَ❭**\n"
+        cat_caption += f"**{EMOJI_TELETHON} ❬ ِحسـابك  :   {mention}  ٍ**\n"
+        cat_caption += f"**{EMOJI_TELETHON} ❬ ٰقنـاة تليـثون  :** @M4_STORY  ٍَ❭\n"
+        cat_caption += f"**{EMOJI_TELETHON} ❬ ٰمـطور السورس : ** @LLL5L ٍَ❭\n"
+        cat_caption += f"———×"
         try:
             await event.client.send_file(
                 event.chat_id, PIC, caption=cat_caption, reply_to=reply_to_id
@@ -66,11 +68,13 @@ async def amireallyalive(event):
         await edit_or_reply(
             event,
             f"**{IQTHON_ALIVE_TEXT}**\n\n"
-            f"**{EMOJI_TELETHON} اصـدار النسـخة 📄  :**  ` 1.0.0 `\n"
-            f"**{EMOJI_TELETHON} مـدة التشـغيـل 🕛 : ** ` {uptime}`\n"
-            f"**{EMOJI_TELETHON} المستخدم 🚹  :**  {mention}\n"
-            f"**{EMOJI_TELETHON} قنـاة تـليثـون الـرسميـة ⚛️ :** @M4_STORY\n"
-            f"**{EMOJI_TELETHON} مـطـور الـسورس 🛃 :** @KLANR\n"
+            f"**———×**\n"
+            f"**{EMOJI_TELETHON} ❬ ٍَ أصدار النسخـة :  ِ5.0.0  ٍَ❭**\n"
+            f"**{EMOJI_TELETHON}❬ ٰمـدة الـتشغيل  : {uptime}  ٍَ❭**\n"
+            f"**{EMOJI_TELETHON} ❬ ِحسـابك  :   {mention}  ٍَ❭**\n"
+            f"**{EMOJI_TELETHON} ❬ ٰقنـاة تليـثون  :** @M4_STORY  ٍَ❭\n"
+            f"**{EMOJI_TELETHON}** ❬ ٰمـطور السورس : ** @LLL5L ٍَ❭\n"
+            f"———×\n"
         )
 
 
