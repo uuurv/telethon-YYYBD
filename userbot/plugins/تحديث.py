@@ -114,13 +114,13 @@ async def update(event, repo, ups_rem, ac_br):
 
 async def deploy(event, repo, ups_rem, ac_br, txt):
     if HEROKU_API_KEY is None:
-        return await event.edit("**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**\n**⌔︙ هنا شرح عن كيفيه وضع كود هيروكو المطلوب  :** https://t.me/L3LL3/15")
+        return await event.edit("**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**\n**⌔︙ هنا شرح عن كيفيه وضع كود هيروكو المطلوب  :** https://t.me/teamtelethon/14")
     heroku = heroku3.from_key(HEROKU_API_KEY)
     heroku_app = None
     heroku_applications = heroku.apps()
     if HEROKU_APP_NAME is None:
         await event.edit(
-            "**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**\n**⌔︙ هنا شرح عن كيفيه وضع كود هيروكو المطلوب  :** https://t.me/L3LL3/15"
+            "**⌔︙ رجـاء قـم بوضـع الفـار الأتـي :⤵️**\n `HEROKU_API_KEY` \n**⌔︙ ليـتم تـحديث بشـكل صحيـح**\n**⌔︙ هنا شرح عن كيفيه وضع كود هيروكو المطلوب  :** https://t.me/teamtelethon/14"
             
         )
         repo.__del__()
@@ -131,11 +131,11 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             break
     if heroku_app is None:
         await event.edit(
-            f"{txt}\n" "**⌔︙بيانات اعتماد Heroku غير صالحة لنشر userbot dyno.**"
+            f"{txt}\n" "**⌔︙يوجد هناك خطا  بفار HEROKU_API_NAME او HEROKU_API_KEY قم بالتاكد منهما او تابع شرح كيفيه اضافه هذا الفارات بشكل صحيح :**\n https://youtu.be/7Zs0Yt3aSsM "
         )
         return repo.__del__()
     sandy = await event.edit(
-        "**⌔︙ جـاري التحديث، قـد يستغـرق الأمـر 2-3 دقائـق لاتقم بتحديث مـره اخـرى انتـظـر ⏱**"
+        "**⌔︙ جـاري التحديث، قـد يستغـرق الأمـر 10-5 دقائـق لاتقم بتحديث مـره اخـرى انتـظـر ⏱**"
     )
     try:
         ulist = get_collectionlist_items()
@@ -171,7 +171,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     try:
         remote.push("master:main", force=True)
     except Exception as error:
-        await event.edit(f"{txt}\n**⌔︙عذرا هناك خطأ ⁉️ :**\n`{error}`")
+        await event.edit(f"{txt}\n**⌔︙يوجد هناك خطا  بفار HEROKU_API_NAME او HEROKU_API_KEY قم بالتاكد منهما او تابع شرح كيفيه اضافه هذا الفارات بشكل صحيح :**\n https://youtu.be/7Zs0Yt3aSsM")
         return repo.__del__()
     await event.edit("**⌔︙الان يتـم تحـديث سـورس تـليثون العـرب أنتضر ⚜️**")
     delgvar("ipaddress")
@@ -281,7 +281,7 @@ async def upstream(event):
 )
 async def upstream(event):
     event = await edit_or_reply(event, "**⌔︙جـاري تحديث والاسترداد  يرجـى الإنتظـار ↯**")
-    off_repo = "https://github.com/Odysho/Telethon-Arab-helper"
+    off_repo = "https://github.com/telethon-Arab/teletho-help"
     os.chdir("/app")
     try:
         txt = "**⌔︙ عـذرًا، لا يمڪـن لبرنامـج التحديـث المتابعـة بسـبب ϟ**"
@@ -311,28 +311,3 @@ async def upstream(event):
     await deploy(event, repo, ups_rem, ac_br, txt)
 
 
-@iqthon.iq_cmd(
-    pattern="badcat$",
-    command=("badcat", plugin_category),
-    info={
-        "header": "To update to badcat( for extra masala and gali).",
-        "usage": "{tr}badcat",
-    },
-)
-async def variable(var):
-    "To update to badcat( for extra masala and gali)."
-    if Config.HEROKU_API_KEY is None:
-        return await edit_delete(
-            var,
-            "Set the required var in heroku to function this normally `HEROKU_API_KEY`.",
-        )
-    if Config.HEROKU_APP_NAME is not None:
-        app = Heroku.app(Config.HEROKU_APP_NAME)
-    else:
-        return await edit_delete(
-            var,
-            "Set the required var in heroku to function this normally `HEROKU_APP_NAME`.",
-        )
-    heroku_var = app.config()
-    await edit_or_reply(var, f"`Changing goodcat to badcat wait for 2-3 minutes.`")
-    heroku_var["UPSTREAM_REPO"] = "https://github.com/Jisan09/catuserbot"
