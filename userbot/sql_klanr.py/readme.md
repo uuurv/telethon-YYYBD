@@ -1,0 +1,1 @@
+sql for klanr hhhhh
