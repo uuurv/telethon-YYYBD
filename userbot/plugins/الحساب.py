@@ -38,7 +38,6 @@ from ..helpers.utils import reply_id, _catutils, parse_pre, yaml_format, install
 from ..sql_helper.global_list import add_to_list, get_collection_list, is_in_list, rm_from_list
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from . import AUTONAME, BOTLOG, BOTLOG_CHATID, DEFAULT_BIO, _catutils, edit_delete, iqthon, logging, spamwatch
-
     
 def inline_mention(user):
     full_name = user_full_name(user) or "No Name"
@@ -48,20 +47,6 @@ def user_full_name(user):
     names = [user.first_name]
     names = [i for i in list(names) if i]
     return " ".join(names)
-
-@iqthon.iq_cmd(incoming=True)
-async def _(event):
-    if event.is_private:
-        return
-    chat_id = str(event.chat_id).replace("-100", "")
-    channels_set  = get_all_post(chat_id)
-    if channels_set == []:
-        return
-    for chat in channels_set:
-        if event.media:
-            await event.client.send_file(int(chat), event.media, caption=event.text)
-        elif not event.media:
-            await bot.send_message(int(chat), event.message)
 
 DEFAULTUSER = str(AUTONAME) if AUTONAME else str(ALIVE_NAME)
 DEFAULTUSERBIO = (
@@ -692,36 +677,7 @@ async def permalink(mention):
     ll5 = user.first_name.replace("\u2060", "") if user.first_name else (" ")
     kno = user.last_name.replace("\u2060", "") if user.last_name else (" ")
     await edit_or_reply(mention, f"•  |  {ll5} {kno}")    
-@iqthon.on(admin_cmd(pattern="نشر تلقائي ?(.*)"))
-async def _(event):
-    if (event.is_private or event.is_group):
-        return await edit_or_reply(event, "AutoPost Can Only Be Used For Channels.")
-    hel_ = event.pattern_match.group(1)
-    if str(hel_).startswith("-100"):
-        iq = str(hel_).replace("-100", "")
-    else:
-        iq = hel_
-    if not iq.isdigit():
-        return await edit_or_reply(event, "**Please Give Channel ID !!**")
-    if is_post(iq , event.chat_id):
-        return await edit_or_reply(event, "This Channel Is Already In AutoPost Database.")
-    add_post(iq, event.chat_id)
-    await edit_or_reply(event, f"**📍 Started AutoPosting from** `{hel_}`")
-@iqthon.on(admin_cmd(pattern="ايقاف نشر تلقائي ?(.*)"))
-async def _(event):
-    if (event.is_private or event.is_group):
-        return await edit_or_reply(event, "AutoPost Can Only Be Used For Channels.")
-    hel_ = event.pattern_match.group(1)
-    if str(hel_).startswith("-100"):
-        iq = str(hel_).replace("-100", "")
-    else:
-        iq = hel_
-    if not iq.isdigit():
-        return await edit_or_reply(event, "**Please Give Channel ID !!**")
-    if not is_post(iq, event.chat_id):
-        return await edit_or_reply(event, "I don't think this channel is in AutoPost Database.")
-    remove_post(iq, event.chat_id)
-    await edit_or_reply(event, f"**📍 Stopped AutoPosting From** `{hel_}`")
+
 @iqthon.on(admin_cmd(pattern="صورته(?:\s|$)([\s\S]*)"))
 async def potocmd(event):
     uid = "".join(event.raw_text.split(maxsplit=1)[1:])
@@ -837,5 +793,3 @@ async def _(event):  # sourcery no-metrics
 iqthon.loop.create_task(digitalpicloop())
 iqthon.loop.create_task(autoname_loop())
 iqthon.loop.create_task(autobio_loop())
-
-
