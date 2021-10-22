@@ -37,7 +37,7 @@ async def amireallyalive(event):
     uptime = await get_readable_time((time.time() - StartTime))
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or " ٍَ 🖤"
-    IQTHON_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "❬ Welcome Telethon-Arabe  🕸❭"
+    IQTHON_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "❬ اهلا بك تليثون العرب 🕸❭"
     IQTHON_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/24e17c9f8b659b67fe289.mp4"
     me = await event.client.get_me()
     my_first = me.first_name
