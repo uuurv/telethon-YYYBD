@@ -12,7 +12,6 @@ import telethon.password as pwd_mod
 from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 from pySmartDL import SmartDL
-from telethon import events
 from telethon.events import CallbackQuery
 from telethon.errors import FloodWaitError
 from telethon.tl import functions
@@ -36,11 +35,10 @@ from ..core.managers import edit_delete, edit_or_reply
 from . import ALIVE_NAME, AUTONAME, BOTLOG, BOTLOG_CHATID, DEFAULT_BIO, get_user_from_event
 from ..helpers import get_user_from_event, reply_id
 from ..helpers.utils import reply_id, _catutils, parse_pre, yaml_format, install_pip, get_user_from_event, _format
-from ..sql_helper.autopost_sql import add_post, get_all_post, is_post, remove_post
 from ..sql_helper.global_list import add_to_list, get_collection_list, is_in_list, rm_from_list
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from . import AUTONAME, BOTLOG, BOTLOG_CHATID, DEFAULT_BIO, _catutils, edit_delete, iqthon, logging, spamwatch
-from . import *
+
     
 def inline_mention(user):
     full_name = user_full_name(user) or "No Name"
