@@ -232,14 +232,13 @@ if Config.PLUGIN_CHANNEL:
                 )
 
     iqthon.loop.create_task(install())
-@iqthon.on(admin_cmd(pattern="اعاده تشغيل(?: |$)(.*)"))    
+@iqthon.on(admin_cmd(pattern="تحديث(?: |$)(.*)"))    
 async def _(event):
-    "⌔︙إعـادة تشغيـل البـوت ↻"
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "**⌔︙إعـادة التشغيـل ↻** \n" "**⌔︙ تم إعـادة تشغيـل البـوت ↻**")
     sandy = await edit_or_reply(
         event,
-        "**⌔︙ جـاري إعـادة التشغيـل، قـد يستغـرق الأمـر 2-3 دقائـق لاتقم بترسيـت مـره اخـرى انتـظـر ⏱**",
+        "**⌔︙ جـاري إعـادة التشغيـل، قـد يستغـرق الأمـر 8-5 دقائـق لاتقم بترسيـت مـره اخـرى انتـظـر ⏱**",
     )
     try:
         ulist = get_collectionlist_items()
@@ -259,15 +258,6 @@ async def _(event):
         pass
     except Exception as e:
         LOGS1.error(e)
-@iqthon.on(admin_cmd(pattern="مسح تليثون(?: |$)(.*)"))    
-async def _(event):
-    if BOTLOG:
-        await event.client.send_message(BOTLOG_CHATID, "**⌔︙ إيقاف التشغيـل ✕ **\n" "**⌔︙ تـم إيقـاف تشغيـل البـوت بنجـاح ✓**")
-    await edit_or_reply(event, "**⌔︙جـاري إيقـاف تشغيـل البـوت الآن ..**\n **أعـد تشغيـلي يدويـاً لاحقـاً عـبر هيـروڪو ..**\n**سيبقى البـوت متوقفـاً عن العمـل لغايـة** \n**الوقـت المذڪـور 💡**")
-    if HEROKU_APP is not None:
-        HEROKU_APP.process_formation()["worker"].scale(0)
-    else:
-        sys.exit(0)
 @iqthon.on(admin_cmd(pattern="اطفاء مؤقت( [0-9]+)?$"))    
 async def _(event):
     if " " not in event.pattern_match.group(1):
