@@ -386,7 +386,7 @@ async def save_welcome(event):
     elif event.reply_to_msg_id and not string:
         rep_msg = await event.get_reply_message()
         string = rep_msg.text
-    success = "**⌔︙تم حفظ الترحيب  \n {} بهذه الدردشة بنجاح ✅**"
+    success = "**⌔︙تم حفظ الترحيب بهذه الدردشة بنجاح ✅**"
     if add_welcome_setting(event.chat_id, 0, string, msg_id) is True:
         return await edit_or_reply(event, success.format("saved"))
     rm_welcome_setting(event.chat_id)
