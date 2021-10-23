@@ -366,78 +366,90 @@ async def corona(event):
                 5,
             )
 @iqthon.on(admin_cmd(pattern=r"تحميل صوت(?: |$)(.*)"))
-async def download_audio(event):
-    url = event.pattern_match.group(1)
-    rmsg = await event.get_reply_message()
-    if not url and rmsg:
-        myString = rmsg.text
-        url = re.search("(?P<url>https?://[^\s]+)", myString).group("url")
-    if not url:
-        return await edit_or_reply(event, "**⌔︙ يجب وضع رابط لتحميله  ❗️**")
-    catevent = await edit_or_reply(event, "**⌔︙ يتم الإعداد إنتظر قليلا  ⏱**")
+async def iq(event):
     reply_to_id = await reply_id(event)
-    ytdl_data = await ytdl_down(catevent, audio_opts, url)
-    if ytdl_data is None:
-
-        return
-    await catevent.edit(
-        f"**⌔︙ يتم لتحميل الأغنية 🎙 :**\
-        \n**{ytdl_data['title']}**\
-        \n⌔︙بواسطة 📝 : **{ytdl_data['uploader']}**"
-    )
-    f = pathlib.Path(f"{ytdl_data['title']}.mp3".replace("|", "_"))
-    catthumb = pathlib.Path(f"{ytdl_data['title']}.mp3.jpg".replace("|", "_"))
+    reply = await event.get_reply_message()
+    if event.pattern_match.group(2):
+        query = event.pattern_match.group(2)
+    elif reply and reply.message:
+        query = reply.message
+    else:
+        return await edit_or_reply(event, "**⌔︙قم بوضع الأمر وبجانبه إسم الأغنية  🖇**")
+    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    catevent = await edit_or_reply(event, "**⌔︙جاري تحميل الأغنية إنتظر قليلا  ⏳**")
+    video_link = await yt_search(str(query))
+    if not url(video_link):
+        return await catevent.edit(
+            f"**⌔︙عـذرًا لم أستطع إيجاد الأغنية أو الفيديو لـ  ❌** `{query}`"
+        )
+    cmd = event.pattern_match.group(1)
+    q = "320k" if cmd == "320" else "128k"
+    song_cmd = song_dl.format(QUALITY=q, video_link=video_link)
+    # thumb_cmd = thumb_dl.format(video_link=video_link)
+    name_cmd = name_dl.format(video_link=video_link)
+    try:
+        cat = Get(cat)
+        await event.client(cat)
+    except BaseException:
+        pass
+    stderr = (await _catutils.runcmd(song_cmd))[1]
+    if stderr:
+        return await catevent.edit(f"**⌔︙ خـطأ  ⚠️ :** `{stderr}`")
+    catname, stderr = (await _catutils.runcmd(name_cmd))[:2]
+    if stderr:
+        return await catevent.edit("**⌔︙ خـطأ  ⚠️ :** `{stderr}`")
+    catname = os.path.splitext(catname)[0]
+    song_file = Path(f"{catname}.mp3")
+    if not os.path.exists(song_file):
+        return await catevent.edit(
+            f"**⌔︙عـذرًا لم أستطع إيجاد الأغنية أو الفيديو لـ  ❌** `{query}`"
+        )
+    await catevent.edit("**⌔︙لقد وجدت الاغنية إنتظر قليلا  ⏱**")
+    catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):
-        catthumb = pathlib.Path(f"{ytdl_data['title']}.mp3.webp".replace("|", "_"))
-    if not os.path.exists(catthumb):
+        catthumb = Path(f"{catname}.webp")
+    elif not os.path.exists(catthumb):
         catthumb = None
-    c_time = time.time()
-    ul = io.open(f, "rb")
-    uploaded = await event.client.fast_upload_file(
-        file=ul,
-        progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-            progress(d, t, catevent, c_time, "upload", file_name=f)
-        ),
-    )
-    ul.close()
-    attributes, mime_type = await fix_attributes(f, ytdl_data, supports_streaming=True)
-    media = types.InputMediaUploadedDocument(
-        file=uploaded,
-        mime_type=mime_type,
-        attributes=attributes,
-        thumb=await event.client.upload_file(catthumb) if catthumb else None,
-    )
+    ytdata = Video.get(video_link)
     await event.client.send_file(
         event.chat_id,
-        file=media,
-        reply_to=reply_to_id,
-        caption=ytdl_data["title"],
-        supports_streaming=True,
+        song_file,
         force_document=False,
+        caption=f"**الاسم :** `{ytdata['title']}`",
+        thumb=catthumb,
+        supports_streaming=True,
+        reply_to=reply_to_id,
     )
-    os.remove(f)
-    if catthumb:
-        os.remove(catthumb)
     await catevent.delete()
+    for files in (catthumb, song_file):
+        if files and os.path.exists(files):
+            os.remove(files)
+
+
+async def delete_messages(event, chat, from_message):
+    itermsg = event.client.iter_messages(chat, min_id=from_message.id)
+    msgs = [from_message.id]
+    async for i in itermsg:
+        msgs.append(i.id)
+    await event.client.delete_messages(chat, msgs)
+    await event.client.send_read_acknowledge(chat)
 @iqthon.on(admin_cmd(pattern=r"تحميل فيديو(?: |$)(.*)"))
-async def _(event):
+async def iq(event):
     reply_to_id = await reply_id(event)
     reply = await event.get_reply_message()
     if event.pattern_match.group(1):
         query = event.pattern_match.group(1)
-    elif reply:
-        if reply.message:
-            query = reply.messag
+    elif reply and reply.message:
+        query = reply.message
     else:
-        return await edit_or_reply(event, "**⌔︙قم بوضع الأمر وبجانبه إسم الأغنية  🖇**")
+        return await edit_or_reply(event, "**⌔︙قم بوضع الأمر وبجانبه إسم الفيديو  🖇**")
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     catevent = await edit_or_reply(event, "**⌔︙لقد وجدت الفيديو المطلوب إنتظر قليلا  ⏱ ...**")
     video_link = await yt_search(str(query))
     if not url(video_link):
         return await catevent.edit(
-            f"**⌔︙ عـذرًا لم أستطع إيجاد أي فيديو او صوت متعلق بـ ❌** `{query}`"
+            f"**⌔︙ عـذرًا لم أستطع إيجاد أي فيديو  متعلق بـ ❌** `{query}`"
         )
-    # thumb_cmd = thumb_dl.format(video_link=video_link)
     name_cmd = name_dl.format(video_link=video_link)
     video_cmd = video_dl.format(video_link=video_link)
     stderr = (await _catutils.runcmd(video_cmd))[1]
@@ -465,11 +477,12 @@ async def _(event):
         catthumb = Path(f"{catname}.webp")
     elif not os.path.exists(catthumb):
         catthumb = None
+    ytdata = Video.get(video_link)
     await event.client.send_file(
         event.chat_id,
         vsong_file,
         force_document=False,
-        caption=query,
+        caption=f"**العنوان :** `{ytdata['title']}`",
         thumb=catthumb,
         supports_streaming=True,
         reply_to=reply_to_id,
