@@ -550,7 +550,7 @@ async def fetch_info(replied_user, event):
     caption += f"<b>• ⚜️ | ؏ــدد صــوࢪ  : </b> {replied_user_profile_photos_count}\n"
     caption += f"<b>• ⚜️ | الـحـسـاب  :  </b> "
     caption += f' <a href="tg://user?id={user_id}">{first_name}{last_name}</a> \n'
-    caption = "<b>𓍹ⵧⵧⵧⵧⵧⵧⵧⵧ⁦⁦ⵧⵧⵧⵧⵧⵧⵧⵧ𓍻</b>\n"
+    caption += "<b>𓍹ⵧⵧⵧⵧⵧⵧⵧⵧ⁦⁦ⵧⵧⵧⵧⵧⵧⵧⵧ𓍻</b>\n"
     return photo, caption
 
 async def autoname_loop():
