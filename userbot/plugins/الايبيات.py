@@ -14,6 +14,7 @@ import logging
 import time
 import fitz
 import pathlib
+import base64
 from datetime import datetime
 from io import BytesIO
 from covid import Covid
@@ -29,6 +30,7 @@ from telethon.utils import get_attributes
 from search_engine_parser import BingSearch, GoogleSearch, YahooSearch
 from youtube_dl import YoutubeDL
 from youtube_dl.utils import ContentTooShortError, DownloadError, ExtractorError, GeoRestrictedError, MaxDownloadsReached, PostProcessingError, UnavailableVideoError, XAttrMetadataError
+from youtubesearchpython import Video
 from html_telegraph_poster.upload_images import upload_image
 from search_engine_parser.core.exceptions import NoResultsOrTrafficError
 from telethon import types
@@ -365,7 +367,7 @@ async def corona(event):
             await edit_delete(catevent, "**⌔︙ معلومـات فـايروس كـورونا. 💉  \n  فـي بـلد  - {} غـير مـوجودة ❌**".format(country),
                 5,
             )
-@iqthon.on(admin_cmd(pattern=r"تحميل صوت(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=r"تحميل صوت(320)?(?:\s|$)([\s\S]*)"))
 async def iq(event):
     reply_to_id = await reply_id(event)
     reply = await event.get_reply_message()
@@ -433,7 +435,7 @@ async def delete_messages(event, chat, from_message):
         msgs.append(i.id)
     await event.client.delete_messages(chat, msgs)
     await event.client.send_read_acknowledge(chat)
-@iqthon.on(admin_cmd(pattern=r"تحميل فيديو(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern=r"تحميل فيديو(?:\s|$)([\s\S]*)"))
 async def iq(event):
     reply_to_id = await reply_id(event)
     reply = await event.get_reply_message()
