@@ -361,7 +361,7 @@ async def _(event):  # sourcery no-metrics
         )
         update_previous_welcome(event.chat_id, current_message.id)
 
-@iqthon.on(admin_cmd(pattern="اضف ترحيب (?:\s|$)([\s\S]*)"))    
+@iqthon.on(admin_cmd(pattern="ترحيب(?:\s|$)([\s\S]*)"))    
 async def save_welcome(event):
     msg = await event.get_reply_message()
     string = "".join(event.text.split(maxsplit=1)[1:])
@@ -422,10 +422,10 @@ async def show_welcome(event):
         )
         await event.reply(cws.reply, link_preview=False)
 
-@iqthon.on(admin_cmd(pattern="$(تشغيل|ايقاف) رساله الترحيب السابقه"))    
+@iqthon.on(admin_cmd(pattern="رساله الترحيب السابقه (تشغيل|ايقاف)$"))    
 async def del_welcome(event):
     input_str = event.pattern_match.group(1)
-    if input_str == "on":
+    if input_str == "تشغيل":
         if gvarstatus("clean_welcome") is None:
             return await edit_delete(event, "**⌔︙تم تشغيلها بالفعل ✅**")
         delgvar("clean_welcome")
