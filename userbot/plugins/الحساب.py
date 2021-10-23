@@ -546,9 +546,12 @@ async def fetch_info(replied_user, event):
     caption += f"<b>• ⚜️ | الاســم  :  </b> `{first_name} {last_name}`\n"
     caption += f"<b>• ⚜️ | الــمــ؏ــࢪف  : </b> {username}\n"
     caption += f"<b>• ⚜️ | الايــديہ  :  </b> <code>{user_id}</code>\n"
-    caption += f"<b>• ⚜️ | ؏ــدد صــوࢪ  : </b> {replied_user_profile_photos_count}\n"
-    caption += f"<b>• ⚜️ | الــنــبــذة  : </b>  <code>{user_bio}</code>\n"
-    caption += f"<b>• ⚜️ | الــمــجــمــو؏ــاتہ الـمـشـتـࢪكـة  : </b> {common_chat}\n"
+    caption += f"<b>• ⚜️ | ؏ــدد صــوࢪڪہ  : </b> `{replied_user_profile_photos_count}`\n"
+    caption += f"<b>• ⚜️ | الــنــبــذة  : </b>  `<code>{user_bio}</code>`\n"
+    caption += f"<b>• ⚜️ | الــمــجــمــو؏ــاتہ الـمـشـتـࢪكـة  : </b> `{common_chat}`\n"
+    caption += f"<b>• ⚜️ | رابــط مــبـاشـࢪ لــہ الـحـسـابہ  :  </b> \n"
+    caption += f'• ⚜️ | <a href="tg://user?id={user_id}">{first_name}</a> \n'
+    caption += f"<b> 𓆩 تلـيثـون الـ؏ـࢪب </b> - @IQTHON 𓆪 "
     return photo, caption
 async def autoname_loop():
     AUTONAMESTART = gvarstatus("اسم وقتي") == "true"
