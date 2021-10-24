@@ -271,20 +271,7 @@ async def spammer(event):
     await event.delete()
     await spam_function(event, sandy, cat, sleeptimem, sleeptimet)
 
-@iqthon.on(admin_cmd(pattern="مؤقت ([\s\S]*)"))    
-async def spammer(event):
-    "**⌔︙ لإرسال التكرار مع تخصيص وقت إيقـاف بين كل رسالة ❗️**"
-    reply = await event.get_reply_message()
-    input_str = "".join(event.text.split(maxsplit=1)[1:]).split(" ", 2)
-    try:
-        sleeptimet = sleeptimem = float(input_str[0])
-    except Exception:
-        return await edit_delete(
-            event, "**⌔︙خطأ إستخـدم بناء جملة مناسبة لتوقيت ❗️**"
-        )
-    cat = input_str[1:]
-    await event.delete()
-    await spam_function(event, reply, cat, sleeptimem, sleeptimet, DelaySpam=True)
+
         
 @iqthon.on(admin_cmd(pattern="مؤقته (\d*) ([\s\S]*)"))    
 async def selfdestruct(destroy):
