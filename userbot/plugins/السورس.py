@@ -88,8 +88,6 @@ async def amireallyalive(event):
     results = await event.client.inline_query(Config.TG_BOT_USERNAME, cat_caption)
     await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
     await event.delete()
-
-
 @iqthon.tgbot.on(CallbackQuery(data=re.compile(b"stats")))
 async def on_plug_in_callback_query_handler(event):
     statstext = await catalive(StartTime)
@@ -97,10 +95,7 @@ async def on_plug_in_callback_query_handler(event):
 
 @iqthon.on(admin_cmd(pattern="رابط التنصيب(?: |$)(.*)"))    
 async def source(e):
-    await edit_or_reply(
-        e,
-        "رابط تنصيب تليثون العرب [هنا رابط](https://heroku.com/deploy?template=https://github.com/klanrali/Telethon-Arab-helper)",
-    )
+    await edit_or_reply(e, "رابط تنصيب تليثون العرب [هنا رابط](https://dashboard.heroku.com/new?template=https://github.com/telethon-Arab/teletho-help)",)
 @iqthon.on(admin_cmd(pattern="حساب كيثاب( -l(\d+))? ([\s\S]*)"))    
 async def _(event):
     reply_to = await reply_id(event)
@@ -189,11 +184,11 @@ async def amireallyalive(event):
             event,
             f"**❬ ٰمـدة الـتشغيل  : {uptime}  ٍَ❭**"
         )
-@iqthon.on(admin_cmd(pattern="معلومات تنصيبي(?: |$)(.*)"))    
+@iqthon.on(admin_cmd(pattern="فارات تنصيبي(?: |$)(.*)"))    
 async def _(event):
     cmd = "env"
     o = (await _catutils.runcmd(cmd))[0]
-    OUTPUT = (f"⌔︙وحـدة المعلومات الخاصه بتنصيبك مع جميع الفارات  لتنصيب سورس تليثون @M4_STORY :**\n\n{o}")
+    OUTPUT = (f"⌔︙وحـدة المعلومات الخاصه بتنصيبك مع جميع الفارات  لتنصيب سورس تليثون @iqthon :**\n\n{o}")
     await edit_or_reply(event, OUTPUT)
 
 if Config.PLUGIN_CHANNEL:
