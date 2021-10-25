@@ -1,4 +1,3 @@
-# ported from uniborg (@spechide)
 import os
 
 import requests
