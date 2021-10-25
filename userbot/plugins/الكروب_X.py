@@ -1727,41 +1727,53 @@ async def watcher(event):
             await event.delete()
         except Exception as e:
             LOGS.info(str(e))
-@iqthon.on(admin_cmd(pattern="صورة(?: |$)(\d*)? ?([\s\S]*)"))
-async def img_sampler(event):
-    reply_to_id = await reply_id(event)
-    if event.is_reply and not event.pattern_match.group(2):
-        query = await event.get_reply_message()
-        query = str(query.message)
+@iqthon.on(admin_cmd(pattern=r"جلب الصور(?:\s|$)([\s\S]*)"))
+async def potocmd(event):
+    uid = "".join(event.raw_text.split(maxsplit=1)[1:])
+    user = await event.get_reply_message()
+    chat = event.input_chat
+    if user:
+        photos = await event.client.get_profile_photos(user.sender)
+        u = True
     else:
-        query = str(event.pattern_match.group(2))
-    if not query:
-        return await edit_or_reply(
-            event, "**⌔︙ الرد على رسالة أو تمرير استعلام للبحث**"
-        )
-    cat = await edit_or_reply(event, "**⌔︙ جـاري البحـث علـى الصورة 🗾**")
-    if event.pattern_match.group(1) != "":
-        lim = int(event.pattern_match.group(1))
-        if lim > 10:
-            lim = int(10)
-        if lim <= 0:
-            lim = int(1)
+        photos = await event.client.get_profile_photos(chat)
+        u = False
+    if uid.strip() == "":
+        uid = 1
+        if int(uid) > (len(photos)):
+            return await edit_delete(
+                event, "**⌔︙ لم يتم العثور على صورة لهذا  الشخص 🏞**"
+            )
+        send_photos = await event.client.download_media(photos[uid - 1])
+        await event.client.send_file(event.chat_id, send_photos)
+    elif uid.strip() == "جميعها":
+        if len(photos) > 0:
+            await event.client.send_file(event.chat_id, photos)
+        else:
+            try:
+                if u:
+                    photo = await event.client.download_profile_photo(user.sender)
+                else:
+                    photo = await event.client.download_profile_photo(event.input_chat)
+                await event.client.send_file(event.chat_id, photo)
+            except Exception:
+                return await edit_delete(event, "**⌔︙ هذا المستخدم ليس لديه صور لتظهر لك  🙅🏼  **")
     else:
-        lim = int(3)
-    response = googleimagesdownload()
-    # creating list of arguments
-    arguments = {
-        "keywords": query,
-        "limit": lim,
-        "format": "jpg",
-        "no_directory": "no_directory",
-    }
-    
-    try:
-        paths = response.download(arguments)
-    except Exception as e:
-        return await cat.edit(f"**⌔︙ حدث خطأ  ❌ :** \n`{e}`")
-    lst = paths[0][query]
-    await event.client.send_file(event.chat_id, lst, reply_to=reply_to_id)
-    shutil.rmtree(os.path.dirname(os.path.abspath(lst[0])))
-    await cat.delete()
+        try:
+            uid = int(uid)
+            if uid <= 0:
+                await edit_or_reply(
+                    event, "**⌔︙ الرقم غير صحيح - اختر رقم صوره موجود فعليا ⁉️**"
+                )
+                return
+        except BaseException:
+            await edit_or_reply(event, "**⌔︙ هناك خطا  ⁉️**")
+            return
+        if int(uid) > (len(photos)):
+            return await edit_delere(
+                event, "**⌔︙ لم يتم العثور على صورة لهذا  الشخص 🏞**"
+            )
+
+        send_photos = await event.client.download_media(photos[uid - 1])
+        await event.client.send_file(event.chat_id, send_photos)
+    await event.delete()
