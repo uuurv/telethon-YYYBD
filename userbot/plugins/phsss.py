@@ -36,7 +36,7 @@ async def get_user_from_event(event):
     return user_obj
 
 
-@iqthon.on(admin_cmd(pattern="بورن هوب(?: |$)(.*)"))
+@iqthon.on(admin_cmd(pattern="بورن(?: |$)(.*)"))
 async def phcomment(event):
     try:
         await event.edit("جاري الصنع")
