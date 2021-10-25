@@ -49,7 +49,7 @@ async def amireallyalive(event):
         PIC = random.choice(A_IMG)
         cat_caption = f"**{IQTHON_ALIVE_TEXT}**\n"
         cat_caption += f"𓍹ⵧⵧⵧⵧⵧⵧⵧⵧᵗᵉˡᵉᵗʰᵒᶰ ᵃʳᵃᵇˢ⁦⁦ⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n"
-        cat_caption += f"**{EMOJI_TELETHON} ❬ ٍَ النسخـة :  ِ6.0.1  ٍَ❭**\n"
+        cat_caption += f"**{EMOJI_TELETHON} ❬ ٍَ النسخـة :  ِ6.0.2  ٍَ❭**\n"
         cat_caption += f"**{EMOJI_TELETHON} ❬ ٰمـدة الـتشغيل  : {uptime}  ٍَ❭**\n"
         cat_caption += f"**{EMOJI_TELETHON} ❬ ِحسـابك  :   {my_mention}  ٍَ❭**\n"
         cat_caption += f"**{EMOJI_TELETHON} ❬ ٰ الـوقت  : {TM}  ٍَ❭**\n"
@@ -68,7 +68,7 @@ async def amireallyalive(event):
             event,
             f"**{IQTHON_ALIVE_TEXT}**\n\n"
             f"𓍹ⵧⵧⵧⵧⵧⵧⵧⵧᵗᵉˡᵉᵗʰᵒᶰ ᵃʳᵃᵇˢ⁦⁦ⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n"
-            f"**{EMOJI_TELETHON} ❬ ٍَ النسخـة :  ِ6.0.0  ٍَ❭**\n"
+            f"**{EMOJI_TELETHON} ❬ ٍَ النسخـة :  ِ6.0.2  ٍَ❭**\n"
             f"**{EMOJI_TELETHON} ❬ ٰمـدة الـتشغيل  : {uptime}  ٍَ❭**\n"
             f"**{EMOJI_TELETHON} ❬ ِحسـابك  :   {my_mention}  ٍَ❭**\n"
             f"**{EMOJI_TELETHON} ❬ ٰ الـوقت  : {TM}  ٍَ❭**\n"
