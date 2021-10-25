@@ -1,6 +1,3 @@
-# Copyright (C) 2020 BY - GitHub.com/code-rgb [TG - @deleteduser420]
-# ported to cat by @mrconfused (@sandy1709)
-
 import os
 
 import requests
