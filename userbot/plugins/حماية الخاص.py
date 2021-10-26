@@ -34,8 +34,8 @@ async def do_pm_permit_action(event, chat):  # sourcery no-metrics
     except AttributeError:
         PMMESSAGE_CACHE = {}
     me = await event.client.get_me()
-    mention = f"- {chat.first_name}"
-    my_mention = f"- {me.first_name}"
+    mention = f"[{chat.first_name}](tg://user?id={chat.id})"
+    my_mention = f"[{me.first_name}](tg://user?id={me.id})"
     first = chat.first_name
     last = chat.last_name
     fullname = f"{first} {last}" if last else first
@@ -119,13 +119,13 @@ async def do_pm_permit_action(event, chat):  # sourcery no-metrics
             remwarns=remwarns,
         )
     elif gvarstatus("pmmenu") is None:
-        USER_BOT_NO_WARN = f"""""- نورت  الحسابہَ **{first}** \n - انتضرَ حتهہَ يجيہَ مالكہَ الحساب. 
+        USER_BOT_NO_WARN = f"""""- نورت  الحسابہَ **{mention}** \n - انتضرَ حتهہَ يجيہَ مالكہَ الحساب. 
 عندكہَ **{warns}/{totalwarns}** تحذيرات َ .
 اخـتـࢪ احـد الـخـيـاࢪاتـہَ فـيـہَ الاسـفـلـہَ ، ⬇️🤍
  وانـتـظـࢪ الـى انـہَ اصـبـحـہَ مـتـصـلـہَ بالانـتـࢪنـتـہَ ،
  لـيـتـمـہَ الـࢪد عـلـيـڪـہَ . 🧸♥️ ⬇️⬇️"""""
     else:
-        USER_BOT_NO_WARN = f"""- نورت  الحسابہَ **{first}** \n - انتضرَ حتهہَ يجيہَ مالكہَ الحساب. 
+        USER_BOT_NO_WARN = f"""- نورت  الحسابہَ **{mention}** \n - انتضرَ حتهہَ يجيہَ مالكہَ الحساب. 
 عندكہَ **{warns}/{totalwarns}** تحذيرات َ .
 ⌔︙ عـزيـزي بـدون تـكـࢪاࢪ ، اذكـࢪ فـقـط سـبـب الـمـࢪاسـلـة لـطـفـاً .🧸♥️"""
     addgvar("pmpermit_text", USER_BOT_NO_WARN)
@@ -465,7 +465,7 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "**⌔︙ عـذرا ، هـذه الـخـيـارات لـلـمـسـتـخـدم الـذي يـراسـلـك 🧸♥️**"
         return await event.answer(text, cache_time=0, alert=True)
-    text = f"""حسنا الان بإمكانك اختيار احد الخيارات في الاسفل للتواصل  , .
+    text = f"""حسنا الان بإمكانك اختيار احد الخيارات في الاسفل للتواصل مع , {mention}.
 ⌔︙ اختر بهدوء خيار واحد فقط لنعرف سبب قدومك هنا 🤍
 ⌔︙ هذه الخيارات في الاسفل اختر واحد فقط ⬇️"""
     buttons = [
