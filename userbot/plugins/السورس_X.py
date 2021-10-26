@@ -127,7 +127,7 @@ async def inline_handler(event):
         result = None
         query = event.text
         await bot.get_me()
-        if query.startswith("فحص") and event.query.user_id == bot.uid:
+        if query.startswith("السورس") and event.query.user_id == bot.uid:
             buttons = [
                 [
                     Button.url("CH", "https://t.me/IQTHON"),
@@ -143,7 +143,7 @@ async def inline_handler(event):
             await event.answer([result] if result else None)
 
 
-@bot.on(admin_cmd(outgoing=True, pattern="فحص"))
+@bot.on(admin_cmd(outgoing=True, pattern="السورس"))
 async def repo(event):
     if event.fwd_from:
         return
