@@ -121,16 +121,10 @@ async def amireallyalive(event):
             f"𓍹ⵧⵧⵧⵧⵧⵧⵧⵧᵗᵉˡᵉᵗʰᵒᶰ ᵃʳᵃᵇˢ⁦⁦ⵧⵧⵧⵧⵧⵧⵧⵧ𓍻" )
         
 
-@iqthon.on(admin_cmd(pattern="ialive(?: |$)(.*)"))    
-async def amireallyalive(event):
+@iqthon.on(admin_cmd(pattern="فحص(?: |$)(.*)"))    
+async def iqthon(event):
     reply_to_id = await reply_id(event)
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
-    cat_caption = f"**Catuserbot is Up and Running**\n"
-    cat_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
-    cat_caption += f"**{EMOJI} Catuserbot Version :** `{catversion}`\n"
-    cat_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
-    cat_caption += f"**{EMOJI} Master:** {my_mention}\n"
-    results = await event.client.inline_query(Config.TG_BOT_USERNAME, cat_caption)
+    results = await event.client.inline_query(Config.TG_BOT_USERNAME)
     await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
     await event.delete()
 @iqthon.tgbot.on(CallbackQuery(data=re.compile(b"stats")))
