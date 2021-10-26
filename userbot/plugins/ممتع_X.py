@@ -195,22 +195,6 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 12])
 
-@iqthon.on(admin_cmd(pattern="قتل(?: |$)(.*)"))
-async def _(event):
-    "أمر الرسوم المتحركة"
-    animation_interval = 0.8
-    animation_ttl = range(5)
-    event = await edit_or_reply(event, "شنو")
-    animation_chars = [
-        "شنو",
-        "شنوو",
-        "شنووو",
-        "شنووو هذا",
-    ]
-    for i in animation_ttl:
-        await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 5], link_preview=True)
-
 
 @iqthon.on(admin_cmd(pattern="طوبه(?: |$)(.*)"))
 async def _(event):
@@ -752,34 +736,6 @@ async def _(event):
     await event.edit(
         "╔═══════════════════╗ \n ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ \n╚═══════════════════╝"
     )
-
-@iqthon.on(admin_cmd(pattern="عين(?: |$)(.*)"))
-async def _(event):
-    "أمر الرسوم المتحركة"
-    animation_interval = 3
-    animation_ttl = range(10)
-    event = await edit_or_reply(event, "👁👁")
-    animation_chars = [
-        "👁👁\n  👱🏻‍♂️  =====> ۿـا ، شلونج شخبارج ؟",
-        "👁👁\n  👱🏻‍♀️  =====> كولشي تمام",
-        "👁👁\n  👱🏻‍♂️  =====> شنو ههاي شفتج 🤤",
-        "👁👁\n  👱🏻‍♀️  =====> هاي شبيك",
-        "👁👁\n  👱🏻‍♂️  =====> بس حلك 🤤",
-        "👁👁\n  👱🏻‍♀️  =====> وخر ",
-        "👁👁\n  👱🏻‍♂️  =====> متت 😹",
-        "👁👁\n  👱🏻‍♀️  =====> لا تضحك",
-        "👁👁\n  👱🏻‍♂️  =====> بس حلك متت 😹🤤",
-        "👁👁\n  👱🏻‍♀️  =====> كافي لتضحك😭😒",
-        "👁👁\n  👱🏻‍♂️  =====> باع لشفه 🤤",
-        "👁👁\n  👱🏻‍♀️  =====> هاي شبيك لتباوع",
-        "👁👁\n  👱🏻‍♂️  =====> دولي",
-        "👁👁\n  👱🏻‍♂️  =====> رايح بايي",
-    ]
-    for i in animation_ttl:
-        await asyncio.sleep(animation_interval)
-        await event.edit(animation_chars[i % 10])
-    await asyncio.sleep(animation_interval)
-    await event.delete()
 
 @iqthon.on(admin_cmd(pattern="فراشه(?: |$)(.*)"))
 async def _(event):
@@ -1899,10 +1855,10 @@ async def iq(mention):
 
 @iqthon.on(admin_cmd(pattern="ملصق متحرك(?: |$)(.*)"))
 async def honkasays(event):
-    await event.edit("`Sedang Memproses, Mohon Tunggu Sebentar...`")
+    await event.edit("**جاري التحويل **")
     text = event.pattern_match.group(1)
     if not text:
-        return await event.edit("Beri Aku Bebeberapa Text, Contoh : `.honka space <text>`")
+        return await event.edit("**قم بكتابه الكلمه بجانب الامر**")
     try:
         if not text.endswith("."):
             text = text + "."
@@ -1929,6 +1885,6 @@ async def honkasays(event):
             )
         await event.delete()
     except ChatSendInlineForbiddenError:
-        await event.edit("`Mohon Maaf, Saya Tidak Bisa Menggunakan Hal-Hal Sebaris Disini.`")
+        await event.edit("**جاري التحويل **")
     except ChatSendStickersForbiddenError:
-        await event.edit("Mohon Maaf, Tidak Bisa Mengirim Sticker Disini.")
+        await event.edit("**جاري التحويل **")
