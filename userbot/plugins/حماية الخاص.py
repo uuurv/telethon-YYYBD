@@ -156,7 +156,6 @@ async def do_pm_options_action(event, chat):
     except BaseException:
         return
 
-
 async def do_pm_enquire_action(event, chat):
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
@@ -196,7 +195,6 @@ async def do_pm_enquire_action(event, chat):
     except BaseException:
         return
 
-
 async def do_pm_request_action(event, chat):
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
@@ -234,7 +232,6 @@ async def do_pm_request_action(event, chat):
     except BaseException:
         return
 
-
 async def do_pm_chat_action(event, chat):
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
@@ -250,8 +247,6 @@ async def do_pm_chat_action(event, chat):
         PM_WARNS[str(chat.id)] = 1
         sql.del_collection("pmwarns")
         sql.add_collection("pmwarns", PM_WARNS, {})
-        # await asyncio.sleep(5)
-        # await msg.delete()
         return None
     del PM_WARNS[str(chat.id)]
     sql.del_collection("pmwarns")
@@ -273,8 +268,6 @@ async def do_pm_chat_action(event, chat):
         return await event.client.send_message(BOTLOG_CHATID, the_message)
     except BaseException:
         return
-
-
 async def do_pm_spam_action(event, chat):
     try:
         PMMESSAGE_CACHE = sql.get_collection("pmmessagecache").json
@@ -296,7 +289,6 @@ async def do_pm_spam_action(event, chat):
         return await event.client.send_message(BOTLOG_CHATID,the_message)
     except BaseException:
         return
-
 
 @iqthon.iq_cmd(incoming=True, func=lambda e: e.is_private, edited=False, forword=None)
 async def on_new_private_message(event):
@@ -390,7 +382,6 @@ async def on_plug_in_callback_query_handler(event):
         sql.add_collection("pmwarns", PM_WARNS, {})
     await event.edit(text, buttons=buttons)
 
-
 @iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"to_enquire_something")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
@@ -408,8 +399,6 @@ async def on_plug_in_callback_query_handler(event):
         sql.add_collection("pmwarns", PM_WARNS, {})
     sqllist.rm_from_list("pmoptions", event.query.user_id)
     await event.edit(text)
-
-
 @iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"to_request_something")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
@@ -427,7 +416,6 @@ async def on_plug_in_callback_query_handler(event):
         sql.add_collection("pmwarns", PM_WARNS, {})
     sqllist.rm_from_list("pmoptions", event.query.user_id)
     await event.edit(text)
-
 
 @iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"to_chat_with_my_master")))
 async def on_plug_in_callback_query_handler(event):
@@ -447,7 +435,6 @@ async def on_plug_in_callback_query_handler(event):
     sqllist.rm_from_list("pmoptions", event.query.user_id)
     await event.edit(text)
 
-
 @iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"to_spam_my_master_inbox")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
@@ -465,16 +452,7 @@ async def on_plug_in_callback_query_handler(event):
         sql.add_collection("pmwarns", PM_WARNS, {})
     sqllist.rm_from_list("pmoptions", event.query.user_id)
     await event.edit(text)
-
-
-@iqthon.iq_cmd(
-    pattern="الحماية (تشغيل|ايقاف)$",
-    command=("الحماية", plugin_category),
-    info={
-        "header": "To turn on or turn off pmpermit.",
-        "usage": "{tr}pmguard on/off",
-    },
-)
+@iqthon.on(admin_cmd(pattern="الحماية (تشغيل|ايقاف)(?: |$)(.*)"))
 async def pmpermit_on(event):
     input_str = event.pattern_match.group(1)
     if input_str == "تشغيل":
@@ -488,16 +466,7 @@ async def pmpermit_on(event):
         await edit_delete(event, "**⌔︙تـم تـعـطـيـل امـر الـحـمـايـة لـحـسـابـك بـنـجـاح  ✅**")
     else:
         await edit_delete(event, "**⌔︙ امـر الـحـمـايـة بـالـفـعـل مُـعَـطـل لـحـسـابـك 🌿**")
-
-
-@iqthon.iq_cmd(
-    pattern="الحماية (تشغيل|ايقاف)$",
-    command=("الحماية", plugin_category),
-    info={
-        "header": "To turn on or turn off pmmenu.",
-        "usage": "{tr}pmmenu on/off",
-    },
-)
+@iqthon.on(admin_cmd(pattern="الحماية (تشغيل|ايقاف)(?: |$)(.*)"))
 async def pmpermit_on(event):
     input_str = event.pattern_match.group(1)
     if input_str == "ايقاف":
@@ -511,19 +480,7 @@ async def pmpermit_on(event):
         await edit_delete(event, "**⌔︙ تـم تـفـعـيـل امـر الـحـمـايـة لـحـسـابـك بـنـجـاح  ✅**")
     else:
         await edit_delete(event, "**⌔︙امـر الـحـمـايـة بـالـفـعـل مُـمَـكـن لـحـسـابـك  🌿**")
-
-
-@iqthon.iq_cmd(
-    pattern="(ق|قبول)(?:\s|$)([\s\S]*)",
-    command=("قبول", plugin_category),
-    info={
-        "header": "To approve user to direct message you.",
-        "usage": [
-            "{tr}a/approve <username/reply reason> in group",
-            "{tr}a/approve <reason> in pm",
-        ],
-    },
-)
+@iqthon.on(admin_cmd(pattern="(ق|قبول)(?:\s|$)([\s\S]*)"))
 async def approve_p_m(event):  # sourcery no-metrics
     if gvarstatus("pmpermit") is None:
         return await edit_delete(event, f"**⌔︙ يــجـب تـفـعـيـل امـر الحـمـايـة أولاً بـأرســال ** {cmdhd} الـحماية تشغيل  لـتـفـعـيـل هـذا الأمـر .⚠️❕")
@@ -573,24 +530,8 @@ async def approve_p_m(event):  # sourcery no-metrics
         sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
     else:
         await edit_delete(event, f"[{user.first_name}](tg://user?id={user.id}) \n ⌔︙ هـو بـالـفـعل فـي قـائـمـة الـسـمـاح ✅")
-
-
-@iqthon.iq_cmd(
-    pattern="(ر|رفض)(?:\s|$)([\s\S]*)",
-    command=("رفض", plugin_category),
-    info={
-        "header": "To disapprove user to direct message you.",
-        "note": "This command works only for approved users",
-        "options": {"all": "To disapprove all approved users"},
-        "usage": [
-            "{tr}da/disapprove <username/reply> in group",
-            "{tr}da/disapprove in pm",
-            "{tr}da/disapprove all - To disapprove all users.",
-        ],
-    },
-)
+@iqthon.on(admin_cmd(pattern="(ر|رفض)(?:\s|$)([\s\S]*)"))
 async def disapprove_p_m(event):
-    "To disapprove user to direct message you."
     if gvarstatus("pmpermit") is None:
         return await edit_delete(event, f"**⌔︙ يــجـب تـفـعـيـل امـر الحـمـايـة أولاً بـأرســال ** {cmdhd} الـحماية تشغيل  لـتـفـعـيـل هـذا الأمـر .⚠️❕")
     if event.is_private:
@@ -613,19 +554,7 @@ async def disapprove_p_m(event):
         await edit_or_reply(event, f"[{user.first_name}](tg://user?id={user.id})\n**⌔︙ تـم رفـضـه مـن أرسـال الـرسـائـل ⚠️**\n**⌔︙ الـسـبـب ❔  :** {reason}")
     else:
         await edit_delete(event, f"[{user.first_name}](tg://user?id={user.id})\n ** ⌔︙ لــم يـتـم الـمـوافـقـة عـلـيـه مـسـبـقـاً ❕ **")
-
-
-@iqthon.iq_cmd(
-    pattern="مرفوض(?:\s|$)([\s\S]*)",
-    command=("مرفوض", plugin_category),
-    info={
-        "header": "To block user to direct message you.",
-        "usage": [
-            "{tr}block <username/reply reason> in group",
-            "{tr}block <reason> in pm",
-        ],
-    },
-)
+@iqthon.on(admin_cmd(pattern="مرفوض(?:\s|$)([\s\S]*)"))
 async def block_p_m(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(event, f"**⌔︙ يــجـب تـفـعـيـل امـر الحـمـايـة أولاً بـأرســال ** {cmdhd} الـحماية تشغيل  لـتـفـعـيـل هـذا الأمـر .⚠️❕")
@@ -662,19 +591,7 @@ async def block_p_m(event):
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
     await event.client(functions.contacts.BlockRequest(user.id))
     await edit_delete(event, f"[{user.first_name}](tg://user?id={user.id})\n **⌔︙ تـم حـظـره بـنـجـاح ، لا يـمـكـنـه مـراسـلـتـك بـعـد الان **\n**⌔︙ الـسـبـب ❔  :** {reason}")
-
-
-@iqthon.iq_cmd(
-    pattern="مقبول(?:\s|$)([\s\S]*)",
-    command=("مقبول", plugin_category),
-    info={
-        "header": "To unblock a user.",
-        "usage": [
-            "{tr}unblock <username/reply reason> in group",
-            "{tr}unblock <reason> in pm",
-        ],
-    },
-)
+@iqthon.on(admin_cmd(pattern="مقبول(?:\s|$)([\s\S]*)"))
 async def unblock_pm(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(event, f"**⌔︙ يــجـب تـفـعـيـل امـر الحـمـايـة أولاً بـأرســال ** {cmdhd} الـحماية تشغيل  لـتـفـعـيـل هـذا الأمـر .⚠️❕")
@@ -689,18 +606,7 @@ async def unblock_pm(event):
         reason = "**⌔︙لـم يـذكـر 💭 **"
     await event.client(functions.contacts.UnblockRequest(user.id))
     await event.edit(f"[{user.first_name}](tg://user?id={user.id}) \n **⌔︙ تـم الـغـاء حـظـره بـنـجـاح ،  يـمـكـنـه مـراسـلـتـك الان **\n**⌔︙ الـسـبـب ❔  :** {reason}")
-
-
-@iqthon.iq_cmd(
-    pattern="المقبولين$",
-    command=("المقبولين", plugin_category),
-    info={
-        "header": "To see list of approved users.",
-        "usage": [
-            "{tr}listapproved",
-        ],
-    },
-)
+@iqthon.on(admin_cmd(pattern="المقبولين(?: |$)(.*)"))
 async def approve_p_m(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(event,f"**⌔︙ يــجـب تـفـعـيـل امـر الحـمـايـة أولاً بـأرســال ** {cmdhd} الـحماية تشغيل  لـتـفـعـيـل هـذا الأمـر .⚠️❕",)
