@@ -16,6 +16,8 @@ from datetime import datetime
 from telethon import version
 from telethon.events import CallbackQuery
 from telethon.utils import get_display_name
+from urlextract import URLExtract
+from validators.url import url
 from userbot import StartTime, iqthon, catversion
 from ..Config import Config
 from ..core.logger import logging
@@ -30,7 +32,31 @@ LOGS = logging.getLogger(os.path.basename(__name__))
 LOGS1 = logging.getLogger(__name__)
 ppath = os.path.join(os.getcwd(), "temp", "githubuser.jpg")
 GIT_TEMP_DIR = "./temp/"
+cmdhd = Config.COMMAND_HAND_LER
+extractor = URLExtract()
+vlist = [
+    "ALIVE_PIC",
+    "ALIVE_EMOJI",
+    "ALIVE_TEXT",
+    "ALLOW_NSFW",
+    "HELP_EMOJI",
+    "HELP_TEXT",
+    "IALIVE_PIC",
+    "PM_PIC",
+    "PM_TEXT",
+    "PM_BLOCK",
+    "MAX_FLOOD_IN_PMS",
+    "START_TEXT",
+    "NO_OF_ROWS_IN_HELP",
+    "NO_OF_COLUMNS_IN_HELP",
+    "CUSTOM_STICKER_PACKNAME",
+]
 
+oldvars = {
+    "PM_PIC": "pmpermit_pic",
+    "PM_TEXT": "pmpermit_txt",
+    "PM_BLOCK": "pmblock",
+}
 @iqthon.on(admin_cmd(pattern="(السورس|سورس)(?: |$)(.*)"))    
 async def amireallyalive(event):
     reply_to_id = await reply_id(event)
@@ -266,3 +292,36 @@ async def _(event):
     event = await edit_or_reply(event, f"`⌔︙ حسنـاً، سأدخـل وضـع السڪون لـ : {counter} ** عـدد الثوانـي ⏱** ")
     sleep(counter)
     await event.edit("** ⌔︙حسنـاً، أنـا نشـط الآن ᯤ **")
+@iqthon.on(admin_cmd(pattern="(اضف|جلب|حذف) فار ([\s\S]*)"))    
+async def bad(event):  # sourcery no-metrics
+    cmd = event.pattern_match.group(1).lower()
+    vname = event.pattern_match.group(2)
+    vnlist = "".join(f"{i}. `{each}`\n" for i, each in enumerate(vlist, start=1))
+    if not vname:
+        return await edit_delete(event, f"**⌔︙ 📑 يجب وضع اسم الفار الصحيح من هذه القائمه :\n\n**{vnlist}", time=60)
+    vinfo = None
+    if " " in vname:
+        vname, vinfo = vname.split(" ", 1)
+    reply = await event.get_reply_message()
+    if not vinfo and reply:
+        vinfo = reply.text
+    if vname in vlist:
+        if vname in oldvars:
+            vname = oldvars[vname]
+        if cmd == "اضف":
+            if not vinfo:
+                return await edit_delete(event, f"**⌔︙ يجب وضع اسم الفار اولا لاستخدامه لـ **{vname}**")
+            check = vinfo.split(" ")
+            for i in check:
+                if (("PIC" in vname) or ("pic" in vname)) and not url(i):
+                    return await edit_delete(event, "**⌔︙ قم بوضع رابط صحيح او وضع رابط تلكراف**")
+            addgvar(vname, vinfo)
+            await edit_delete(event, f"**⌔︙📑 القيـمة لـ {vname} \n⌔︙ تـم تغييـرها لـ :-** `{vinfo}`", time=20)
+        if cmd == "جلب":
+            var_data = gvarstatus(vname)
+            await edit_delete(event, f"**⌔︙📑 قيـمة الـ {vname}** \n⌔︙ هية  `{var_data}`", time=20)
+        elif cmd == "حذف":
+            delgvar(vname)
+            await edit_delete(event, f"**⌔︙📑 قيـمة الـ {vname}** \n**⌔︙ تم حذفها ووضع القيمه الاصلية لها**", time=20)
+    else:
+        await edit_delete(event, f"**⌔︙📑 يـجب وضع الفار الصحـيح من هذه الـقائمة :\n\n**{vnlist}", time=60)
