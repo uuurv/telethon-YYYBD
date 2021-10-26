@@ -268,6 +268,56 @@ async def delete_messages(event, chat, from_message):
         msgs.append(i.id)
     await event.client.delete_messages(chat, msgs)
     await event.client.send_read_acknowledge(chat)
+@iqthon.on(admin_cmd(pattern="جلب لقطات(?:\s|$)([\s\S]*)"))    
+async def collage(event):
+    catinput = event.pattern_match.group(1)
+    reply = await event.get_reply_message()
+    catid = await reply_id(event)
+    event = await edit_or_reply(event, "**⌔︙جاري الالتقاط قـد يستغـرق هـذا الأمـر عـدة دقائـق انتضر ...**")
+    if not (reply and (reply.media)):
+        await event.edit("**⌔︙تنسيـق الوسائـط غيـر مدعـوم ⚠️**")
+        return
+    if not os.path.isdir("./temp/"):
+        os.mkdir("./temp/")
+    catsticker = await reply.download_media(file="./temp/")
+    if not catsticker.endswith((".mp4", ".mkv", ".tgs")):
+        os.remove(catsticker)
+        await event.edit("**⌔︙تنسيـق الوسائـط غيـر مدعـوم ⚠️**")
+        return
+    if catinput:
+        if not catinput.isdigit():
+            os.remove(catsticker)
+            await event.edit("**⌔︙إدخـالك غيـر صالـح، يرجـىٰ التحـقق مـن المساعـدة ⚠️**")
+            return
+        catinput = int(catinput)
+        if not 0 < catinput < 10:
+            os.remove(catsticker)
+            await event.edit("**⌔︙يرجـىٰ وضـع عـدد الصـور بجانـب الأمـر إختـر رقـماً بيـن 1 إلـى 9 ✦**")
+            return
+    else:
+        catinput = 3
+    if catsticker.endswith(".tgs"):
+        hmm = await make_gif(event, catsticker)
+        if hmm.endswith(("@tgstogifbot")):
+            os.remove(catsticker)
+            return await event.edit(hmm)
+        collagefile = hmm
+    else:
+        collagefile = catsticker
+    endfile = "./temp/collage.png"
+    catcmd = f"vcsi -g {catinput}x{catinput} '{collagefile}' -o {endfile}"
+    stdout, stderr = (await _catutils.runcmd(catcmd))[:2]
+    if not os.path.exists(endfile):
+        for files in (catsticker, collagefile):
+            if files and os.path.exists(files):
+                os.remove(files)
+        return await edit_delete(
+            event, f"**⌔︙تنسيـق الوسائـط غيـر مدعـوم، حـاول إستخـدام عـدد أصغـر  ⚠️**", 5 )
+    await event.client.send_file(event.chat_id, endfile, reply_to=catid)
+    await event.delete()
+    for files in (catsticker, collagefile, endfile):
+        if files and os.path.exists(files):
+            os.remove(files)
 @iqthon.on(admin_cmd(pattern=r"رابط تطبيق ([\s\S]*)"))
 async def app_search(event):
     app_name = event.pattern_match.group(1)
