@@ -34,7 +34,7 @@ async def do_pm_permit_action(event, chat):  # sourcery no-metrics
     except AttributeError:
         PMMESSAGE_CACHE = {}
     me = await event.client.get_me()
-    mention1 = f"- {chat.first_name}"
+    mention = f"- {chat.first_name}"
     my_mention = f"- {me.first_name}"
     first = chat.first_name
     last = chat.last_name
