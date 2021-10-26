@@ -12,7 +12,6 @@ import urllib3
 import speedtest
 from asyncio.exceptions import CancelledError
 from time import sleep
-from time import time
 from platform import python_version
 from github import Github
 from pySmartDL import SmartDL
