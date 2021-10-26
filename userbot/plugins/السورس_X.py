@@ -92,11 +92,11 @@ async def amireallyalive(event):
         PIC = random.choice(A_IMG
                            )
         cat_caption = f"**{IQTHON_ALIVE_TEXT}**\n 𓍹ⵧⵧⵧⵧⵧⵧⵧⵧᵗᵉˡᵉᵗʰᵒᶰ ᵃʳᵃᵇˢ⁦⁦ⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n"
-        cat_caption += f"""**{EMOJI_TELETHON} ❬ ٍَ النسخـة :  ِ6.0.3  ٍَ❭**\n
-        **{EMOJI_TELETHON} ❬ ٰمـدة الـتشغيل  : {uptime}  ٍَ❭**\n
-        **{EMOJI_TELETHON} ❬ ِحسـابك  :   {my_mention}  ٍَ❭**\n
-        **{EMOJI_TELETHON} ❬ ٰ الـوقت  : {TM}  ٍَ❭**\n
-        **{EMOJI_TELETHON} ❬ ٰالسـورس :** @IQTHON  ٍَ❭\n
+        cat_caption += f"""**{EMOJI_TELETHON} ❬ ٍَ النسخـة :  ِ6.0.3  ٍَ❭**
+        **{EMOJI_TELETHON} ❬ ٰمـدة الـتشغيل  : {uptime}  ٍَ❭**
+        **{EMOJI_TELETHON} ❬ ِحسـابك  :   {my_mention}  ٍَ❭**
+        **{EMOJI_TELETHON} ❬ ٰ الـوقت  : {TM}  ٍَ❭**
+        **{EMOJI_TELETHON} ❬ ٰالسـورس :** @IQTHON  ٍَ❭
         𓍹ⵧⵧⵧⵧⵧⵧⵧⵧᵗᵉˡᵉᵗʰᵒᶰ ᵃʳᵃᵇˢ⁦⁦ⵧⵧⵧⵧⵧⵧⵧⵧ𓍻"""
         try:
             await event.client.send_file(event.chat_id, 
