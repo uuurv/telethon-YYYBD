@@ -4,6 +4,9 @@ import base64
 import string
 import os
 import subprocess
+import io
+import sys
+import traceback
 from datetime import datetime
 from asyncio import sleep
 from geopy.geocoders import Nominatim
@@ -832,3 +835,37 @@ async def _(event):
     else:
         result = event.date
     await edit_or_reply(event, f"**هذا تاريخ الرساله والوقت  👁‍🗨 :** `{yaml_format(result)}`")
+@iqthon.on(admin_cmd(pattern="احسب ([\s\S]*)"))    
+async def calculator(event):
+    cmd = event.text.split(" ", maxsplit=1)[1]
+    event = await edit_or_reply(event, "**⌔︙ جـاري حسـاب المسـئلـة 📐**")
+    old_stderr = sys.stderr
+    old_stdout = sys.stdout
+    redirected_output = sys.stdout = io.StringIO()
+    redirected_error = sys.stderr = io.StringIO()
+    stdout, stderr, exc = None, None, None
+    san = f"print({cmd})"
+    try:
+        await aexec(san, event)
+    except Exception:
+        exc = traceback.format_exc()
+    stdout = redirected_output.getvalue()
+    stderr = redirected_error.getvalue()
+    sys.stdout = old_stdout
+    sys.stderr = old_stderr
+    evaluation = ""
+    if exc:
+        evaluation = exc
+    elif stderr:
+        evaluation = stderr
+    elif stdout:
+        evaluation = stdout
+    else:
+        evaluation = "**⌔︙ عـذار المسـئلة لااقـدر حلـها أو هنـاك خطـأ بتـرتيـب السـؤال 🆘**"
+    final_output = "**⌔︙ المسئلة **: `{}` \n **⌔︙ الجواب **: `{}` \n".format(cmd, evaluation)
+    await event.edit(final_output)
+
+
+async def aexec(code, event):
+    exec(f"async def __aexec(event): " + "".join(f"\n {l}" for l in code.split("\n")))
+    return await locals()["__aexec"](event)
