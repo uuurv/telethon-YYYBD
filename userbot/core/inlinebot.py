@@ -49,13 +49,13 @@ async def inline_handler(event):  # sourcery no-metrics
     string.split()
     query_user_id = event.query.user_id
     if query_user_id == Config.OWNER_ID or query_user_id in Config.SUDO_USERS:
-        hmm = re.compile("secret (.*) (.*)")
+        hmm = re.compile("همسه (.*) (.*)")
         match = re.findall(hmm, query)
         if query.startswith("**iqthonbot"):
             buttons = [
                 (
-                    Button.inline("Stats", data="stats"),
-                    Button.url("Repo", "https://github.com/telethontesthelp/Telethon-arabb"),
+                    Button.inline("السورس", data="stats"),
+                    Button.url("الريبو", "https://github.com/telethon-Arab/telethonNow"),
                 )
             ]
             ALIVE_PIC = gvarstatus("ALIVE_PIC")
@@ -142,10 +142,8 @@ async def inline_handler(event):  # sourcery no-metrics
                     else:
                         sandy = f"[{u.first_name}](tg://user?id={u.id})"
                 except ValueError:
-                    # ValueError: Could not find the input entity
                     sandy = f"[user](tg://user?id={u})"
             except ValueError:
-                # if u is username
                 try:
                     u = await event.client.get_entity(user)
                 except ValueError:
@@ -160,10 +158,10 @@ async def inline_handler(event):  # sourcery no-metrics
             timestamp = int(time.time() * 2)
             newsecret = {str(timestamp): {"userid": u, "text": txct}}
 
-            buttons = [Button.inline("show message 🔐", data=f"secret_{timestamp}")]
+            buttons = [Button.inline("اظهر الرسالة 🔐", data=f"secret_{timestamp}")]
             result = builder.article(
-                title="secret message",
-                text=f"🔒 A whisper message to {sandy}, Only he/she can open it.",
+                title="رسالة سرية",
+                text=f"🔒 رسالة تهمس ل {sandy}, هو فقط من يمكنه فتحه.",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -172,7 +170,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(jsondata, open(secret, "w"))
             else:
                 json.dump(newsecret, open(secret, "w"))
-        elif string == "سورس":
+        elif string == "stats":
             EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
             _, check_sgnirts = check_data_base_heal_th()
             CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "𓆩. تليثـون العـرب .𓆪"
