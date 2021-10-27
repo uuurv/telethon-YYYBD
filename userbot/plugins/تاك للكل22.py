@@ -11,8 +11,7 @@ from ..helpers.utils import get_user_from_event, reply_id
 
 plugin_category = "extra"
 
-@iqthon.on(admin_cmd(pattern="تاك (تشغيل|ايقاف|للكل|للبوتات|للنشط|للادمنيه|للمالك)?(.*)"
-                   ))
+@iqthon.on(admin_cmd(pattern="التاك (تشغيل|ايقاف|للكل|للبوتات|للنشط|للادمنيه|للمالك)$"))    
 async def iq(e):
     okk = e.text
     lll = e.pattern_match.group(2)
