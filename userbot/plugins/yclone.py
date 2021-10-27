@@ -62,7 +62,8 @@ async def purgeme(event):
     await sleep(5)
     await smsg.delete()
 
-purgetype = {"م": InputMessagesFilterVoice, InputMessagesFilterGif, InputMessagesFilterMusic, InputMessagesFilterRoundVideo, InputMessagesFilterVideo, InputMessagesFilterPhotos, InputMessagesFilterGeo,
+purgetype = {
+    "م": InputMessagesFilterVoice, InputMessagesFilterGif, InputMessagesFilterMusic, InputMessagesFilterRoundVideo, InputMessagesFilterVideo, InputMessagesFilterPhotos, InputMessagesFilterGeo,
     "ر": InputMessagesFilterEmpty,
     "و": InputMessagesFilterUrl, 
 }
