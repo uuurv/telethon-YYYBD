@@ -15,7 +15,7 @@ from telethon.tl.types import (
     InputMessagesFilterVoice,
 )
 
-from userbot import catub
+from userbot import iqthon
 
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import reply_id
