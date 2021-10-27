@@ -2,9 +2,7 @@ import re
 from asyncio import sleep
 
 from telethon.errors import rpcbaseerrors
-from telethon.tl.types import (
-    InputMessagesFilterDocument,
-    InputMessagesFilterEmpty,
+from telethon.tl.types import ( InputMessagesFilterDocument, InputMessagesFilterEmpty,
     InputMessagesFilterGeo,
     InputMessagesFilterGif,
     InputMessagesFilterMusic,
@@ -21,38 +19,13 @@ from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.utils import reply_id
 from . import BOTLOG, BOTLOG_CHATID
 
-plugin_category = "utils"
-
-
 purgelist = {}
 
-purgetype = {
-    "ف": InputMessagesFilterVoice,
-    "د": InputMessagesFilterDocument,
-    "ج": InputMessagesFilterGif,
-    "ب": InputMessagesFilterPhotos,
-    "ي": InputMessagesFilterGeo,
-    "م": InputMessagesFilterMusic,
-    "ر": InputMessagesFilterRoundVideo,
-    "ت": InputMessagesFilterEmpty,
-    "ل": InputMessagesFilterUrl,
-    "و": InputMessagesFilterVideo,
-    
-}
+purgetype = {"ف": InputMessagesFilterVoice, "د": InputMessagesFilterDocument, "ج": InputMessagesFilterGif, "ب": InputMessagesFilterPhotos, "ي": InputMessagesFilterGeo,
+"م": InputMessagesFilterMusic, "ر": InputMessagesFilterRoundVideo, "ت": InputMessagesFilterEmpty, "ل": InputMessagesFilterUrl, "و": InputMessagesFilterVideo}
 
-
-@iqthon.iq_cmd(
-    pattern="مسح(\s*| \d+)$",
-    command=("مسح", plugin_category),
-    info={
-        "header": "لحذف الرسالة التي تم الرد عليها.",
-        "description": "حذف الرسالة التي قمت بالرد عليها خلال x (عدد) ثوانٍ إذا لم يتم استخدام العدد ثم حذفه على الفور",
-        "usage": ["{tr}مسح + الوقت بالثواني", "{tr}مسح"],
-        "examples": "{tr}مسح + رقم",
-    },
-)
-async def delete_it(event):
-    "لحذف الرسالة التي تم الرد عليها."
+@iqthon.on(admin_cmd(pattern="مسح(\s*| \d+)$"))
+async def iq(event):
     input_str = event.pattern_match.group(1).strip()
     msg_src = await event.get_reply_message()
     if msg_src:
@@ -62,15 +35,10 @@ async def delete_it(event):
             try:
                 await msg_src.delete()
                 if BOTLOG:
-                    await event.client.send_message(
-                        BOTLOG_CHATID, "**⌔︙ حـذف الـرسائل 🗳️  \n ⌔︙ تـم حـذف الـرسالة بـنجاح ✅**"
-                    )
+                    await event.client.send_message(BOTLOG_CHATID, "**⌔︙ حـذف الـرسائل 🗳️  \n ⌔︙ تـم حـذف الـرسالة بـنجاح ✅**")
             except rpcbaseerrors.BadRequestError:
                 if BOTLOG:
-                    await event.client.send_message(
-                        BOTLOG_CHATID,
-                        "**⌔︙عـذرا لايـمكن الـحذف بـدون  صلاحيـات ألاشـراف ⚜️**",
-                    )
+                    await event.client.send_message(BOTLOG_CHATID, "**⌔︙عـذرا لايـمكن الـحذف بـدون  صلاحيـات ألاشـراف ⚜️**")
         elif input_str:
             if not input_str.startswith("var"):
                 await edit_or_reply(event, "**⌔︙ عـذرا الـرسالة غيـر موجـودة ❌**")
@@ -79,27 +47,14 @@ async def delete_it(event):
                 await msg_src.delete()
                 await event.delete()
                 if BOTLOG:
-                    await event.client.send_message(
-                        BOTLOG_CHATID, "**⌔︙ حـذف الـرسائل 🗳️  \n ⌔︙ تـم حـذف الـرسالة بـنجاح ✅**"
-                    )
+                    await event.client.send_message(BOTLOG_CHATID, "**⌔︙ حـذف الـرسائل 🗳️  \n ⌔︙ تـم حـذف الـرسالة بـنجاح ✅**")
             except rpcbaseerrors.BadRequestError:
                 await edit_or_reply(event, "**⌔︙ عـذرا  لا استـطيع حـذف الرسـالة. ⁉️**")
     elif not input_str:
         await event.delete()
 
-
-@iqthon.iq_cmd(
-    pattern="حذف رسائلي",
-    command=("حذف رسائلي", plugin_category),
-    info={
-        "header": "لمسح أحدث رسائلك.",
-        "description": "حذف x (عدد) كمية الرسائل الأخيرة.",
-        "usage": "{tr}حذف رسائلي <count>",
-        "examples": "{tr}حذف رسائلي 2",
-    },
-)
-async def purgeme(event):
-    "To purge your latest messages."
+@iqthon.on(admin_cmd(pattern="حذف رسائلي(?: |$)(.*)"))
+async def iq(event):
     message = event.text
     count = int(message[9:])
     i = 1
@@ -109,56 +64,15 @@ async def purgeme(event):
         i += 1
         await message.delete()
 
-    smsg = await event.client.send_message(
-        event.chat_id,
-        "**⌔︙ تـم الأنتـهاء من التـنظيف ✅**  \n ⌔︙ لقـد  تـم حـذف \n  ⌔︙ عـدد  **" + str(count) + "** من الـرسائـل 🗑️**",
-    )
+    smsg = await event.client.send_message(event.chat_id, "**⌔︙ تـم الأنتـهاء من التـنظيف ✅**  \n ⌔︙ لقـد  تـم حـذف \n  ⌔︙ عـدد  **" + str(count) + "** من الـرسائـل 🗑️**")
     if BOTLOG:
-        await event.client.send_message(
-            BOTLOG_CHATID,
-            "**⌔︙ تـم الأنتـهاء من التـنظيف ✅**  \n ⌔︙ لقـد  تـم حـذف \n  ⌔︙ عـدد  **" + str(count) + "** من الـرسائـل 🗑️**",
-    )
+        await event.client.send_message(BOTLOG_CHATID, "**⌔︙ تـم الأنتـهاء من التـنظيف ✅**  \n ⌔︙ لقـد  تـم حـذف \n  ⌔︙ عـدد  **" + str(count) + "** من الـرسائـل 🗑️**")
     await sleep(5)
     await smsg.delete()
 
 
-
-@iqthon.iq_cmd(
-    pattern="تنظيف(?:\s|$)([\s\S]*)",
-    command=("تنظيف", plugin_category),
-    info={
-        "header": "لـحذف الـرسائل .",
-        "description": "• حذف x (عدد) عدد الرسائل من الرسالة التي تم الرد عليها\
-        \n • إذا كنت لا تستخدم العد ، فسيتم حذف جميع الرسائل من الرسائل التي تم الرد عليها\
-        \n • إذا لم تكن قد قمت بالرد على أي رسالة واستخدمت count ، فسيتم حذف رسائل x الأخيرة.\
-        \n • إذا لم ترد على أي رسالة أو لم تذكر أي إشارة أو عدد ، فلن تفعل شيئًا\
-        \n • إذا تم استخدام العلم ، فسيتم تحديد هذا النوع من الرسائل ، وإلا فسيتم تحديد جميع الأنواع\
-        \n • يمكنك استخدام أعلام متعددة مثل -gi 10 (سيحذف 10 صور و 10 صور متحركة لكن لن يحذف 10 رسائل من مجموعة صور وصور متحركة.)\
-        ",
-        "الاضافه": {
-            "الصوتيات": "لحـذف الرسائل الـصوتية.",
-            "الملفات": "لحـذف الملفات.",
-            "المتحركه": "لحـذف المتحـركه.",
-            "الصور": "لحـذف الـصور",
-            "الاغاني": "لحـذف الاغاني",
-            "الملصقات": "لحـذف الـملصقات",
-            "الروابط": "لحـذف الـروابط",
-            "الفديوهات": "لحـذف الفـيديوهـات",
-            "كلمه": " لحذف جميع النصوص التي تحتوي هذه الكلمه في الكروب",
-        },
-        "ااستخدام": [
-            "{tr}تنظيف <الاضافه(optional)> <count(x)> <reply> - to delete x flagged messages after reply",
-            "{tr}تنظيف <الاضافه> <رقم> - لحذف رسائل الاضافه",
-        ],
-        "examples": [
-            "{tr}تنظيف 40",
-            "{tr}تنظيف -المتحركه 40",
-            "{tr}تنظيف -كلمه تليثون",
-        ],
-    },
-)
-async def fastpurger(event):  # sourcery no-metrics
-    "To purge messages from the replied message"
+@iqthon.on(admin_cmd(pattern="تنظيف(?:\s|$)([\s\S]*)"))
+async def iq(event):  
     chat = await event.get_input_chat()
     msgs = []
     count = 0
@@ -178,11 +92,7 @@ async def fastpurger(event):  # sourcery no-metrics
             if p_type is not None:
                 for ty in p_type:
                     if ty in purgetype:
-                        async for msg in event.client.iter_messages(
-                            event.chat_id,
-                            limit=int(input_str),
-                            offset_id=reply.id - 1,
-                            reverse=True,
+                        async for msg in event.client.iter_messages(event.chat_id, limit=int(input_str), offset_id=reply.id - 1, reverse=True,
                             filter=purgetype[ty],
                         ):
                             count += 1
@@ -198,10 +108,7 @@ async def fastpurger(event):  # sourcery no-metrics
                         error += f"\n\n⌔︙ `{ty}`  **هنـاك خطـا فـي تركـيب الجمـلة 🔩 :**"
             else:
                 count += 1
-                async for msg in event.client.iter_messages(
-                    event.chat_id,
-                    limit=(int(input_str) - 1),
-                    offset_id=reply.id,
+                async for msg in event.client.iter_messages(event.chat_id, limit=(int(input_str) - 1), offset_id=reply.id,
                     reverse=True,
                 ):
                     msgs.append(msg)
@@ -221,10 +128,7 @@ async def fastpurger(event):  # sourcery no-metrics
                 cont = cont.strip()
                 inputstr = inputstr.strip()
                 if cont.isnumeric():
-                    async for msg in event.client.iter_messages(
-                        event.chat_id,
-                        limit=int(cont),
-                        offset_id=reply.id - 1,
+                    async for msg in event.client.iter_messages(event.chat_id, limit=int(cont), offset_id=reply.id - 1,
                         reverse=True,
                         search=inputstr,
                     ):
@@ -234,10 +138,7 @@ async def fastpurger(event):  # sourcery no-metrics
                             await event.client.delete_messages(chat, msgs)
                             msgs = []
                 else:
-                    async for msg in event.client.iter_messages(
-                        event.chat_id,
-                        offset_id=reply.id - 1,
-                        reverse=True,
+                    async for msg in event.client.iter_messages(event.chat_id, offset_id=reply.id - 1, reverse=True,
                         search=input_str,
                     ):
                         count += 1
@@ -254,9 +155,7 @@ async def fastpurger(event):  # sourcery no-metrics
         elif p_type is not None:
             for ty in p_type:
                 if ty in purgetype:
-                    async for msg in event.client.iter_messages(
-                        event.chat_id,
-                        min_id=event.reply_to_msg_id - 1,
+                    async for msg in event.client.iter_messages(event.chat_id, min_id=event.reply_to_msg_id - 1,
                         filter=purgetype[ty],
                     ):
                         count += 1
@@ -283,8 +182,7 @@ async def fastpurger(event):  # sourcery no-metrics
         if p_type != "كلمه" and input_str.isnumeric():
             for ty in p_type:
                 if ty in purgetype:
-                    async for msg in event.client.iter_messages(
-                        event.chat_id, limit=int(input_str), filter=purgetype[ty]
+                    async for msg in event.client.iter_messages(event.chat_id, limit=int(input_str), filter=purgetype[ty]
                     ):
                         count += 1
                         msgs.append(msg)
@@ -306,8 +204,7 @@ async def fastpurger(event):  # sourcery no-metrics
             cont = cont.strip()
             inputstr = inputstr.strip()
             if cont.isnumeric():
-                async for msg in event.client.iter_messages(
-                    event.chat_id, limit=int(cont), search=inputstr
+                async for msg in event.client.iter_messages(event.chat_id, limit=int(cont), search=inputstr
                 ):
                     count += 1
                     msgs.append(msg)
@@ -315,8 +212,7 @@ async def fastpurger(event):  # sourcery no-metrics
                         await event.client.delete_messages(chat, msgs)
                         msgs = []
             else:
-                async for msg in event.client.iter_messages(
-                    event.chat_id, search=input_str
+                async for msg in event.client.iter_messages(event.chat_id, search=input_str
                 ):
                     count += 1
                     msgs.append(msg)
@@ -330,8 +226,7 @@ async def fastpurger(event):  # sourcery no-metrics
     elif p_type is not None:
         for ty in p_type:
             if ty in purgetype:
-                async for msg in event.client.iter_messages(
-                    event.chat_id, filter=purgetype[ty]
+                async for msg in event.client.iter_messages(event.chat_id, filter=purgetype[ty]
                 ):
                     count += 1
                     msgs.append(msg)
@@ -365,9 +260,6 @@ async def fastpurger(event):  # sourcery no-metrics
         result += "**⌔︙ لا تـوجد رسـائل لـتنظيفها ♻️**"
     hi = await event.client.send_message(event.chat_id, result)
     if BOTLOG:
-        await event.client.send_message(
-            BOTLOG_CHATID,
-            f"**⌔︙ حـذف الـرسائل 🗳️** \n{result}",
-        )
+        await event.client.send_message(BOTLOG_CHATID, f"**⌔︙ حـذف الـرسائل 🗳️** \n{result}")
     await sleep(5)
     await hi.delete()
