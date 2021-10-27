@@ -11,13 +11,6 @@ from . import BOTLOG, BOTLOG_CHATID
 
 
 
-purgelist = {}
-purgetype = {
-    "م": InputMessagesFilterVoice, InputMessagesFilterGif, InputMessagesFilterMusic, InputMessagesFilterRoundVideo
-    "ر": InputMessagesFilterEmpty,
-    "و": InputMessagesFilterUrl, 
-}
-
 
 @iqthon.on(admin_cmd(pattern="مسح(\s*| \d+)$"))
 async def iq(event):
