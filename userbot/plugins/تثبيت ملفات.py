@@ -12,8 +12,8 @@ thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg"
 
 
 @iqthon.iq_cmd(
-    pattern="تثبيت ملف$",
-    command=("تثبيت ملف", plugin_category),
+    pattern="تحميل ملف$",
+    command=("تحميل ملف", plugin_category),
     info={
         "header": "To install an external plugin.",
         "description": "Reply to any external plugin(supported by cat) to install it in your bot.",
