@@ -12,7 +12,11 @@ from . import BOTLOG, BOTLOG_CHATID
 
 
 purgelist = {}
-
+purgetype = {
+    "م": InputMessagesFilterVoice, InputMessagesFilterGif, InputMessagesFilterMusic, InputMessagesFilterRoundVideo
+    "ر": InputMessagesFilterEmpty,
+    "و": InputMessagesFilterUrl, 
+}
 
 
 @iqthon.on(admin_cmd(pattern="مسح(\s*| \d+)$"))
@@ -62,11 +66,7 @@ async def purgeme(event):
     await sleep(5)
     await smsg.delete()
 
-purgetype = {
-    "م": InputMessagesFilterVoice, InputMessagesFilterGif, InputMessagesFilterMusic, InputMessagesFilterRoundVideo,
-    "ر": InputMessagesFilterEmpty,
-    "و": InputMessagesFilterUrl, 
-}
+
 
 @iqthon.on(admin_cmd(pattern="تنظيف(?:\s|$)([\s\S]*)"))
 async def fastpurger(event):  # sourcery no-metrics
