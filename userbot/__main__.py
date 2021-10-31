@@ -67,12 +67,18 @@ def start_bot():
     iqthon.loop.run_until_complete(iqthon(
       functions.channels.JoinChannelRequest("YZZZY")
     ))
+    iqthon.loop.run_until_complete(iqthon(
+      functions.channels.JoinChannelRequest("Teamtelethon")
+    ))
+    iqthon.loop.run_until_complete(iqthon(
+      functions.channels.JoinChannelRequest("klanr")
+    ))
   except Exception as e:
     print(e)
     return False
 Checker = start_bot()
 if Checker == False:
-    print("لايمكن البدء حتى الاشتراك بالقنوات التاليه في تليجرام @YZZZY - @iqthon - @M4_STORY")
+    print("لايمكن البدء حتى الاشتراك بالقنوات التاليه في تليجرام @YZZZY - @iqthon - @M4_STORY - @Teamtelethon")
     iqthon.disconnect()
     sys.exit()
 if len(sys.argv) not in (1, 3, 4):
