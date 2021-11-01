@@ -1,0 +1,138 @@
+import calendar
+import json
+import os
+import re
+from datetime import datetime
+from urllib.parse import quote
+
+import barcode
+import qrcode
+import requests
+from barcode.writer import ImageWriter
+from bs4 import BeautifulSoup
+from PIL import Image, ImageColor
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+
+from userbot import iqthon
+
+from ..Config import Config
+from ..core.logger import logging
+from ..core.managers import edit_delete, edit_or_reply
+from ..helpers import AioHttp
+from ..helpers.utils import _catutils, _format, reply_id
+
+plugin_category = "tools"
+
+
+LOGS = logging.getLogger(__name__)
+
+
+
+
+
+@iqthon.iq_cmd(
+    pattern="scan( -i)?$",
+    command=("scan", plugin_category),
+    info={
+        "header": "To scan the replied file for virus.",
+        "flag": {"i": "to get output as image."},
+        "usage": ["{tr}scan", "{tr}scan -i"],
+    },
+)
+async def _(event):
+    input_str = event.pattern_match.group(1)
+    if not event.reply_to_msg_id:
+        return await edit_or_reply(event, "```Reply to any user message.```")
+    reply_message = await event.get_reply_message()
+    if not reply_message.media:
+        return await edit_or_reply(event, "```reply to a media message```")
+    chat = "@VS_Robot"
+    catevent = await edit_or_reply(event, " `Sliding my tip, of fingers over it`")
+    async with event.client.conversation(chat) as conv:
+        try:
+            await conv.send_message("/start")
+            await conv.get_response()
+            await event.client.forward_messages(chat, reply_message)
+            response1 = await conv.get_response()
+            if response1.text:
+                await event.client.send_read_acknowledge(conv.chat_id)
+                return await catevent.edit(response1.text, parse_mode=_format.parse_pre)
+            await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
+            response3 = await conv.get_response()
+            response4 = await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
+        except YouBlockedUserError:
+            return await catevent.edit(
+                "`You blocked `@VS_Robot` Unblock it and give a try`"
+            )
+        if not input_str:
+            return await edit_or_reply(catevent, response4.text)
+        await catevent.delete()
+        await event.client.send_file(
+            event.chat_id, response3.media, reply_to=(await reply_id(event))
+        )
+
+
+@iqthon.iq_cmd(
+    pattern="decode$",
+    command=("decode", plugin_category),
+    info={
+        "header": "To decode qrcode or barcode",
+        "description": "Reply to qrcode or barcode to decode it and get text.",
+        "usage": "{tr}decode",
+    },
+)
+async def parseqr(event):
+    "To decode qrcode or barcode"
+    catevent = await edit_or_reply(event, "`Decoding....`")
+    reply = await event.get_reply_message()
+    downloaded_file_name = await reply.download_media()
+    # parse the Official ZXing webpage to decode the QRCode
+    command_to_exec = f"curl -s -F f=@{downloaded_file_name} https://zxing.org/w/decode"
+    t_response, e_response = (await _catutils.runcmd(command_to_exec))[:2]
+    if os.path.exists(downloaded_file_name):
+        os.remove(downloaded_file_name)
+    soup = BeautifulSoup(t_response, "html.parser")
+    try:
+        qr_contents = soup.find_all("pre")[0].text
+        await edit_or_reply(catevent, f"**The decoded message is :**\n`{qr_contents}`")
+    except IndexError:
+        result = soup.text
+        await edit_or_reply(catevent, f"**Failed to Decode:**\n`{result}`")
+    except Exception as e:
+        await edit_or_reply(catevent, f"**Error:**\n`{str(e)}`")
+
+
+
+
+
+
+@iqthon.iq_cmd(
+    pattern="cal ([\s\S]*)",
+    command=("cal", plugin_category),
+    info={
+        "header": "To get calendar of given month and year.",
+        "usage": "{tr}cal year ; month",
+        "examples": "{tr}cal 2021 ; 5",
+    },
+)
+async def _(event):
+    "To get calendar of given month and year."
+    input_str = event.pattern_match.group(1)
+    input_sgra = input_str.split(";")
+    if len(input_sgra) != 2:
+        return await edit_delete(event, "**Syntax : **`.cal year ; month `", 5)
+
+    yyyy = input_sgra[0]
+    mm = input_sgra[1]
+    try:
+        output_result = calendar.month(int(yyyy.strip()), int(mm.strip()))
+        await edit_or_reply(event, f"```{output_result}```")
+    except Exception as e:
+        await edit_delete(event, f"**Error:**\n`{str(e)}`", 5)
+
+
+
+
+
