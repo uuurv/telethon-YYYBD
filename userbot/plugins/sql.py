@@ -1,22 +1,14 @@
 import asyncio
 from datetime import datetime
-
 from telethon.tl import functions, types
-
 from userbot import iqthon
-
 from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.tools import media_type
 from ..helpers.utils import _format
 from . import BOTLOG, BOTLOG_CHATID
-
-plugin_category = "utils"
-
 LOGS = logging.getLogger(__name__)
-
-
 class AFK:
     def __init__(self):
         self.USERAFK_ON = {}
@@ -30,10 +22,7 @@ class AFK:
         self.media_afk = None
         self.sql_on = False
 
-
 AFK_ = AFK()
-
-
 @iqthon.iq_cmd(outgoing=True, edited=False)
 async def set_not_sql(event):
     if AFK_.sql_on is False:
@@ -58,31 +47,18 @@ async def set_not_sql(event):
         else:
             endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
     current_message = event.message.message
-    if (("sql" not in current_message) or ("#afk" not in current_message)) and (
-        "on" in AFK_.USERAFK_ON
-    ):
-        shite = await event.client.send_message(
-            event.chat_id,
-            "`Back alive! No Longer afk.\nWas afk for " + endtime + "`",
-        )
+    if (("sql" not in current_message) or ("#afk" not in current_message)) and ("on" in AFK_.USERAFK_ON):
+        shite = await event.client.send_message(event.chat_id, "`Back alive! No Longer afk.\nWas afk for " + endtime + "`")
         AFK_.USERAFK_ON = {}
         AFK_.sql_time = None
         await asyncio.sleep(5)
         await shite.delete()
         AFK_.sql_on = False
         if BOTLOG:
-            await event.client.send_message(
-                BOTLOG_CHATID,
-                "#AFKFALSE \n`Set AFK mode to False\n"
-                + "Back alive! No Longer afk.\nWas afk for "
-                + endtime
-                + "`",
-            )
+            await event.client.send_message(BOTLOG_CHATID, "#AFKFALSE \n`Set AFK mode to False\n" + "Back alive! No Longer afk.\nWas afk for " + endtime )
 
 
-@iqthon.iq_cmd(
-    incoming=True, func=lambda e: bool(e.mentioned or e.is_private), edited=False
-)
+@iqthon.iq_cmd(incoming=True, func=lambda e: bool(e.mentioned or e.is_private), edited=False)
 async def on_sql(event):  # sourcery no-metrics
     if AFK_.sql_on is False:
         return
@@ -114,22 +90,16 @@ async def on_sql(event):  # sourcery no-metrics
         msg = None
         if AFK_.sql_type == "media":
             if AFK_.reason:
-                message_to_reply = (
-                    f"**⌔︙ عذرا انا الان في وضعيه عدم الاتصال  👁‍🗨** .\n\n**⌔︙ وضع عدم الاتصال منذ 🕐 :** `{endtime}`"
-                )
+                message_to_reply = (f"**⌔︙ عذرا انا الان في وضعيه عدم الاتصال  👁‍🗨** .\n\n**⌔︙ وضع عدم الاتصال منذ 🕐 :** `{endtime}`")
             else:
                 message_to_reply = f"**⌔︙ عذرا انا الان في وضعيه عدم الاتصال  👁‍🗨** .\n\n**⌔︙ وضع عدم الاتصال منذ 🕐 :** `{endtime}`"
             if event.chat_id:
                 msg = await event.reply(message_to_reply, file=AFK_.media_sql.media)
         elif AFK_.sql_type == "text":
             if AFK_.msg_link and AFK_.reason:
-                message_to_reply = (
-                    f"**⌔︙ عذرا انا الان في وضعيه عدم الاتصال  👁‍🗨** .\n\n**⌔︙ وضع عدم الاتصال منذ 🕐 :** `{endtime}`"
-                )
+                message_to_reply = (f"**⌔︙ عذرا انا الان في وضعيه عدم الاتصال  👁‍🗨** .\n\n**⌔︙ وضع عدم الاتصال منذ 🕐 :** `{endtime}`")
             elif AFK_.reason:
-                message_to_reply = (
-                    f"**⌔︙ عذرا انا الان في وضعيه عدم الاتصال  👁‍🗨** .\n\n**⌔︙ وضع عدم الاتصال منذ 🕐 :** `{endtime}` "
-                )
+                message_to_reply = (f"**⌔︙ عذرا انا الان في وضعيه عدم الاتصال  👁‍🗨** .\n\n**⌔︙ وضع عدم الاتصال منذ 🕐 :** `{endtime}` ")
             else:
                 message_to_reply = f"**⌔︙ عذرا انا الان في وضعيه عدم الاتصال  👁‍🗨** .\n\n**⌔︙ وضع عدم الاتصال منذ 🕐 :** `{endtime}`"
             if event.chat_id:
@@ -155,13 +125,9 @@ async def on_sql(event):  # sourcery no-metrics
             resalt += f"\n<b>⌔︙ الـرسالـة 📧 : </b><code>{messaget}</code>"
         else:
             resalt += f"\n<b>⌔︙ الـرسالـة 📧 : </b>{event.message.message}"
-        resalt += f"\n<b>⌔︙ رابـط الـرسالـة 🔗  : </b><a href = 'https://t.me/c/{hmm.id}/{event.message.id}'> link</a>"
+        resalt += f"\n<b>⌔︙ رابـط الـرسالـة 🔗  : </b><a href = 'https://t.me/c/{hmm.id}/{event.message.id}'> الرابط</a>"
         if not event.is_private:
             await event.client.send_message(
-                Config.PM_LOGGER_GROUP_ID,
-                resalt,
-                parse_mode="html",
-                link_preview=False,
-            )
+                Config.PM_LOGGER_GROUP_ID,resalt, parse_mode="html", link_preview=False)
 
 
