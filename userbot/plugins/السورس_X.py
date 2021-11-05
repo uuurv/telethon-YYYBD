@@ -71,7 +71,7 @@ DELETE_TIMEOUT = 5
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
 
 oldvars = { "PM_PIC": "pmpermit_pic", "PM_TEXT": "pmpermit_txt", "PM_BLOCK": "pmblock"}
-IQPIC = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/24e17c9f8b659b67fe289.mp4"
+IQPIC = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/6064d1bf7e535c2478149.mp4"
 def convert_from_bytes(size):
     power = 2 ** 10
     n = 0
@@ -86,8 +86,8 @@ async def amireallyalive(event):
     uptime = await get_readable_time((time.time() - StartTime))
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI_TELETHON = gvarstatus("ALIVE_EMOJI") or "⎈ ⦙"
-    IQTHON_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "𝗐𝖾𝗅𝖼𝗈𝗆𝖾 𝗍𝖾𝗅𝖾𝗍𝗁𝗈𝗇 𝖺𝗅 𝖺𝗋𝖺𝖻 𓃠"
-    IQTHON_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/8a673319b5a5bf58c7300.mp4"
+    IQTHON_ALIVE_TEXT = "𝗐𝖾𝗅𝖼𝗈𝗆𝖾 𝗍𝖾𝗅𝖾𝗍𝗁𝗈𝗇 𝖺𝗅 𝖺𝗋𝖺𝖻 𓃠"
+    IQTHON_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/6064d1bf7e535c2478149.mp4"
     me = await event.client.get_me()
     my_last = me.last_name
     my_mention = f"[{me.last_name}](tg://user?id={me.id})"
@@ -99,7 +99,7 @@ async def amireallyalive(event):
         PIC = random.choice(A_IMG
                            )
         cat_caption = f"**{IQTHON_ALIVE_TEXT}**\n 𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n"
-        cat_caption += f"""**{EMOJI_TELETHON}  النسخـة :  ِ6.0.5 ** 
+        cat_caption += f"""**{EMOJI_TELETHON}  النسخـة :  ِ6.0.6 ** 
 **{EMOJI_TELETHON} مـدة الـتشغيل  : {uptime} **
 **{EMOJI_TELETHON} حسـابك  :   {my_mention} **
 **{EMOJI_TELETHON} الـوقت  : {TM} **
@@ -118,9 +118,9 @@ async def amireallyalive(event):
         await edit_or_reply(event,
             f"**{IQTHON_ALIVE_TEXT}**\n\n"
             f"𓍹ⵧⵧⵧⵧⵧⵧⵧⵧᵗᵉˡᵉᵗʰᵒᶰ ᵃʳᵃᵇˢ⁦⁦ⵧⵧⵧⵧⵧⵧⵧⵧ𓍻\n"
-            f"**{EMOJI_TELETHON} ❬ ٍَ النسخـة :  ِ6.0.5  ٍَ❭**\n"
+            f"**{EMOJI_TELETHON} ❬ ٍَ النسخـة :  ِ6.0.6  ٍَ❭**\n"
             f"**{EMOJI_TELETHON} ❬ ٰمـدة الـتشغيل  : {uptime}  ٍَ❭**\n"
-            f"**{EMOJI_TELETHON} ❬ ِحسـابك  :   zatlin2  ٍَ❭**\n"
+            f"**{EMOJI_TELETHON} ❬ ِحسـابك  :   {my_mention}  ٍَ❭**\n"
             f"**{EMOJI_TELETHON} ❬ ٰ الـوقت  : {TM}  ٍَ❭**\n"
             f"**{EMOJI_TELETHON} ❬ ٰالسـورس :** @IQTHON  ٍَ❭\n"
             f"𓍹ⵧⵧⵧⵧⵧⵧⵧⵧᵗᵉˡᵉᵗʰᵒᶰ ᵃʳᵃᵇˢ⁦⁦ⵧⵧⵧⵧⵧⵧⵧⵧ𓍻" )
