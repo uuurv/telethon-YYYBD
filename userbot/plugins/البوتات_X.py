@@ -267,7 +267,7 @@ async def _(event):
     if not reply_message.text:
        await event.edit("**⎈ ⦙ الرجاء الرد على الرسالة**")
        return
-    chat = '@zagklanrbot'
+    chat = '@zagtelethonbot'
     sender = reply_message.sender
     if reply_message.sender.bot:
        await event.edit("**⎈ ⦙ الرجاء الرد على الرسالة**")
