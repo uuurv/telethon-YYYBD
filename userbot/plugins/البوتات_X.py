@@ -257,3 +257,33 @@ async def _(iqthon):
             await iqevent.delete()
             await iqthon.client.send_message(iqthon.chat_id, response.message)
 
+@iqthon.on(admin_cmd(pattern="زخرفه ?(.*)"))
+async def iq(iqthon):
+    if iqthon.fwd_from:
+        return
+    if not iqthon.reply_to_msg_id:
+        await edit_delete(iqthon, "**⎈ ⦙ الرجاء الرد على الرسالة**")
+        return
+    reply_message = await iqthon.get_reply_message()
+    warna = iqthon.pattern_match.group(1)
+    chat = "@zagtelethonbot"
+    await edit_or_reply(iqthon, "**⎈ ⦙ جاري الزخرفه ...**")
+    async with bot.conversation(chat) as conv:
+        try:
+            response = conv.wait_event(events.NewMessage(incoming=True, from_users=1943073737))
+            first = await conv.send_message(f"/start")
+            ok = await conv.get_response()
+            await asyncio.sleep(2)
+            second = await bot.forward_messages(chat, reply_message)
+            response = await response
+        except YouBlockedUserError:
+            await iqthon.reply("**⎈ ⦙ قم بفك الحظر من البوت : @zagtelethonbot **")
+            return
+        if response.text.startswith("zag"):
+            await edit_or_reply(
+                iqthon, "**⎈ ⦙ الرجاء تعطيل إعادة توجيه إعدادات الخصوصية الخاصة بك**"
+            )
+        else:
+            await iqthon.delete()
+            await bot.forward_messages(iqthon.chat_id, response.message)
+    await bot.delete_messages(conv.chat_id, [first.id, ok.id, second.id, response.id])
