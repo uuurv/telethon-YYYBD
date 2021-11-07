@@ -52,7 +52,7 @@ function check_deps {
 		DL_COM="wget -q -O -"
 		DL_COM_PDATA="--post-data"
 	else
-		echo "wget OR curl is required and it's not installed"
+		echo "مطلوب wget OR curl وهو غير مثبت"
 		dep_error=1
 	fi
 
@@ -60,7 +60,7 @@ function check_deps {
 
 		if [ -z "$(command -v "$i" 2>&1)" ]; then
 
-			echo "[$i] is required and it's not installed"
+			echo "[$i] مطلوب وهو غير مثبت"
 			dep_error=1
 
 		else
@@ -75,7 +75,7 @@ function check_deps {
 
 						if [ -z "$(echo -n "$openssl_sup" | grep -o "$i" | head -n1)" ]; then
 
-							echo "Your openssl binary does not support ${i}"
+							echo "لا يدعم برنامج opensl الثنائي الخاص بك ${i}"
 							dep_error=1
 
 						fi
@@ -88,7 +88,7 @@ function check_deps {
 	done
 
 	if [ -z "$(command -v python 2>&1)" ]; then
-		echo "WARNING: python is required for MegaCrypter password protected links and it's not installed."
+		echo "تحذير: مطلوب Python للروابط المحمية بكلمة مرور MegaCrypter وهو غير مثبت."
 	fi
 
 	if [[ "$(echo -n "$BASH_VERSION" | grep -o -E "[0-9]+" | head -n1)" < "$BASH_MIN_VER" ]]; then
@@ -97,7 +97,7 @@ function check_deps {
 	fi
 
 	if [ $dep_error -ne 0 ]; then
-		showError "ERROR: there are dependencies not present!"
+		showError "خطأ: هناك تبعيات غير موجودة!"
 	fi
 }
 
@@ -159,13 +159,13 @@ function get_mc_link_info {
 	download_exit_code=$?
 
 	if [ "$download_exit_code" -ne 0 ]; then
-		echo -e "ERROR: Oooops, something went bad. EXIT CODE (${download_exit_code})"
+		echo -e "خطأ: كود الخروج (${download_exit_code})"
 		return 1
 	fi
 
 	if [ $(echo $info_link | grep '"error"') ]; then
 		local error_code=$(echo "$info_link" | jq -r .error)
-		echo -e "MEGACRYPTER ERROR $error_code"
+		echo -e "خطأ MEGACRYPTER $error_code"
 		return 1
 	fi
 
@@ -210,14 +210,14 @@ function check_file_exists {
 				rm ".megadown/${4}"
 			fi
 
-			showError "WARNING: File $1 exists. Download aborted!"
+			showError "تحذير : ملف $1 موجود. توقف التحميل"
 		fi
 
-		DL_MSG="\nFile $1 exists but with different size (${2} vs ${actual_size} bytes). Downloading [${3}] ...\n"
+		DL_MSG="\nالملف : $1 موجود ولكن بحجم مختلف (${2} مقارنه بالملف القديم ${actual_size} البيتا. التنزيل [${3}] ...\n"
 
 	else
 
-		DL_MSG="\nDownloading $1 [${3}] ...\n"
+		DL_MSG="\nالتنزيل : $1 [${3}] ...\n"
 
 	fi
 }
@@ -335,17 +335,17 @@ if [ -z "$link" ]; then
 
 		showHelp
 
-		showError "ERROR: MEGA/MC link or --list parameter is required"
+		showError "خطأ : MEGA/MC الرابط او تنزيل --list parameter is required"
 
 	elif [ ! -f "$list" ]; then
 
 		showHelp
 
-		showError "ERROR: list file ${list} not found"
+		showError "خطأ : لسته ملفات ${list} للاتوجد"
 	fi
 
 	if [ ! $quiet ]; then
-		echo -ne "\n(Pre)reading mc links info..."
+		echo -ne "\n(Pre)قراءة معلومات روابط : ..."
 	fi
 
 	link_count=0
@@ -375,7 +375,7 @@ if [ -z "$link" ]; then
 
 	done < "$list"
 
-	echo -ne " OK(${link_count} MC links found)\n"
+	echo -ne " OK(${link_count} توجد روابط الماك )\n"
 
 	while IFS='' read -r line || [ -n "$line" ]; do
 
@@ -412,7 +412,7 @@ if [ $(echo -n "$link" | grep -E -o 'mega://enc') ]; then
 fi
 
 if [ ! $quiet ]; then
-	echo -e "\nReading link metadata..."
+	echo -e "\nقراءة روابط الداتا ..."
 fi
 
 if [ $(echo -n "$link" | grep -E -o 'mega(\.co)?\.nz') ]; then
@@ -445,11 +445,11 @@ if [ $(echo -n "$link" | grep -E -o 'mega(\.co)?\.nz') ]; then
 	download_exit_code=$?
 
 	if [ "$download_exit_code" -ne 0 ]; then
-		showError "Oooops, something went bad. EXIT CODE (${download_exit_code})"
+		showError "خطأ كود الاستخراج : (${download_exit_code})"
 	fi
 
 	if [ $(echo -n "$mega_res_json" | grep -E -o '\[ *\-[0-9]+ *\]') ]; then
-		showError "MEGA ERROR $(echo -n "$mega_res_json" | grep -E -o '\-[0-9]+')"
+		showError "MEGA خطأ : $(echo -n "$mega_res_json" | grep -E -o '\-[0-9]+')"
 	fi
 
 	file_size=$(echo "$mega_res_json" | jq -r .[0].s)
@@ -461,7 +461,7 @@ if [ $(echo -n "$link" | grep -E -o 'mega(\.co)?\.nz') ]; then
 	at_dec_json=$(echo -n $(urlb64_to_b64 "$at") | $OPENSSL_AES_CBC_128_DEC -K "$hex_key" -iv "00000000000000000000000000000000" -nopad | tr -d '\0')
 
 	if [ ! $(echo -n "$at_dec_json" | grep -E -o 'MEGA') ]; then
-		showError "MEGA bad link"
+		showError "MEGA الرابط سيئ :"
 	fi
 
 	if [ -z "$output" ]; then
@@ -483,13 +483,13 @@ if [ $(echo -n "$link" | grep -E -o 'mega(\.co)?\.nz') ]; then
 	download_exit_code=$?
 
 	if [ "$download_exit_code" -ne 0 ]; then
-		showError "Oooops, something went bad. EXIT CODE (${download_exit_code})"
+		showError "خطأ كود الأستخراج : (${download_exit_code})"
 	fi
 
 	dl_temp_url=$(echo "$mega_res_json" | jq -r .[0].g)
 	
 	if [ $metadata ]; then
-		echo "{\"file_name\" : \"${file_name}\", \"file_size\" : ${file_size}, \"url\" : \"${dl_temp_url}\", \"hex_raw_key\" : \"${hex_raw_key:32:16}0000000000000000\", \"hex_key\" : \"${hex_key}\"}"
+		echo "{\"اسم الفايل\" : \"${file_name}\", \"حجم الفايل\" : ${file_size}, \"الرابط\" : \"${dl_temp_url}\", \"hex_raw_key\" : \"${hex_raw_key:32:16}0000000000000000\", \"hex_key\" : \"${hex_key}\"}"
 		exit 0
 	fi
 
@@ -540,12 +540,12 @@ else
 
 		if [ -z "$(command -v python 2>&1)" ]; then
 
-			echo "ERROR: python is required for MegaCrypter password protected links and it's not installed."
+			echo "تحذير: مطلوب Python للروابط المحمية بكلمة مرور MegaCrypter وهو غير مثبت"
 			exit 1
 
 		fi
 
-		echo -ne "\nLink is password protected. "
+		echo -ne "\nالارتباط محمي بكلمة مرور."
 
 		if [ -n "$password" ]; then
 
@@ -557,17 +557,17 @@ else
 
 			echo -ne "\n\n"
 
-			read -e -p "Enter password: " pass
+			read -e -p "اكتب الباسورد : " pass
 
 			pass_hash=$(mc_pass_check "$mc_pass" "$pass")
 
 			until [ "$pass_hash" != "false" ]; do
-				read -e -p "Wrong password! Try again: " pass
+				read -e -p "خطأ الباسورد: " pass
 				pass_hash=$(mc_pass_check "$mc_pass" "$pass")
 			done
 		fi
 
-		echo -ne "\nPassword is OK. Decrypting metadata...\n"
+		echo -ne "\nكلمة المرور على ما يرام. فك تشفير البيانات الوصفية : ...\n"
 
 		IFS='#' read -a array <<< "$pass_hash"
 
