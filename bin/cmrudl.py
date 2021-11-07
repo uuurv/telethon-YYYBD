@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import argparse
 import collections
 import errno
@@ -26,7 +24,7 @@ except ImportError:
     from urllib2 import quote as urllib_quote
 
 __prog__ = "cmrudl.py"
-__version__ = "1.0.6"
+__version__ = "6.0.7"
 __copyright__ = "Copyright (c) 2019 JrMasterModelBuilder"
 __license__ = "MPL-2.0"
 
@@ -75,7 +73,7 @@ class Main(object):
 
     def assert_status_code(self, code, expected):
         if code != expected:
-            raise Exception("Invalid status code: %s expected: %s" % (code, expected))
+            raise Exception("هنا خطا في الكود : %s متوقع : %s" % (code, expected))
 
     def seconds_human(self, seconds):
         m, s = divmod(seconds, 60)
@@ -127,7 +125,6 @@ class Main(object):
         return (code, headers, body)
 
     def request_data_decode(self, body, headers):
-        # Should use headers to determine the correct encoding.
         return body.decode("utf-8")
 
     def request_header_get(self, headers, header, cast=None):
@@ -234,7 +231,6 @@ class Main(object):
         parser = TheHTMLParser()
         parser.feed(html)
 
-        # The object is JSON, except any < is hex encoded, so use decode wrapper.
         jsobj = parser.result()
         cloud_settings = self.js_object_decode(jsobj)
 
@@ -249,13 +245,13 @@ class Main(object):
         parsed = self.parse_storage(html)
         cloud_settings = parsed["cloudSettings"]
         if not cloud_settings:
-            raise Exception("The cloudSettings object was not found")
+            raise Exception("لم يتم العثور على كائن cloudSettings")
 
         weblink_get = cloud_settings["dispatcher"]["weblink_get"]
         weblink_get_len = len(weblink_get)
         if weblink_get_len != 1:
             raise Exception(
-                "Unexpected dispatcher.weblink_get count: %s" % (weblink_get_len)
+                "غير متوقع dispatcher.weblink_get count: %s" % (weblink_get_len)
             )
 
         weblink_get_url = weblink_get[0]["url"]
@@ -345,7 +341,7 @@ class Main(object):
         size = self.stat(file_path).st_size
         if size != file_size:
             raise Exception(
-                "Unexected download size: %s expected: %s" % (size, file_size)
+                "حجم التنزيل غير المتوقع : %s متوقع : %s" % (size, file_size)
             )
 
     def download_set_mtime(self, file_path, file_mtime):
@@ -353,7 +349,7 @@ class Main(object):
 
     def assert_not_exists(self, file_path):
         if self.stat(file_path):
-            raise Exception("Already exists: %s" % (file_path))
+            raise Exception("موجود أصلا : %s" % (file_path))
 
     def download(self):
         out_dir = self.create_out_dir()
@@ -401,7 +397,7 @@ class Main(object):
 
         # Verify size.
         storage_size = storage["size"]
-        self.log("Verifying size: %s" % (storage_size), True)
+        self.log("التحقق من الحجم : %s" % (storage_size), True)
         try:
             self.download_verify_size(file_name_temp_path, storage_size)
         except Exception as ex:
@@ -411,7 +407,7 @@ class Main(object):
         # Set the modified time if requested.
         if self.options.mtime:
             storage_mtime = storage["mtime"]
-            self.log("Setting mtime: %s" % (storage_mtime), True)
+            self.log("ضبط mtime : %s" % (storage_mtime), True)
             self.download_set_mtime(file_name_temp_path, storage_mtime)
 
         os.rename(file_name_temp_path, file_name_path)
