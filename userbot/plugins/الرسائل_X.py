@@ -89,6 +89,37 @@ async def _(event):
     if m.media and not isinstance(m.media, MessageMediaWebPage):
         return await event.client.send_file(event.chat_id, m.media, caption=m.text)
     await event.client.send_message(event.chat_id, m.text)
+@iqthon.on(admin_cmd(pattern="ارسال للكروبات ?(.*)$"))    
+async def gcast(event):
+    if not event.out and not is_fullsudo(event.sender_id):
+        return await edit_or_reply(event, "هـذا الامـر مقـيد ")
+    xx = event.pattern_match.group(1)
+    if not xx:
+        return edit_or_reply(event, "**⎈ ⦙   يجـب وضـع نـص مع الامـر للتوجيـه**")
+    tt = event.text
+    msg = tt[6:]
+    event = await edit_or_reply(event, "** ⎈ ⦙   يتـم الـتوجيـة للـمجموعـات انتـظر قليلا**")
+    er = 0
+    done = 0
+    async for x in bot.iter_dialogs():
+        if x.is_group:
+            chat = x.id
+            try:
+                done += 1
+                await bot.send_message(chat, msg)
+            except BaseException:
+                er += 1
+    await event.edit(f"⎈ ⦙   تـم بنـجـاح فـي {done} من الـدردشـات , خطـأ فـي {er} من الـدردشـات")
+async def getTranslate(text, **kwargs):
+    translator = Translator()
+    result = None
+    for _ in range(10):
+        try:
+            result = translator.translate(text, **kwargs)
+        except Exception:
+            translator = Translator()
+            await sleep(0.1)
+    return result
 @iqthon.iq_cmd(incoming=True, groups_only=True)
 async def _(event):
     if not CHAT_FLOOD:
@@ -628,6 +659,30 @@ async def filter_incoming_handler(handler):  # sourcery no-metrics
                         my_last=my_last, my_fullname=my_fullname, my_username=my_username, my_mention=my_mention,
                     ),
                 )
+@iqthon.on(admin_cmd(pattern="اضف رد ([\s\S]*)")) 
+async def add_new_filter(new_handler):
+    keyword = new_handler.pattern_match.group(1)
+    string = new_handler.text.partition(keyword)[2]
+    msg = await new_handler.get_reply_message()
+    msg_id = None
+    if msg and msg.media and not string:
+        if BOTLOG:
+            await new_handler.client.send_message(BOTLOG_CHATID, f"**⎈ ⦙   اضـافه ردّ ⎗ :** \n**⎈ ⦙  آيـدي الدردشـة 🆔 :** {new_handler.chat_id} \n**⎈ ⦙  آثـار ⌬ :** {keyword}\n\n**⎈ ⦙  تـم حفظ الرسـالة التاليـة ڪردّ على الكلمـة في الدردشـة، يرجـى عـدم حذفهـا ✻**")
+            msg_o = await new_handler.client.forward_messages(entity=BOTLOG_CHATID, messages=msg, from_peer=new_handler.chat_id, silent=True)
+            msg_id = msg_o.id
+        else:
+            await edit_or_reply(new_handler, "**⎈ ⦙   لحفـظ الوسائـط ڪرد يتوجـب تعييـن - PRIVATE_GROUP_BOT_API_ID. 💡**")
+            return
+    elif new_handler.reply_to_msg_id and not string:
+        rep_msg = await new_handler.get_reply_message()
+        string = rep_msg.text
+    success = "**⎈ ⦙  تـم حفـظ الـرد {} بنجـاح ✓**"
+    if add_filter(str(new_handler.chat_id), keyword, string, msg_id) is True:
+        return await edit_or_reply(new_handler, success.format(keyword, "added"))
+    remove_filter(str(new_handler.chat_id), keyword)
+    if add_filter(str(new_handler.chat_id), keyword, string, msg_id) is True:
+        return await edit_or_reply(new_handler, success.format(keyword, "Updated"))
+    await edit_or_reply(new_handler, f"**⎈ ⦙   حـدث خطـأ عنـد تعييـن الـردّ ✕ :** {keyword}")
 @iqthon.on(admin_cmd(pattern="جميع الردود(?: |$)(.*)"))    
 async def on_snip_list(event):
     OUT_STR = "**⎈ ⦙  لايوجـد أيّ رد في هـذه الدردشـة  ✕**"
