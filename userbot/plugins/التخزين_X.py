@@ -90,6 +90,18 @@ async def spam_function(event, sandy, cat, sleeptimem, sleeptimet, DelaySpam=Fal
                 + f"⎈ ⦙ `{spam_message}`",
             )
 
+@iqthon.on(admin_cmd(pattern="مؤقت ([\s\S]*)"))    
+async def spammer(event):
+    reply = await event.get_reply_message()
+    input_str = "".join(event.text.split(maxsplit=1)[1:]).split(" ", 2)
+    try:
+        sleeptimet = sleeptimem = float(input_str[0])
+    except Exception:
+        return await edit_delete(event, "**⎈ ⦙ خطأ إستخـدم بناء جملة مناسبة لتوقيت ❗️**")
+    cat = input_str[1:]
+    await event.delete()
+    await spam_function(event, reply, cat, sleeptimem, sleeptimet, DelaySpam=True)
+
 @iqthon.on(admin_cmd(pattern="بحث صوت(320)?(?: |$)(.*)"))    
 async def _(event):
     reply_to_id = await reply_id(event)
@@ -206,4 +218,3 @@ async def _(event):
     for files in (catthumb, vsong_file):
         if files and os.path.exists(files):
             os.remove(files)
-
