@@ -74,7 +74,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
         result = None
         query = iqthon.text
         await bot.get_me()
-        if query.startswith("اوامري") and iqthon.query.user_id == bot.uid:
+        if query.startswith("(امور|اوامر|الاوامر|الأوامر)") and iqthon.query.user_id == bot.uid:
             buttons = [[Button.inline("اوامر السورس", data="order1"),],[Button.inline("𝟑 اوامر الحساب", data="order12"), Button.inline("𝟐 اوامر الحساب", data="order3"), Button.inline("𝟏 اوامر الحساب", data="order2"),],[Button.inline("𝟑 اوامر الكروب", data="order11"), Button.inline("𝟐 اوامر الكروب", data="order5"), Button.inline("𝟏 اوامر الكروب", data="order4"),],[Button.inline("𝟐 اوامر الالعاب", data="order7"), Button.inline("𝟏 اوامر الالعاب", data="order6"),],[Button.inline("𝟐 اوامر الصيغ", data="order9"), Button.inline("𝟏 اوامر الصيغ", data="order8"),],[Button.inline("اوامر الاغاني", data="order10"), Button.inline("اوامر الوقتي", data="order13"),],[Button.inline("اوامر التسليه", data="order14"),],[Button.inline("𝟐 الفارات", data="order16"), Button.inline("𝟏 الفارات", data="order15"),]]
             if IQTHONPC and IQTHONPC.endswith((".jpg", ".png", "gif", "mp4")):
                 result = builder.photo(IQTHONPC, text=help2, buttons=buttons, link_preview=False)
@@ -83,14 +83,14 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             else:
                 result = builder.article(title="iqthon",text=help2,buttons=buttons,link_preview=False)
             await iqthon.answer([result] if result else None)
-@bot.on(admin_cmd(outgoing=True, pattern="اوامري"))
+@bot.on(admin_cmd(outgoing=True, pattern="(امور|اوامر|الاوامر|الأوامر)"))
 async def repoiqthon(iqthon):
     if iqthon.fwd_from:
         return # ذمه برقبتك اذا تاخذ سطر واحد او تاخذ الفكره تعبي لاتخمطه ولاتاخذ افكاري بس الفاشل يسويها الى يوم القيامه
     TG_BOT = Config.TG_BOT_USERNAME
     if iqthon.reply_to_msg_id:
         await iqthon.get_reply_message()
-    response = await bot.inline_query(TG_BOT, "اوامري")
+    response = await bot.inline_query(TG_BOT, "(امور|اوامر|الاوامر|الأوامر)")
     await response[0].click(iqthon.chat_id)
     await iqthon.delete()
 @iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"order1")))
