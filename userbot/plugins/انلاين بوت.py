@@ -13,12 +13,13 @@ from telethon.errors import QueryIdInvalidError
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from ..sql_helper.global_collection import add_to_collectionlist, del_keyword_collectionlist, get_collectionlist_items
 from . import SUDO_LIST, edit_delete, edit_or_reply, reply_id, mention, BOTLOG, BOTLOG_CHATID, HEROKU_APP
+# ذمه برقبتك اذا تاخذ سطر واحد او تاخذ الفكره تعبي لاتخمطه ولاتاخذ افكاري بس الفاشل يسويها الى يوم القيامه
 IQTHONPC = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/9fa2824990eb9d80adcea.jpg"
 if Config.TG_BOT_USERNAME is not None and tgbot is not None:
     @tgbot.on(events.InlineQuery)
     async def inlineiqthon(iqthon):
         builder = iqthon.builder
-        result = None
+        result = None # ذمه برقبتك اذا تاخذ سطر واحد او تاخذ الفكره تعبي لاتخمطه ولاتاخذ افكاري بس الفاشل يسويها الى يوم القيامه
         query = iqthon.text
         await bot.get_me()
         if query.startswith("تنصيب") and iqthon.query.user_id == bot.uid:
@@ -33,7 +34,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
 @bot.on(admin_cmd(outgoing=True, pattern="تنصيب"))
 async def repoiqthon(iqthon):
     if iqthon.fwd_from:
-        return
+        return # ذمه برقبتك اذا تاخذ سطر واحد او تاخذ الفكره تعبي لاتخمطه ولاتاخذ افكاري بس الفاشل يسويها الى يوم القيامه
     TG_BOT = Config.TG_BOT_USERNAME
     if iqthon.reply_to_msg_id:
         await iqthon.get_reply_message()
@@ -59,7 +60,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
 @bot.on(admin_cmd(outgoing=True, pattern="^/orders$"))
 async def repoiqthon(iqthon):
     if iqthon.fwd_from:
-        return
+        return # ذمه برقبتك اذا تاخذ سطر واحد او تاخذ الفكره تعبي لاتخمطه ولاتاخذ افكاري بس الفاشل يسويها الى يوم القيامه
     TG_BOT = Config.TG_BOT_USERNAME
     if iqthon.reply_to_msg_id:
         await iqthon.get_reply_message()
@@ -85,7 +86,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
 @bot.on(admin_cmd(outgoing=True, pattern="اوامري"))
 async def repoiqthon(iqthon):
     if iqthon.fwd_from:
-        return
+        return # ذمه برقبتك اذا تاخذ سطر واحد او تاخذ الفكره تعبي لاتخمطه ولاتاخذ افكاري بس الفاشل يسويها الى يوم القيامه
     TG_BOT = Config.TG_BOT_USERNAME
     if iqthon.reply_to_msg_id:
         await iqthon.get_reply_message()
@@ -151,7 +152,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
 @bot.on(admin_cmd(outgoing=True, pattern="السورس"))
 async def repoiqthon(iqthon):
     if iqthon.fwd_from:
-        return
+        return # ذمه برقبتك اذا تاخذ سطر واحد او تاخذ الفكره تعبي لاتخمطه ولاتاخذ افكاري بس الفاشل يسويها الى يوم القيامه
     TG_BOT = Config.TG_BOT_USERNAME
     if iqthon.reply_to_msg_id:
         await iqthon.get_reply_message()
@@ -181,4 +182,4 @@ async def inlineiqthon(iqthon):
 @iqthon.tgbot.on(CallbackQuery(data=re.compile(rb"order16")))
 async def inlineiqthon(iqthon):
     text = "**🚹  ⦑  2 اوامـر الـفـارات  ⦒ :**\n\n⤪⟿⟿⟿⟿⟿⟿⟿⟿⟿⟿⟿⤮ \n⑴ ⦙ `.اضف فار + اسم افار + القيمه`\n**✐ :  يضيف اليك الفار الخاص بسورس ❝**\n⑵ ⦙ `.حذف فار + اسم الفار`\n**✐ :  يحذف الفار الذي اضفته ❝**\n⑶  ⦙ `.جلب فار + اسم الفار`\n**✐ :  يرسل اليك معلومات الفار وقيمه الفار ❝**\n⤪⟿⟿⟿⟿⟿⟿⟿⟿⟿⟿⟿⤮\n\n**☣️  ⦑  2  الــفــارات  ⦒  :**\n\n**⑴ ⦙  لتغير كليشة الفحص كاملة :**\n`.اضف فار ALIVE_TELETHONIQ + كليشه مع المتغيرات`\n\n**✐ : متغيرات كليشه الفحص  :**\n\n1 -  :  `{uptime}` :  مده التشغيل بوتك \n2 -  :  `{my_mention}`  : رابط حسابك  \n3 -  :  `{TM}`  : الوقت \n4 -  :  `{ping} ` : البنك \n5 -  : ` {telever} ` : نسخه تليثون \n6 -  :  `{tg_bot}` :  معرف بوتك \n\n**⎈ ⦙ لأضهار الأوامر مرة اخرى قم بضغط على ⬅️**  /orders"
-    await iqthon.edit(text)
+    await iqthon.edit(text) # ذمه برقبتك اذا تاخذ سطر واحد او تاخذ الفكره تعبي لاتخمطه ولاتاخذ افكاري بس الفاشل يسويها الى يوم القيامه
