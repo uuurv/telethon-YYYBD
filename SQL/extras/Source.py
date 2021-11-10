@@ -5,7 +5,7 @@ from userbot import StartTime, iqthon
 from userbot.Config import Config
 from userbot.plugins import mention
 help1 = ("**⎈ ⦙ كيفيه التنصيب :**")
-help2 = ("**⎈ ⦙ قائمه الاوامر :**\n**⎈ ⦙ لسورس تليثون العرب : @IQTHON")
+help2 = ("**⎈ ⦙ قائمه الاوامر :**\n**⎈ ⦙ لسورس تليثون العرب :** @IQTHON")
 TG_BOT = Config.TG_BOT_USERNAME
 TM = time.strftime("%I:%M")
 ALIVE_TEXT = "𝗐𝖾𝗅𝖼𝗈𝗆𝖾 𝗍𝖾𝗅𝖾𝗍𝗁𝗈𝗇 𝖺𝗅 𝖺𝗋𝖺𝖻 𓃠"
