@@ -1,3 +1,4 @@
+# ملف تعبان عليه والفكره هم بستر عرضك لاتاخذه ابو الغيره
 import time
 import json
 import math
@@ -7,13 +8,14 @@ import re
 from telethon import Button, events, types
 from userbot import iqthon
 from SQL.extras import *
-from ..Config import Config
+from ..Config import Config 
+# ها راح تاخذه مو ولك ليش 
 from telethon.events import CallbackQuery, InlineQuery
 from telethon.errors import QueryIdInvalidError
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from ..sql_helper.global_collection import add_to_collectionlist, del_keyword_collectionlist, get_collectionlist_items
-from . import SUDO_LIST, edit_delete, edit_or_reply, reply_id, mention, BOTLOG, BOTLOG_CHATID, HEROKU_APP
-# ذمه برقبتك اذا تاخذ سطر واحد او تاخذ الفكره تعبي لاتخمطه ولاتاخذ افكاري بس الفاشل يسويها الى يوم القيامه
+from . import SUDO_LIST, edit_delete, edit_or_reply, reply_id, mention, BOTLOG, BOTLOG_CHATID, HEROKU_APP 
+# عرفتك كواد والله  
 IQTHONPC = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/9fa2824990eb9d80adcea.jpg"
 if Config.TG_BOT_USERNAME is not None and tgbot is not None:
     @tgbot.on(events.InlineQuery)
@@ -21,7 +23,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
         builder = iqthon.builder
         result = None # ذمه برقبتك اذا تاخذ سطر واحد او تاخذ الفكره تعبي لاتخمطه ولاتاخذ افكاري بس الفاشل يسويها الى يوم القيامه
         query = iqthon.text
-        await bot.get_me()
+        await bot.get_me() # بشرفك عوفه  
         if query.startswith("تنصيب") and iqthon.query.user_id == bot.uid:
             buttons = [[Button.url("1- شرح التنصيب", "https://youtu.be/44tYK_yV02Q"), Button.url("2- استخراج ايبيات", "https://my.telegram.org/"),],[Button.url("3- ستخراج تيرمكس", "https://replit.com/@telethon-Arab/generatestringsession#start.sh"), Button.url("4- بوت فاذر", "http://t.me/BotFather"),],[Button.url("5- رابط التنصيب", "https://dashboard.heroku.com/new?template=https://github.com/telethon-Arab/telethohelp"),],[Button.url("المطـور 👨🏼‍💻", "https://t.me/LLL5L"),]]
             if IQTHONPC and IQTHONPC.endswith((".jpg", ".png", "gif", "mp4")):
@@ -40,7 +42,7 @@ async def repoiqthon(iqthon):
         await iqthon.get_reply_message()
     response = await bot.inline_query(TG_BOT, "تنصيب")
     await response[0].click(iqthon.chat_id)
-    await iqthon.delete()
+    await iqthon.delete() # متكلي شعندك عوفه بابه
 if Config.TG_BOT_USERNAME is not None and tgbot is not None:
     @tgbot.on(events.InlineQuery)
     async def inlineiqthon(iqthon):
@@ -60,7 +62,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
 @bot.on(admin_cmd(outgoing=True, pattern="^/orders$"))
 async def repoiqthon(iqthon):
     if iqthon.fwd_from:
-        return # ذمه برقبتك اذا تاخذ سطر واحد او تاخذ الفكره تعبي لاتخمطه ولاتاخذ افكاري بس الفاشل يسويها الى يوم القيامه
+        return 
     TG_BOT = Config.TG_BOT_USERNAME
     if iqthon.reply_to_msg_id:
         await iqthon.get_reply_message()
