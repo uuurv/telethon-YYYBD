@@ -46,7 +46,7 @@ async def load_plugins(folder):
 async def startupmessage():
     try:
         if BOTLOG:
-            Config.CATUBLOGO = await iqthon.tgbot.send_file(BOTLOG_CHATID, "https://telegra.ph/file/01f19261ce89d39433f35.jpg", caption="**⎈ ⦙ تـمّ تـحديـث تليثـون العـرب ✓  :**  [` 6.0.8` ] \n \n**⎈ ⦙ للحصول على اوامر السورس أرسل :** (  `.الاوامر`  ) \n**⎈ ⦙ يحتاج لتفعيل اونلاين أو أرسل :** (  `.اوامري`  )\n \n**⎈ ⦙ القناة الرسمية : @IQTHON **\n**⎈ ⦙ حلول مشاكل سورس تليثون  : @YZZZY**\n**⎈ ⦙ شروحات سورس تليثون : @L3LL3**\n**⎈ ⦙ فارات سورس تليثون  : @TEAMTELETHON **\n**⎈ ⦙ كلايش تليثون :  @FGFFG**",                buttons=[(Button.url("مجموعه تليثون", "https://t.me/KLANR"),)],            )
+            Config.CATUBLOGO = await iqthon.tgbot.send_file(BOTLOG_CHATID, "https://telegra.ph/file/01f19261ce89d39433f35.jpg", caption="**⎈ ⦙ تـمّ تـحديـث تليثـون العـرب ✓  :**  [` 6.9` ] \n \n**⎈ ⦙ للحصول على اوامر السورس أرسل :** (  `.الاوامر`  ) \n**⎈ ⦙ يحتاج لتفعيل اونلاين أو أرسل :** (  `.اوامري`  )\n \n**⎈ ⦙ القناة الرسمية : @IQTHON **\n**⎈ ⦙ حلول مشاكل سورس تليثون  : @YZZZY**\n**⎈ ⦙ شروحات سورس تليثون : @L3LL3**\n**⎈ ⦙ فارات سورس تليثون  : @TEAMTELETHON **\n**⎈ ⦙ كلايش تليثون :  @FGFFG**",                buttons=[(Button.url("مجموعه تليثون", "https://t.me/KLANR"),)],            )
     except Exception as e:
         LOGS.error(e)
         return None
