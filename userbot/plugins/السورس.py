@@ -115,7 +115,7 @@ async def iq(iqthonevent):
         await edit_or_reply(iqevent,caption)
 fahs = """**{ALIVE_TEXT}**
 𓍹ⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧⵧ𓍻
-**{EMOJI}  النسخـة :  ِ6.8 ** 
+**{EMOJI}  النسخـة :  ِ6.9 ** 
 **{EMOJI} مـدة الـتشغيل  : {uptime} **
 **{EMOJI} حسـابك  :   {my_mention} **
 **{EMOJI} الـوقت  : {TM} **
