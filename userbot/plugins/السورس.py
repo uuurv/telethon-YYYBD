@@ -923,6 +923,6 @@ async def repoiqthon(iqthon):
     response = await bot.inline_query(TG_BOT, "اوامر الصيغ(?: |$)(.*)")
     await response[0].click(iqthon.chat_id)
     await iqthon.delete()
-@iqthon.on(admin_cmd(pattern="كشف همسه(?: |$)(.*)"))    
+@iqthon.on(admin_cmd(pattern="فتح همسه(?: |$)(.*)"))    
 async def iq(event):
     await edit_or_reply(event, "**عزيزي كل عقلك ؟  **\n**وين اكو شي اسمه فتح همسة عرض العالم ماتخاف علية ادبسزز ولي يلة 🙂💔**")
