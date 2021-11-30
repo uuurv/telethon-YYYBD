@@ -924,5 +924,5 @@ async def repoiqthon(iqthon):
     await response[0].click(iqthon.chat_id)
     await iqthon.delete()
 @iqthon.on(admin_cmd(pattern="كشف همسه(?: |$)(.*)"))    
-async def iq(kshaf):
-    await edit_or_reply(kshaf , "**عزيزي كل عقلك ؟  **\n**وين اكو شي اسمه فتح همسة عرض العالم ماتخاف علية ادبسزز ولي يلة 🙂💔**"
+async def iq(event):
+    await edit_or_reply(event, "**عزيزي كل عقلك ؟  **\n**وين اكو شي اسمه فتح همسة عرض العالم ماتخاف علية ادبسزز ولي يلة 🙂💔**")
