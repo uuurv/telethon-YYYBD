@@ -1,3 +1,2 @@
-sql for klanr hhhhh
-
+خير شرايد ؟ يلا دعبل @iqthon
 
