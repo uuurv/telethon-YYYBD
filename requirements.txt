@@ -20,6 +20,7 @@ googletrans==4.0.0-rc1
 gtts
 hachoir
 heroku3
+pyminizip
 html-telegraph-poster
 humanize
 IMDbPY
