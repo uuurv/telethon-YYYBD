@@ -10,12 +10,12 @@ __author__ = "<t.me/iqthon>"
 __copyright__ = "telethon AR (C) 2020 - 2021  " + __author__
 iqthon.version = __version__
 iqthon.tgbot.version = __version__
-LOGS = logging.getLogger("IQTHON")
+LOGS = logging.getLogger("I_e_a")
 bot = iqthon
 StartTime = time.time()
 catversion = "6.8"
 if Config.UPSTREAM_REPO == "Telethon-Ar":
-    UPSTREAM_REPO_URL = "https://github.com/telethon-Arab/telethonNow"
+    UPSTREAM_REPO_URL = "https://github.com/uuurv/telethon-YYYBD"
 else:
     UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 if Config.PRIVATE_GROUP_BOT_API_ID == 0:
