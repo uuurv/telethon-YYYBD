@@ -268,7 +268,7 @@ class ParallelTransferrer:
             )
         )
         if not self.auth_key:
-            log.debug(f"تصدير مصادقة تخزين تليثون : {self.dc_id}")
+            log.debug(f"تصدير مصادقة تخزين مايثون : {self.dc_id}")
             auth = await self.client(ExportAuthorizationRequest(self.dc_id))
             self.client._init_request.query = ImportAuthorizationRequest(
                 id=auth.id, bytes=auth.bytes
