@@ -105,20 +105,20 @@ async def bot_start(event):
         else:
             start_msg = f"**⌔︙ اهلا وسهلا اخوي  {mention} **\
                         \n**⌔︙ {my_mention}'انا البوت المساعد .**\
-                        \n**⌔︙ يمكنك التواصل مع صاحب البوت فقط ارسل رسالتك 👤.**\
-                        \n\n**⌔︙ البوت خاص بسورس :** [TELETHON FOR ARABS](https://t.me/M4_STORY)"
+                        \n**⌔︙ يمكنك التواصل مع مطور السورس ارسل رسالتك 👤.**\
+                        \n\n**⌔︙ البوت خاص بسورس :** [MAISON FOR ARABS](https://t.me/I_E_A)"
         buttons = [
             (
-                Button.url("تنصيب سورسنا", "https://heroku.com/deploy?template=https://github.com/klanrali/Telethon-Arab-helper"),
+                Button.url("مطور السورس", "https://t.me/W_M_X"),
                 Button.url(
                     "قناه المساعد",
-                    "https://t.me/yzzzy",
+                    "https://t.me/I_E_A",
                 ),
             )
         ]
     else:
         start_msg = "**⌔︙ اهلا وسهلا بك ايها المطور ⚜️**\
-            \n⌔︙ لروئيه الاوام الخاصه بالمطور أرسل : `/مساعدة`"
+            \n⌔︙ لروئيه الاوامر الخاصه بالمطور أرسل : `/مساعدة`"
         buttons = None
     try:
         await event.client.send_message(
@@ -289,7 +289,7 @@ async def handler(event):
                 LOGS.error(str(e))
 
 
-@iqthon.bot_cmd(
+@I_E_A.bot_cmd(
     pattern=f"^/uinfo$",
     from_users=Config.OWNER_ID,
 )
@@ -407,7 +407,7 @@ async def send_flood_alert(user_) -> None:
         FloodConfig.ALERT[user_.id]["fa_id"] = fa_msg.id
 
 
-@iqthon.tgbot.on(CallbackQuery(data=re.compile(b"bot_pm_ban_([0-9]+)")))
+@I_E_A.tgbot.on(CallbackQuery(data=re.compile(b"bot_pm_ban_([0-9]+)")))
 @check_owner
 async def bot_pm_ban_cb(c_q: CallbackQuery):
     user_id = int(c_q.pattern_match.group(1))
@@ -449,7 +449,7 @@ def is_flood(uid: int) -> Optional[bool]:
         return True
 
 
-@iqthon.tgbot.on(CallbackQuery(data=re.compile(b"toggle_bot-antiflood_off$")))
+@I_E_A.tgbot.on(CallbackQuery(data=re.compile(b"toggle_bot-antiflood_off$")))
 @check_owner
 async def settings_toggle(c_q: CallbackQuery):
     if gvarstatus("bot_antif") is None:
@@ -459,8 +459,8 @@ async def settings_toggle(c_q: CallbackQuery):
     await c_q.edit("BOT_ANTIFLOOD is now disabled !")
 
 
-@iqthon.bot_cmd(incoming=True, func=lambda e: e.is_private)
-@iqthon.bot_cmd(edited=True, func=lambda e: e.is_private)
+@I_E_A.bot_cmd(incoming=True, func=lambda e: e.is_private)
+@I_E_A.bot_cmd(edited=True, func=lambda e: e.is_private)
 async def antif_on_msg(event):
     if gvarstatus("bot_antif") is None:
         return
