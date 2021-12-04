@@ -112,7 +112,7 @@ async def bot_start(event):
                 Button.url("قناة السورس", "https://t.me/i_e_a"),
                 Button.url(
                     "قناه المساعد",
-                    "https://t.me/yzzzy",
+                    "https://t.me/i_e_a",
                 ),
             )
         ]
