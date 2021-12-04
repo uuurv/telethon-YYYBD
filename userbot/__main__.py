@@ -7,7 +7,7 @@ from .core.logger import logging
 from .core.session import iqthon
 from .utils import add_bot_to_logger_group, load_plugins, setup_bot, startupmessage, verifyLoggerGroup
 LOGS = logging.getLogger(
-"تليثون العرب"
+"مايثون"
 )
 print(
 userbot.__copyright__)
@@ -34,7 +34,7 @@ async def startup_process():
     await load_plugins("plugins")
     await load_plugins("assistant")
     print(
-f"<b> ⌔︙ اهلا بك لقد نصبت تليثون العرب بنجاح 🥁 اذهب الى قناتنا لمعرفة المزيـد ⤵️. </b>\n CH : https://t.me/iqthon "
+f"<b> ⌔︙ اهلا بك لقد نصبت سورس مايثون بنجاح 🥁 اذهب الى قناتنا لمعرفة المزيـد ⤵️. </b>\n CH : https://t.me/I_e_a "
 )
     await verifyLoggerGroup()
     await add_bot_to_logger_group(BOTLOG_CHATID)
@@ -50,30 +50,30 @@ def start_bot():
 iqthon(
 functions.channels.JoinChannelRequest
 (
-"IQTHON"
+"I_e_a"
 ))
 )
     iqthon.loop.run_until_complete(iqthon(
 functions.channels.JoinChannelRequest(
-"L3LL3"
+"I_e_a"
 )
 )
 )
     iqthon.loop.run_until_complete(
 iqthon(
-functions.channels.JoinChannelRequest("Teamtelethon"
+functions.channels.JoinChannelRequest("I_e_a"
 )
 ))
     iqthon.loop.run_until_complete(
 iqthon(
 functions.channels.JoinChannelRequest(
-"KLANR"
+"I_e_a"
 )))
     iqthon.loop.run_until_complete(iqthon(
 functions.channels.JoinChannelRequest(
-"M4_STORY")))
+"I_e_a")))
     iqthon.loop.run_until_complete(iqthon(
-functions.channels.JoinChannelRequest("YZZZY"
+functions.channels.JoinChannelRequest("I_e_a"
 )
 )
 )
